@@ -1,6 +1,6 @@
 package jp.co.interlineOZDemo.vo;
 
-public class UserVO {
+public class UserInformVO {
 	private String userid;
 	private String password;
 	private String conpanyname;
@@ -8,11 +8,11 @@ public class UserVO {
 	private String post;
 	private String authority;
 	
-	public UserVO() {
+	public UserInformVO() {
 		super();
 	}
 
-	public UserVO(String userid, String password, String conpanyname, String address, String post, String authority) {
+	public UserInformVO(String userid, String password, String conpanyname, String address, String post, String authority) {
 		super();
 		this.userid = userid;
 		this.password = password;

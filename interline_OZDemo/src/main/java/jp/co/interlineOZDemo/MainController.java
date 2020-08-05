@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +14,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jp.co.interlineOZDemo.dao.UserDAO;
-import jp.co.interlineOZDemo.vo.UserVO;
+import jp.co.interlineOZDemo.dao.MemberDAO;
+import jp.co.interlineOZDemo.vo.UserInformVO;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class MainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@Autowired
-	UserDAO dao;
+	MemberDAO dao;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -43,18 +45,26 @@ public class HomeController {
 		return "home";
 	}
 	
+	//Login
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(UserVO vo) {
+	public String Login(UserInformVO vo) {
 		
-		UserVO result_user = dao.getUser(vo.getUserid());
+		UserInformVO result_user = dao.getUser(vo.getUserid());
 		
 		if(result_user.getPassword().equals(vo.getPassword())) {
-			
-		}else {
-			
+			return "redirect:/member/memberMain";
 		}
-		return "User/UserMain";
+		
+		return "redirect:/";
 	}
 	
-	
+	//logout
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String Logout(HttpSession session) {
+		
+		session.removeAttribute("");
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 }

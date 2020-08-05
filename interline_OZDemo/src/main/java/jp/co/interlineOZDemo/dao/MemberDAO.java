@@ -4,18 +4,18 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import jp.co.interlineOZDemo.vo.UserVO;
+import jp.co.interlineOZDemo.vo.UserInformVO;
 
 @Repository
-public class UserDAO {
+public class MemberDAO {
 
 	@Autowired
 	SqlSession session;
 	
-	public UserVO getUser(String id) {
-		UserMapper mapper = session.getMapper(UserMapper.class);
+	public UserInformVO getUser(String id) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		
-		UserVO result_user = mapper.getUser(id);
+		UserInformVO result_user = mapper.getUser(id);
 		
 		return result_user;
 	}

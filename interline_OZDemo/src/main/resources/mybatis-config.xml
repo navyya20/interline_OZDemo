@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="jp.co.interlineOZDemo.vo.UserVO" alias="user"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.UserInformVO" alias="member"/>
 	</typeAliases>
 	<mappers>
-		<mapper resource="UserMapper.xml"/>
+		<mapper resource="MemberMapper.xml"/>
 	</mappers>
 </configuration>
