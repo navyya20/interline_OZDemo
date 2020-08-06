@@ -12,10 +12,10 @@ public class MemberDAO {
 	@Autowired
 	SqlSession session;
 	
-	public UserInformVO getUser(String id) {
+	public UserInformVO getMember(String id) {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		
-		UserInformVO result_user = mapper.getUser(id);
+		UserInformVO result_user = mapper.getMember(id);
 		
 		return result_user;
 	}

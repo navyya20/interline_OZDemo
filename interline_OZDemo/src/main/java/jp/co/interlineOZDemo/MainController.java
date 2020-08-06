@@ -1,8 +1,6 @@
 package jp.co.interlineOZDemo;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -32,43 +30,56 @@ public class MainController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(HttpSession session) {
+		session.removeAttribute("login_id");
+		session.invalidate();
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		return "login";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginForm(HttpSession session) {
+		session.removeAttribute("login_id");
+		session.invalidate();
 		
 		return "login";
 	}
 	
 	//Login
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(HttpSession session,String id, String pw) {
+	@ResponseBody
+	@RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public HashMap<String, String> Login(HttpSession session,String userid, String password) {
+		logger.debug("login id:{}, pw:{}", userid,password);
 		
-		UserInformVO result_user = dao.getUser(id);
+		UserInformVO member = dao.getMember(userid);
+		HashMap<String,String> result = new HashMap<>();
 		
-		if(result_user.getPassword().equals(pw)) {
-			session.setAttribute("login_id", result_user.getUserid());
+		if(member != null && member.getPassword().equals(password)){
+			session.setAttribute("login_id", member.getUserid());
+			session.setAttribute("user_inform", member);
 			
-			if(result_user.getAuthority() == "a") {
-				return "redirect:/admin/adminMain";
-			}else if(result_user.getAuthority() == "u") {
-				return "redirect:/member/memberMain";
+			if(member.getAuthority().equals("a")) {
+				result.put("url", "admin/adminMain");		
+			}else if(member.getAuthority().equals("u")) {
+				result.put("url", "member/memberMain");
 			}
 		}
 		
-		return "redirect:/";
+		if(member == null) {
+			result.put("error","存在しないIDです。");
+		}else if(!member.getPassword().equals(password)){
+			result.put("error","PASSWORDが一致しません。");
+		}
+		
+		return result;
 	}
 	
 	//logout
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String Logout(HttpSession session) {
 		
-		session.removeAttribute("");
+		session.removeAttribute("member");
+		session.removeAttribute("login_id");
 		session.invalidate();
 		
 		return "redirect:/";

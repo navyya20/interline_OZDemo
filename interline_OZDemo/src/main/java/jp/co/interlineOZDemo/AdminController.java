@@ -21,7 +21,7 @@ public class AdminController {
 	@RequestMapping(value="/adminMain", method=RequestMethod.GET)
 	public String mainMenuMember() {
 		
-		return "Admin/mainMenuMember";
+		return "Admin/mainMenuAdmin";
 	}
 	
 	//회원 리스트
