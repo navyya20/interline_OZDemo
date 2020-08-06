@@ -42,17 +42,23 @@ public class MainController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "login";
 	}
 	
 	//Login
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(UserInformVO vo) {
+	public String Login(HttpSession session,String id, String pw) {
 		
-		UserInformVO result_user = dao.getUser(vo.getUserid());
+		UserInformVO result_user = dao.getUser(id);
 		
-		if(result_user.getPassword().equals(vo.getPassword())) {
-			return "redirect:/member/memberMain";
+		if(result_user.getPassword().equals(pw)) {
+			session.setAttribute("login_id", result_user.getUserid());
+			
+			if(result_user.getAuthority() == "a") {
+				return "redirect:/admin/adminMain";
+			}else if(result_user.getAuthority() == "u") {
+				return "redirect:/member/memberMain";
+			}
 		}
 		
 		return "redirect:/";

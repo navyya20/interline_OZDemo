@@ -5,8 +5,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="jp.co.interlineOZDemo.vo.UserInformVO" alias="member"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateSheetVO" alias="estimateSheet"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateItemsVO" alias="estimateItems"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.ItemsVO" alias="Items"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="MemberMapper.xml"/>
+		<mapper resource="AdminMapper.xml"/>
 	</mappers>
 </configuration>
