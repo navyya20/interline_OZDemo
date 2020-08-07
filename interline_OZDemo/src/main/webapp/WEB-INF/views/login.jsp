@@ -6,11 +6,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>Login</title>
-</head>
-
-
-
-
+	
 <script src="<c:url value = 'resources/js/jquery-2.0.3.min.js'/>"></script>
 <link href="resources/css/Font-Style.css" rel="stylesheet">
 <style type="text/css">
@@ -66,8 +62,9 @@ $(document).ready(function(){
 });
 
 </script>
+</head>
 
-<body class="pc_body">
+<body class="body">
 <div id="login_div">
 	<table id="login_table">
 	<tr>

@@ -13,25 +13,24 @@
 
 <script>
 $(function(){
+	$('button[name="move_btn"]').click(member_frameMove);
+	$('#logout').click(member_logout);
 
-	isMobile(); 
-		
-	function isMobile() {
-		var filter = "win16|win32|win64|mac|macintel";
-		if( navigator.platform  ){
-			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-				$("body").attr('class','mobile_body');
-		    }else{
-		    	$("body").attr('class','pc_body');
-		    	$("a").addClass('pc_font_button1');
-		    }
-		}
+	function member_frameMove(){
+		var url = $(this)[0].id;
+		list_Box.location.href=url;
 	}
-	
-	$('#list_Box').css('min-height',window.innerHeight-100+'px');
-	$('#list_Box').attr("src","estimateSheetList");
-	
+
+	function member_logout(){
+		location.href="../logout";
+	}
+
 	$('#list_Box').load(function(){
+		var box_pathname = $(this)[0].contentWindow.location.pathname;
+		
+		if(box_pathname.indexOf("login") > -1){
+			location.href = "../login";
+		}
 		
 		if($(this).contents().find('#OZViewer').html()==null){
          	$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
@@ -39,14 +38,9 @@ $(function(){
 			$(this).css('height',window.innerHeight-40+'px');
 		}
 		
-		if(($(this)[0].contentWindow.location.pathname).indexOf("statistics") > -1){
-			$('#list_Box').css('width','1300px');
-		}else{
-			$('#list_Box').css('width','1100px');
-		}
 	});
 });
-</script>	
+</script>
 
 <style>
 
@@ -58,13 +52,13 @@ margin:20px 0px 0px 0px;
 </style>
 <body>
 <div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">
-<img id="" src="../resources/image/interline2.png" width="70%" height="70%"><h1>○○様</h1>
-<p><button class="menuPc_font_button1" type="button" onclick="list_Box.location.href='estimateSheetList'">見積書リスト</button></p>
-<p><button class="menuPc_font_button1" type="button" onclick="list_Box.location.href='updateMyProfile'">会員情報</button></p>
-<p><button class="menuPc_font_button1" type="button" onclick="location.href='../logout'">ログアウト</button></p>	
+<h1>${sessionScope.user_inform.userid}様</h1><br></br>
+<p><button name="move_btn" type="button" id="estimateSheetList">見積書リスト</button></p>
+<p><button name="move_btn" type="button" id="updateMyProfile">会員情報</button></p>
+<p><button name="logout" type="button" id="logout">ログアウト</button></p>	
 </div>
 <div id="_iframe" style="position:absolute; left:20%;  text-align: left;">
-<iframe name="list_Box" id="list_Box" src="" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+<iframe name="list_Box" id="list_Box" src="estimateSheetList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 </div>
 </body>
 </html>
