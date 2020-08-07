@@ -3,7 +3,7 @@ package jp.co.interlineOZDemo.vo;
 public class UserInformVO {
 	private String userid;
 	private String password;
-	private String conpanyname;
+	private String companyname;
 	private String address;
 	private String post;
 	private String authority;
@@ -12,11 +12,11 @@ public class UserInformVO {
 		super();
 	}
 
-	public UserInformVO(String userid, String password, String conpanyname, String address, String post, String authority) {
+	public UserInformVO(String userid, String password, String companyname , String address, String post, String authority) {
 		super();
 		this.userid = userid;
 		this.password = password;
-		this.conpanyname = conpanyname;
+		this.companyname  = companyname ;
 		this.address = address;
 		this.post = post;
 		this.authority = authority;
@@ -38,12 +38,12 @@ public class UserInformVO {
 		this.password = password;
 	}
 
-	public String getConpanyname() {
-		return conpanyname;
+	public String getcompanyname () {
+		return companyname ;
 	}
 
-	public void setConpanyname(String conpanyname) {
-		this.conpanyname = conpanyname;
+	public void setcompanyname (String companyname ) {
+		this.companyname  = companyname ;
 	}
 
 	public String getAddress() {
@@ -72,7 +72,7 @@ public class UserInformVO {
 
 	@Override
 	public String toString() {
-		return "UserVO [userid=" + userid + ", password=" + password + ", conpanyname=" + conpanyname + ", address="
+		return "UserVO [userid=" + userid + ", password=" + password + ", companyname =" + companyname  + ", address="
 				+ address + ", post=" + post + ", authority=" + authority + "]";
 	}
 }

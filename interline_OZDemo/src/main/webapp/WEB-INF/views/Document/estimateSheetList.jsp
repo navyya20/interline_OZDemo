@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>estimateSheetList</title>
 </head>
+<<<<<<< HEAD
 
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
@@ -76,5 +77,9 @@ $(function(){
 		<td style="width: 5%;"><span class="pc_font_button2">修正</span></td>
 	</tr>
 </table>
+=======
+<body>
+<h1>estimateSheetList</h1>
+>>>>>>> 80332c80d03fe43920f8d6fe32fc6f85052e323b
 </body>
 </html>
