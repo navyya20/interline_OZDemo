@@ -22,7 +22,7 @@ public class MemberController {
 	@RequestMapping(value="/estimateSheetList", method=RequestMethod.GET)
 	public String getEstimateSheetList() {
 		
-		return "Document/writeEstimateSheet";
+		return "Document/estimateSheetList";
 	}
 	
 	//견적서 작성
