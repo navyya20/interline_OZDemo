@@ -8,8 +8,25 @@
 	<title>Login</title>
 </head>
 
-<script src="<c:url value = 'resources/js/jquery-2.0.3.min.js'/>"></script>
 
+
+
+<script src="<c:url value = 'resources/js/jquery-2.0.3.min.js'/>"></script>
+<link href="resources/css/Font-Style.css" rel="stylesheet">
+<style type="text/css">
+	#login_div{
+		margin-top:10%;
+		text-align: center;
+	}
+	#login_table{
+		display: inline-block;
+		
+	}
+	.login_title{
+		font-weight: bold;
+		color: rgb(0, 112, 192);
+	}
+</style>
 <script>
 $(document).ready(function(){
 	 $('#btn_login').click(input_Check);
@@ -50,25 +67,31 @@ $(document).ready(function(){
 
 </script>
 
-<body>
+<body class="pc_body">
 <div id="login_div">
-<table>
-<tr>
-<th colspan="2" class="login_th_title">
-<span class="title_text">見積書システム</span></th>
-</tr>
-<tr>
-<td class="login_td_id"><label for="login_id">ID</label></td>
-<td class="login_td_id"><input type="text" id="login_id" name="login_id"></td>
-</tr>
-<tr>
-<td class="login_td_pw"><label for="login_pw">PW</label></td>
-<td class="login_td_pw"><input type="password" id="login_pw" name="login_pw"></td>
-</tr>
-<tr>
-<td colspan="2" class="login_td_Submit"><button id="btn_login">ログイン</button></td>
-</tr>
-</table>
+	<table id="login_table">
+	<tr>
+	<td colspan="2" class="login_logo" style="text-align: left;">
+		<img src="<c:url value = 'resources/image/interline_login.png'/>" id="login_logo">
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2" class="login_title" style="text-align: left;">
+		<span>OZ-DEMO 見積書編</span>
+	</td>
+	</tr>
+	<tr>
+	<td class="login_td_id"><label for="login_id">ID</label></td>
+	<td class="login_td_id"><input type="text" id="login_id" name="login_id"></td>
+	</tr>
+	<tr>
+	<td class="login_td_pw"><label for="login_pw">PW</label></td>
+	<td class="login_td_pw"><input type="password" id="login_pw" name="login_pw"></td>
+	</tr>
+	<tr>
+	<td colspan="2" class="login_td_Submit" style="text-align: right;"><button id="btn_login">ログイン</button></td>
+	</tr>
+	</table>
 </div>
 </body>
 </html>

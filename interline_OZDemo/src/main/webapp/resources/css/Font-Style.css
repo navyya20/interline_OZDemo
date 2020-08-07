@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.pc_body *{
+	font-family: 'ヒラギノ角ゴ Pro W3',Hiragino Kaku Gothic Pro,"メイリオ",Meiryo,Osaka,'ＭＳ Ｐゴシック',MS PGothic,sans-serif;
+}
+
+.pc_body h1{
+	font-size:32px;
+}
+
+.pc_font_title{
+	font-size:24px;
+	font-weight:700;
+}
+
+.pc_font_button1{
+	border: solid 2px rgb(0, 112, 192);
+	border-radius: 9px;
+	padding: 2px 5px;
+	background-color: rgb(0, 112, 192);
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+	font-size:18px;
+}
+
+.pc_font_content1{
+	font-size:16px;
+}
+
+.pc_font_button2{
+	border: solid 2px rgb(0, 112, 192);
+    border-radius: 9px;
+    padding: 0px 5px;
+    background-color: rgb(0, 112, 192);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.mobile_body{
+	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
+	-webkit-text-size-adjust:300%;
+}
+.mobile_font_title{
+	font-size:18px;
+	font-weight:700;
+}
+.mobile_font_content1{
+	font-size:16px;
+}
+.mobile_font_content2{
+	font-size:14px;
+}
+.mobile_button{
+	border: solid 2px rgb(0, 112, 192);
+	border-radius: 9px;
+	background-color: rgb(0, 112, 192);
+	color: white;
+	font-size: 14px;
+	text-align: center;
+	padding: 20px;
+	margin:10px;
+	cursor: pointer;
+}
+.mobile_button_fake{
+	border-radius: 9px;
+	color: black;
+	font-size: 14px;
+	text-align: center;
+	padding: 20px;
+	margin:10px;
+	cursor: pointer;
+}
+.mobile_img_size{
+	width: 8%;
+}
+.mobile_menuBar{
+	
+}
+
+.test{
+	font-size: 30px;
+}
+
+.menuPc_font_button1{
+	border: solid 2px rgb(0, 112, 192);
+	border-radius: 9px;
+	padding: 2px 5px;
+	background-color: rgb(0, 112, 192);
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+	font-size:18px;
+	width: 130px;
+}
+
