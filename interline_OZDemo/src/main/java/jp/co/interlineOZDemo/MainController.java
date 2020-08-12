@@ -55,7 +55,7 @@ public class MainController {
 		HashMap<String,String> result = new HashMap<>();
 		
 		if(member != null && member.getPassword().equals(password)){
-			session.setAttribute("login_id", member.getUserid());
+			session.setAttribute("login_id", member.getUserId());
 			session.setAttribute("user_inform", member);
 			
 			if(member.getAuthority().equals("a")) {
