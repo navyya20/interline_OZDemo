@@ -14,6 +14,10 @@
 	body{
 		text-align: center;
 	}
+	#title{
+		margin-left: auto;
+		margin-right: auto;
+	}
 	#list_table{
 		border-collapse: collapse;
 		margin-left: auto;
