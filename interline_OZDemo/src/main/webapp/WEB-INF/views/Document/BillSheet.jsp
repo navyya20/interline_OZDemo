@@ -15,16 +15,14 @@
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
-		var id = '<%=session.getAttribute("login_id") %>';
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet","http://127.0.0.1:8888/oz80/server");
-		oz.sendToActionScript("connection.reportname","writeBill.ozr");
+		oz.sendToActionScript("connection.reportname","readBill.ozr");
 
-		oz.sendToActionScript("odi.odinames", "Bill");
- 		oz.sendToActionScript("odi.Bill.pcount", "2");
-		oz.sendToActionScript("odi.Bill.args1", "reportnum="+reportNum);
-		oz.sendToActionScript("odi.Bill.args2", "id="+id);
+		oz.sendToActionScript("odi.odinames", "readBill");
+ 		oz.sendToActionScript("odi.readBill.pcount", "2");
+		oz.sendToActionScript("odi.readBill.args1", "reportnum="+reportNum);
 		return true;
 	}
 	start_ozjs("OZViewer","http://127.0.0.1:8888/oz80/ozhviewer/");

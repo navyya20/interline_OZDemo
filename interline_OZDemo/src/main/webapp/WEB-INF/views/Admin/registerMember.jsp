@@ -19,11 +19,6 @@
 <td><input type="password" id="password" name="password"></td>
 </tr>
 <tr>
-<tr>
-<td><label for="companyname">企業名</label></td>
-<td><input type="text" id="companyname" name="companyname"></td>
-</tr>
-<tr>
 <td colspan="2" id="tr_btn"><button id="insert_Member_btn">会員登録</button>
 </td>
 </tr>

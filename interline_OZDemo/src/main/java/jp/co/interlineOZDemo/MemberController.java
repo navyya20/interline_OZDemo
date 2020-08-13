@@ -3,6 +3,7 @@ package jp.co.interlineOZDemo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,9 +42,18 @@ public class MemberController {
 	
 	//청구서 작성
 	@RequestMapping(value="/writeBill", method=RequestMethod.GET)
-	public String writeBillSheet(){
+	public String writeBillSheet(Model model,int reportNum){
 		
+		model.addAttribute("reportNum", reportNum);
+		 
 		return "Document/writeBillSheet";
+	}
+	
+	@RequestMapping(value="/readBill", method=RequestMethod.GET)
+	public String readBillSheet(Model model,int reportNum){
+		
+		model.addAttribute("reportNum", reportNum);	 
+		return "Document/BillSheet";
 	}
 	
 	//(회원용)회원정보 수정

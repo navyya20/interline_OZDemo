@@ -6,6 +6,6 @@
 <mapper namespace="jp.co.interlineOZDemo.dao.MemberMapper">
 	
 	<select id="getMember" parameterType="string" resultType="member">
-		select * from userInform where userId = #{id}
+		select * from userInform where userId = #{userId}
 	</select>
 </mapper>
