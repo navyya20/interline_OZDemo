@@ -57,8 +57,12 @@ public class AdminController {
 	
 	//(관리자용)회원정보 수정
 	@RequestMapping(value="/updateMember", method=RequestMethod.GET)
-	public String updateMemberForm() {
+	public String updateMemberForm(Model model,int userNum) {
+		logger.debug("updateMember:{}",userNum);
 		
+		UserInformVO sel_member = dao.getMember(userNum);
+		
+		model.addAttribute("member",sel_member);
 		return "Admin/updateMember";
 	}
 	
@@ -69,21 +73,24 @@ public class AdminController {
 		int result = dao.updateMember(member);
 		
 		if(result == 1) {
-			logger.debug("登録成功");
+			logger.debug("修正成功");
 		}
 		
 		return "redirect:/admin/memberList";
 	}
 	
+	//회원정보 삭제
 	@RequestMapping(value="/deleteMember", method=RequestMethod.POST)
-	public String deleteMember(UserInformVO member) {
-		logger.debug("updateMember:{}",member);
+	public String deleteMember(int userNum) {
+		logger.debug("userNum:{}",userNum);
 		
-		int result = dao.deleteMember(member);
 		
-		if(result == 1) {
-			logger.debug("登録成功");
+		int result = dao.deleteMember(userNum);
+		  
+		if(result == 1) { 
+			logger.debug("削除成功"); 
 		}
+		 
 		
 		return "redirect:/admin/memberList";
 	}

@@ -5,6 +5,8 @@ public class UserInformVO {
 	private String userId;
 	private String password;
 	private String companyName;
+	private String representative;
+	private String phoneNumber;
 	private String address;
 	private String post;
 	private String authority;
@@ -20,14 +22,17 @@ public class UserInformVO {
 		super();
 	}
 
-	public UserInformVO(int userNum, String userId, String password, String companyName, String address, String post,
-			String authority, String stampFileName, String startDate, String bankName, String depositeClassification,
-			String accountNumber, String accountOwner, String hurigana) {
+	public UserInformVO(int userNum, String userId, String password, String companyName, String representative,
+			String phoneNumber, String address, String post, String authority, String stampFileName, String startDate,
+			String bankName, String depositeClassification, String accountNumber, String accountOwner,
+			String hurigana) {
 		super();
 		this.userNum = userNum;
 		this.userId = userId;
 		this.password = password;
 		this.companyName = companyName;
+		this.representative = representative;
+		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.post = post;
 		this.authority = authority;
@@ -70,6 +75,22 @@ public class UserInformVO {
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	public String getRepresentative() {
+		return representative;
+	}
+
+	public void setRepresentative(String representative) {
+		this.representative = representative;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getAddress() {
@@ -155,9 +176,11 @@ public class UserInformVO {
 	@Override
 	public String toString() {
 		return "UserInformVO [userNum=" + userNum + ", userId=" + userId + ", password=" + password + ", companyName="
-				+ companyName + ", address=" + address + ", post=" + post + ", authority=" + authority
-				+ ", stampFileName=" + stampFileName + ", startDate=" + startDate + ", bankName=" + bankName
-				+ ", depositeClassification=" + depositeClassification + ", accountNumber=" + accountNumber
-				+ ", accountOwner=" + accountOwner + ", hurigana=" + hurigana + "]";
+				+ companyName + ", representative=" + representative + ", phoneNumber=" + phoneNumber + ", address="
+				+ address + ", post=" + post + ", authority=" + authority + ", stampFileName=" + stampFileName
+				+ ", startDate=" + startDate + ", bankName=" + bankName + ", depositeClassification="
+				+ depositeClassification + ", accountNumber=" + accountNumber + ", accountOwner=" + accountOwner
+				+ ", hurigana=" + hurigana + "]";
 	}
+	
 }

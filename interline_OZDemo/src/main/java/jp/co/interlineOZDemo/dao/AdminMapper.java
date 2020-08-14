@@ -12,6 +12,8 @@ public interface AdminMapper {
 
 	int updateMember(UserInformVO vo);
 
-	int deleteMember(UserInformVO vo);
+	int deleteMember(int userNum);
+
+	UserInformVO getMember(int userNum);
 
 }

@@ -21,6 +21,10 @@
 		select * from userInform
 	</select>
 	
+	<select id="getMember" parameterType="int" resultType="member">
+		select * from userInform where userNum = #{userNum}
+	</select>
+	
 	<update id="updateMember" parameterType="member">
 		update userInform
 			set
@@ -29,7 +33,7 @@
 				userId = #{userId}
 	</update>
 	
-	<delete id="deleteMember" parameterType="member">
-		delete from userInform where userId = #{userId}
+	<delete id="deleteMember" parameterType="int">
+		delete from userInform where userNum = #{userNum}
 	</delete>
 </mapper>

@@ -11,6 +11,16 @@
 
 </head>
 <body style="width:98%;height:98%">
+
+<script>
+function OZUserEvent_OZViewer(param1, param2, param3){
+
+	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
+
+	console.log(billData);
+}
+</script>
+
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){

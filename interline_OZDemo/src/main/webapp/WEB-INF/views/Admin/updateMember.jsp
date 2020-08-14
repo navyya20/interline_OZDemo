@@ -11,7 +11,7 @@
 <table>
 <tr>
 <td><label for="userid">会員ID</label></td>
-<td><input type="text" id="userid" name="userid" value="${user.userId}" readonly></td>
+<td><input type="text" id="userid" name="userId" value="${member.userId}" readonly></td>
 </tr>
 <tr>
 <td><label for="password">会員PW</label></td>
