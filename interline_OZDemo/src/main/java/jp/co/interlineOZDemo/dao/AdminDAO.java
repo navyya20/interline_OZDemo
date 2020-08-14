@@ -35,10 +35,18 @@ public class AdminDAO {
 		return n;
 	}
 
-	public int deleteMember(UserInformVO vo) {
+	public int deleteMember(int userNum) {
 		AdminMapper mapper = session.getMapper(AdminMapper.class);
 		
-		int n = mapper.deleteMember(vo);
+		int n = mapper.deleteMember(userNum);
 		return n;
+	}
+
+	public UserInformVO getMember(int userNum) {
+		AdminMapper mapper = session.getMapper(AdminMapper.class);
+		
+		UserInformVO member = mapper.getMember(userNum);
+		
+		return member;
 	}
 }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,9 +30,10 @@ public class AdminController {
 	
 	//회원 리스트
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
-	public String getMemberList() {
+	public String getMemberList(Model model) {
 		ArrayList<UserInformVO> list = dao.getMemberList();
 		
+		model.addAttribute("member", list);
 		return "Admin/memberList";
 	}
 	
@@ -55,8 +57,12 @@ public class AdminController {
 	
 	//(관리자용)회원정보 수정
 	@RequestMapping(value="/updateMember", method=RequestMethod.GET)
-	public String updateMemberForm() {
+	public String updateMemberForm(Model model,int userNum) {
+		logger.debug("updateMember:{}",userNum);
 		
+		UserInformVO sel_member = dao.getMember(userNum);
+		
+		model.addAttribute("member",sel_member);
 		return "Admin/updateMember";
 	}
 	
@@ -67,21 +73,24 @@ public class AdminController {
 		int result = dao.updateMember(member);
 		
 		if(result == 1) {
-			logger.debug("登録成功");
+			logger.debug("修正成功");
 		}
 		
 		return "redirect:/admin/memberList";
 	}
 	
+	//회원정보 삭제
 	@RequestMapping(value="/deleteMember", method=RequestMethod.POST)
-	public String deleteMember(UserInformVO member) {
-		logger.debug("updateMember:{}",member);
+	public String deleteMember(int userNum) {
+		logger.debug("userNum:{}",userNum);
 		
-		int result = dao.deleteMember(member);
 		
-		if(result == 1) {
-			logger.debug("登録成功");
+		int result = dao.deleteMember(userNum);
+		  
+		if(result == 1) { 
+			logger.debug("削除成功"); 
 		}
+		 
 		
 		return "redirect:/admin/memberList";
 	}

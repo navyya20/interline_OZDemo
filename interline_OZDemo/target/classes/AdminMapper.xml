@@ -5,31 +5,35 @@
 
 <mapper namespace="jp.co.interlineOZDemo.dao.AdminMapper">
 	<insert id="registerMember" parameterType="member">
-		insert into userinform(
-		userid
+		insert into userInform(
+		userId
 		,password
-		,companyname
+		,companyName
 		)
 		values(
-		#{userid}
+		#{userId}
 		,#{password}
-		,#{companyname}
+		,#{companyName}
 		)
 	</insert>
 	
 	<select id="getMemberList" resultType="member">
-		select * from userinform
+		select * from userInform
+	</select>
+	
+	<select id="getMember" parameterType="int" resultType="member">
+		select * from userInform where userNum = #{userNum}
 	</select>
 	
 	<update id="updateMember" parameterType="member">
-		update userinform
+		update userInform
 			set
 				password = #{password}
 			where
-				userid = #{userid}
+				userId = #{userId}
 	</update>
 	
-	<delete id="deleteMember" parameterType="member">
-		delete from userinform where userid = #{userid}
+	<delete id="deleteMember" parameterType="int">
+		delete from userInform where userNum = #{userNum}
 	</delete>
 </mapper>

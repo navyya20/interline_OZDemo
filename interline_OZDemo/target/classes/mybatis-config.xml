@@ -8,6 +8,7 @@
 		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateSheetVO" alias="estimateSheet"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateItemsVO" alias="estimateItems"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.ItemsVO" alias="Items"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.BillInformVO" alias="billInform"/>
 	</typeAliases>
 	<mappers>
 		<mapper resource="MemberMapper.xml"/>
