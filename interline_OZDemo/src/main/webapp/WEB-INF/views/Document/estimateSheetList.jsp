@@ -20,12 +20,18 @@
 	}
 	#list_table{
 		border-collapse: collapse;
+		width: 100%;
+		padding: 2px 2px 2px 2px;
 		margin-left: auto;
 		margin-right: auto;
 	}
 	#list_table td{
 		border-style:solid;
 		border-width: 1px;
+		vertical-align: bottom;
+	}
+	.lastColum{
+		padding-bottom: 3px;
 	}
 </style>
 
@@ -65,20 +71,26 @@ $(function(){
 		}
 	});
 });
+function wrtieNewSheet(){
+	window.parent.location.href="writeEstimate";
+}
 </script>
 
 <body>
 <div id="title">見積書リスト</div>
+<div style="text-align: right; margin-bottom: 5px;"><span class="pc_font_button2" onclick="wrtieNewSheet()">新しく作成</span></div>
+<div style="text-align: center;">
 <table id="list_table">
 	<tr>
 		<td style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
-		<td style="width: 10%;">文書番号</td>
-		<td style="width: 10%;">顧客</td>
-		<td style="width: 10%;">件名</td>
-		<td style="width: 10%;">保存日時</td>
-		<td style="width: 10%;">請求書</td>
-		<td style="width: 5%;"><span class="pc_font_button2">修正</span></td>
+		<td style="width: 5%;">文書番号</td>
+		<td style="width: 9%;">顧客</td>
+		<td style="width: 9%;">件名</td>
+		<td style="width: 9%;">保存日時</td>
+		<td style="width: 5%;">請求書</td>
+		<td class="lastColum" style="width: 5%;"><span class="pc_font_button2">修正作成</span></td>
 	</tr>
 </table>
+</div>
 </body>
 </html>
