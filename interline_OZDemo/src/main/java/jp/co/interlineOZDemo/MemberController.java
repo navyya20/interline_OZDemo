@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 
 @Controller
 @RequestMapping("/member")
@@ -31,6 +34,16 @@ public class MemberController {
 	public String writeEstimateSheet() {
 		
 		return "Document/writeEstimateSheet";
+	}
+	
+	//견적서 저장
+	@ResponseBody
+	@RequestMapping(value="/saveEstimate", method=RequestMethod.POST)
+	public String saveEstimateSheet(EstimateSheetVO estimateSheetVO, String estimateItemsString) {
+		System.out.println("saveEstimateSheet");
+		System.out.println(estimateSheetVO);
+		System.out.println(estimateItemsString);
+		return "success";
 	}
 	
 	//견적서 열람

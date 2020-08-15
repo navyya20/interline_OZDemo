@@ -26,16 +26,19 @@
 		oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
 		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
 		oz.sendToActionScript("connection.servlet","http://192.168.1.20:8888/oz80/server");
-		oz.sendToActionScript("connection.reportname","OZDemo/estimateSheet.ozr");
+		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
 		oz.sendToActionScript("connection.pcount","2");
 		oz.sendToActionScript("connection.args1","repeat=13");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
 		return true;
 	}
 	start_ozjs("OZViewer","http://192.168.1.20:8888/oz80/ozhviewer/");
-
-	function OZUserEvent_OZViewer(param1, param2, param3) {
-		
+	
+	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
+		var inputJson=JSON.parse(inputJsonString);
+		var processedInputJson = getJsonToSend(inputJson);
+		var address="saveEstimate";
+		sendInputJson(processedInputJson,address);
 	}
 </script>
 </body>
