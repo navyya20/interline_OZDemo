@@ -17,10 +17,9 @@ public class EstimateSheetVO {
 	private String cautions;
 	private int sum;
 	private int sumWithTax;
+	private int sumWithTax2;
 	private String email;
 	private String state;
-	
-	
 	public int getReportNum() {
 		return reportNum;
 	}
@@ -117,6 +116,12 @@ public class EstimateSheetVO {
 	public void setSumWithTax(int sumWithTax) {
 		this.sumWithTax = sumWithTax;
 	}
+	public int getSumWithTax2() {
+		return sumWithTax2;
+	}
+	public void setSumWithTax2(int sumWithTax2) {
+		this.sumWithTax2 = sumWithTax2;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -129,15 +134,16 @@ public class EstimateSheetVO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
 	@Override
 	public String toString() {
 		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", supplier=" + supplier
 				+ ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber + ", incharge=" + incharge
 				+ ", receiver=" + receiver + ", reportName=" + reportName + ", deadline=" + deadline + ", supplyPoint="
 				+ supplyPoint + ", payCondition=" + payCondition + ", stamp=" + stamp + ", cautions=" + cautions
-				+ ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", email=" + email + ", state=" + state + "]";
+				+ ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2 + ", email=" + email
+				+ ", state=" + state + "]";
 	}
+	
+	
 	
 }

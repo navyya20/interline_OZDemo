@@ -8,4 +8,60 @@
 	<select id="getMember" parameterType="string" resultType="member">
 		select * from userInform where userId = #{userId}
 	</select>
+	
+	<insert id="insertEstimateSheet" parameterType="estimateSheet">
+		insert into estimateSheet (
+			supplier,
+			address,
+			post,
+			phoneNumber,
+			incharge,
+			
+			receiver,
+			reportName,
+			deadline,
+			supplyPoint,
+			payCondition,
+			
+			cautions,
+			sum,
+			sumWithTax,
+			sumWithTax2,
+			state
+		) VALUES (			
+			#{supplier},
+			#{address},
+			#{post},
+			#{phoneNumber},
+			#{incharge},
+			
+			#{receiver},
+			#{reportName},
+			#{deadline},
+			#{supplyPoint},
+			#{payCondition},
+			
+			
+			#{cautions},
+			#{sum},
+			#{sumWithTax},
+			#{sumWithTax2},
+			'e'
+		)
+		
+		<selectKey keyProperty="reportNum" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<insert id="insertEstimateItems" parameterType="java.util.List">
+		insert into estimateItems (
+			reportNum, itemName, imtemNum, amount, unit, unitPrice, price, note 
+		) VALUES
+		<foreach item="item" index="i" collection="list" separator=",">
+			( #{item.reportNum}, #{item.itemName}, #{item.imtemNum}, #{item.amount}, #{item.unit}, #{item.unitPrice}, #{item.price}, #{item.note} )
+		</foreach>
+	</insert>
+	
+	
 </mapper>
