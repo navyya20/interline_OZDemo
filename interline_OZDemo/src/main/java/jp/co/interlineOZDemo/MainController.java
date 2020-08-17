@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,8 @@ public class MainController {
 		if(member != null){
 			session.setAttribute("loginId", member.getUserId());
 			session.setAttribute("userInform", member);
+			JSONObject jsonObject = new JSONObject(member);
+			session.setAttribute("userInformJsonString", jsonObject.toString());
 			
 			if(member.getAuthority().equals("a")) {
 				result.put("url", "admin/adminMain");		

@@ -8,6 +8,13 @@
 var itemJsonString=JSON.stringify(itemJson);
 
 
+//세션으로부터 유저인폼 jsonString을 받는다.
+function getUserInform(){
+	var userInformJsonString = sessionStorage.getItem("userInformJsonString");
+	console.log("userInformJsonString:" + userInformJsonString);
+	return userInformJsonString;
+}
+
 //input: 폼에서 받은 제이슨
 //output: 견적서 VO에 맞는 제이슨과  견적아이템들VO에 맞는 제이슨을 포함한 제이슨
 //견적서 VO는 컨트롤러에서 VO로 받을수있게. 견적아이템들VO는 컨트롤러에서 String 으로 받아 제이슨화 하여 VO리스트화 작업을 거쳐야함.
