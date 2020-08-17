@@ -22,10 +22,10 @@ $(function(){
 	}
 
 	$('#list_Box').load(function(){
-		var box_pathname = $(this)[0].contentWindow.location.pathname;
+		var title = $(this).contents()[0].title;
 		
-		if(box_pathname.indexOf("login") > -1){
-			location.href = "../login";
+		if( title == "Login"){
+			location.href = "../";
 		}
 		
 		if($(this).contents().find('#OZViewer').html()==null){
@@ -33,10 +33,23 @@ $(function(){
 		}else{
 			$(this).css('height',window.innerHeight-40+'px');
 		}
+
+		$('#list_Box').css('width','1100px');
 	
 	});
 });
 </script>
+
+<style>
+body{
+text-align:center;
+}
+
+#_iframe{
+margin:20px 0px 0px 0px;
+}
+
+</style>
 </head>
 <body>
 <div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">

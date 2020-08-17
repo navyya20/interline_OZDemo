@@ -17,7 +17,9 @@ function OZUserEvent_OZViewer(param1, param2, param3){
 
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 
-	console.log(billData);
+	var processedInputJson = getJsonToSend(billData);
+	var address="saveBill";
+	sendInputJson(processedInputJson,address);
 }
 </script>
 

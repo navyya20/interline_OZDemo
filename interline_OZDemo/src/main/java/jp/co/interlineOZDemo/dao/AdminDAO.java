@@ -1,6 +1,7 @@
 package jp.co.interlineOZDemo.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,18 @@ public class AdminDAO {
 
 	@Autowired
 	SqlSession session;
+	
+	public UserInformVO check_Multiple(String check_point, Object check_content) {
+		AdminMapper mapper = session.getMapper(AdminMapper.class);
+		HashMap<String, Object> map = new HashMap<>();
+		
+		map.put("check_point", check_point);
+		map.put("check_content", check_content);
+		
+		UserInformVO vo = mapper.check_Multiple(map);
+
+		return vo;
+	}
 
 	public int registerMember(UserInformVO member) {
 		AdminMapper mapper = session.getMapper(AdminMapper.class);
@@ -49,4 +62,5 @@ public class AdminDAO {
 		
 		return member;
 	}
+
 }

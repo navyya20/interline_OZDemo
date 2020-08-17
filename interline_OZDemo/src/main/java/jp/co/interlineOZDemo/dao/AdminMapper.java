@@ -1,6 +1,7 @@
 package jp.co.interlineOZDemo.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jp.co.interlineOZDemo.vo.UserInformVO;
 
@@ -15,5 +16,7 @@ public interface AdminMapper {
 	int deleteMember(int userNum);
 
 	UserInformVO getMember(int userNum);
+
+	UserInformVO check_Multiple(HashMap<String, Object> map);
 
 }

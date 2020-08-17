@@ -4,16 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="jp.co.interlineOZDemo.dao.AdminMapper">
+
+	<select id="check_Multiple" parameterType="map" resultType="member">
+			select * from userInform where
+	<choose>
+		<when test="check_point != null and check_point == 'check_Num'">
+			userNum = #{check_content}
+		</when>
+		<when test="check_point !=null and check_point == 'check_Id'">
+			userId = #{check_content}
+		</when>
+	</choose>
+	</select>
+
 	<insert id="registerMember" parameterType="member">
 		insert into userInform(
-		userId
+		userNum
+		,userId
 		,password
-		,companyName
 		)
 		values(
-		#{userId}
+		#{userNum}
+		,#{userId}
 		,#{password}
-		,#{companyName}
 		)
 	</insert>
 	

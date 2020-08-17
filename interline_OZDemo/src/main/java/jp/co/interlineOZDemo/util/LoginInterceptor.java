@@ -37,9 +37,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		}
 		System.out.println(request.getRequestURL());
 		System.out.println(request.getRequestURI().substring(8, 12));//확인 바람!
-		if (member.getAuthority().equals("u") && request.getRequestURI().substring(8, 12).equals("admi")) {		
+		if (member.getAuthority().equals("u") && request.getRequestURI().contains("/admin/")) {		
 			response.sendRedirect(request.getContextPath()+"/member/memberMain");
-		}else if (member.getAuthority().equals("a") && request.getRequestURI().substring(8, 12).equals("user")) {
+		}else if (member.getAuthority().equals("a") && request.getRequestURI().contains("/member/")) {
 			response.sendRedirect(request.getContextPath()+"/admin/adminMain");
 		}
 		

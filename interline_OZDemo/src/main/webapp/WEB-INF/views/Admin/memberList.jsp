@@ -6,20 +6,53 @@
 <head>
 <meta charset="UTF-8">
 <title>memberList</title>
+<script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
 <script>
+
+$(function(){
+
+	first_memberList();
+
+	function first_memberList(){
+		if($('#list_Box',parent.document)[0] != null){
+			$('#list_Box',parent.document).css('height',$("body")[0].scrollHeight+50+'px');
+		}
+	}
+});
 
 function update_member(val){
 	location.href="updateMember?userNum="+val;
 }
 
 function del_member(val){
-	var userNum = document.getElementById('userNum');
-	var form = document.getElementById('delForm_member');
-	userNum.value = val;
+	if(confirm("削除しましか？")){
+		var userNum = document.getElementById('userNum');
+		var form = document.getElementById('delForm_member');
+		userNum.value = val;
 	
-	form.submit();
+		form.submit();
+	}
 }
 </script>
+<style>
+body{
+text-align:center;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,td{
+border: 1px solid black;
+}
+
+.memberList_td_Btn{
+border-style: none;
+width:50px;
+height: 45px;
+}
+</style>
 </head>
 <body>
 <h1>会員リスト</h1>
@@ -36,8 +69,8 @@ function del_member(val){
 <td>${member[i].companyName}</td>
 <td>${member[i].representative}</td>
 <td>${member[i].startDate}</td>
-<td><button id="upBtn_member" onclick="update_member(${member[i].userNum})">修正</button></td>
-<td><button id="delBtn_member" onclick="del_member(${member[i].userNum})">削除</button></td>
+<td class="memberList_td_Btn"><button id="upBtn_member" onclick="update_member(${member[i].userNum})">修正</button></td>
+<td class="memberList_td_Btn"><button id="delBtn_member" onclick="del_member(${member[i].userNum})">削除</button></td>
 </tr>
 </c:forEach>
 </table>

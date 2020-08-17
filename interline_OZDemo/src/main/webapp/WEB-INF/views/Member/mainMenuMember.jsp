@@ -27,10 +27,10 @@ $(function(){
 	}
 
 	$('#list_Box').load(function(){
-		var box_pathname = $(this)[0].contentWindow.location.pathname;
+		var title = $(this).contents()[0].title;
 		
-		if(box_pathname.indexOf("login") > -1){
-			location.href = "../login";
+		if( title == "Login"){
+			location.href = "../";
 		}
 		
 		if($(this).contents().find('#OZViewer').html()==null){
