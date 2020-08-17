@@ -26,12 +26,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		//セッションのログイン情報を取得
 		HttpSession session = request.getSession();
-		String login_id = (String) session.getAttribute("login_id");
-		UserInformVO member=(UserInformVO)session.getAttribute("member");
-		logger.debug("LoginInterceptor:{} ",login_id);
+		String loginId = (String) session.getAttribute("loginId");
+		UserInformVO member=(UserInformVO)session.getAttribute("userInform");
+		logger.debug("LoginInterceptor:{} ",loginId);
 		//ログインをしなった場合、ログインページに移動
-		if(login_id == null || member==null ) {
-			
+		if(loginId == null || member==null ) {
+			System.out.println("session정보가 없습니다.");
 			response.sendRedirect(request.getContextPath()+"/login");
 			return false;
 		}

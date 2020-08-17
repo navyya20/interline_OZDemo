@@ -3,11 +3,12 @@ package jp.co.interlineOZDemo.vo;
 public class EstimateSheetVO {
 	private int reportNum;
 	private String reportDate;
+	private int userNum;
 	private String supplier;
 	private String address;
 	private String post;
 	private String phoneNumber;
-	private String incharge;
+	private String representative;
 	private String receiver;
 	private String reportName;
 	private String deadline;
@@ -20,8 +21,17 @@ public class EstimateSheetVO {
 	private int sumWithTax2;
 	private String email;
 	private String state;
+	
+	
+	
 	public int getReportNum() {
 		return reportNum;
+	}
+	public int getUserNum() {
+		return userNum;
+	}
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
 	}
 	public void setReportNum(int reportNum) {
 		this.reportNum = reportNum;
@@ -56,11 +66,11 @@ public class EstimateSheetVO {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getIncharge() {
-		return incharge;
+	public String getRepresentative() {
+		return representative;
 	}
-	public void setIncharge(String incharge) {
-		this.incharge = incharge;
+	public void setRepresentative(String representative) {
+		this.representative = representative;
 	}
 	public String getReceiver() {
 		return receiver;
@@ -136,12 +146,12 @@ public class EstimateSheetVO {
 	}
 	@Override
 	public String toString() {
-		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", supplier=" + supplier
-				+ ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber + ", incharge=" + incharge
-				+ ", receiver=" + receiver + ", reportName=" + reportName + ", deadline=" + deadline + ", supplyPoint="
-				+ supplyPoint + ", payCondition=" + payCondition + ", stamp=" + stamp + ", cautions=" + cautions
-				+ ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2 + ", email=" + email
-				+ ", state=" + state + "]";
+		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", userNum=" + userNum
+				+ ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
+				+ ", representative=" + representative + ", receiver=" + receiver + ", reportName=" + reportName
+				+ ", deadline=" + deadline + ", supplyPoint=" + supplyPoint + ", payCondition=" + payCondition
+				+ ", stamp=" + stamp + ", cautions=" + cautions + ", sum=" + sum + ", sumWithTax=" + sumWithTax
+				+ ", sumWithTax2=" + sumWithTax2 + ", email=" + email + ", state=" + state + "]";
 	}
 	
 	

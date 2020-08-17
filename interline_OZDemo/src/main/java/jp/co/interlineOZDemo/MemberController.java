@@ -2,6 +2,8 @@ package jp.co.interlineOZDemo;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
+import jp.co.interlineOZDemo.vo.UserInformVO;
 
 
 
@@ -51,12 +54,14 @@ public class MemberController {
 	//견적서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveEstimate", method=RequestMethod.POST)
-	public String saveEstimateSheet(EstimateSheetVO estimateSheetVO, String estimateItemsString) {
+	public String saveEstimateSheet(EstimateSheetVO estimateSheetVO, String estimateItemsString , HttpSession session) {
 		System.out.println("saveEstimateSheet실행");
 		System.out.println("견적서내용:"+estimateSheetVO);
 		System.out.println("견적아이템들:"+estimateItemsString);
 
 		//견적내용 insert후 reportNum받아옴.
+		UserInformVO userInform = (UserInformVO)session.getAttribute("member");
+		estimateSheetVO.setUserNum(userInform.getUserNum());
 		int reportNum = dao.insertEstimateSheet(estimateSheetVO);
 		
 		//estimateItemsArray에 작성한 아이템들이 배열로 들어옴.

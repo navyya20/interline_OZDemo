@@ -31,12 +31,12 @@ $(document).ready(function(){
 		var id=$("#login_id").val();
 		var pw=$("#login_pw").val();
 
-		if(id !="" && pw != ""){
+		if(id !="" && pw !=""){
 			$.ajax({
 				type:"post",
 				url:"login",
 				traditional: true,
-				data:{userid:id,password:pw},
+				data:{userId:id,password:pw},
 				dataType:"json",
 				success:function(result){
 					if(result.error!=null){
@@ -60,6 +60,13 @@ $(document).ready(function(){
 		return false;
 	}
 });
+
+//인터셉터로 로그인 들어왔는데 현제페이지가 아이프레임 내부일경우 부모요소를 로그인 페이지로 페이지이동
+if ( self !== top ) {
+	  // you're in an iframe
+	window.parent.location.href="login";
+}
+
 
 </script>
 </head>
@@ -86,7 +93,7 @@ $(document).ready(function(){
 	<td class="login_td_pw"><input type="password" id="login_pw" name="login_pw"></td>
 	</tr>
 	<tr>
-	<td colspan="2" class="login_td_Submit" style="text-align: right;"><button id="btn_login">ログイン</button></td>
+	<td colspan="2" class="login_td_Submit" style="text-align: right; padding-top: 5px;"><span id="btn_login" class="pc_font_button1">ログイン</span></td>
 	</tr>
 	</table>
 </div>

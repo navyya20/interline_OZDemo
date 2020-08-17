@@ -5,17 +5,19 @@
 
 <mapper namespace="jp.co.interlineOZDemo.dao.MemberMapper">
 	
-	<select id="getMember" parameterType="string" resultType="member">
-		select * from userInform where userId = #{userId}
+	<select id="getMember" parameterType="member" resultType="member">
+		select * from userInform where userId = #{userId} and password = #{password}
 	</select>
 	
 	<insert id="insertEstimateSheet" parameterType="estimateSheet">
 		insert into estimateSheet (
+			userNum,
+			
 			supplier,
 			address,
 			post,
 			phoneNumber,
-			incharge,
+			representative,
 			
 			receiver,
 			reportName,
@@ -29,11 +31,13 @@
 			sumWithTax2,
 			state
 		) VALUES (			
+			#{userNum}
+			
 			#{supplier},
 			#{address},
 			#{post},
 			#{phoneNumber},
-			#{incharge},
+			#{representative},
 			
 			#{receiver},
 			#{reportName},
@@ -53,6 +57,7 @@
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
 	
 	<insert id="insertEstimateItems" parameterType="java.util.List">
 		insert into estimateItems (

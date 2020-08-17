@@ -8,7 +8,7 @@ import jp.co.interlineOZDemo.vo.UserInformVO;
 
 public interface MemberMapper {
 
-	public UserInformVO getMember(String id);
+	public UserInformVO getMember(UserInformVO userIdPassword);
 
 	public int insertEstimateSheet(EstimateSheetVO estimateSheetVO);
 

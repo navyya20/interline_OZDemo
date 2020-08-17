@@ -48,15 +48,17 @@ public class MainController {
 	//Login
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public HashMap<String, String> Login(HttpSession session,String userid, String password) {
-		logger.debug("login id:{}, pw:{}", userid,password);
-		
-		UserInformVO member = dao.getMember(userid);
+	public HashMap<String, String> Login(HttpSession session,String userId, String password) {
+		logger.debug("login id:{}, pw:{}", userId,password);
+		UserInformVO userIdPassword = new UserInformVO();
+		userIdPassword.setUserId(userId);
+		userIdPassword.setPassword(password);
+		UserInformVO member = dao.getMember(userIdPassword);
 		HashMap<String,String> result = new HashMap<>();
 		
-		if(member != null && member.getPassword().equals(password)){
-			session.setAttribute("login_id", member.getUserId());
-			session.setAttribute("user_inform", member);
+		if(member != null){
+			session.setAttribute("loginId", member.getUserId());
+			session.setAttribute("userInform", member);
 			
 			if(member.getAuthority().equals("a")) {
 				result.put("url", "admin/adminMain");		
@@ -68,7 +70,7 @@ public class MainController {
 		if(member == null) {
 			result.put("error","存在しないIDです。");
 		}else if(!member.getPassword().equals(password)){
-			result.put("error","PASSWORDが一致しません。");
+			result.put("error","PASSWORDが合致しません。");
 		}
 		
 		return result;
@@ -79,7 +81,7 @@ public class MainController {
 	public String Logout(HttpSession session) {
 		
 		session.removeAttribute("member");
-		session.removeAttribute("login_id");
+		session.removeAttribute("loginId");
 		session.invalidate();
 		
 		return "redirect:/";
