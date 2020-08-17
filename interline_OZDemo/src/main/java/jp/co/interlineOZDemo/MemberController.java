@@ -113,10 +113,19 @@ public class MemberController {
 		return "Document/BillSheet";
 	}
 	
-	//(회원용)회원정보 수정
+	//(회원용)회원정보 수정페이지로드
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.GET)
 	public String updateMyProfileForm() {
-		
+		System.out.println("회원정보 업데이트 화면로드");
 		return "Member/updateMyProfile";
+	}
+	
+	//(회원용)회원정보 수정정보 저장
+	@RequestMapping(value="/updateMyProfile",method=RequestMethod.POST)
+	public String updateMyProfileForm2(UserInformVO userInform ) {
+		System.out.println("회원정보 업데이트 실행");
+		System.out.println("받아온 회원수정정보:" + userInform);
+		dao.updateMyProfile(userInform);
+		return "Document/estimateSheetList";
 	}
 }

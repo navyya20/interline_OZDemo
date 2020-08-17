@@ -71,7 +71,7 @@ public class MainController {
 		}
 		
 		if(member == null) {
-			result.put("error","存在しないIDです。");
+			result.put("error","ID,PWを確認してください。");
 		}else if(!member.getPassword().equals(password)){
 			result.put("error","PASSWORDが合致しません。");
 		}

@@ -14,4 +14,6 @@ public interface MemberMapper {
 
 	public void insertEstimateItems(ArrayList<EstimateItemsVO> estimateItemsArray);
 
+	public void updateMyProfile(UserInformVO userInform);
+
 }

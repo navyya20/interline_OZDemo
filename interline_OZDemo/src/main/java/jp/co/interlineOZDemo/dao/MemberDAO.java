@@ -37,4 +37,9 @@ public class MemberDAO {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		mapper.insertEstimateItems(estimateItemsArray);
 	}
+
+	public void updateMyProfile(UserInformVO userInform) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		mapper.updateMyProfile(userInform);
+	}
 }
