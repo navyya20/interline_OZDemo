@@ -18,8 +18,18 @@ function OZUserEvent_OZViewer(param1, param2, param3){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 
 	var processedInputJson = getJsonToSend(billData);
-	var address="saveBill";
-	sendInputJson(processedInputJson,address);
+
+	console.log(billData);
+	$.ajax(
+			{
+				url: "saveBill",
+				type: 'POST',
+				data: processedInputJson,
+				success: function(result){
+					alert(result);
+				}
+			}		
+	);
 }
 </script>
 

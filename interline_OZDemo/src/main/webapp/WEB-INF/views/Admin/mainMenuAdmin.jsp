@@ -7,11 +7,12 @@
 <meta charset="UTF-8">
 <title>Admin</title>
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script>
 $(function(){
-	$('button[name="move_btn"]').click(admin_frameMove);
+	$('.move_btn').click(admin_frameMove);
 	$('#logout').click(admin_logout);
-
+	
 	function admin_frameMove(){
 		var url = $(this)[0].id;
 		list_Box.location.href=url;
@@ -23,21 +24,18 @@ $(function(){
 
 	$('#list_Box').load(function(){
 		var title = $(this).contents()[0].title;
-		
+
 		if( title == "Login"){
 			location.href = "../";
 		}
-		
-		if($(this).contents().find('#OZViewer').html()==null){
-         	$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
-		}else{
-			$(this).css('height',window.innerHeight-40+'px');
-		}
 
-		$('#list_Box').css('width','1100px');
+		$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
+		
+		/* $('#list_Box').css('width','700px'); */
 	
 	});
 });
+
 </script>
 
 <style>
@@ -47,19 +45,23 @@ text-align:center;
 
 #_iframe{
 margin:20px 0px 0px 0px;
+width: 80%;
 }
 
+#list_Box{
+width: 80%;
+}
 </style>
 </head>
-<body>
+<body class="pc_body">
 <div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">
 <h1>管理者</h1><br></br>
-<p><button type="button" name="move_btn" id="registerMember">会員登録</button></p>
-<p><button type="button" name="move_btn" id="memberList">会員リスト</button></p>
-<p><button type="button" name="logout" id="logout">ログアウト</button></p>	
+<p><button type="button" class="pc_font_button1 mainMenuButton move_btn" id="registerMember">会員登録</button></p>
+<p><button type="button" class="pc_font_button1 mainMenuButton move_btn" id="memberList">会員リスト</button></p>
+<p><button type="button" class="pc_font_button1 mainMenuButton logout" id="logout">ログアウト</button></p>	
 </div>
 <div id="_iframe" style="position:absolute; left:20%;  text-align: left;">
-<iframe name="list_Box" id="list_Box" src="memberList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+<iframe name="list_Box" id="list_Box" src="../admin/memberList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 </div>
 </body>
 </html>
