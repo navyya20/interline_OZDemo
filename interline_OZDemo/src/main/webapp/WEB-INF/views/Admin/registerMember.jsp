@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>registerMember</title>
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script>
 $(function(){
 
@@ -64,35 +65,53 @@ body{
 text-align:center;
 }
 
+td{
+height: 28px;
+}
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
+input[type="number"],input[type="text"],input[type="password"]{
+height: 18px;
+width: 175px;
+}
+
+#registerMember_contents{
+margin: 70px auto;
+width: fit-content;
+}
+
 </style>
 </head>
-<body>
+<body class="pc_body">
 <h1>会員登録</h1>
+<div id="registerMember_contents">
 <form action="../admin/registerMember" method="post" id="registerMember_Form">
 <table>
 <tr>
-<td><label for="userNum">会員番号</label></td>
-<td><input type="number" id="userNum" name="userNum"></td>
+<td><label for="userNum" class="pc_font_content1">会員番号</label></td>
+<td><input type="number" id="userNum" name="userNum" class="pc_font_content1"></td>
 </tr>
 <tr>
-<td><label for="userId">会員ID</label></td>
-<td><input type="text" id="userId" name="userId"></td>
+<td><label for="userId" class="pc_font_content1">会員ID</label></td>
+<td><input type="text" id="userId" name="userId" class="pc_font_content1"></td>
 </tr>
 <tr>
-<td><label for="password">会員PW</label></td>
-<td><input type="password" id="password" name="password"></td>
+<td><label for="password" class="pc_font_content1">会員PW</label></td>
+<td><input type="password" id="password" name="password" class="pc_font_content1"></td>
 </tr>
 <tr>
-<td colspan="2" id="tr_btn"><button id="insert_Member_btn">会員登録</button>
+<td colspan="2" id="tr_btn"><button id="insert_Member_btn" class="pc_font_button2">会員登録</button>
 </td>
 </tr>
 </table>
 </form>
+</div>
+
+
 </body>
 </html>

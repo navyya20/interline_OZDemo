@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.util.PageNavigator;
+import jp.co.interlineOZDemo.vo.BillInformVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -141,6 +142,15 @@ public class MemberController {
 		model.addAttribute("reportNum", reportNum);
 		 
 		return "Document/writeBillSheet";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/saveBill", method=RequestMethod.POST)
+	public String saveEstimateSheet(BillInformVO BillInform , HttpSession session) {
+		System.out.println("saveEstimateSheet실행");
+		System.out.println("견적서내용:"+BillInform);
+	
+		return "success";
 	}
 	
 	@RequestMapping(value="/readBill", method=RequestMethod.GET)

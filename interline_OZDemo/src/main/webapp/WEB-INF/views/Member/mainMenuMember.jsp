@@ -65,7 +65,7 @@ $(function(){
 </style>
 <body>
 <div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">
-<h1>${sessionScope.user_inform.userId}様</h1><br></br>
+<h1>${sessionScope.userInform.userId}様</h1><br></br>
 <table style="text-align: center; margin-left: auto;margin-right: auto;">
 <tr>
 	<td class="mainMenuTd">
