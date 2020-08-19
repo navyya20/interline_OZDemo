@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.interlineOZDemo.dao.MemberDAO;
+import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -27,6 +29,9 @@ import jp.co.interlineOZDemo.vo.UserInformVO;
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
+	private static final int countPerPage=10;		
+	private static final int pagePerGroup=10;	
+	
 	@Autowired
 	MemberDAO dao;
 	
@@ -37,19 +42,51 @@ public class MemberController {
 		return "Member/mainMenuMember";
 	}
 	
-	//견적서 리스트
+	//견적서 리스트 페이지 
 	@RequestMapping(value="/estimateSheetList", method=RequestMethod.GET)
-	public String getEstimateSheetList() {
+	public String getEstimateSheetList(HttpSession session , Model model ,@RequestParam(value="page", defaultValue="1") int page) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		
+		int total = dao.getTotalEstimateSheet(userInform.getUserNum());
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		ArrayList<EstimateSheetVO> estimateSheetArray = new ArrayList<EstimateSheetVO>();
+		estimateSheetArray = dao.getEstimateSheetList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
+		model.addAttribute("estimateSheetArray",estimateSheetArray);
+		model.addAttribute("pn", navi);
 		return "Document/estimateSheetList";
 	}
 	
 	//견적서 작성
 	@RequestMapping(value="/writeEstimate", method=RequestMethod.GET)
-	public String writeEstimateSheet() {
-		
+	public String writeEstimateSheet(HttpSession session, Model model) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		JSONObject userInformJsonObject = new JSONObject(userInform);
+		String userInformJsonString = userInformJsonObject.toString();
+		model.addAttribute("userInformJsonString", userInformJsonString);
 		return "Document/writeEstimateSheet";
 	}
+	//견적서 수정작성
+		@RequestMapping(value="/modEstimate", method=RequestMethod.GET)
+		public String modEstimateSheet(HttpSession session, Model model, int reportNum) {
+			UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+			EstimateSheetVO userNumReportNum = new EstimateSheetVO();
+			userNumReportNum.setUserNum(userInform.getUserNum());
+			userNumReportNum.setReportNum(reportNum);
+			EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
+			ArrayList<EstimateItemsVO> estimateItems = dao.getEstimateItems(reportNum);
+			JSONObject estimateSheetJsonObject = new JSONObject(estimateSheet);
+			String estimateSheetJsonString = estimateSheetJsonObject.toString();
+			model.addAttribute("estimateSheetJsonString", estimateSheetJsonString);
+			
+			if(estimateItems.size() !=0 && estimateItems != null) {
+				JSONObject estimateItemsJsonObject = new JSONObject(estimateItems);
+				String estimateItemsJsonString = estimateItemsJsonObject.toString();
+				model.addAttribute("estimateItemsJsonString", estimateItemsJsonString);
+			}
+			
+			return "Document/modEstimateSheet";
+		}
+	
 	
 	//견적서 저장
 	@ResponseBody

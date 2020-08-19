@@ -18,12 +18,20 @@
 <script src="<c:url value = '../resources/js/estimateSheet.js'/>"></script>
 
 <body>
-<input type="hidden" id="userInformJsonString" value="${userInformJsonString}">
+<input type="hidden" id="estimateSheetJsonString" value="${estimateSheetJsonString}">
+<input type="hidden" id="estimateItemsJsonString" value="${estimateItemsJsonString}">
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	//세션으로부터 유저인폼 jsonString을 받는다.
 	function getUserInform(){
-		var userInformJsonString = $('#userInformJsonString').val();
+		var estimateSheetJsonString = $('#estimateSheetJsonString').val();
+		var estimateItemsJsonString = $('#estimateItemsJsonString').val();
+		if (estimateItemsJsonString != ""){
+			var estimateSheetJsonObject = JSON.parse(userInformJsonString);
+			var estimateItemsJsonObject = JSON.parse(estimateItemsJsonString);
+			var estimateItemsJsonObjectSerialized = serializeEstimateItemsJsonObject(estimateItemsJsonObject);
+			var estimateSheetJsonObject = {estimateSheetJsonObject,estimateItemsJsonObjectSerialized};
+		}
 	}
 
 	function SetOZParamters_OZViewer(){
@@ -33,7 +41,7 @@
 		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
 		oz.sendToActionScript("connection.servlet","http://192.168.1.20:8888/oz80/server");
 		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
-		oz.sendToActionScript("connection.inputjson", userInformJsonString);
+		oz.sendToActionScript("connection.inputjson", JSON.stringify(estimateSheetJsonObject));
 		oz.sendToActionScript("connection.pcount","2");
 		oz.sendToActionScript("connection.args1","repeat=13");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);

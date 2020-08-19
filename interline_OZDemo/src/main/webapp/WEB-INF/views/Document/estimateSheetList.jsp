@@ -33,6 +33,10 @@
 	.lastColum{
 		padding-bottom: 3px;
 	}
+	#navigator a{
+		text-decoration: none;
+		color: black;
+	}
 </style>
 
 <script>
@@ -74,6 +78,15 @@ $(function(){
 function wrtieNewSheet(){
 	window.parent.location.href="writeEstimate";
 }
+
+
+function formSubmit(page){
+	var pp = document.getElementById('page');
+	
+	pp.value=page;
+							
+	document.location.href = "estimateSheetList?page=" + pp.value;
+}
 </script>
 
 <body>
@@ -90,7 +103,33 @@ function wrtieNewSheet(){
 		<td style="width: 5%;">請求書</td>
 		<td class="lastColum" style="width: 5%;"><span class="pc_font_button2">修正作成</span></td>
 	</tr>
+	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
+		<td><input id='row${status.count}' type='checkbox' name='row#{status.count}' value='${estimateSheetArray.reportNum}'></td>
+		<td>${estimateSheetArray.reportNum}</td>
+		<td>${estimateSheetArray.receiver}</td>
+		<td>${estimateSheetArray.reportName}</td>
+		<td>${estimateSheetArray.reportDate}</td>
+		<td>${estimateSheetArray.state}</td>
+	</c:forEach>
+
 </table>
 </div>
+
+
+<div id = "navigator">
+	<a href="javascript:formSubmit(${pn.currentPage - pn.pagePerGroup})">◁◁</a>&nbsp;
+	<a href="javascript:formSubmit(${pn.currentPage-1})">◀</a> &nbsp;&nbsp;
+	
+	<c:forEach var="counter" begin="${pn.startPageGroup}" end="${pn.endPageGroup}">
+	<c:if test="${counter == pn.currentPage}"><b></c:if>
+	<a href="javascript:formSubmit(${counter})">${counter}</a>&nbsp;
+	<c:if test="${counter == pn.currentPage}"></b></c:if>
+	</c:forEach>
+	&nbsp;&nbsp;
+	<a href="javascript:formSubmit(${pn.currentPage + 1})">▶</a> &nbsp;&nbsp;
+	<a href="javascript:formSubmit(${pn.currentPage + pn.pagePerGroup})">▷▷</a>
+	<input type="hidden" id="page">
+</div>
+
 </body>
 </html>

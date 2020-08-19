@@ -2,6 +2,7 @@ package jp.co.interlineOZDemo.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,31 @@ public class MemberDAO {
 	public void updateMyProfile(UserInformVO userInform) {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		mapper.updateMyProfile(userInform);
+	}
+
+	public EstimateSheetVO getEstimateSheet(EstimateSheetVO userNumReportNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		EstimateSheetVO estimateSheet = mapper.getEstimateSheet(userNumReportNum);
+		return estimateSheet;
+	}
+
+	public ArrayList<EstimateItemsVO> getEstimateItems(int reportNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		ArrayList<EstimateItemsVO> estimateItems = mapper.getEstimateItems(reportNum);
+		return estimateItems;
+	}
+
+	public ArrayList<EstimateSheetVO> getEstimateSheetList(int st, int ctt, int userNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		RowBounds rbs = new RowBounds(st,ctt);
+		ArrayList<EstimateSheetVO> estimateSheetArray = mapper.getEstimateSheetList(rbs, userNum);
+		return estimateSheetArray;
+		
+	}
+
+	public int getTotalEstimateSheet(int userNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		int result = mapper.getTotalEstimateSheet(userNum);
+		return result;
 	}
 }

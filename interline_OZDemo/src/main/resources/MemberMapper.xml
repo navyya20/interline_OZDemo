@@ -85,4 +85,19 @@
 		
 		where userId=#{userId}
 	</update>
+	
+	<select id="getEstimateSheet" parameterType="estimateSheet" resultType="estimateSheet">
+		select * from estimateSheet where reportNum=#{reportNum} and userNum=#{userNum}
+	</select>
+	<select id="getEstimateItems" parameterType="int" resultType="estimateItems">
+		select * from estimateItems where reportNum=#{reportNum}
+	</select>
+	
+	<select id="getEstimateSheetList" parameterType="int" resultType="estimateSheet">
+		select * from estimateSheet where userNum=#{userNum} order by reportDate desc
+	</select>
+	
+	<select id="getTotalEstimateSheet" parameterType="int" resultType="int">
+		select count(*) from estimateSheet where userNum=#{userNum}
+	</select>
 </mapper>

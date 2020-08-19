@@ -7,13 +7,20 @@
 			};
 var itemJsonString=JSON.stringify(itemJson);
 
-
-//세션으로부터 유저인폼 jsonString을 받는다.
-function getUserInform(){
-	var userInformJsonString = sessionStorage.getItem("userInformJsonString");
-	console.log("userInformJsonString:" + userInformJsonString);
-	return userInformJsonString;
+function serializeEstimateItemsJsonObject(estimateItemsJsonObject){
+	var jsonObject = new Object();
+	for(var i = 0 ; i < estimateItemsJsonObject.length ; i++){
+		jsonObject["itemName"+(i+1)] = estimateItemsJsonObject[i].itemName
+		jsonObject["imtemNum"+(i+1)] = estimateItemsJsonObject[i].imtemNum
+		jsonObject["amount"+(i+1)] = estimateItemsJsonObject[i].amount
+		jsonObject["unit"+(i+1)] = estimateItemsJsonObject[i].unit
+		jsonObject["unitPrice"+(i+1)] = estimateItemsJsonObject[i].unitPrice
+		jsonObject["price"+(i+1)] = estimateItemsJsonObject[i].price
+		jsonObject["note"+(i+1)] = estimateItemsJsonObject[i].note
+	}
+	return jsonObject;
 }
+
 
 //input: 폼에서 받은 제이슨
 //output: 견적서 VO에 맞는 제이슨과  견적아이템들VO에 맞는 제이슨을 포함한 제이슨
