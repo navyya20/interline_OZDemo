@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +76,7 @@ $(function(){
 		}
 	});
 });
-function wrtieNewSheet(){
+function writeNewSheet(){
 	window.parent.location.href="writeEstimate";
 }
 
@@ -87,11 +88,15 @@ function formSubmit(page){
 							
 	document.location.href = "estimateSheetList?page=" + pp.value;
 }
+
+function modEstimateSheet(reportNum){
+	window.parent.location.href = "modEstimate?reportNum=" + reportNum;
+}
 </script>
 
 <body>
 <div id="title">見積書リスト</div>
-<div style="text-align: right; margin-bottom: 5px;"><span class="pc_font_button2" onclick="wrtieNewSheet()">新しく作成</span></div>
+<div style="text-align: right; margin-bottom: 5px;"><span class="pc_font_button2" onclick="writeNewSheet()">新しく作成</span></div>
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
@@ -101,15 +106,33 @@ function formSubmit(page){
 		<td style="width: 9%;">件名</td>
 		<td style="width: 9%;">保存日時</td>
 		<td style="width: 5%;">請求書</td>
-		<td class="lastColum" style="width: 5%;"><span class="pc_font_button2">修正作成</span></td>
+		<td style="width: 5%;">修正作成</td>
 	</tr>
 	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
-		<td><input id='row${status.count}' type='checkbox' name='row#{status.count}' value='${estimateSheetArray.reportNum}'></td>
-		<td>${estimateSheetArray.reportNum}</td>
-		<td>${estimateSheetArray.receiver}</td>
-		<td>${estimateSheetArray.reportName}</td>
-		<td>${estimateSheetArray.reportDate}</td>
-		<td>${estimateSheetArray.state}</td>
+	<tr>
+		<td><input id='row${status.count}' type='checkbox' name='row${status.count}' value='${sheet.reportNum}'></td>
+		<td>${sheet.reportNum}</td>
+		<td>${sheet.receiver}</td>
+		<td>${sheet.reportName}</td>
+		<td>
+			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd"/></td>
+		<td class="lastColum">
+			<c:choose>
+				<c:when test="${sheet.state eq 'e'}">
+					<span class="pc_font_button2">請求書作成</span>
+				</c:when>
+				<c:when test="${sheet.state eq 'b'}">
+					<span class="pc_font_button2">請求書閲覧</span>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
+		</td>
+		<td class="lastColum">
+			<span class="pc_font_button2" onclick="modEstimateSheet(${sheet.reportNum})">修正作成</span>
+		</td>
+	</tr>
 	</c:forEach>
 
 </table>

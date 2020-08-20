@@ -22,6 +22,7 @@
 	cursor: pointer;
 	text-decoration: none;
 	font-size:18px;
+	white-space:nowrap;
 }
 
 .pc_font_content1{
@@ -36,6 +37,7 @@
     color: white;
     cursor: pointer;
     font-size: 14px;
+    white-space:nowrap;
 }
 
 .mobile_body{

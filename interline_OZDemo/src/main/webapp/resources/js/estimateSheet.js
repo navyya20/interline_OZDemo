@@ -11,7 +11,7 @@ function serializeEstimateItemsJsonObject(estimateItemsJsonObject){
 	var jsonObject = new Object();
 	for(var i = 0 ; i < estimateItemsJsonObject.length ; i++){
 		jsonObject["itemName"+(i+1)] = estimateItemsJsonObject[i].itemName
-		jsonObject["imtemNum"+(i+1)] = estimateItemsJsonObject[i].imtemNum
+		jsonObject["itemNum"+(i+1)] = estimateItemsJsonObject[i].itemNum
 		jsonObject["amount"+(i+1)] = estimateItemsJsonObject[i].amount
 		jsonObject["unit"+(i+1)] = estimateItemsJsonObject[i].unit
 		jsonObject["unitPrice"+(i+1)] = estimateItemsJsonObject[i].unitPrice
@@ -36,7 +36,7 @@ function getJsonToSend(inputJson){
 	
 	var estimateItems = new Array();
 	for(var i=1 ; i <=13 ; i++){
-		if(inputJson["itemNum"+i] != ""){
+		if(inputJson["itemName"+i] != ""){
 			var item = new Object();
 			item.itemNum = inputJson["itemNum"+i];
 			item.itemName = inputJson["itemName"+i];
@@ -77,7 +77,7 @@ function sendInputJson(processedInputJson,address){
 				data: processedInputJson,
 				success: function(data){
 					alert("送信成功");
-					//location.href="getUpdateReport?reportNum="+reportNum;
+					location.href="memberMain";
 				},
 				error: function(e){
 					console.log(JSON.stringify(e));

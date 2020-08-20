@@ -46,14 +46,15 @@ public class MemberController {
 	//견적서 리스트 페이지 
 	@RequestMapping(value="/estimateSheetList", method=RequestMethod.GET)
 	public String getEstimateSheetList(HttpSession session , Model model ,@RequestParam(value="page", defaultValue="1") int page) {
+		System.out.println("견적서 리스트 페이지 호출 실행");
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		
 		int total = dao.getTotalEstimateSheet(userInform.getUserNum());
 		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
 		ArrayList<EstimateSheetVO> estimateSheetArray = new ArrayList<EstimateSheetVO>();
 		estimateSheetArray = dao.getEstimateSheetList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
 		model.addAttribute("estimateSheetArray",estimateSheetArray);
 		model.addAttribute("pn", navi);
+		System.out.println("견적서 리스트 페이지 호출 완료");
 		return "Document/estimateSheetList";
 	}
 	
@@ -66,6 +67,7 @@ public class MemberController {
 		model.addAttribute("userInformJsonString", userInformJsonString);
 		return "Document/writeEstimateSheet";
 	}
+	
 	//견적서 수정작성
 		@RequestMapping(value="/modEstimate", method=RequestMethod.GET)
 		public String modEstimateSheet(HttpSession session, Model model, int reportNum) {
@@ -74,14 +76,18 @@ public class MemberController {
 			userNumReportNum.setUserNum(userInform.getUserNum());
 			userNumReportNum.setReportNum(reportNum);
 			EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
-			ArrayList<EstimateItemsVO> estimateItems = dao.getEstimateItems(reportNum);
-			JSONObject estimateSheetJsonObject = new JSONObject(estimateSheet);
-			String estimateSheetJsonString = estimateSheetJsonObject.toString();
+			if(estimateSheet==null) {
+				return "Document/estimateSheetList";
+			}
+			JSONObject estimateSheetJson = new JSONObject(estimateSheet);
+			String estimateSheetJsonString = estimateSheetJson.toString();
 			model.addAttribute("estimateSheetJsonString", estimateSheetJsonString);
 			
+			ArrayList<EstimateItemsVO> estimateItems = dao.getEstimateItems(reportNum);
 			if(estimateItems.size() !=0 && estimateItems != null) {
-				JSONObject estimateItemsJsonObject = new JSONObject(estimateItems);
+				JSONArray estimateItemsJsonObject = new JSONArray(estimateItems);
 				String estimateItemsJsonString = estimateItemsJsonObject.toString();
+				System.out.println(estimateItemsJsonString);
 				model.addAttribute("estimateItemsJsonString", estimateItemsJsonString);
 			}
 			
@@ -98,8 +104,6 @@ public class MemberController {
 		System.out.println("견적아이템들:"+estimateItemsString);
 
 		//견적내용 insert후 reportNum받아옴.
-		UserInformVO userInform = (UserInformVO)session.getAttribute("member");
-		estimateSheetVO.setUserNum(userInform.getUserNum());
 		int reportNum = dao.insertEstimateSheet(estimateSheetVO);
 		
 		//estimateItemsArray에 작성한 아이템들이 배열로 들어옴.
@@ -110,7 +114,7 @@ public class MemberController {
 			JSONObject item = (JSONObject)jsonArray.get(i);
 			EstimateItemsVO estimateItemsVO = new EstimateItemsVO();
 			estimateItemsVO.setReportNum(reportNum);
-			estimateItemsVO.setImtemNum(Integer.parseInt((String)item.get("itemNum")));
+			estimateItemsVO.setItemNum(Integer.parseInt((String)item.get("itemNum")));
 			estimateItemsVO.setItemName((String)item.get("itemName"));
 			estimateItemsVO.setAmount(Integer.parseInt((String)item.get("amount")));
 			estimateItemsVO.setUnit((String)item.get("unit"));

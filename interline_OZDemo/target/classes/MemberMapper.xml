@@ -31,7 +31,7 @@
 			sumWithTax2,
 			state
 		) VALUES (			
-			#{userNum}
+			#{userNum},
 			
 			#{supplier},
 			#{address},
@@ -61,10 +61,10 @@
 	
 	<insert id="insertEstimateItems" parameterType="java.util.List">
 		insert into estimateItems (
-			reportNum, itemName, imtemNum, amount, unit, unitPrice, price, note 
+			reportNum, itemName, itemNum, amount, unit, unitPrice, price, note 
 		) VALUES
 		<foreach item="item" index="i" collection="list" separator=",">
-			( #{item.reportNum}, #{item.itemName}, #{item.imtemNum}, #{item.amount}, #{item.unit}, #{item.unitPrice}, #{item.price}, #{item.note} )
+			( #{item.reportNum}, #{item.itemName}, #{item.itemNum}, #{item.amount}, #{item.unit}, #{item.unitPrice}, #{item.price}, #{item.note} )
 		</foreach>
 	</insert>
 	

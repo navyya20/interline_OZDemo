@@ -3,7 +3,7 @@ package jp.co.interlineOZDemo.vo;
 public class EstimateItemsVO {
 	private int reportNum;
     private String itemName;
-    private int imtemNum;
+    private int itemNum;
     private int amount;
     private String unit;
     private int unitPrice;
@@ -21,12 +21,7 @@ public class EstimateItemsVO {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public int getImtemNum() {
-		return imtemNum;
-	}
-	public void setImtemNum(int imtemNum) {
-		this.imtemNum = imtemNum;
-	}
+	
 	public int getAmount() {
 		return amount;
 	}
@@ -57,12 +52,19 @@ public class EstimateItemsVO {
 	public void setNote(String note) {
 		this.note = note;
 	}
+	public int getItemNum() {
+		return itemNum;
+	}
+	public void setItemNum(int itemNum) {
+		this.itemNum = itemNum;
+	}
 	@Override
 	public String toString() {
-		return "EstimateItemsVO [reportNum=" + reportNum + ", itemName=" + itemName + ", imtemNum=" + imtemNum
+		return "EstimateItemsVO [reportNum=" + reportNum + ", itemName=" + itemName + ", itemNum=" + itemNum
 				+ ", amount=" + amount + ", unit=" + unit + ", unitPrice=" + unitPrice + ", price=" + price + ", note="
 				+ note + "]";
 	}
+	
     
 	
     
