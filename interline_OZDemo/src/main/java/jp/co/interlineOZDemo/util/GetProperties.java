@@ -16,7 +16,7 @@ public class GetProperties {
 	String serverPath="";
 	
 	public GetProperties() {
-		ClassPathResource resource = new ClassPathResource("db2.properties");
+		ClassPathResource resource = new ClassPathResource("user.properties");
 		
 		
 		Properties properties = new Properties();
@@ -28,7 +28,7 @@ public class GetProperties {
 		}
 	    webIP=properties.getProperty("webIP","localhost:8888");
 	    ozIP=properties.getProperty("ozIP","localhost:8888");
-	    serverPath=properties.getProperty("ozIP","C:\\Apache Software Foundation\\Tomcat 8.5");
+	    serverPath=properties.getProperty("serverPath","C:\\Apache Software Foundation\\Tomcat 8.5");
 	}
 
 

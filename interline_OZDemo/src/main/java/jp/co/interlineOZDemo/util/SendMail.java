@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.activation.CommandMap;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.activation.MailcapCommandMap;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -22,7 +24,7 @@ public class SendMail {
 	public void MailSend(String emailAddress ,String title,String text, String html ,String filePath, String fileName) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");  //로그인시 TLS를 사용할 것인지 설정
-        prop.put("mail.smtp.host", "smtp.gmail.com");  //이메일 발송을 처리해줄 SMTP서버
+        prop.put("mail.smtp.host", "smtp.naver.com");  //이메일 발송을 처리해줄 SMTP서버
         prop.put("mail.smtp.auth", "true");  //SMTP 서버의 인증을 사용한다는 의미
         prop.put("mail.smtp.port", "587");  //구글SMTP서버 TLS의 포트번호는 587이며 SSL의 포트번호는 465이다.
         
@@ -36,7 +38,7 @@ public class SendMail {
         try {
             msg.setSentDate(new Date());  //보내는 날짜 지정
             
-            msg.setFrom(new InternetAddress("navyya20@gmail.com", "InterlineOZdemo")); //Message 클래스의 setFrom() 메소드를 사용하여 발송자를 지정한다. 발송자의 메일, 발송자명
+            msg.setFrom(new InternetAddress("navyya20@naver.com", "InterlineOZdemo")); //Message 클래스의 setFrom() 메소드를 사용하여 발송자를 지정한다. 발송자의 메일, 발송자명
             																	//InternetAddress 클래스는 이메일 주소를 나타날 때 사용하는 클래스이다.
 
             InternetAddress to = new InternetAddress(emailAddress);       //수신자의 메일을 생성한다. 
@@ -47,20 +49,26 @@ public class SendMail {
             //여기까지는 메일만 보내기
             
             //여기서 부턴 파일 첨부하기
-            MimeBodyPart attachPart = new MimeBodyPart();   //마임바디파트(파일용) 생성 이걸 msg에 넣어서 보낼것임.
-            FileDataSource fds = new FileDataSource(filePath);  //파일을 가져온다.파라메터로 경로 혹은 파일 오브젝트
-            attachPart.setDataHandler(new DataHandler(fds));  // 마임바디파트에 넣는다.
-            attachPart.setFileName(fileName); // 파일명
-            
-            MimeBodyPart bodypart = new MimeBodyPart();  //마임바디파트(내용용) 이것도 msg에 넣어서 보낼것임.
-            bodypart.setContent(html, "text/html;charset=UTF-8"); 
-           
-            Multipart multipart = new MimeMultipart();  //파일 파트와  콘텐츠 파트를 핸들링
-            multipart.addBodyPart(bodypart);
-            multipart.addBodyPart(attachPart);
-           
-            msg.setContent(multipart);	//  msg에 setText랑 바디파트의 setcontents랑 안겹치나???===겹친다.  msg.setText는 지워지고 bodypart.setContent가 내용으로 들어간다.
-            
+			
+			 MimeBodyPart attachPart = new MimeBodyPart(); //마임바디파트(파일용) 생성 이걸 msg에 넣어서보낼것임. 
+			 FileDataSource fds = new FileDataSource(filePath); //파일을 가져온다.파라메터로 경로혹은 파일 오브젝트 attachPart.setDataHandler(new DataHandler(fds)); // 마임바디파트에 넣는다.
+			 attachPart.setDataHandler(new DataHandler(fds));  // 마임바디파트에 넣는다.
+			 attachPart.setFileName(fileName); // 파일명
+			 System.out.println("파일설정완료");
+			 
+			 MimeBodyPart bodypart = new MimeBodyPart(); //마임바디파트(내용용) 이것도 msg에 넣어서 보낼것임.
+			 bodypart.setContent(html, "text/html;charset=UTF-8");
+			 System.out.println("바디설정완료");
+			 
+			 Multipart multipart = new MimeMultipart(); //파일 파트와 콘텐츠 파트를 핸들링
+			 multipart.addBodyPart(bodypart); multipart.addBodyPart(attachPart);
+			 System.out.println("합치기 완료");
+			 
+			 
+			 msg.setContent(multipart); // msg에 setText랑 바디파트의 setcontents랑 안겹치나???===겹친다.msg.setText는 지워지고 bodypart.setContent가 내용으로 들어간다.
+			 
+			 
+			 
             Transport.send(msg);
             
         } catch(AddressException ae) {            

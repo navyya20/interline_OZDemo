@@ -8,7 +8,7 @@ public class GetAuthen extends Authenticator{
     
     public GetAuthen() {
         String mail_id = "navyya20";
-        String mail_pw = "eodms1614";
+        String mail_pw = "rlaeodms1614";
         
         pa = new PasswordAuthentication(mail_id, mail_pw);
     }

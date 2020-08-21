@@ -1,5 +1,6 @@
 package jp.co.interlineOZDemo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -163,15 +164,18 @@ public class MemberController {
 			SendMail mail = new SendMail();
 			String title = "OZ_Demoの件";
 			String text = "作成した見積書をお送りいたします。";
-			String html = "";
+			String html = "作成した見積書をお送りいたします。";
 			GetProperties getProperties = new GetProperties();
-			String filePath = getProperties.getServerPath()+"\\webapps\\ozsch80\\Repository\\pdf\\"+"reportExport"+estimateSheetVO.getReportName()+reportNum+".pdf";
+			String filePath = getProperties.getServerPath()+"/webapps/ozsch80/Repository/pdf/"+"reportExport"+estimateSheetVO.getReportName()+reportNum+".pdf";
+			filePath.replace('/', File.separatorChar);
+			System.out.println("filePath:"+filePath);
+			File targetFile = new File(filePath);
+			targetFile.setReadable(true, false);
+            targetFile.setWritable(true, false);
+            targetFile.setExecutable(true, false);
 			String fileName = "reportExport"+estimateSheetVO.getReportName()+reportNum+".pdf";
 			mail.MailSend(email, title, text, html, filePath, fileName);
 		}
-		//SendMail mail = new SendMail();
-		//mail.MailSend(emailAddress, title, text, html, filePath, fileName);
-		//MailSend(String emailAddress ,String title,String text, String html ,String filePath, String fileName)
 		
 		return "success";
 	}
