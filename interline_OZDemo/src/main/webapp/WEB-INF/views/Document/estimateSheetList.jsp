@@ -92,6 +92,32 @@ function formSubmit(page){
 function modEstimateSheet(reportNum){
 	window.parent.location.href = "modEstimate?reportNum=" + reportNum;
 }
+
+function deleteSheet(){
+	var checkBox=$('input[name="selectedRow"]');
+	var reportNumArray=new Array();
+	for(var i=0 ; i<checkBox.length ; i++) {
+	    if (checkBox[i].checked == true){
+	    	reportNumArray.push(parseInt(checkBox[i].value));
+	    }
+	}
+	console.log("reportNumArray:"+reportNumArray);
+	$.ajax(
+			{
+				url: "deleteSheet",
+				type: 'GET',
+				traditional : true,
+				data: {"reportNum":reportNumArray},
+				success: function(data){
+					document.location.href = "estimateSheetList";
+				},
+				error: function(e){
+					console.log(JSON.stringify(e));
+					alert('エラー！');
+				}
+			}		
+	);
+}
 </script>
 
 <body>
@@ -110,10 +136,10 @@ function modEstimateSheet(reportNum){
 	</tr>
 	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
 	<tr>
-		<td><input id='row${status.count}' type='checkbox' name='row${status.count}' value='${sheet.reportNum}'></td>
+		<td><input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
 		<td>${sheet.reportNum}</td>
 		<td>${sheet.receiver}</td>
-		<td>${sheet.reportName}</td>
+		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_blank" style="text-decoration: none;">${sheet.reportName}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd"/></td>
@@ -137,6 +163,7 @@ function modEstimateSheet(reportNum){
 
 </table>
 </div>
+<div style="text-align: right; margin-bottom: 5px; margin-top: 5px;"><span class="pc_font_button2" onclick="deleteSheet()">削除</span></div>
 
 
 <div id = "navigator">

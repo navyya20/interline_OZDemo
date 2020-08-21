@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class SendMail {
-	public void MailSend(String emailAddress ,String title,String text, String html ,String fileName) {
+	public void MailSend(String emailAddress ,String title,String text, String html ,String filePath, String fileName) {
         Properties prop = System.getProperties();
         prop.put("mail.smtp.starttls.enable", "true");  //로그인시 TLS를 사용할 것인지 설정
         prop.put("mail.smtp.host", "smtp.gmail.com");  //이메일 발송을 처리해줄 SMTP서버
@@ -42,15 +42,15 @@ public class SendMail {
             InternetAddress to = new InternetAddress(emailAddress);       //수신자의 메일을 생성한다. 
             msg.setRecipient(Message.RecipientType.TO, to);  //Message 클래스의 setRecipient() 메소드를 사용하여 수신자를 설정한다. setRecipient() 메소드로 수신자, 참조, 숨은 참조 설정이 가능하다.          
             msg.setSubject(title, "UTF-8");            
-            msg.setText("안녕하세요 테스트 메일입니다.", "UTF-8");       
+            msg.setText(text, "UTF-8");       
             
             //여기까지는 메일만 보내기
             
             //여기서 부턴 파일 첨부하기
             MimeBodyPart attachPart = new MimeBodyPart();   //마임바디파트(파일용) 생성 이걸 msg에 넣어서 보낼것임.
-            FileDataSource fds = new FileDataSource("C:\\Apache Software Foundation\\Tomcat 8.5\\webapps\\ozsch80\\Repository\\pdf\\document.pdf");  //파일을 가져온다.파라메터로 경로 혹은 파일 오브젝트
+            FileDataSource fds = new FileDataSource(filePath);  //파일을 가져온다.파라메터로 경로 혹은 파일 오브젝트
             attachPart.setDataHandler(new DataHandler(fds));  // 마임바디파트에 넣는다.
-            attachPart.setFileName("noname.pdf"); // 파일명
+            attachPart.setFileName(fileName); // 파일명
             
             MimeBodyPart bodypart = new MimeBodyPart();  //마임바디파트(내용용) 이것도 msg에 넣어서 보낼것임.
             bodypart.setContent(html, "text/html;charset=UTF-8"); 

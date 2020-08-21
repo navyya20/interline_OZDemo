@@ -32,7 +32,7 @@ public class MainController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session) {
-		session.removeAttribute("login_id");
+		session.removeAttribute("loginId");
 		session.invalidate();
 		
 		return "login";
@@ -40,7 +40,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(HttpSession session) {
-		session.removeAttribute("login_id");
+		session.removeAttribute("loginId");
 		session.invalidate();
 		
 		return "login";

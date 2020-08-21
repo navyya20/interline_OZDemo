@@ -1,6 +1,7 @@
 package jp.co.interlineOZDemo.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 
@@ -25,5 +26,7 @@ public interface MemberMapper {
 	public ArrayList<EstimateSheetVO> getEstimateSheetList(RowBounds rbs, int userNum);
 
 	public int getTotalEstimateSheet(int userNum);
+
+	public int deleteSheet(HashMap<String, Object> hashMap);
 
 }

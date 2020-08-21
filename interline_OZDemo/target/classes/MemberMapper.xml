@@ -100,4 +100,9 @@
 	<select id="getTotalEstimateSheet" parameterType="int" resultType="int">
 		select count(*) from estimateSheet where userNum=#{userNum}
 	</select>
+	
+	<delete id="deleteSheet" parameterType="hashMap">
+		delete from estimateSheet where userNum=#{userNum} and 
+		reportNum in (<foreach item="item" index="i" collection="reportNum" separator=",">#{item}</foreach>)
+	</delete>
 </mapper>

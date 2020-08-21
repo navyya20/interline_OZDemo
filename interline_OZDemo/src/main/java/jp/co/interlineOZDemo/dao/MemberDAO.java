@@ -1,6 +1,7 @@
 package jp.co.interlineOZDemo.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -69,4 +70,11 @@ public class MemberDAO {
 		int result = mapper.getTotalEstimateSheet(userNum);
 		return result;
 	}
+
+	public int deleteSheet(HashMap<String, Object> hashMap) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		int result = mapper.deleteSheet(hashMap);
+		return result;
+	}
+
 }
