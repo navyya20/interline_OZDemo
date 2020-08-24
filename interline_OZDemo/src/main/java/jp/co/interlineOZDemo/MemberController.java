@@ -52,7 +52,7 @@ public class MemberController {
 	//memberMain
 	@RequestMapping(value = "/memberMain", method=RequestMethod.GET)
 	public String mainMenuMember() {
-		
+
 		return "Member/mainMenuMember";
 	}
 	
@@ -231,9 +231,10 @@ public class MemberController {
 	//청구서 작성
 	@RequestMapping(value="/writeBill", method=RequestMethod.GET)
 	public String writeBillSheet(Model model,int reportNum, HttpSession session){
+		String id = (String) session.getAttribute("loginId");
 		
 		model.addAttribute("reportNum", reportNum);
-		model.addAttribute("id", (String)session.getAttribute("loginId"));
+		model.addAttribute("id", id);
 		 
 		return "Document/writeBillSheet";
 	}

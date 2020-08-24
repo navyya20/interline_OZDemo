@@ -49,15 +49,16 @@ function pagechange(){
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
 		var id = "${id}";
+
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet","http://127.0.0.1:8888/oz80/server");
 		oz.sendToActionScript("connection.reportname","writeBill.ozr");
 
 		oz.sendToActionScript("odi.odinames", "writeBill");
- 		oz.sendToActionScript("odi.Bill.pcount", "2");
-		oz.sendToActionScript("odi.Bill.args1", "reportnum="+reportNum);
-		oz.sendToActionScript("odi.Bill.args2", "id="+id);
+ 		oz.sendToActionScript("odi.writeBill.pcount", "2");
+		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
+		oz.sendToActionScript("odi.writeBill.args2", "id="+id);
 		return true;
 	}
 	start_ozjs("OZViewer","http://127.0.0.1:8888/oz80/ozhviewer/");
