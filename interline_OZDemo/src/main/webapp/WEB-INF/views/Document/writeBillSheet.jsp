@@ -1,17 +1,22 @@
+<%@page import="jp.co.interlineOZDemo.util.GetProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
-<html style="height:100%">
+<html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css"/>
-<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="http://127.0.0.1:8888/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
-<script type="text/javascript" src="http://127.0.0.1:8888/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://127.0.0.1:8888/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+<meta charset="UTF-8">
+<title>BillSheet</title>
 </head>
+
+<script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.css" type="text/css"/>
+<script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+
 <body style="width:98%;height:98%">
 
 <script>
@@ -19,7 +24,6 @@ function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 	billData["reportNum"] ="${reportNum}";
 	var strData = JSON.stringify(billData);
-	console.log(strData);
 
 	$.ajax(
 			{
@@ -39,6 +43,10 @@ function OZUserEvent_OZViewer(){
 	);
 	
 }
+
+function pagechange(){
+	window.history.back();
+}
 </script>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
@@ -47,20 +55,19 @@ function OZUserEvent_OZViewer(){
 		var reportNum = "${reportNum}";
 		var id = "${id}";
 
-		console.log(reportNum);
-		console.log(id);
 		var oz;
 		oz = document.getElementById("OZViewer");
-		oz.sendToActionScript("connection.servlet","http://127.0.0.1:8888/oz80/server");
-		oz.sendToActionScript("connection.reportname","writeBill.ozr");
+		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
+		oz.sendToActionScript("connection.reportname","OZDemo_Bill/writeBill.ozr");
 
+		oz.sendToActionScript("global.language", "ja");
 		oz.sendToActionScript("odi.odinames", "writeBill");
- 		oz.sendToActionScript("odi.Bill.pcount", "2");
-		oz.sendToActionScript("odi.Bill.args1", "reportnum="+reportNum);
-		oz.sendToActionScript("odi.Bill.args2", "id="+id);
+ 		oz.sendToActionScript("odi.writeBill.pcount", "2");
+		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
+		oz.sendToActionScript("odi.writeBill.args2", "id="+id);
 		return true;
 	}
-	start_ozjs("OZViewer","http://127.0.0.1:8888/oz80/ozhviewer/");
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
 </script>
 <script>
 	
