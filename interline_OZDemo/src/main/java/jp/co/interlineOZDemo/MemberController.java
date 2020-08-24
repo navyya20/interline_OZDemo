@@ -122,21 +122,23 @@ public class MemberController {
 		ArrayList<EstimateItemsVO> estimateItemsArray = new ArrayList<EstimateItemsVO>();
 		JSONObject jsonObject = new JSONObject(estimateItemsString);
 		JSONArray jsonArray = (JSONArray)jsonObject.get("itemArray");
-		for ( int i = 0 ; i < jsonArray.length() ; i++ ) {
-			JSONObject item = (JSONObject)jsonArray.get(i);
-			EstimateItemsVO estimateItemsVO = new EstimateItemsVO();
-			estimateItemsVO.setReportNum(reportNum);
-			estimateItemsVO.setItemNum(Integer.parseInt((String)item.get("itemNum")));
-			estimateItemsVO.setItemName((String)item.get("itemName"));
-			estimateItemsVO.setAmount(Integer.parseInt((String)item.get("amount")));
-			estimateItemsVO.setUnit((String)item.get("unit"));
-			estimateItemsVO.setUnitPrice(Integer.parseInt((String)item.get("unitPrice")));
-			estimateItemsVO.setPrice(Integer.parseInt((String)item.get("price")));
-			estimateItemsVO.setNote((String)item.get("note"));
-			estimateItemsArray.add(estimateItemsVO);
+		System.out.println("견적된item갯수:"+jsonArray.length());
+		if(jsonArray.length() != 0) {
+			for ( int i = 0 ; i < jsonArray.length() ; i++ ) {
+				JSONObject item = (JSONObject)jsonArray.get(i);
+				EstimateItemsVO estimateItemsVO = new EstimateItemsVO();
+				estimateItemsVO.setReportNum(reportNum);
+				estimateItemsVO.setItemNum(Integer.parseInt((String)item.get("itemNum")));
+				estimateItemsVO.setItemName((String)item.get("itemName"));
+				estimateItemsVO.setAmount(Integer.parseInt((String)item.get("amount")));
+				estimateItemsVO.setUnit((String)item.get("unit"));
+				estimateItemsVO.setUnitPrice(Integer.parseInt((String)item.get("unitPrice")));
+				estimateItemsVO.setPrice(Integer.parseInt((String)item.get("price")));
+				estimateItemsVO.setNote((String)item.get("note"));
+				estimateItemsArray.add(estimateItemsVO);
+			}
+			dao.insertEstimateItems(estimateItemsArray);
 		}
-		
-		dao.insertEstimateItems(estimateItemsArray);
 		
 		//파일 데몬서버에 떨구기
 		GetProperties properties= new GetProperties();
