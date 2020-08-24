@@ -105,4 +105,61 @@
 		delete from estimateSheet where userNum=#{userNum} and 
 		reportNum in (<foreach item="item" index="i" collection="reportNum" separator=",">#{item}</foreach>)
 	</delete>
+	
+	<insert id="insertBillSheet" parameterType="billInform">
+		insert into billInform(
+			billNum,
+  			reportNum,
+			billDate,
+	
+			supplier,
+			address,
+			post,
+			phoneNumber,
+			representative,
+	
+			receiver,
+			supplyPoint,
+			
+			sum,
+			sumWithTax,
+  
+  			bankName,
+   			depositeClassification,
+   			accountNumber,
+   			accountOwner,
+  		 	hurigana
+		)values(
+			#{billNum},
+  			#{reportNum},
+			#{billDate},
+	
+			#{supplier},
+			#{address},
+			#{post},
+			#{phoneNumber},
+			#{representative},
+	
+			#{receiver},
+			#{supplyPoint},
+			
+			#{sum},
+			#{sumWithTax},
+  
+  			#{bankName},
+   			#{depositeClassification},
+   			#{accountNumber},
+   			#{accountOwner},
+  		 	#{hurigana}
+		)
+	</insert>
+	
+	<update id="setState" parameterType="int">
+		update 
+			estimateSheet
+		set
+			state = "b"
+		where
+			reportNum = #{reportNum}
+	</update>
 </mapper>

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jp.co.interlineOZDemo.vo.BillInformVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -75,6 +76,17 @@ public class MemberDAO {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		int result = mapper.deleteSheet(hashMap);
 		return result;
+	}
+
+	public int insertBillSheet(BillInformVO billInform) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		int result = mapper.insertBillSheet(billInform);
+		return result;
+	}
+
+	public void setState(int reportNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		mapper.setState(reportNum);
 	}
 
 }

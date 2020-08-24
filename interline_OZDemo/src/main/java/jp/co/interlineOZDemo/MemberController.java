@@ -1,7 +1,10 @@
 package jp.co.interlineOZDemo;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.util.ExportReport;
 import jp.co.interlineOZDemo.util.GetProperties;
@@ -31,13 +36,15 @@ import oz.scheduler.SchedulerException;
 
 
 
+
+
 @Controller
 @RequestMapping("/member")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	private static final int countPerPage=10;		
-	private static final int pagePerGroup=10;	
+	private static final int pagePerGroup=10;
 	
 	@Autowired
 	MemberDAO dao;
@@ -223,27 +230,48 @@ public class MemberController {
 	
 	//청구서 작성
 	@RequestMapping(value="/writeBill", method=RequestMethod.GET)
-	public String writeBillSheet(Model model,int reportNum){
+	public String writeBillSheet(Model model,int reportNum, HttpSession session){
 		
 		model.addAttribute("reportNum", reportNum);
+		model.addAttribute("id", (String)session.getAttribute("loginId"));
 		 
 		return "Document/writeBillSheet";
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/saveBill", method=RequestMethod.POST)
-	public String saveEstimateSheet(BillInformVO BillInform , HttpSession session) {
-		System.out.println("saveEstimateSheet실행");
-		System.out.println("견적서내용:"+BillInform);
-	
-		return "success";
+	@RequestMapping(value="/saveBill", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
+	public String saveEstimateSheet(String jsonStr, HttpSession session) {
+		System.out.println("견적서내용:"+jsonStr);
+		
+		Gson gson = new Gson();
+		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class);
+		
+		SimpleDateFormat billDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
+		SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
+		
+		
+		try {
+			Date bill_Date = billDate_pattern.parse(BillInform.getBillDate());
+			BillInform.setBillDate(newDate_pattern.format(bill_Date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		int result = dao.insertBillSheet(BillInform);
+		
+		if(result == 1) {
+			dao.setState(BillInform.getReportNum());
+			return "success";
+		}
+		return "error";		
 	}
 	
 	@RequestMapping(value="/readBill", method=RequestMethod.GET)
 	public String readBillSheet(Model model,int reportNum){
 		
 		model.addAttribute("reportNum", reportNum);	 
-		return "Document/BillSheet";
+		return "Document/readBillSheet";
 	}
 	
 	//(회원용)회원정보 수정페이지로드

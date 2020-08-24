@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 
+import jp.co.interlineOZDemo.vo.BillInformVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -28,5 +29,9 @@ public interface MemberMapper {
 	public int getTotalEstimateSheet(int userNum);
 
 	public int deleteSheet(HashMap<String, Object> hashMap);
+
+	public int insertBillSheet(BillInformVO billInform);
+
+	public void setState(int reportNum);
 
 }

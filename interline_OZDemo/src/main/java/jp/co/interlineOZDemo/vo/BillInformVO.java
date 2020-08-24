@@ -8,10 +8,10 @@ public class BillInformVO {
 	private	String address;
 	private String post;
 	private	String phoneNumber;
-	private	String incharge;
+	private	String representative;
 	private	String receiver;
 	private	String supplyPoint;
-	private	String cautions;
+	private String stamp;
 	private	int sum;
 	private	int sumWithTax;
 	private String bankName;
@@ -25,9 +25,9 @@ public class BillInformVO {
 	}
 
 	public BillInformVO(int billNum, int reportNum, String billDate, String supplier, String address, String post,
-			String phoneNumber, String incharge, String receiver, String supplyPoint, String cautions, int sum,
-			int sumWithTax, String bankName, String depositeClassification, String accountNumber, String accountOwner,
-			String hurigana) {
+			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp,
+			int sum, int sumWithTax, String bankName, String depositeClassification, String accountNumber,
+			String accountOwner, String hurigana) {
 		super();
 		this.billNum = billNum;
 		this.reportNum = reportNum;
@@ -36,10 +36,10 @@ public class BillInformVO {
 		this.address = address;
 		this.post = post;
 		this.phoneNumber = phoneNumber;
-		this.incharge = incharge;
+		this.representative = representative;
 		this.receiver = receiver;
 		this.supplyPoint = supplyPoint;
-		this.cautions = cautions;
+		this.stamp = stamp;
 		this.sum = sum;
 		this.sumWithTax = sumWithTax;
 		this.bankName = bankName;
@@ -105,12 +105,12 @@ public class BillInformVO {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getIncharge() {
-		return incharge;
+	public String getRepresentative() {
+		return representative;
 	}
 
-	public void setIncharge(String incharge) {
-		this.incharge = incharge;
+	public void setRepresentative(String representative) {
+		this.representative = representative;
 	}
 
 	public String getReceiver() {
@@ -129,12 +129,12 @@ public class BillInformVO {
 		this.supplyPoint = supplyPoint;
 	}
 
-	public String getCautions() {
-		return cautions;
+	public String getStamp() {
+		return stamp;
 	}
 
-	public void setCautions(String cautions) {
-		this.cautions = cautions;
+	public void setStamp(String stamp) {
+		this.stamp = stamp;
 	}
 
 	public int getSum() {
@@ -195,11 +195,12 @@ public class BillInformVO {
 
 	@Override
 	public String toString() {
-		return "billInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", billDate=" + billDate
+		return "BillInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", billDate=" + billDate
 				+ ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
-				+ ", incharge=" + incharge + ", receiver=" + receiver + ", supplyPoint=" + supplyPoint + ", cautions="
-				+ cautions + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", bankName=" + bankName
-				+ ", depositeClassification=" + depositeClassification + ", accountNumber=" + accountNumber
+				+ ", representative=" + representative + ", receiver=" + receiver + ", supplyPoint=" + supplyPoint + ", stamp="
+				+ stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", bankName="
+				+ bankName + ", depositeClassification=" + depositeClassification + ", accountNumber=" + accountNumber
 				+ ", accountOwner=" + accountOwner + ", hurigana=" + hurigana + "]";
 	}
+
 }

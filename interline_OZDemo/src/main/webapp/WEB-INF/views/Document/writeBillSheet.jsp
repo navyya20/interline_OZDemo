@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html style="height:100%">
 <head>
@@ -8,28 +11,33 @@
 <link rel="stylesheet" href="http://127.0.0.1:8888/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://127.0.0.1:8888/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://127.0.0.1:8888/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
-
 </head>
 <body style="width:98%;height:98%">
 
 <script>
-function OZUserEvent_OZViewer(param1, param2, param3){
-
+function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
+	billData["reportNum"] ="${reportNum}";
+	var strData = JSON.stringify(billData);
+	console.log(strData);
 
-	var processedInputJson = getJsonToSend(billData);
-
-	console.log(billData);
 	$.ajax(
 			{
 				url: "saveBill",
 				type: 'POST',
-				data: processedInputJson,
-				success: function(result){
-					alert(result);
+				data: {jsonStr:strData},
+				dataType:'text',
+				success: function(data){
+					alert("保存成功");
+					location.href="memberMain";
+				},
+				error: function(e){
+					console.log(JSON.stringify(e));
+					alert('エラー！');
 				}
 			}		
 	);
+	
 }
 </script>
 
@@ -37,13 +45,16 @@ function OZUserEvent_OZViewer(param1, param2, param3){
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
-		var id = '<%=session.getAttribute("login_id") %>';
+		var id = "${id}";
+
+		console.log(reportNum);
+		console.log(id);
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet","http://127.0.0.1:8888/oz80/server");
 		oz.sendToActionScript("connection.reportname","writeBill.ozr");
 
-		oz.sendToActionScript("odi.odinames", "Bill");
+		oz.sendToActionScript("odi.odinames", "writeBill");
  		oz.sendToActionScript("odi.Bill.pcount", "2");
 		oz.sendToActionScript("odi.Bill.args1", "reportnum="+reportNum);
 		oz.sendToActionScript("odi.Bill.args2", "id="+id);

@@ -80,6 +80,13 @@ function writeNewSheet(){
 	window.parent.location.href="writeEstimate";
 }
 
+function writeBillSheet(reportNum){
+	window.parent.location.href = "writeBill?reportNum=" +reportNum;
+}
+
+function readBillSheet(reportNum){
+	window.parent.location.href = "readBill?reportNum=" +reportNum;
+}
 
 function formSubmit(page){
 	var pp = document.getElementById('page');
@@ -146,10 +153,10 @@ function deleteSheet(){
 		<td class="lastColum">
 			<c:choose>
 				<c:when test="${sheet.state eq 'e'}">
-					<span class="pc_font_button2">請求書作成</span>
+					<span class="pc_font_button2" onclick="writeBillSheet(${sheet.reportNum})">請求書作成</span>
 				</c:when>
 				<c:when test="${sheet.state eq 'b'}">
-					<span class="pc_font_button2">請求書閲覧</span>
+					<span class="pc_font_button2" onclick="readBillSheet(${sheet.reportNum})">請求書閲覧</span>
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
