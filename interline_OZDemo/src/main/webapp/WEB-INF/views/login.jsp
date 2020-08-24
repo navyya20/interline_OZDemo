@@ -30,8 +30,9 @@ $(document).ready(function(){
 	function input_Check(){
 		var id=$("#login_id").val();
 		var pw=$("#login_pw").val();
-
-		if(id !="" && pw !=""){
+		
+		var check = /^[A-Za-z0-9]{3,20}$/ ;
+		if(check.test(id) && check.test(pw)){
 			$.ajax({
 				type:"post",
 				url:"login",
@@ -50,11 +51,11 @@ $(document).ready(function(){
 			$("#login_pw").val("");
 		}
 		
-		if(id == ""){
-			alert("IDを入力してください。");
+		if(!check.test(id)){
+			alert("IDは3~20字の英数字です。");
 			$("#login_id").focus();
-		}else if(pw == ""){
-			alert("PASSWORDを入力してください。");
+		}else if(!check.test(pw)){
+			alert("PASSWORDは3~20字の英数字です。");
 			$("#login_pw").focus();
 		}
 		return false;
