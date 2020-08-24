@@ -19,7 +19,6 @@ function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 	billData["reportNum"] ="${reportNum}";
 	var strData = JSON.stringify(billData);
-	console.log(strData);
 
 	$.ajax(
 			{
@@ -39,6 +38,10 @@ function OZUserEvent_OZViewer(){
 	);
 	
 }
+
+function pagechange(){
+	window.history.back();
+}
 </script>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
@@ -46,9 +49,6 @@ function OZUserEvent_OZViewer(){
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
 		var id = "${id}";
-
-		console.log(reportNum);
-		console.log(id);
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet","http://127.0.0.1:8888/oz80/server");
