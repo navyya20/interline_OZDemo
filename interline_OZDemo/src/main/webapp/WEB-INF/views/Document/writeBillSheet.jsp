@@ -23,25 +23,28 @@
 function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 	billData["reportNum"] ="${reportNum}";
-	var strData = JSON.stringify(billData);
 
-	$.ajax(
-			{
-				url: "saveBill",
-				type: 'POST',
-				data: {jsonStr:strData},
-				dataType:'text',
-				success: function(data){
-					alert("保存成功");
-					location.href="memberMain";
-				},
-				error: function(e){
-					console.log(JSON.stringify(e));
-					alert('エラー！');
-				}
-			}		
-	);
-	
+	if(billData.bankName != "" && billData.accountNumber != "" && billData.accountOwner != "" && billData.hurigana != "" && billData.depositeClassification != ""){
+		$.ajax({
+			url: "saveBill",
+			type: 'POST',
+			data: {jsonStr:JSON.stringify(billData)},
+			dataType:'text',
+			success: function(data){
+				alert("保存成功");
+				location.href="memberMain";
+			},
+			error: function(e){
+				console.log(JSON.stringify(e));
+				alert('エラー！');
+			}
+		});
+	}
+
+	if(billData.bankName == "" || billData.accountNumber == "" || billData.accountOwner == "" || billData.hurigana == "" || billData.depositeClassification == ""){
+		alert("口座情報を確認してください。");
+	}
+	return false;
 }
 
 function pagechange(){
