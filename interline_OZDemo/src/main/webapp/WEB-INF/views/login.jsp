@@ -68,12 +68,15 @@ if ( self !== top ) {
 	  // you're in an iframe
 	window.parent.location.href="login";
 }
-
+console.log(isNaN('1234'));
 
 </script>
 </head>
 
 <body class="body">
+<div style="position: absolute; top: 0; left: 0">
+	version1 2020 08 27 18:12
+</div>
 <div id="login_div">
 	<table id="login_table">
 	<tr>

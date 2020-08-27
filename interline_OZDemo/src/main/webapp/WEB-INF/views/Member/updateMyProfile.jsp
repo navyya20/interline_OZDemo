@@ -102,7 +102,7 @@ function submitMyProfile(){
 
 	var form = document.getElementById("updateMyProfile");
 	var form = $("#updateMyProfile").serialize() ;
-	 
+	
     $.ajax({
         type : "post",
         url : "updateMyProfile",
@@ -111,12 +111,11 @@ function submitMyProfile(){
         error: function(xhr, status, error){
             console.log(error);
         },
-        success : function(json){
-            alert(json);
+        success : function(s){
+            alert("自社情報を修正しました。");
             location.reload(true);
         }
     });
-
 }
 </script>
 

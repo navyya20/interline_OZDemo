@@ -184,7 +184,7 @@ public class MemberController {
             EstimateSheetVO estimateSheet = dao.getEstimateSheet(estimateSheetVO);
 			String fileName = estimateSheet.getReportNum()+"OZDemo"+estimateSheet.getReportDate()+".pdf";
 			System.out.println("fileName:"+fileName);
-			String html=estimateSheet.getReceiver()+"\n"+"ご担当様\n\n下記の御見積書を作成しました。\n文書番号: "+estimateSheet.getReportNum()+"\n作成日: "+estimateSheet.getReportDate()+"\n件名: "+estimateSheet.getReportName()+"\nファイル名: "+fileName+"\n";
+			String html="<div>"+estimateSheet.getReceiver()+"</div>"+"<div>ご担当様<div><br></br><div>下記の御見積書を作成しました。</div><br></br><div>文書番号: "+estimateSheet.getReportNum()+"</div><div>作成日: "+estimateSheet.getReportDate()+"</div><div>件名: "+estimateSheet.getReportName()+"</div><div>ファイル名: "+fileName+"</div>";
 			mail.MailSend(email, title, text, html, filePath, fileName);
 		}
 		
@@ -281,8 +281,11 @@ public class MemberController {
 	
 	//(회원용)회원정보 수정페이지로드
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.GET)
-	public String updateMyProfileForm() {
+	public String updateMyProfileForm(HttpSession session) {
 		System.out.println("회원정보 업데이트 화면로드");
+		UserInformVO userIdPassword = (UserInformVO)session.getAttribute("userInform");
+		UserInformVO member = dao.getMember(userIdPassword);
+		session.setAttribute("userInform", member);
 		return "Member/updateMyProfile";
 	}
 	
