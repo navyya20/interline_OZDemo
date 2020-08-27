@@ -69,12 +69,17 @@ $(function(){
 <table style="text-align: center; margin-left: auto;margin-right: auto;">
 <tr>
 	<td class="mainMenuTd">
-		<div id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</div>
+		<div id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報</div>
 	</td>
 </tr>
 <tr>
 	<td class="mainMenuTd">
-		<div id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">会員情報</div>
+		<div id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeEstimate;'">見積書作成</div>
+	</td>
+</tr>
+<tr>
+	<td class="mainMenuTd">
+		<div id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</div>
 	</td>
 </tr>
 <tr>

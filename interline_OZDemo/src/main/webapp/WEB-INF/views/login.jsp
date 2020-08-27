@@ -50,7 +50,8 @@ $(document).ready(function(){
 			$("#login_id").val("");
 			$("#login_pw").val("");
 		}
-		
+		if(id.length == 0){alert("IDを入力してください。");$("#login_id").focus();return false;}
+		if(pw.length == 0){alert("PWを入力してください。");$("#login_pw").focus();return false;}
 		if(!check.test(id)){
 			alert("IDは3~20字の英数字です。");
 			$("#login_id").focus();

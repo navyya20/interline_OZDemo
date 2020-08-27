@@ -76,7 +76,7 @@ function sendInputJson(processedInputJson,address){
 				type: 'POST',
 				data: processedInputJson,
 				success: function(data){
-					alert("送信成功");
+					alert("見積書を作成しました。");
 					location.href="memberMain";
 				},
 				error: function(e){

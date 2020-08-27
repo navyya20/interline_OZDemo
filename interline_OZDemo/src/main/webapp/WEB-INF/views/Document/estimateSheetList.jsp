@@ -29,10 +29,11 @@
 	#list_table td{
 		border-style:solid;
 		border-width: 1px;
-		vertical-align: bottom;
+		vertical-align: middle;
 	}
 	.lastColum{
-		padding-bottom: 3px;
+		padding-bottom: 4px;
+		padding-top: 2px;
 	}
 	#navigator a{
 		text-decoration: none;
@@ -109,6 +110,8 @@ function deleteSheet(){
 	    }
 	}
 	console.log("reportNumArray:"+reportNumArray);
+	if(reportNumArray.length　==　0){alert("削除対象が選択されていません。"); return false;}
+	confirm("削除しますか。");
 	$.ajax(
 			{
 				url: "deleteSheet",
@@ -125,11 +128,20 @@ function deleteSheet(){
 			}		
 	);
 }
+function selectAll(){
+	var checkBoxSelectAll=$('input[name="selectAll"]');
+	var checkBoxItems=$('input[name="selectedRow"]');
+	if (checkBoxSelectAll[0].checked == true){
+		checkBoxItems.prop('checked', true) ;
+	}else{
+		checkBoxItems.prop('checked', false) ;
+	}
+}
 </script>
 
 <body>
 <div id="title">見積書リスト</div>
-<div style="text-align: right; margin-bottom: 5px;"><span class="pc_font_button2" onclick="writeNewSheet()">新しく作成</span></div>
+<div style="text-align: left; margin-bottom: 5px; margin-top: 5px;"><span class="pc_font_button2" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0);">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
@@ -149,7 +161,7 @@ function deleteSheet(){
 		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_blank" style="text-decoration: none;">${sheet.reportName}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd"/></td>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd HH:mm"/></td>
 		<td class="lastColum">
 			<c:choose>
 				<c:when test="${sheet.state eq 'e'}">
@@ -170,7 +182,6 @@ function deleteSheet(){
 
 </table>
 </div>
-<div style="text-align: right; margin-bottom: 5px; margin-top: 5px;"><span class="pc_font_button2" onclick="deleteSheet()">削除</span></div>
 
 
 <div id = "navigator">

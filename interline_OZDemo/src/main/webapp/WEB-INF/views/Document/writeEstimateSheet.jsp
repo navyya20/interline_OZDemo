@@ -17,7 +17,7 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 
-<script src="<c:url value = '../resources/js/estimateSheet.js?ver=1'/>"></script>
+<script src="<c:url value = '../resources/js/estimateSheet.js?ver=2'/>"></script>
 
 <body>
 <div id="userInformJsonString" style="display: none;">${userInformJsonString}</div>
@@ -41,6 +41,7 @@
 		oz.sendToActionScript("connection.pcount","2");
 		oz.sendToActionScript("connection.args1","repeat=13");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
+		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");

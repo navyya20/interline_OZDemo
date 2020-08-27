@@ -101,7 +101,22 @@ function submitMyProfile(){
 	if(!postCheck.test(post)){"123-1234形式でお願いします。";$("#post").focus();return;}
 
 	var form = document.getElementById("updateMyProfile");
-	form.submit();
+	var form = $("#updateMyProfile").serialize() ;
+	 
+    $.ajax({
+        type : "post",
+        url : "updateMyProfile",
+        data : form,
+        dataType : "text",
+        error: function(xhr, status, error){
+            console.log(error);
+        },
+        success : function(json){
+            alert(json);
+            location.reload(true);
+        }
+    });
+
 }
 </script>
 
