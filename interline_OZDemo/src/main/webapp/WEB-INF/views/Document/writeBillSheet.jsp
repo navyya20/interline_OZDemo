@@ -20,9 +20,14 @@
 <body style="width:98%;height:98%">
 
 <script>
+
 function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 	billData["reportNum"] ="${reportNum}";
+	billData["billNum"] ="${reportNum}";
+	billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
+	billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
+	billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
 
 	if(billData.bankName != "" && billData.accountNumber != "" && billData.accountOwner != "" && billData.hurigana != "" && billData.depositeClassification != ""){
 		$.ajax({
@@ -50,6 +55,7 @@ function OZUserEvent_OZViewer(){
 function pagechange(){
 	window.history.back();
 }
+
 </script>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>

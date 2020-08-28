@@ -14,6 +14,7 @@ public class BillInformVO {
 	private String stamp;
 	private	int sum;
 	private	int sumWithTax;
+	private int sumWithTax2;
 	private String bankName;
 	private String depositeClassification;
 	private String accountNumber;
@@ -25,8 +26,8 @@ public class BillInformVO {
 	}
 
 	public BillInformVO(int billNum, int reportNum, String billDate, String supplier, String address, String post,
-			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp,
-			int sum, int sumWithTax, String bankName, String depositeClassification, String accountNumber,
+			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp, int sum,
+			int sumWithTax, int sumWithTax2, String bankName, String depositeClassification, String accountNumber,
 			String accountOwner, String hurigana) {
 		super();
 		this.billNum = billNum;
@@ -42,6 +43,7 @@ public class BillInformVO {
 		this.stamp = stamp;
 		this.sum = sum;
 		this.sumWithTax = sumWithTax;
+		this.sumWithTax2 = sumWithTax2;
 		this.bankName = bankName;
 		this.depositeClassification = depositeClassification;
 		this.accountNumber = accountNumber;
@@ -153,6 +155,14 @@ public class BillInformVO {
 		this.sumWithTax = sumWithTax;
 	}
 
+	public int getSumWithTax2() {
+		return sumWithTax2;
+	}
+
+	public void setSumWithTax2(int sumWithTax2) {
+		this.sumWithTax2 = sumWithTax2;
+	}
+
 	public String getBankName() {
 		return bankName;
 	}
@@ -197,10 +207,10 @@ public class BillInformVO {
 	public String toString() {
 		return "BillInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", billDate=" + billDate
 				+ ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
-				+ ", representative=" + representative + ", receiver=" + receiver + ", supplyPoint=" + supplyPoint + ", stamp="
-				+ stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", bankName="
-				+ bankName + ", depositeClassification=" + depositeClassification + ", accountNumber=" + accountNumber
-				+ ", accountOwner=" + accountOwner + ", hurigana=" + hurigana + "]";
+				+ ", representative=" + representative + ", receiver=" + receiver + ", supplyPoint=" + supplyPoint
+				+ ", stamp=" + stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2
+				+ ", bankName=" + bankName + ", depositeClassification=" + depositeClassification + ", accountNumber="
+				+ accountNumber + ", accountOwner=" + accountOwner + ", hurigana=" + hurigana + "]";
 	}
 
 }

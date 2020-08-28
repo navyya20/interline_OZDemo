@@ -119,10 +119,10 @@
 			representative,
 	
 			receiver,
-			supplyPoint,
 			
 			sum,
 			sumWithTax,
+			sumWithTax2,
   
   			bankName,
    			depositeClassification,
@@ -141,10 +141,10 @@
 			#{representative},
 	
 			#{receiver},
-			#{supplyPoint},
 			
 			#{sum},
 			#{sumWithTax},
+			#{sumWithTax2},
   
   			#{bankName},
    			#{depositeClassification},
