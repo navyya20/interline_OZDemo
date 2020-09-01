@@ -76,7 +76,8 @@ console.log(isNaN('1234'));
 <body class="body">
 <div style="position: absolute; top: 0; left: 0">
 	version1 2020 08 27 18:12<br>
-	version1.1 2020 80 27 20:53<br>
+	version1.1 2020 08 27 20:53<br>
+	version1.2 2020 08 28 16:26<br>
 </div>
 <div id="login_div">
 	<table id="login_table">

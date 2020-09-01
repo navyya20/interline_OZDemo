@@ -18,7 +18,16 @@ $(function(){
 		var user_num = $("#userNum").val();
 		var user_id = $("#userId").val();
 		var user_pw = $("#password").val();
-		
+		var check = /^[A-Za-z0-9]{3,20}$/ ;
+		if(!check.test(id)){
+			alert("IDは3~20字の英数字です。");
+			$("#login_id").focus();
+			return false;
+		}else if(!check.test(pw)){
+			alert("PASSWORDは3~20字の英数字です。");
+			$("#login_pw").focus();
+			return false;
+		}
  		if(user_num !="" && user_id != ""&& user_pw != ""){
 
  			$.ajax({
