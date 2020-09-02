@@ -26,7 +26,8 @@
 <script>
 $(document).ready(function(){
 	 $('#btn_login').click(input_Check);
-	 
+	 $("#login_id").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
+	 $("#login_pw").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
 	function input_Check(){
 		var id=$("#login_id").val();
 		var pw=$("#login_pw").val();
@@ -52,23 +53,16 @@ $(document).ready(function(){
 		}
 		if(id.length == 0){alert("IDを入力してください。");$("#login_id").focus();return false;}
 		if(pw.length == 0){alert("PWを入力してください。");$("#login_pw").focus();return false;}
-		if(!check.test(id)){
-			alert("IDは3~20字の英数字です。");
-			$("#login_id").focus();
-		}else if(!check.test(pw)){
-			alert("PASSWORDは3~20字の英数字です。");
-			$("#login_pw").focus();
-		}
 		return false;
 	}
 });
+
 
 //인터셉터로 로그인 들어왔는데 현제페이지가 아이프레임 내부일경우 부모요소를 로그인 페이지로 페이지이동
 if ( self !== top ) {
 	  // you're in an iframe
 	window.parent.location.href="login";
 }
-console.log(isNaN('1234'));
 
 </script>
 </head>

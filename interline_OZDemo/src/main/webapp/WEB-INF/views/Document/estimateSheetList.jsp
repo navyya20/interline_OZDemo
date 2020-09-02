@@ -10,7 +10,7 @@
 </head>
 
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
-<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<link href="../resources/css/Font-Style.css?ver=1" rel="stylesheet">
 <style>
 	body{
 		text-align: center;
@@ -141,7 +141,7 @@ function selectAll(){
 
 <body>
 <div id="title">見積書リスト</div>
-<div style="text-align: left; margin-bottom: 5px; margin-top: 5px;"><span class="pc_font_button2" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0);">削除</span></div>
+<div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="pc_font_button2" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
@@ -151,7 +151,7 @@ function selectAll(){
 		<td style="width: 9%;">件名</td>
 		<td style="width: 9%;">保存日時</td>
 		<td style="width: 5%;">請求書</td>
-		<td style="width: 5%;">修正作成</td>
+		<td style="width: 5%;">COPYして作成</td>
 	</tr>
 	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
 	<tr>
@@ -168,14 +168,14 @@ function selectAll(){
 					<span class="pc_font_button2" onclick="writeBillSheet(${sheet.reportNum})">請求書作成</span>
 				</c:when>
 				<c:when test="${sheet.state eq 'b'}">
-					<span class="pc_font_button2" onclick="readBillSheet(${sheet.reportNum})">請求書閲覧</span>
+					<span class="pc_font_button3" onclick="readBillSheet(${sheet.reportNum})">請求書閲覧</span>
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>
 			</c:choose>
 		</td>
 		<td class="lastColum">
-			<span class="pc_font_button2" onclick="modEstimateSheet(${sheet.reportNum})">修正作成</span>
+			<span class="pc_font_button2" onclick="modEstimateSheet(${sheet.reportNum})">COPYして作成</span>
 		</td>
 	</tr>
 	</c:forEach>

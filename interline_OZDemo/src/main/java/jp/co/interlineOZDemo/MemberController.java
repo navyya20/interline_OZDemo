@@ -140,7 +140,7 @@ public class MemberController {
 			dao.insertEstimateItems(estimateItemsArray);
 		}
 		
-		//파일 데몬서버에 떨구기
+		/*파일 데몬서버에 떨구기
 		GetProperties properties= new GetProperties();
 		String ozId="admin";
 		String ozPW="admin1";
@@ -165,8 +165,8 @@ public class MemberController {
 			e.printStackTrace();
 			result="saveError";
 		}
-		
-		//이메일 보내기
+		*/
+		/*이메일 보내기
 		if (!email.equals("") && email!=null) {
 			System.out.println("이메일을 보냅니다.");
 			System.out.println("emailAddress:" + email);
@@ -187,7 +187,7 @@ public class MemberController {
 			String html="<div>"+estimateSheet.getReceiver()+"</div>"+"<div>ご担当様<div><br></br><div>下記の御見積書を作成しました。</div><br></br><div>文書番号: "+estimateSheet.getReportNum()+"</div><div>作成日: "+estimateSheet.getReportDate()+"</div><div>件名: "+estimateSheet.getReportName()+"</div><div>ファイル名: "+fileName+"</div>";
 			mail.MailSend(email, title, text, html, filePath, fileName);
 		}
-		
+		*/
 		return "success";
 	}
 	

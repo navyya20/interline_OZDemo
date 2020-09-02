@@ -69,7 +69,7 @@ $(function(){
 <table style="text-align: center; margin-left: auto;margin-right: auto;">
 <tr>
 	<td class="mainMenuTd">
-		<div id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報</div>
+		<div id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報修正</div>
 	</td>
 </tr>
 <tr>

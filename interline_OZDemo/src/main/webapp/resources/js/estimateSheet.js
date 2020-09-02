@@ -51,6 +51,10 @@ function getJsonToSend(inputJson){
 			item.price = inputJson["price"+i];
 			//console.log("변환:"+item.price);
 			
+			inputJson["amount"+i] = inputJson["amount"+i].replace(/,/gi, "").replace(/￥/gi, "");
+			item.price = inputJson["amount"+i];
+			//console.log("변환:"+item.amount);
+			
 			item.note = inputJson["note"+i];
 			estimateItems.push(item);
 		}

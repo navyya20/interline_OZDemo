@@ -26,6 +26,9 @@
 	//세션으로부터 유저인폼 jsonString을 받는다.
 	function getUserInform(){
 		var userInformJsonString = $('#userInformJsonString').html();
+		var userInformJson=JSON.parse(userInformJsonString);
+		userInformJson["supplier"]=userInformJson.companyName;
+		userInformJsonString = JSON.stringify(userInformJson);
 		console.log("userInformJsonString:"+userInformJsonString);
 		return userInformJsonString;
 	}
@@ -39,12 +42,16 @@
 		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
 		oz.sendToActionScript("connection.inputjson", getUserInform());
 		oz.sendToActionScript("connection.pcount","2");
-		oz.sendToActionScript("connection.args1","repeat=13");
+		oz.sendToActionScript("connection.args1","repeat=12");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
+	
+	var opt = [];
+	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
+	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
 	
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 		var inputJson=JSON.parse(inputJsonString);

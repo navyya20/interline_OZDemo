@@ -39,7 +39,16 @@
     font-size: 12px;
     white-space:nowrap;
 }
-
+.pc_font_button3{
+	border: solid 2px rgb(0, 0, 255);
+    border-radius: 0px;
+    padding: 2px 5px 2px 5px;
+    background-color: rgb(0, 0, 255);
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    white-space:nowrap;
+}
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
 	-webkit-text-size-adjust:300%;

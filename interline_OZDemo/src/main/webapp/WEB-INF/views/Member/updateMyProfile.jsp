@@ -90,7 +90,7 @@ function submitMyProfile(){
 	if(characterCheck.test(hurigana)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#hurigana").focus();return;}
 
 	if(companyName.length >=21){"会社名は20文字以内にお願いします。";$("#companyName").focus();return;}
-	if(representative.length >=21){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
+	if(representative.length >=14){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
 	if(address.length >=51){"住所は50文字以内にお願いします。";$("#address").focus();return;}
 	if(bankName.length >=31){"銀行名は30文字以内にお願いします。";$("#bankName").focus();return;}
 	if(depositeClassification.length >=11){"代表者名は10文字以内にお願いします。";$("#depositeClassification").focus();return;}
@@ -120,8 +120,7 @@ function submitMyProfile(){
 </script>
 
 <body>
-<div id="title">会員情報修正</div>
-
+aaa
 <div id = "">
 <form id="updateMyProfile" action="updateMyProfile" method="post">
 <table class="informTable">
@@ -135,31 +134,31 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>PW</td>
-		<td class="inputTd"><input type="password" id="password" name="password" class="inputBox" value="${userInform.password}"></td>
+		<td class="inputTd"><input type="password" id="password" name="password" class="inputBox" title="形式:3~20字の英数字" maxlength="20" value="${userInform.password}"></td>
 	</tr>
 	<tr>
 		<td>PW確認</td>
-		<td class="inputTd"><input type="password" id="password2" name="password2" class="inputBox" value="${userInform.password}"></td>
+		<td class="inputTd"><input type="password" id="password2" name="password2" class="inputBox" title="形式:3~20字の英数字" maxlength="20"  value="${userInform.password}"></td>
 	</tr>
 	<tr>
 		<td>企業名</td>
-		<td class="inputTd"><input type="text" id="companyName" name="companyName" class="inputBox" value="${userInform.companyName}"></td>
+		<td class="inputTd"><input type="text" id="companyName" name="companyName" class="inputBox" maxlength="20" value="${userInform.companyName}"></td>
 	</tr>
 	<tr>
 		<td>代表者</td>
-		<td class="inputTd"><input type="text" id="representative" name="representative" class="inputBox" value="${userInform.representative}"></td>
+		<td class="inputTd"><input type="text" id="representative" name="representative" class="inputBox" maxlength="13" value="${userInform.representative}"></td>
 	</tr>
 	<tr>
 		<td>電話番号</td>
-		<td class="inputTd"><input type="text" id="phoneNumber" name="phoneNumber" class="inputBox" value="${userInform.phoneNumber}"></td>
+		<td class="inputTd"><input type="text" id="phoneNumber" name="phoneNumber" class="inputBox" title="形式:000-0000-0000" maxlength="13" value="${userInform.phoneNumber}"></td>
 	</tr>
 	<tr>
 		<td>住所</td>
-		<td class="inputTd"><input type="text" id="address" name="address" class="inputBox" value="${userInform.address}"></td>
+		<td class="inputTd"><input type="text" id="address" name="address" class="inputBox" maxlength="50" value="${userInform.address}"></td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" value="${userInform.post}"></td>
+		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" title="形式:000-0000" maxlength="8" value="${userInform.post}"></td>
 	</tr>
 	
 	
@@ -173,23 +172,23 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>銀行名</td>
-		<td class="inputTd"><input type="text" id="bankName" name="bankName" class="inputBox" value="${userInform.bankName}"></td>
+		<td class="inputTd"><input type="text" id="bankName" name="bankName" class="inputBox" maxlength="30" value="${userInform.bankName}"></td>
 	</tr>
 	<tr>
 		<td>預金区分</td>
-		<td class="inputTd"><input type="text" id="depositeClassification" name="depositeClassification" class="inputBox" value="${userInform.depositeClassification}"></td>
+		<td class="inputTd"><input type="text" id="depositeClassification" name="depositeClassification" class="inputBox" maxlength="10" value="${userInform.depositeClassification}"></td>
 	</tr>
 	<tr>
 		<td>口座番号</td>
-		<td class="inputTd"><input type="text" id="accountNumber" name="accountNumber" class="inputBox" value="${userInform.accountNumber}"></td>
+		<td class="inputTd"><input type="text" id="accountNumber" name="accountNumber" class="inputBox" maxlength="20" value="${userInform.accountNumber}"></td>
 	</tr>
 	<tr>
 		<td>口座名義人</td>
-		<td class="inputTd"><input type="text" id="accountOwner" name="accountOwner" class="inputBox" value="${userInform.accountOwner}"></td>
+		<td class="inputTd"><input type="text" id="accountOwner" name="accountOwner" class="inputBox" maxlength="20" value="${userInform.accountOwner}"></td>
 	</tr>
 	<tr>
 		<td>ふりがな</td>
-		<td class="inputTd"><input type="text" id="hurigana" name="hurigana" class="inputBox" value="${userInform.hurigana}"></td>
+		<td class="inputTd"><input type="text" id="hurigana" name="hurigana" class="inputBox" maxlength="20" value="${userInform.hurigana}"></td>
 	</tr>
 	
 	<tr id="tr_btn">
