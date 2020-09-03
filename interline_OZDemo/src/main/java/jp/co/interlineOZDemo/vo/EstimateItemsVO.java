@@ -7,8 +7,7 @@ public class EstimateItemsVO {
     private int amount;
     private String unit;
     private int unitPrice;
-    private int price;    
-    private String note;
+    private long price;    
 	public int getReportNum() {
 		return reportNum;
 	}
@@ -40,17 +39,11 @@ public class EstimateItemsVO {
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
-	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
 	}
 	public int getItemNum() {
 		return itemNum;
@@ -61,8 +54,7 @@ public class EstimateItemsVO {
 	@Override
 	public String toString() {
 		return "EstimateItemsVO [reportNum=" + reportNum + ", itemName=" + itemName + ", itemNum=" + itemNum
-				+ ", amount=" + amount + ", unit=" + unit + ", unitPrice=" + unitPrice + ", price=" + price + ", note="
-				+ note + "]";
+				+ ", amount=" + amount + ", unit=" + unit + ", unitPrice=" + unitPrice + ", price=" + price  + "]";
 	}
 	
     

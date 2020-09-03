@@ -35,7 +35,7 @@ function getJsonToSend(inputJson){
 	inputJson["sumWithTax2"] = inputJson["sumWithTax2"].replace(/,/gi, "").replace(/￥/gi, "");
 	
 	var estimateItems = new Array();
-	for(var i=1 ; i <=13 ; i++){
+	for(var i=1 ; i <=12 ; i++){
 		if(inputJson["itemName"+i] != ""){
 			var item = new Object();
 			item.itemNum = inputJson["itemNum"+i];
@@ -45,20 +45,21 @@ function getJsonToSend(inputJson){
 			
 			inputJson["unitPrice"+i] =inputJson["unitPrice"+i].replace(/,/gi, "").replace(/￥/gi, "");
 			item.unitPrice = inputJson["unitPrice"+i];
-			//console.log("변환:"+item.unitPrice);
+			console.log("변환:"+item.unitPrice);
 			
 			inputJson["price"+i] = inputJson["price"+i].replace(/,/gi, "").replace(/￥/gi, "");
 			item.price = inputJson["price"+i];
-			//console.log("변환:"+item.price);
+			console.log("변환:"+item.price);
 			
 			inputJson["amount"+i] = inputJson["amount"+i].replace(/,/gi, "").replace(/￥/gi, "");
-			item.price = inputJson["amount"+i];
-			//console.log("변환:"+item.amount);
+			item.amount = inputJson["amount"+i];
+			console.log("변환:"+item.amount);
 			
-			item.note = inputJson["note"+i];
 			estimateItems.push(item);
+			console.log("아이템 하나 추가");
 		}
 	}
+	console.log("정규화작업완료");
 	var estimateItemsJson = new Object();
 	estimateItemsJson.itemArray=estimateItems;
 	inputJson.estimateItemsString = JSON.stringify(estimateItemsJson);

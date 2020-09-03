@@ -16,9 +16,9 @@ public class EstimateSheetVO {
 	private String payCondition;
 	private String stamp;
 	private String cautions;
-	private int sum;
-	private int sumWithTax;
-	private int sumWithTax2;
+	private long sum;
+	private long sumWithTax;
+	private long sumWithTax2;
 	private String email;
 	private String state;
 	
@@ -114,22 +114,22 @@ public class EstimateSheetVO {
 	public void setCautions(String cautions) {
 		this.cautions = cautions;
 	}
-	public int getSum() {
+	public long getSum() {
 		return sum;
 	}
-	public void setSum(int sum) {
+	public void setSum(long sum) {
 		this.sum = sum;
 	}
-	public int getSumWithTax() {
+	public long getSumWithTax() {
 		return sumWithTax;
 	}
-	public void setSumWithTax(int sumWithTax) {
+	public void setSumWithTax(long sumWithTax) {
 		this.sumWithTax = sumWithTax;
 	}
-	public int getSumWithTax2() {
+	public long getSumWithTax2() {
 		return sumWithTax2;
 	}
-	public void setSumWithTax2(int sumWithTax2) {
+	public void setSumWithTax2(long sumWithTax2) {
 		this.sumWithTax2 = sumWithTax2;
 	}
 	public String getEmail() {

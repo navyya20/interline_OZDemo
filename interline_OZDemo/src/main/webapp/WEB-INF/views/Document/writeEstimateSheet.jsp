@@ -17,7 +17,7 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 
-<script src="<c:url value = '../resources/js/estimateSheet.js?ver=2'/>"></script>
+<script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
 
 <body>
 <div id="userInformJsonString" style="display: none;">${userInformJsonString}</div>

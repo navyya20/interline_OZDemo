@@ -17,7 +17,7 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 
-<script src="<c:url value = '../resources/js/estimateSheet.js?ver=1'/>"></script>
+<script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
 
 <body>
 <div id="estimateSheetJsonString" style="display: none;">${estimateSheetJsonString}</div>
@@ -61,12 +61,15 @@
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
 	
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
-		console.log("inputJsonString:"+inputJsonString);
 		var inputJson=JSON.parse(inputJsonString);
 		var processedInputJson = getJsonToSend(inputJson);
 		var address="saveEstimate";
+		$('#wrapper').css('z-index',2);
+		$('#wrapper').css('visibility','visible');
+		$('body').css('cursor','progress');
 		sendInputJson(processedInputJson,address);
 	}
 </script>
+<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
 </body>
 </html>

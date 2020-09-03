@@ -133,8 +133,7 @@ public class MemberController {
 				estimateItemsVO.setAmount(Integer.parseInt((String)item.get("amount")));
 				estimateItemsVO.setUnit((String)item.get("unit"));
 				estimateItemsVO.setUnitPrice(Integer.parseInt((String)item.get("unitPrice")));
-				estimateItemsVO.setPrice(Integer.parseInt((String)item.get("price")));
-				estimateItemsVO.setNote((String)item.get("note"));
+				estimateItemsVO.setPrice(Long.parseLong((String)item.get("price")));
 				estimateItemsArray.add(estimateItemsVO);
 			}
 			dao.insertEstimateItems(estimateItemsArray);
