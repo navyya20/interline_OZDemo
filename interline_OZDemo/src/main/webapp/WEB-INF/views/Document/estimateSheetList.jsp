@@ -111,7 +111,7 @@ function deleteSheet(){
 	}
 	console.log("reportNumArray:"+reportNumArray);
 	if(reportNumArray.length　==　0){alert("削除対象が選択されていません。"); return false;}
-	confirm("削除しますか。");
+	if(!confirm("削除しますか。")){ return false; }
 	$.ajax(
 			{
 				url: "deleteSheet",
