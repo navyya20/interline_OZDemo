@@ -19,11 +19,7 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 
 <body style="width:98%;height:98%">
-<script>
-function pagechange(){
-	window.history.back();
-}
-</script>
+
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){

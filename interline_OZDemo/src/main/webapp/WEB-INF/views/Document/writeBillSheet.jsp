@@ -23,13 +23,15 @@
 
 function OZUserEvent_OZViewer(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
-	billData["reportNum"] ="${reportNum}";
-	billData["billNum"] ="${reportNum}";
-	billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
-	billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
-	billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
 
-	if(billData.bankName != "" && billData.accountNumber != "" && billData.accountOwner != "" && billData.hurigana != "" && billData.depositeClassification != ""){
+	if(confirm("請求書を保存しますか?")){
+		
+		billData["reportNum"] ="${reportNum}";
+		billData["billNum"] ="${reportNum}";
+		billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
+		billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
+		billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
+
 		$.ajax({
 			url: "saveBill",
 			type: 'POST',
@@ -46,15 +48,8 @@ function OZUserEvent_OZViewer(){
 		});
 	}
 
-	if(billData.bankName == "" || billData.accountNumber == "" || billData.accountOwner == "" || billData.hurigana == "" || billData.depositeClassification == ""){
-		alert("口座情報を確認してください。");
-	}
 	return false;
-}
-
-function pagechange(){
-	window.history.back();
-}
+}	
 
 </script>
 

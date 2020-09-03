@@ -51,6 +51,10 @@ width: 80%;
 #list_Box{
 width: 80%;
 }
+
+#registerMember{
+padding: 2px 13px 2px 13px;
+}
 </style>
 </head>
 <body class="pc_body">
