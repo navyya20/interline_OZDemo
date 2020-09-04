@@ -21,36 +21,6 @@
 
 <script>
 
-function OZUserEvent_OZViewer(){
-	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
-
-	if(confirm("請求書を保存しますか?")){
-		
-		billData["reportNum"] ="${reportNum}";
-		billData["billNum"] ="${reportNum}";
-		billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
-		billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
-		billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
-
-		$.ajax({
-			url: "saveBill",
-			type: 'POST',
-			data: {jsonStr:JSON.stringify(billData)},
-			dataType:'text',
-			success: function(data){
-				alert("保存成功");
-				location.href="memberMain";
-			},
-			error: function(e){
-				console.log(JSON.stringify(e));
-				alert('エラー！');
-			}
-		});
-	}
-
-	return false;
-}	
-
 </script>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
@@ -69,9 +39,40 @@ function OZUserEvent_OZViewer(){
  		oz.sendToActionScript("odi.writeBill.pcount", "2");
 		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
 		oz.sendToActionScript("odi.writeBill.args2", "id="+id);
+		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
+
+	function OZUserEvent_OZViewer(){
+		var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
+
+		if(confirm("請求書を保存しますか?")){
+			
+			billData["reportNum"] ="${reportNum}";
+			billData["billNum"] ="${reportNum}";
+			billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
+			billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
+			billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
+
+			$.ajax({
+				url: "saveBill",
+				type: 'POST',
+				data: {jsonStr:JSON.stringify(billData)},
+				dataType:'text',
+				success: function(data){
+					alert("保存成功");
+					location.href="memberMain";
+				},
+				error: function(e){
+					console.log(JSON.stringify(e));
+					alert('エラー！');
+				}
+			});
+		}
+
+		return false;
+	}	
 </script>
 <script>
 	
