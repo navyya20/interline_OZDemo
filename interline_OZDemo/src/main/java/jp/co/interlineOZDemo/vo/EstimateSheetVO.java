@@ -3,6 +3,7 @@ package jp.co.interlineOZDemo.vo;
 public class EstimateSheetVO {
 	private int reportNum;
 	private String reportDate;
+	private String dateForDisplaying;
 	private int userNum;
 	private String supplier;
 	private String address;
@@ -144,14 +145,21 @@ public class EstimateSheetVO {
 	public void setState(String state) {
 		this.state = state;
 	}
+	public String getDateForDisplaying() {
+		return dateForDisplaying;
+	}
+	public void setDateForDisplaying(String dateForDisplaying) {
+		this.dateForDisplaying = dateForDisplaying;
+	}
 	@Override
 	public String toString() {
-		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", userNum=" + userNum
-				+ ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
-				+ ", representative=" + representative + ", receiver=" + receiver + ", reportName=" + reportName
-				+ ", deadline=" + deadline + ", supplyPoint=" + supplyPoint + ", payCondition=" + payCondition
-				+ ", stamp=" + stamp + ", cautions=" + cautions + ", sum=" + sum + ", sumWithTax=" + sumWithTax
-				+ ", sumWithTax2=" + sumWithTax2 + ", email=" + email + ", state=" + state + "]";
+		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", dateForDisplaying="
+				+ dateForDisplaying + ", userNum=" + userNum + ", supplier=" + supplier + ", address=" + address
+				+ ", post=" + post + ", phoneNumber=" + phoneNumber + ", representative=" + representative
+				+ ", receiver=" + receiver + ", reportName=" + reportName + ", deadline=" + deadline + ", supplyPoint="
+				+ supplyPoint + ", payCondition=" + payCondition + ", stamp=" + stamp + ", cautions=" + cautions
+				+ ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2 + ", email=" + email
+				+ ", state=" + state + "]";
 	}
 	
 	

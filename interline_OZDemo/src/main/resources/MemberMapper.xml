@@ -29,7 +29,8 @@
 			sum,
 			sumWithTax,
 			sumWithTax2,
-			state
+			state,
+			dateForDisplaying
 		) VALUES (			
 			#{userNum},
 			
@@ -50,7 +51,8 @@
 			#{sum},
 			#{sumWithTax},
 			#{sumWithTax2},
-			'e'
+			'e',
+			#{dateForDisplaying}
 		)
 		
 		<selectKey keyProperty="reportNum" resultType="int" order="AFTER">
