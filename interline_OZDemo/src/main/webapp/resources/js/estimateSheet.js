@@ -74,7 +74,7 @@ function getJsonToSend(inputJson){
 function sendInputJson(processedInputJson,address){
 	console.log("sendInputJson함수 실행");
 	console.log("address:"+address);
-	console.log(processedInputJson);
+	console.log(JSON.stringify(processedInputJson));
 	$.ajax(
 			{
 				url: address,
