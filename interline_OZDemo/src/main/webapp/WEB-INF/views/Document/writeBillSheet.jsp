@@ -39,6 +39,9 @@
  		oz.sendToActionScript("odi.writeBill.pcount", "2");
 		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
 		oz.sendToActionScript("odi.writeBill.args2", "id="+id);
+
+		oz.sendToActionScript("export.format","pdf");
+		oz.sendToActionScript("pdf.filename","BillSheet");
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
