@@ -6,7 +6,13 @@
 <mapper namespace="jp.co.interlineOZDemo.dao.MemberMapper">
 	
 	<select id="getMember" parameterType="member" resultType="member">
-		select * from userInform where userId = #{userId} and password = #{password}
+		select 
+			userNum,userId,password,companyName,representative,phoneNumber,address,post,authority
+			,stampFileName,startDate,bankName,depositeClassification,accountNumber,accountOwner,hurigana
+		 from 
+		 	userInform 
+		 where 
+		 	userId = #{userId} and password = #{password}
 	</select>
 	
 	<insert id="insertEstimateSheet" parameterType="estimateSheet">
@@ -89,14 +95,35 @@
 	</update>
 	
 	<select id="getEstimateSheet" parameterType="estimateSheet" resultType="estimateSheet">
-		select * from estimateSheet where reportNum=#{reportNum} and userNum=#{userNum}
+		select 
+			reportNum,reportDate,dateForDisplaying,userNum,supplier,address,post,phoneNumber
+			,representative,receiver,reportName,deadline,supplyPoint,payCondition,cautions
+			,sum,sumWithTax,sumWithTax2,state
+		 from 
+		 	estimateSheet 
+		 where 
+		 	reportNum=#{reportNum} and userNum=#{userNum}
 	</select>
 	<select id="getEstimateItems" parameterType="int" resultType="estimateItems">
-		select * from estimateItems where reportNum=#{reportNum}
+		select 
+			reportNum,itemName,itemNum,amount,unit,unitPrice,price 
+		from 
+			estimateItems 
+		where 
+			reportNum=#{reportNum}
 	</select>
 	
 	<select id="getEstimateSheetList" parameterType="int" resultType="estimateSheet">
-		select * from estimateSheet where userNum=#{userNum} order by reportDate desc
+		select 			
+			reportNum,reportDate,dateForDisplaying,userNum,supplier,address,post,phoneNumber
+			,representative,receiver,reportName,deadline,supplyPoint,payCondition,cautions
+			,sum,sumWithTax,sumWithTax2,state 
+		from 
+			estimateSheet 
+		where 
+			userNum=#{userNum} 
+		order by 
+			reportDate desc
 	</select>
 	
 	<select id="getTotalEstimateSheet" parameterType="int" resultType="int">

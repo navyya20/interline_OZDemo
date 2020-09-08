@@ -120,8 +120,8 @@ function submitMyProfile(){
 </script>
 
 <body>
-aaa
-<div id = "">
+<div id="title">自社情報修正</div>
+
 <form id="updateMyProfile" action="updateMyProfile" method="post">
 <table class="informTable">
 	<tr>
