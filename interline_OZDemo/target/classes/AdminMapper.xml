@@ -6,7 +6,11 @@
 <mapper namespace="jp.co.interlineOZDemo.dao.AdminMapper">
 
 	<select id="check_Multiple" parameterType="map" resultType="member">
-			select * from userInform where
+		select 
+			userNum,userId 
+		from 
+			userInform 
+		where
 	<choose>
 		<when test="check_point != null and check_point == 'check_Num'">
 			userNum = #{check_content}
@@ -31,11 +35,19 @@
 	</insert>
 	
 	<select id="getMemberList" resultType="member">
-		select * from userInform
+		select 
+			userNum,userId,companyName,representative,startDate 
+		from 
+			userInform
 	</select>
 	
 	<select id="getMember" parameterType="int" resultType="member">
-		select * from userInform where userNum = #{userNum}
+		select 
+			userNum,userId,password
+		from 
+			userInform 
+		where 
+			userNum = #{userNum}
 	</select>
 	
 	<update id="updateMember" parameterType="member">

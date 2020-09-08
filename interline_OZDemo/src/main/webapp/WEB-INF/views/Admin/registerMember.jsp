@@ -19,16 +19,19 @@ $(function(){
 		var user_id = $("#userId").val();
 		var user_pw = $("#password").val();
 		var check = /^[A-Za-z0-9]{3,20}$/ ;
-		if(!check.test(id)){
+
+		if(user_num == ""){
+			alert("会員番号を入力してください。");
+			$("#userNum").focus();
+		}else if(!check.test(user_id)){
 			alert("IDは3~20字の英数字です。");
-			$("#login_id").focus();
-			return false;
-		}else if(!check.test(pw)){
+			$("#userId").focus();
+		}else if(!check.test(user_pw)){
 			alert("PASSWORDは3~20字の英数字です。");
-			$("#login_pw").focus();
-			return false;
+			$("#password").focus();
 		}
- 		if(user_num !="" && user_id != ""&& user_pw != ""){
+
+ 		if(user_num !="" && check.test(user_id) != ""&& check.test(user_pw)){
 
  			$.ajax({
 				type:"post",
@@ -52,18 +55,7 @@ $(function(){
 			}); 
 		} 
 
-		if(user_num == ""){
-			alert("会員番号を入力してください。");
-			$("#userNum").focus();
-		}else if(user_id == ""){
-			alert("会員IDを入力してください。");
-			$("#userMail").focus();
-		}else if(user_pw == ""){
-			alert("パスワードを入力してください。");
-			$("#password").focus();
-		}
-		
-		return false;
+ 		return false;
 	}
 });
 

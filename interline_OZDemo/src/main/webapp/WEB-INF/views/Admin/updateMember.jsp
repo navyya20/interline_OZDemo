@@ -14,13 +14,14 @@ $(function(){
 
 	function userInform_update(){
 		var pw = $("#password").val();
-
-		if(pw != null && pw != ""){
+		var check = /^[A-Za-z0-9]{3,20}$/ ;
+		
+		if(check.test(pw)){
 			if(confirm("修正しましか？")){
 				return true;
 			}
 		}else{
-			alert("パスワードを入力してください。");
+			alert("PASSWORDは3~20字の英数字です。");
 			$("#password").focus();
 		}
 
