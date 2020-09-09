@@ -33,26 +33,27 @@ $(document).ready(function(){
 		var pw=$("#login_pw").val();
 		
 		var check = /^[A-Za-z0-9]{3,20}$/ ;
-		if(check.test(id) && check.test(pw)){
-			$.ajax({
-				type:"post",
-				url:"login",
-				traditional: true,
-				data:{userId:id,password:pw},
-				dataType:"json",
-				success:function(result){
-					if(result.error!=null){
-						alert(result.error);
-					}else if(result.error==null){
-						location.href=result.url;
-					}
-				}	
-			});
-			$("#login_id").val("");
-			$("#login_pw").val("");
-		}
 		if(id.length == 0){alert("IDを入力してください。");$("#login_id").focus();return false;}
 		if(pw.length == 0){alert("PWを入力してください。");$("#login_pw").focus();return false;}
+
+		console.log("ID/PW를 확인하러 갑니다.");
+		$.ajax({
+			type:"post",
+			url:"login",
+			traditional: true,
+			data:{userId:id,password:pw},
+			dataType:"json",
+			success:function(result){
+				if(result.error!=null){
+					alert(result.error);
+				}else if(result.error==null){
+					location.href=result.url;
+				}
+			}	
+		});
+		$("#login_id").val("");
+		$("#login_pw").val("");
+
 		return false;
 	}
 });

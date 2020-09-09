@@ -95,8 +95,8 @@ function submitMyProfile(){
 	if(bankName.length >=31){"銀行名は30文字以内にお願いします。";$("#bankName").focus();return;}
 	if(depositeClassification.length >=11){"代表者名は10文字以内にお願いします。";$("#depositeClassification").focus();return;}
 	if(accountNumber.length >=21){"口座番号は20文字以内にお願いします。";$("#accountNumber").focus();return;}
-	if(accountOwner.length >=21){"代表者名は20文字以内にお願いします。";$("#accountOwner").focus();return;}
-	if(hurigana.length >=21){"口座名義人名は20文字以内にお願いします。";$("#hurigana").focus();return;}
+	if(accountOwner.length >=31){"代表者名は30文字以内にお願いします。";$("#accountOwner").focus();return;}
+	if(hurigana.length >=61){"口座名義人名は60文字以内にお願いします。";$("#hurigana").focus();return;}
 	if(!phoneCheck.test(phoneNumber)){"123-1234-1234形式でお願いします。";$("#phoneNumber").focus();return;}
 	if(!postCheck.test(post)){"123-1234形式でお願いします。";$("#post").focus();return;}
 
