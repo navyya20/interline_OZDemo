@@ -23,13 +23,20 @@
 		margin-right: auto;
 	}
 	.categoryTd{
-		width: 10%;
+		width: 17%;
 	}
 	.inputTd{
-		width: 30%;
+		width: 65%;
+		text-align:left;
 	}
 	.inputBox{
-		width: 100%; 
+		width: 98%; 
+	}
+	.mini_title{
+		font-weight: 700;
+	}
+	#update_Member_btn{
+		padding: 1px 20px 1px 20px;
 	}
 </style>
 <script type="text/javascript">
@@ -126,7 +133,7 @@ function submitMyProfile(){
 <table class="informTable">
 	<tr>
 		<td class="categoryTd"></td>
-		<td style="text-align: left;">会員情報</td>
+		<td style="text-align: left;" class="mini_title">会員情報</td>
 	</tr>
 	<tr>
 		<td>ID</td>
@@ -168,7 +175,7 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td class="categoryTd"></td>
-		<td style="text-align: left;">口座情報</td>
+		<td style="text-align: left;" class="mini_title">口座情報</td>
 	</tr>
 	<tr>
 		<td>銀行名</td>
