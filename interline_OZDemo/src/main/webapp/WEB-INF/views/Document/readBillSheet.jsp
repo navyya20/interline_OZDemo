@@ -17,8 +17,39 @@
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
+
+<style>
+#readBill_div_btn{
+margin: 0px 0px 10px 0px;
+}
+</style>
+
+<script>
+$(document).ready(function(){
+	 isMobile(); 
+	function isMobile() {
+	    var filter = "win16|win32|win64|mac|macintel";
+	    if( navigator.platform  ){
+	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+		      $("body").addClass('mobile_body');
+	      }else{
+	    	  $("body").addClass('pc_body');
+		      $("#title").addClass("pc_font_title");
+		      $(".btn").addClass("pc_font_button2");
+	      }
+	    }
+	  }
+	
+});
+
+function back(){
+	location.href="memberMain";
+}
+</script>
 
 <body style="width:98%;height:98%">
+<div id="readBill_div_btn"><button id="back_Btn"  class="pc_font_button1" onclick="back()">戻る</button></div>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
@@ -44,9 +75,6 @@
 		return true;
 	}
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
-</script>
-<script>
-	
 </script>
 </body>
 </html>
