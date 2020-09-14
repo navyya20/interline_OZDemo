@@ -7,16 +7,19 @@
 			};
 var itemJsonString=JSON.stringify(itemJson);
 
+//견적된 아이템들의 jsonObject를 받는다. vo의 배열이기 때문에 ozr에서 인덱스를 가진 폼아이디와 파라메터를 일치시켜줘야한다.
+//input: 견적된 아이템들의 jsonObject
+//output: 병렬의 아이템들을 직렬배열 화한다. 단, 파라메터에 인덱스가 붙는다. 단, 가격의경우 엔표시가 붙고 숫자의경우 3자리마다 컴마가 붙는다. 
 function serializeEstimateItemsJsonObject(estimateItemsJsonObject){
 	var jsonObject = new Object();
 	for(var i = 0 ; i < estimateItemsJsonObject.length ; i++){
-		jsonObject["itemName"+(i+1)] = estimateItemsJsonObject[i].itemName
-		jsonObject["itemNum"+(i+1)] = estimateItemsJsonObject[i].itemNum
-		jsonObject["amount"+(i+1)] = estimateItemsJsonObject[i].amount
-		jsonObject["unit"+(i+1)] = estimateItemsJsonObject[i].unit
-		jsonObject["unitPrice"+(i+1)] = estimateItemsJsonObject[i].unitPrice
-		jsonObject["price"+(i+1)] = estimateItemsJsonObject[i].price
-		jsonObject["note"+(i+1)] = estimateItemsJsonObject[i].note
+		jsonObject["itemName"+(i+1)] = estimateItemsJsonObject[i].itemName;
+		jsonObject["itemNum"+(i+1)] = estimateItemsJsonObject[i].itemNum;  //아이템넘버는 지금 사용하지않지만 혹시몰라서 칼럼을 남겨두었다. 일단 포린키이기때문에 지우면 안된다.
+		jsonObject["amount"+(i+1)] = comma(estimateItemsJsonObject[i].amount);
+		jsonObject["unit"+(i+1)] = estimateItemsJsonObject[i].unit;
+		jsonObject["unitPrice"+(i+1)] = "￥" + comma(estimateItemsJsonObject[i].unitPrice);
+		jsonObject["price"+(i+1)] = "￥" + comma(estimateItemsJsonObject[i].price);
+		jsonObject["note"+(i+1)] = estimateItemsJsonObject[i].note;
 	}
 	return jsonObject;
 }
@@ -35,7 +38,8 @@ function getJsonToSend(inputJson){
 	inputJson["sumWithTax2"] = inputJson["sumWithTax2"].replace(/,/gi, "").replace(/￥/gi, "");
 	
 	var estimateItems = new Array();
-	for(var i=1 ; i <=12 ; i++){
+	//alert(parseInt(inputJson["repeat"],10));
+	for(var i=1 ; i <= parseInt(inputJson["repeat"],10) ; i++){
 		if(inputJson["itemName"+i] != ""){
 			var item = new Object();
 			item.itemNum = inputJson["itemNum"+i];
@@ -90,4 +94,23 @@ function sendInputJson(processedInputJson,address){
 				}
 			}		
 	);
+}
+
+
+//숫자에 컴마 붙이기
+//input: 인트나 숫자로된 스트링
+//output: 3자리 마다 컴마가 붙은 스트링
+function comma(num){
+	var len, point, str;
+	num = num+"";
+	point = num.length % 3;
+	len= num.length;
+	
+	str = num.substring(0,point);
+	while (point < len){
+		if (str != "") str += ",";
+		str += num.substring(point, point+3);
+		point += 3;
+	}
+	return str;
 }

@@ -42,7 +42,7 @@
 		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
 		oz.sendToActionScript("connection.inputjson", getUserInform());
 		oz.sendToActionScript("connection.pcount","2");
-		oz.sendToActionScript("connection.args1","repeat=12");
+		oz.sendToActionScript("connection.args1","repeat=10");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;

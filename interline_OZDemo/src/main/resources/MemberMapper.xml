@@ -36,7 +36,8 @@
 			sumWithTax,
 			sumWithTax2,
 			state,
-			dateForDisplaying
+			dateForDisplaying,
+			expirationDate
 		) VALUES (			
 			#{userNum},
 			
@@ -58,7 +59,8 @@
 			#{sumWithTax},
 			#{sumWithTax2},
 			'e',
-			#{dateForDisplaying}
+			#{dateForDisplaying},
+			#{expirationDate}
 		)
 		
 		<selectKey keyProperty="reportNum" resultType="int" order="AFTER">
@@ -98,7 +100,8 @@
 		select 
 			reportNum,reportDate,dateForDisplaying,userNum,supplier,address,post,phoneNumber
 			,representative,receiver,reportName,deadline,supplyPoint,payCondition,cautions
-			,sum,sumWithTax,sumWithTax2,state
+			,sum,sumWithTax,sumWithTax2,state,dateForDisplaying,
+			expirationDate
 		 from 
 		 	estimateSheet 
 		 where 
@@ -115,11 +118,9 @@
 	
 	<select id="getEstimateSheetList" parameterType="int" resultType="estimateSheet">
 		select 			
-			reportNum,reportDate,dateForDisplaying,userNum,supplier,address,post,phoneNumber
-			,representative,receiver,reportName,deadline,supplyPoint,payCondition,cautions
-			,sum,sumWithTax,sumWithTax2,state 
+			reportNum,reportDate,dateForDisplaying,userNum,supplier,receiver,reportName,deadline,state
 		from 
-			estimateSheet 
+			estimateSheet
 		where 
 			userNum=#{userNum} 
 		order by 

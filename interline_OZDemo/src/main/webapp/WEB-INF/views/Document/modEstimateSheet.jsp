@@ -24,13 +24,14 @@
 <div id="estimateItemsJsonString" style="display: none;">${estimateItemsJsonString}</div>
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
-	//세션으로부터 유저인폼 jsonString을 받는다.
+	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
 	function getEstimateSheetInform(){
 		var estimateSheetJsonString = $('#estimateSheetJsonString').html();		
 		var estimateItemsJsonString = $('#estimateItemsJsonString').html();
 		console.log("estimateSheetJsonString:"+estimateSheetJsonString);
 		console.log("estimateItemsJsonString:"+estimateItemsJsonString);
 		var estimateSheetJsonObject = JSON.parse(estimateSheetJsonString);
+		//아이템들이 존재하면 인덱스 붙여 1차원 배열로 만든다.
 		if (estimateItemsJsonString != ""){
 			var estimateItemsJsonObject = JSON.parse(estimateItemsJsonString);
 			var estimateItemsJsonObjectSerialized = serializeEstimateItemsJsonObject(estimateItemsJsonObject);
@@ -50,7 +51,7 @@
 		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
 		oz.sendToActionScript("connection.inputjson", JSON.stringify(getEstimateSheetInform()));
 		oz.sendToActionScript("connection.pcount","2");
-		oz.sendToActionScript("connection.args1","repeat=12");
+		oz.sendToActionScript("connection.args1","repeat=10");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;

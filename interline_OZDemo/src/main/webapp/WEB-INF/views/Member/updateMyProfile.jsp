@@ -8,6 +8,7 @@
 <title>updateMyProfile</title>
 </head>
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
+<script src="<c:url value = '../resources/js/inputController.js'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 
 <style>
@@ -41,6 +42,9 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#companyName").on("propertychange input", function() { limitString("companyName",40); });
+		$("#representative").on("propertychange input", function() { limitString("representative",26); });
+		$("#address").on("propertychange input", function() { limitString("address",120); });
 		 isMobile(); 
 		function isMobile() {
 		    var filter = "win16|win32|win64|mac|macintel";
@@ -96,9 +100,9 @@ function submitMyProfile(){
 	if(characterCheck.test(accountOwner)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#accountOwner").focus();return;}
 	if(characterCheck.test(hurigana)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#hurigana").focus();return;}
 
-	if(companyName.length >=21){"会社名は20文字以内にお願いします。";$("#companyName").focus();return;}
-	if(representative.length >=14){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
-	if(address.length >=51){"住所は50文字以内にお願いします。";$("#address").focus();return;}
+	//if(companyName.length >=21){"会社名は20文字以内にお願いします。";$("#companyName").focus();return;}
+	//if(representative.length >=14){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
+	//if(address.length >=51){"住所は50文字以内にお願いします。";$("#address").focus();return;}
 	if(bankName.length >=31){"銀行名は30文字以内にお願いします。";$("#bankName").focus();return;}
 	if(depositeClassification.length >=11){"代表者名は10文字以内にお願いします。";$("#depositeClassification").focus();return;}
 	if(accountNumber.length >=21){"口座番号は20文字以内にお願いします。";$("#accountNumber").focus();return;}
@@ -149,11 +153,11 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>企業名</td>
-		<td class="inputTd"><input type="text" id="companyName" name="companyName" class="inputBox" maxlength="20" value="${userInform.companyName}"></td>
+		<td class="inputTd"><input type="text" id="companyName" name="companyName" class="inputBox" value="${userInform.companyName}"></td>
 	</tr>
 	<tr>
 		<td>代表者</td>
-		<td class="inputTd"><input type="text" id="representative" name="representative" class="inputBox" maxlength="13" value="${userInform.representative}"></td>
+		<td class="inputTd"><input type="text" id="representative" name="representative" class="inputBox" value="${userInform.representative}"></td>
 	</tr>
 	<tr>
 		<td>電話番号</td>
@@ -161,7 +165,7 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>住所</td>
-		<td class="inputTd"><input type="text" id="address" name="address" class="inputBox" maxlength="50" value="${userInform.address}"></td>
+		<td class="inputTd"><input type="text" id="address" name="address" class="inputBox" value="${userInform.address}"></td>
 	</tr>
 	<tr>
 		<td>POST</td>

@@ -4,6 +4,7 @@ public class EstimateSheetVO {
 	private int reportNum;
 	private String reportDate;
 	private String dateForDisplaying;
+	private String expirationDate;
 	private int userNum;
 	private String supplier;
 	private String address;
@@ -151,16 +152,23 @@ public class EstimateSheetVO {
 	public void setDateForDisplaying(String dateForDisplaying) {
 		this.dateForDisplaying = dateForDisplaying;
 	}
+	public String getExpirationDate() {
+		return expirationDate;
+	}
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
 	@Override
 	public String toString() {
 		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", dateForDisplaying="
-				+ dateForDisplaying + ", userNum=" + userNum + ", supplier=" + supplier + ", address=" + address
-				+ ", post=" + post + ", phoneNumber=" + phoneNumber + ", representative=" + representative
-				+ ", receiver=" + receiver + ", reportName=" + reportName + ", deadline=" + deadline + ", supplyPoint="
-				+ supplyPoint + ", payCondition=" + payCondition + ", stamp=" + stamp + ", cautions=" + cautions
-				+ ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2 + ", email=" + email
-				+ ", state=" + state + "]";
+				+ dateForDisplaying + ", expirationDate=" + expirationDate + ", userNum=" + userNum + ", supplier="
+				+ supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
+				+ ", representative=" + representative + ", receiver=" + receiver + ", reportName=" + reportName
+				+ ", deadline=" + deadline + ", supplyPoint=" + supplyPoint + ", payCondition=" + payCondition
+				+ ", stamp=" + stamp + ", cautions=" + cautions + ", sum=" + sum + ", sumWithTax=" + sumWithTax
+				+ ", sumWithTax2=" + sumWithTax2 + ", email=" + email + ", state=" + state + "]";
 	}
+	
 	
 	
 	
