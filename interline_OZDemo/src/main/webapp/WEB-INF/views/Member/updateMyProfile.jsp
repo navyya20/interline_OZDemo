@@ -86,6 +86,8 @@ function submitMyProfile(){
 	var postCheck = /^\d{2,3}-\d{3,4}$/;
 	//#&@ 검사
 	var characterCheck = /[~!$%^*_+|<>?:{}]/;
+	//계좌번호 검사
+	var accountcheck=/^\d{1,4}-\d{1,8}$/;
 	
 	if(!pwCheck.test(password)){alert("PASSWORDは3~20字の英数字です。");$("#login_pw").focus();return;}
 	if(password != password2){alert("パスワードを確認してください");return;}
@@ -103,13 +105,13 @@ function submitMyProfile(){
 	//if(companyName.length >=21){"会社名は20文字以内にお願いします。";$("#companyName").focus();return;}
 	//if(representative.length >=14){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
 	//if(address.length >=51){"住所は50文字以内にお願いします。";$("#address").focus();return;}
-	if(bankName.length >=31){"銀行名は30文字以内にお願いします。";$("#bankName").focus();return;}
-	if(depositeClassification.length >=11){"代表者名は10文字以内にお願いします。";$("#depositeClassification").focus();return;}
-	if(accountNumber.length >=21){"口座番号は20文字以内にお願いします。";$("#accountNumber").focus();return;}
-	if(accountOwner.length >=31){"代表者名は30文字以内にお願いします。";$("#accountOwner").focus();return;}
-	if(hurigana.length >=61){"口座名義人名は60文字以内にお願いします。";$("#hurigana").focus();return;}
-	if(!phoneCheck.test(phoneNumber)){"123-1234-1234形式でお願いします。";$("#phoneNumber").focus();return;}
-	if(!postCheck.test(post)){"123-1234形式でお願いします。";$("#post").focus();return;}
+	if(bankName.length >=31){alert("銀行名は30文字以内にお願いします。");$("#bankName").focus();return;}
+	if(depositeClassification.length >=11){alert("代表者名は10文字以内にお願いします。");$("#depositeClassification").focus();return;}
+	if(accountNumber.length >0 && !accountcheck.test(accountNumber)){alert("口座番号は123-1234567形式でお願いします。");$("#accountNumber").focus();return;}
+	if(accountOwner.length >=31){alert("代表者名は30文字以内にお願いします。");$("#accountOwner").focus();return;}
+	if(hurigana.length >=61){alert("口座名義人名は60文字以内にお願いします。");$("#hurigana").focus();return;}
+	if(!phoneCheck.test(phoneNumber)){alert("123-1234-1234形式でお願いします。");$("#phoneNumber").focus();return;}
+	if(!postCheck.test(post)){alert("123-1234形式でお願いします。");$("#post").focus();return;}
 
 	var form = document.getElementById("updateMyProfile");
 	var form = $("#updateMyProfile").serialize() ;
@@ -191,7 +193,7 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>口座番号</td>
-		<td class="inputTd"><input type="text" id="accountNumber" name="accountNumber" class="inputBox" maxlength="20" value="${userInform.accountNumber}"></td>
+		<td class="inputTd"><input type="text" id="accountNumber" name="accountNumber" class="inputBox" maxlength="13" value="${userInform.accountNumber}"></td>
 	</tr>
 	<tr>
 		<td>口座名義人</td>

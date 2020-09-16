@@ -19,7 +19,13 @@
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <style>
 #writeBill_div_btn{
-margin: 0px 0px 10px 0px;
+margin:0px 0px 10px 0px;
+}
+#save_Btn{
+margin: 0px 0px 5px 0px;
+}
+#back_Btn{
+margin: 5px 0px 0px 0px;
 }
 </style>
 
@@ -47,11 +53,12 @@ function save(){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
 	var bankName_Len = billData.bankName.length;
 	var depositeClassification_Len = billData.depositeClassification.length;
-	var accountNumber_Len = billData.accountNumber.length;
+	var accountNumber = billData.accountNumber;
 	var accountOwner_Len = billData.accountOwner.length;
 	var hurigana_Len = billData.hurigana.length;
-		
-	if(0< bankName_Len && bankName_Len <= 30 && 0< depositeClassification_Len && depositeClassification_Len <= 10 && 0< accountNumber_Len && accountNumber_Len <= 16 && 0< accountOwner_Len && accountOwner_Len <= 30 && 0< hurigana_Len && hurigana_Len <= 60){
+	var accountcheck=/^\d{1,4}-\d{1,8}$/;
+	
+	if(0< bankName_Len && bankName_Len <= 30 && 0< depositeClassification_Len && depositeClassification_Len <= 10 && accountcheck.test(accountNumber) && 0< accountOwner_Len && accountOwner_Len <= 30 && 0< hurigana_Len && hurigana_Len <= 60){
 
 		if(confirm("請求書を保存しますか?")){
 		
@@ -83,8 +90,8 @@ function save(){
 		alert("銀行名は1~30文字です。");
 	}else if(0>=depositeClassification_Len || depositeClassification_Len>10){
 		alert("預金区分は1~10文字です。");
-	}else if(0>=accountNumber_Len || accountNumber_Len>16){
-		alert("口座番号は1~16文字です。");
+	}else if(!accountcheck.test(accountNumber)){
+		alert("口座番号は123-1234567形式でお願いします。");
 	}else if(0>=accountOwner_Len || accountOwner_Len>30){
 		alert("口座名義人は1~30文字です。");
 	}else if(0>=hurigana_Len || hurigana_Len>60){
@@ -98,11 +105,12 @@ function save(){
 function back(){
 	location.href="memberMain";
 }
+
 </script>
 <body style="width:98%;height:98%">
 
 <div id="writeBill_div_btn">
-<button id="save_Btn"  class="pc_font_button1" onclick="save()">保存</button> 
+<button id="save_Btn"  class="pc_font_button1" onclick="save()">保存</button>
 <button id="back_Btn"  class="pc_font_button1" onclick="back()">戻る</button>
 </div>
 
