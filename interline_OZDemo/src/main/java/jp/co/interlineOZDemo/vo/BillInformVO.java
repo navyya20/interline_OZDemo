@@ -12,9 +12,9 @@ public class BillInformVO {
 	private	String receiver;
 	private	String supplyPoint;
 	private String stamp;
-	private	int sum;
-	private	int sumWithTax;
-	private int sumWithTax2;
+	private	long sum;
+	private	long sumWithTax;
+	private long sumWithTax2;
 	private String bankName;
 	private String depositeClassification;
 	private String accountNumber;
@@ -26,8 +26,8 @@ public class BillInformVO {
 	}
 
 	public BillInformVO(int billNum, int reportNum, String billDate, String supplier, String address, String post,
-			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp, int sum,
-			int sumWithTax, int sumWithTax2, String bankName, String depositeClassification, String accountNumber,
+			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp, long sum,
+			long sumWithTax, long sumWithTax2, String bankName, String depositeClassification, String accountNumber,
 			String accountOwner, String hurigana) {
 		super();
 		this.billNum = billNum;
@@ -139,27 +139,27 @@ public class BillInformVO {
 		this.stamp = stamp;
 	}
 
-	public int getSum() {
+	public long getSum() {
 		return sum;
 	}
 
-	public void setSum(int sum) {
+	public void setSum(long sum) {
 		this.sum = sum;
 	}
 
-	public int getSumWithTax() {
+	public long getSumWithTax() {
 		return sumWithTax;
 	}
 
-	public void setSumWithTax(int sumWithTax) {
+	public void setSumWithTax(long sumWithTax) {
 		this.sumWithTax = sumWithTax;
 	}
 
-	public int getSumWithTax2() {
+	public long getSumWithTax2() {
 		return sumWithTax2;
 	}
 
-	public void setSumWithTax2(int sumWithTax2) {
+	public void setSumWithTax2(long sumWithTax2) {
 		this.sumWithTax2 = sumWithTax2;
 	}
 
