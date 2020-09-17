@@ -32,7 +32,6 @@ $(document).ready(function(){
 	    var filter = "win16|win32|win64|mac|macintel";
 	    if( navigator.platform  ){
 	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-		      $("body").addClass('mobile_body');
 	      }else{
 	    	  $("body").addClass('pc_body');
 		      $("#title").addClass("pc_font_title");
@@ -48,7 +47,7 @@ function back(){
 }
 </script>
 
-<body style="width:98%;height:98%">
+<body>
 <div id="readBill_div_btn"><button id="back_Btn"  class="pc_font_button1" onclick="back()">戻る</button></div>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
@@ -64,7 +63,7 @@ function back(){
 		oz.sendToActionScript("connection.reportname","OZDemo_Bill/readBill.ozr");
 		oz.sendToActionScript("connection.inputjson", JSON.stringify(stamp));
 
-		oz.sendToActionScript("global.language", "ja");
+		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "readBill");
  		oz.sendToActionScript("odi.readBill.pcount", "2");
 		oz.sendToActionScript("odi.readBill.args1", "reportnum="+reportNum);

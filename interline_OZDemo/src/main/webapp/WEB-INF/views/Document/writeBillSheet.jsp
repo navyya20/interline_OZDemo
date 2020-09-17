@@ -36,10 +36,8 @@ $(document).ready(function(){
 	    var filter = "win16|win32|win64|mac|macintel";
 	    if( navigator.platform  ){
 	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-		      $("body").addClass('mobile_body');
 	      }else{
 	    	  $("body").addClass('pc_body');
-	    	  $("body").addClass("pc_body");
 		      $("#title").addClass("pc_font_title");
 		      $(".btn").addClass("pc_font_button2");
 	      }
@@ -107,7 +105,7 @@ function back(){
 }
 
 </script>
-<body style="width:98%;height:98%">
+<body>
 
 <div id="writeBill_div_btn">
 <button id="save_Btn"  class="pc_font_button1" onclick="save()">保存</button>
@@ -127,7 +125,7 @@ function back(){
 		oz.sendToActionScript("connection.reportname","OZDemo_Bill/writeBill.ozr");
 		oz.sendToActionScript("connection.inputjson", JSON.stringify(stamp));
 
-		oz.sendToActionScript("global.language", "ja");
+		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "writeBill");
  		oz.sendToActionScript("odi.writeBill.pcount", "2");
 		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
