@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 <title>Member</title>
 </head>
 
@@ -90,7 +90,7 @@ $(function(){
 </table>
 </div>
 <div id="_iframe" style="position:absolute; left:20%; ">
-<iframe name="list_Box" id="list_Box" src="estimateSheetList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+	<iframe name="list_Box" id="list_Box" src="estimateSheetList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"/>
 <title>estimateSheetList</title>
 </head>
 
@@ -30,6 +30,7 @@
 		border-style:solid;
 		border-width: 1px;
 		vertical-align: middle;
+		word-break: break-all;
 	}
 	.lastColum{
 		padding-bottom: 4px;
@@ -50,14 +51,14 @@ $(function(){
 		var filter = "win16|win32|win64|mac|macintel";
 		if( navigator.platform  ){
 			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-				$("body").attr('class','mobile_body');
+				//$("body").attr('class','mobile_body');
 		    }else{
 		    	$("body").addClass("pc_body");
 		    	$("#title").addClass("pc_font_title");
 		    	$(".btn").addClass("pc_font_button2");
 		    }
 		}
-	}
+	} 
 	
 	$('#list_Box').css('min-height',window.innerHeight-100+'px');
 	$('#list_Box').attr("src","estimateSheetList");
