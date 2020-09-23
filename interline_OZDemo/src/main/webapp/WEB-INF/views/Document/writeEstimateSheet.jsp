@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
 <title>estimateSheet</title>
 </head>
 
@@ -30,6 +31,7 @@
 		userInformJson["supplier"]=userInformJson.companyName;
 		userInformJsonString = JSON.stringify(userInformJson);
 		console.log("userInformJsonString:"+userInformJsonString);
+		$('#userInform').html(userInformJsonString);
 		return userInformJsonString;
 	}
 
