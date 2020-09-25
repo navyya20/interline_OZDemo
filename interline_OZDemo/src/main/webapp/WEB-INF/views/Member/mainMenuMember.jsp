@@ -56,37 +56,32 @@ $(function(){
 	z-index: 1;
 }
 .mainMenuButton{
-	width:100%;	
+	display:inline-block;
+	width:100px;
 }
 .mainMenuTd{
-	width: 80%;
+	width: 150px;
 }
 
 </style>
-<body>
-<div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">
-<h1>${sessionScope.userInform.userId}様</h1><br></br>
-<table style="text-align: center; margin-left: auto;margin-right: auto;">
-<tr>
-	<td class="mainMenuTd">
-		<div id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報修正</div>
-	</td>
-</tr>
-<tr>
-	<td class="mainMenuTd">
-		<div id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeEstimate;'">見積書作成</div>
-	</td>
-</tr>
-<tr>
-	<td class="mainMenuTd">
-		<div id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</div>
-	</td>
-</tr>
-<tr>
-	<td class="mainMenuTd">
-		<div id="logout" class="pc_font_button1 mainMenuButton logout">ログアウト</div>
-	</td class="mainMenuTd">
-</tr>
+<body class="pc_body">
+<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
+<table style="text-align: center; margin: auto;">
+	<tr>
+		<td style="font-weight: bold;">${sessionScope.userInform.userId}様</td>
+		<td class="mainMenuTd">
+			<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報修正</span>
+		</td>
+		<td class="mainMenuTd">
+			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeEstimate;'">見積書作成</span>
+		</td>
+		<td class="mainMenuTd">
+			<span id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</span>
+		</td>
+		<td class="mainMenuTd">
+			<span id="logout" class="pc_font_button1 mainMenuButton logout">ログアウト</span>
+		</td>
+	</tr>
 </table>
 </div>
 <div id="_iframe" style="position:absolute; left:20%; ">

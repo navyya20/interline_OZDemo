@@ -100,7 +100,7 @@ if ( self !== top ) {
 	<td class="login_td_pw"><input type="password" id="login_pw" name="login_pw"></td>
 	</tr>
 	<tr>
-	<td colspan="2" class="login_td_Submit" style="text-align: right; padding-top: 5px;"><span id="btn_login" class="pc_font_button1">ログイン</span></td>
+	<td colspan="2" class="login_td_Submit" style="text-align: center; padding-top: 5px;"><span id="btn_login" class="pc_font_button1">ログイン</span></td>
 	</tr>
 	</table>
 </div>

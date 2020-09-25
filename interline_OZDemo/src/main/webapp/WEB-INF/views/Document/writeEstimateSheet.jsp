@@ -19,52 +19,113 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=6'/>"></script>
-
-<body>
-<div id="userInformJsonString" style="display: none;">${userInformJsonString}</div>
-<div id="OZViewer" style="width:98%;height:98%"></div>
-<script type="text/javascript" >
-	//세션으로부터 유저인폼 jsonString을 받는다.
-	function getUserInform(){
-		var userInformJsonString = $('#userInformJsonString').html();
-		var userInformJson=JSON.parse(userInformJsonString);
-		userInformJson["supplier"]=userInformJson.companyName;
-		userInformJsonString = JSON.stringify(userInformJson);
-		console.log("userInformJsonString:"+userInformJsonString);
-		$('#userInform').html(userInformJsonString);
-		return userInformJsonString;
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<style>
+	#buttonTable td{
+		text-align: center;
 	}
-
-	function SetOZParamters_OZViewer(){
-		var oz;
-		oz = document.getElementById("OZViewer");
-		oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
-		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
-		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
-		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
-		oz.sendToActionScript("connection.inputjson", getUserInform());
-		oz.sendToActionScript("connection.pcount","2");
-		oz.sendToActionScript("connection.args1","repeat=10");
-		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
-		oz.sendToActionScript("pdf.fontembedding","true");
-		return true;
+	#buttonTable td span{
+		display:inline-block;
+		width:100px;
 	}
+	#buttonTable{
+		margin: auto;
+		margin-bottom: 5px;
+	}
+	#buttonDiv{
+		text-align: center;
+	}
+	.mainMenuButton{	
+		display:inline-block;
+		width:100px;
+	}
+	.mainMenuTd{
+		width: 100px;
+	}
+</style>
+<body class="pc_body">
+	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
+	<table style="text-align: center; margin: auto;">
+		<tr>
+			<td class="mainMenuTd">
+				<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
+			</td>
+			<td class="mainMenuTd"></td>
+			<td class="mainMenuTd">
+				<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
+			</td>
+		</tr>
+	</table>
+	</div>
+	<div id="OZViewer" style="width:98%;height:98%"></div>
+	<script type="text/javascript" >
+		//세션으로부터 유저인폼 jsonString을 받는다.
+		function getUserInform(){
+			//var userInformJsonString = $('#userInformJsonString').html();
+			var userInformJsonString = '${userInformJsonString}';
+			var userInformJson=JSON.parse(userInformJsonString);
+			userInformJson["supplier"]=userInformJson.companyName;
+			userInformJsonString = JSON.stringify(userInformJson);
+			console.log("userInformJsonString:"+userInformJsonString);
+			$('#userInform').html(userInformJsonString);
+			return userInformJsonString;
+		}
 	
-	var opt = [];
-	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
-	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+		function SetOZParamters_OZViewer(){
+			
+			var oz;
+			oz = document.getElementById("OZViewer");
+			oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
+			oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
+			oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
+			oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
+			oz.sendToActionScript("connection.inputjson", getUserInform());
+			oz.sendToActionScript("connection.pcount","2");
+			oz.sendToActionScript("connection.args1","repeat=10");
+			oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
+			oz.sendToActionScript("pdf.fontembedding","true");
+			return true;
+		}
+		
+		var opt = [];
+		opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
+		opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
+		start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+
+
+		/* function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
+			var inputJson=JSON.parse(inputJsonString);
+			var processedInputJson = getJsonToSend(inputJson);
+			var address="saveEstimate";
+			$('#wrapper').css('z-index',2);
+			$('#wrapper').css('visibility','visible');
+			$('body').css('cursor','progress');
+			sendInputJson(processedInputJson,address);
+		} */
+
+		//보존버튼을 누루면 작동. 
+		//뷰어의 모든 값을 제이슨스트링으로 가져옴.
+		//parse/직렬화되어있는 아이템을 병렬화하여 jsonString으로/ 병렬화된 item의 JsonString과 견적서객체 ajax로 보냄.
+		function saveButton(){
+			var inputJsonString = OZViewer.GetInformation("INPUT_JSON_ALL");
+			console.log("제이슨:"+inputJsonString);
+			var inputJson=JSON.parse(inputJsonString);
+			var processedInputJson = getJsonToSend(inputJson);
+			var address="saveEstimate";
+			$('#wrapper').css('z-index',2);
+			$('#wrapper').css('visibility','visible');
+			$('body').css('cursor','progress');
+			sendInputJson(processedInputJson,address);
+		}
+
+		//모도루 버튼 클릭시 작동. 메인메뉴로 돌아간다.
+		function cancelButton(){
+			var userInformJsonString = $('#userInformJsonString').html();
+			//alert("userInformJsonString:"+userInformJsonString);
+			location.href="memberMain";
+		}
+	</script>
+	<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
 	
-	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
-		var inputJson=JSON.parse(inputJsonString);
-		var processedInputJson = getJsonToSend(inputJson);
-		var address="saveEstimate";
-		$('#wrapper').css('z-index',2);
-		$('#wrapper').css('visibility','visible');
-		$('body').css('cursor','progress');
-		sendInputJson(processedInputJson,address);
-	}
-</script>
-<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
 </body>
 </html>
