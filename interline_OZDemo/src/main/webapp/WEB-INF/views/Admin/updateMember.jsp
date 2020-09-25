@@ -41,7 +41,7 @@ height: 28px;
 
 #updateMember_contents{
 margin: 70px auto;
-width: fit-content;
+width: 30%;
 }
 
 input[type="number"],input[type="text"],input[type="password"]{

@@ -16,21 +16,19 @@
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+<script src="<c:url value = '../resources/js/billSheet.js'/>" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <style>
-#writeBill_div_btn{
-margin:0px 0px 10px 0px;
+.billMenuButton{
+	display:inline-block;
+	width:100px;
 }
-#save_Btn{
-margin: 0px 0px 5px 0px;
-}
-#back_Btn{
-margin: 5px 0px 0px 0px;
+.billMenuTd{
+	width: 100px;
 }
 </style>
 
 <script>
-
 $(document).ready(function(){
 	 isMobile(); 
 	function isMobile() {
@@ -46,74 +44,20 @@ $(document).ready(function(){
 	  }
 	
 });
-
-function save(){
-	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL"));
-	var bankName_Len = billData.bankName.length;
-	var depositeClassification_Len = billData.depositeClassification.length;
-	var accountNumber = billData.accountNumber;
-	var accountOwner_Len = billData.accountOwner.length;
-	var hurigana_Len = billData.hurigana.length;
-	var accountcheck=/^\d{1,4}-\d{1,8}$/;
-	
-	if(0< bankName_Len && bankName_Len <= 30 && 0< depositeClassification_Len && depositeClassification_Len <= 10 && accountcheck.test(accountNumber) && 0< accountOwner_Len && accountOwner_Len <= 30 && 0< hurigana_Len && hurigana_Len <= 60){
-
-		if(confirm("請求書を保存しますか?")){
-		
-			billData["reportNum"] ="${reportNum}";
-			billData["billNum"] ="${reportNum}";
-			billData["sum"] = billData["sum"].replace(/[^0-9]/g,"");
-			billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
-			billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
-
-			$.ajax({
-				url: "saveBill",
-				type: 'POST',
-				data: {jsonStr:JSON.stringify(billData)},
-				dataType:'text',
-				success: function(data){
-					alert("保存成功");
-					location.href="memberMain";
-				},
-				error: function(e){
-					console.log(JSON.stringify(e));
-					alert('エラー！');
-				}
-			});
-		}
-	}
-
-
-	if(0>=bankName_Len || bankName_Len>30){
-		alert("銀行名は1~30文字です。");
-	}else if(0>=depositeClassification_Len || depositeClassification_Len>10){
-		alert("預金区分は1~10文字です。");
-	}else if(!accountcheck.test(accountNumber)){
-		alert("口座番号は123-1234567形式でお願いします。");
-	}else if(0>=accountOwner_Len || accountOwner_Len>30){
-		alert("口座名義人は1~30文字です。");
-	}else if(0>=hurigana_Len || hurigana_Len>60){
-		alert("口座名義人ふりがなは1~60文字です。");
-	}
-		
-
-	return false;
-}
-
-function back(){
-	location.href="memberMain";
-}
-
 </script>
 <body>
 
-<div id="writeBill_div_btn">
-<button id="save_Btn"  class="pc_font_button1" onclick="save()">保存</button>
-<button id="back_Btn"  class="pc_font_button1" onclick="back()">戻る</button>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<table style="text-align:center; margin:auto;"><tr>
+<td class="billMenuTd"><span id="save_Btn"  class="pc_font_button1 billMenuButton" onclick="save(${reportNum})">保存</span></td>
+<td class="billMenuTd"></td>
+<td class="billMenuTd"><span id="back_Btn"  class="pc_font_button1 billMenuButton" onclick="back()">戻る</span></td>
+</tr></table>
 </div>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
+
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
 		var id = "${id}";
@@ -136,11 +80,9 @@ function back(){
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
- 	var opt = [];
-	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
-	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작  
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",opt);
 
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
+	
 </script>
 </body>
 </html>

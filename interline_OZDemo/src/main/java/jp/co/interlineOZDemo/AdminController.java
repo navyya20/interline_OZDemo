@@ -56,18 +56,19 @@ public class AdminController {
 		return "Admin/registerMember";
 	}
 	
+	//회원번호와 회원아이디 중복검사
 	@ResponseBody
 	@RequestMapping(value="/check_multiple", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public String check_Multiple(int userNum, String userId) {
 		logger.debug("userNum:{},userid:{}",userNum,userId);
 		UserInformVO check_result = null;
 		
-		check_result = dao.check_Multiple("check_Num",userNum);
+		check_result = dao.check_Multiple("check_Num",userNum); //회원번호 중복 확인
 		if(check_result != null) {
 			return "存在する会員番号です。";
 		}
 		
-		check_result = dao.check_Multiple("check_Id",userId);
+		check_result = dao.check_Multiple("check_Id",userId); //회원아이디 중복 확인
 		if(check_result != null) {
 			return "存在する会員IDです。";
 		}
@@ -75,6 +76,7 @@ public class AdminController {
 		return "成功";
 	}
 	
+	//회원 등록
 	@RequestMapping(value="/registerMember", method=RequestMethod.POST)
 	public String registerMember(UserInformVO member) {
 		logger.debug("insertMember:{}",member);
@@ -86,7 +88,7 @@ public class AdminController {
 		return "redirect:/admin/memberList";
 	}
 	
-	//(관리자용)회원정보 수정
+	//(관리자용)회원정보 수정폼
 	@RequestMapping(value="/updateMember", method=RequestMethod.GET)
 	public String updateMemberForm(Model model,int userNum) {
 		logger.debug("updateMember:{}",userNum);
@@ -97,11 +99,12 @@ public class AdminController {
 		return "Admin/updateMember";
 	}
 	
+	//회원정보 수정
 	@RequestMapping(value="/updateMember", method=RequestMethod.POST)
 	public String updateMember(UserInformVO member) {
 		logger.debug("updateMember:{}",member);
 		
-		int result = dao.updateMember(member);
+		int result = dao.updateMember(member); //DB에서 해당 회원정보 수정
 		
 		if(result == 1) {
 			logger.debug("修正成功");
@@ -116,7 +119,7 @@ public class AdminController {
 		logger.debug("userNum:{}",userNum);
 		
 		
-		int result = dao.deleteMember(userNum);
+		int result = dao.deleteMember(userNum); //DB에서 해당 회원정보 삭제
 		  
 		if(result == 1) { 
 			logger.debug("削除成功"); 

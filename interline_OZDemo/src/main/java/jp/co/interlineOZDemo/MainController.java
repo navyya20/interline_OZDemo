@@ -30,6 +30,7 @@ public class MainController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	//Main
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session) {
 		session.removeAttribute("loginId");
@@ -38,6 +39,7 @@ public class MainController {
 		return "login";
 	}
 	
+	//Login Form
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginForm(HttpSession session) {
 		session.removeAttribute("loginId");

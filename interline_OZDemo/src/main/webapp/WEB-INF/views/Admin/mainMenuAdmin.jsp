@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -28,8 +28,8 @@ $(function(){
 		if( title == "Login"){
 			location.href = "../";
 		}
-
-		$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
+		
+		$(this).css('height',($(this).contents().find('body')[0].scrollHeight-10)+'px');
 		
 		/* $('#list_Box').css('width','700px'); */
 	
@@ -44,25 +44,44 @@ text-align:center;
 }
 
 #_iframe{
-margin:20px 0px 0px 0px;
-width: 80%;
+	margin:20px 0px 0px 0px;
+	width: 80%; 
+	height: 100%;
 }
 
 #list_Box{
-width: 80%;
+	width: 80%;
+	height: 100%;
+	z-index: 1;
 }
 
 #registerMember{
 padding: 2px 13px 2px 13px;
 }
+
+.mainMenuButton{
+	display:inline-block;
+	width:100px;
+}
+.mainMenuTd{
+	width: 150px;
+}
 </style>
 </head>
 <body class="pc_body">
-<div id="menuBar" style="position: absolute; left: 0px; z-index: 1000; text-align: center; width:20%;">
-<h1>管理者</h1><br></br>
-<p><button type="button" class="pc_font_button1 mainMenuButton move_btn" id="registerMember">会員登録</button></p>
-<p><button type="button" class="pc_font_button1 mainMenuButton move_btn" id="memberList">会員リスト</button></p>
-<p><button type="button" class="pc_font_button1 mainMenuButton logout" id="logout">ログアウト</button></p>	
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
+<table style="text-align:center; margin:auto;"><tr>
+<td style="font-weight: bold;">管理者</td>
+<td class="mainMenuTd">
+<span class="pc_font_button1 mainMenuButton move_btn" id="registerMember">会員登録</span>
+</td>
+<td class="mainMenuTd">
+<span class="pc_font_button1 mainMenuButton move_btn" id="memberList">会員リスト</span>
+</td>
+<td class="mainMenuTd">
+<span class="pc_font_button1 mainMenuButton logout" id="logout">ログアウト</span>
+</td>
+</tr></table>
 </div>
 <div id="_iframe" style="position:absolute; left:20%;  text-align: left;">
 <iframe name="list_Box" id="list_Box" src="../admin/memberList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>

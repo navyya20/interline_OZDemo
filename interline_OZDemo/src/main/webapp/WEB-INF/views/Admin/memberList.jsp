@@ -14,7 +14,7 @@ $(function(){
 	first_MemberList();
 
 	function first_MemberList(){
-		 $('#list_Box',parent.document).css('height',$("body")[0].scrollHeight+50+'px');
+		 $('#list_Box',parent.document).css('height',$("body")[0].scrollHeight-10+'px');
 	}
 });
 
@@ -64,7 +64,7 @@ height: 45px;
 }
 
 #Member_List{
-margin: 70px auto;
+margin: 34px auto 40px;
 width: fit-content;
 }
 </style>

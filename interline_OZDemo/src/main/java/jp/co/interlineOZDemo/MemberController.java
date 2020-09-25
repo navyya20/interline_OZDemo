@@ -242,13 +242,14 @@ public class MemberController {
 		return "Document/writeBillSheet";
 	}
 	
+	//청구서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveBill", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
 	public String saveEstimateSheet(String jsonStr, HttpSession session) {
 		System.out.println("견적서내용:"+jsonStr);
 		
 		Gson gson = new Gson();
-		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class);
+		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화
 		
 		SimpleDateFormat billDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
 		SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
@@ -256,25 +257,26 @@ public class MemberController {
 		
 		try {
 			Date bill_Date = billDate_pattern.parse(BillInform.getBillDate());
-			BillInform.setBillDate(newDate_pattern.format(bill_Date));
+			BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		
 		
-		int result = dao.insertBillSheet(BillInform);
+		int result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
 		
 		if(result == 1) {
-			dao.setState(BillInform.getReportNum());
+			dao.setState(BillInform.getReportNum()); //견적서DB의 청구서 작성여부 변경
 			return "success";
 		}
 		return "error";		
 	}
 	
+	//청구서 열람
 	@RequestMapping(value="/readBill", method=RequestMethod.GET)
 	public String readBillSheet(Model model,int reportNum){
 		
-		model.addAttribute("reportNum", reportNum);	 
+		model.addAttribute("reportNum", reportNum); //청구서와 연결된 견적서 번호
 		return "Document/readBillSheet";
 	}
 	

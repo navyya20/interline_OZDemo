@@ -20,8 +20,12 @@
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 
 <style>
-#readBill_div_btn{
-margin: 0px 0px 10px 0px;
+.billMenuButton{
+	display:inline-block;
+	width:100px;
+}
+.billMenuTd{
+	width: 100px;
 }
 </style>
 
@@ -48,7 +52,11 @@ function back(){
 </script>
 
 <body>
-<div id="readBill_div_btn"><button id="back_Btn"  class="pc_font_button1" onclick="back()">戻る</button></div>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<table style="text-align:center; margin:auto;"><tr>
+<td class="billMenuTd"><span id="back_Btn"  class="pc_font_button1 billMenuButton" onclick="back()">戻る</span></td>
+</tr></table>
+</div>
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >

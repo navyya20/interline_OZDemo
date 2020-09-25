@@ -20,8 +20,8 @@ $(function(){
 		var user_pw = $("#password").val();
 		var check = /^[A-Za-z0-9]{3,20}$/ ;
 
-		if(user_num == ""){
-			alert("会員番号を入力してください。");
+		if(user_num.length <= 0 || user_num.length >9){
+			alert("会員番号は1~9の数字です。");
 			$("#userNum").focus();
 		}else if(!check.test(user_id)){
 			alert("IDは3~20字の英数字です。");
@@ -31,7 +31,7 @@ $(function(){
 			$("#password").focus();
 		}
 
- 		if(user_num !="" && check.test(user_id) != ""&& check.test(user_pw)){
+ 		if(user_num.length > 0 && user_num.length <= 9 && check.test(user_id) && check.test(user_pw)){
 
  			$.ajax({
 				type:"post",
@@ -83,7 +83,7 @@ width: 175px;
 
 #registerMember_contents{
 margin: 70px auto;
-width: fit-content;
+width: 30%;
 }
 
 </style>
@@ -95,7 +95,7 @@ width: fit-content;
 <table>
 <tr>
 <td><label for="userNum" class="pc_font_content1">会員番号</label></td>
-<td><input type="number" id="userNum" name="userNum" class="pc_font_content1"></td>
+<td><input type="number" id="userNum" name="userNum" class="pc_font_content1" style="-moz-appearance: textfield;"></td>
 </tr>
 <tr>
 <td><label for="userId" class="pc_font_content1">会員ID</label></td>
