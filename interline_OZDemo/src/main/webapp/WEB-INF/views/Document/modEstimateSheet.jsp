@@ -9,20 +9,29 @@
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
 <title>estimateSheet</title>
-</head>
+
 
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.css" type="text/css"/>
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <!-- If you want to run the HTML5SVG viewer please change the OZJSViewer.js to OZJSSVGViewer.js.
 <script type="text/javascript" src="http://192.168.0.103:8888/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>   OZJSViewer.js   OZJSSVGViewer.js
 -->
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
-
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+    <style>
+        @font-face {
+            font-family: "nanumbarungothic";
+            src: url('../resources/font/msgothic.ttc') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+	</style>
+</head>
 <body>
 <div id="estimateSheetJsonString" style="display: none;">${estimateSheetJsonString}</div>
 <div id="estimateItemsJsonString" style="display: none;">${estimateItemsJsonString}</div>
