@@ -25,20 +25,6 @@
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <style>
-	#buttonTable td{
-		text-align: center;
-	}
-	#buttonTable td span{
-		display:inline-block;
-		width:100px;
-	}
-	#buttonTable{
-		margin: auto;
-		margin-bottom: 5px;
-	}
-	#buttonDiv{
-		text-align: center;
-	}
 	.mainMenuButton{	
 		display:inline-block;
 		width:100px;
@@ -49,17 +35,17 @@
 </style>
 <body class="pc_body">
 	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
-	<table style="text-align: center; margin: auto;">
-		<tr>
-			<td class="mainMenuTd">
-				<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
-			</td>
-			<td class="mainMenuTd"></td>
-			<td class="mainMenuTd">
-				<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
-			</td>
-		</tr>
-	</table>
+		<table style="text-align: center; margin: auto;">
+			<tr>
+				<td class="mainMenuTd">
+					<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
+				</td>
+				<td class="mainMenuTd"></td>
+				<td class="mainMenuTd">
+					<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div id="OZViewer" style="width:98%;height:98%"></div>
 	<script type="text/javascript" >

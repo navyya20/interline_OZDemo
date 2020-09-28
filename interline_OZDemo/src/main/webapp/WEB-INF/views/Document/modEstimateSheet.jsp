@@ -22,6 +22,7 @@
 -->
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
     <style>
         @font-face {
@@ -30,17 +31,37 @@
             font-weight: normal;
             font-style: normal;
         }
+        .mainMenuButton{	
+			display:inline-block;
+			width:100px;
+		}
+		.mainMenuTd{
+			width: 100px;
+		}
 	</style>
 </head>
 <body>
-<div id="estimateSheetJsonString" style="display: none;">${estimateSheetJsonString}</div>
-<div id="estimateItemsJsonString" style="display: none;">${estimateItemsJsonString}</div>
+<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
+	<table style="text-align: center; margin: auto;">
+		<tr>
+			<td class="mainMenuTd">
+				<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
+			</td>
+			<td class="mainMenuTd"></td>
+			<td class="mainMenuTd">
+				<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
+			</td>
+		</tr>
+	</table>
+</div>
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
 	function getEstimateSheetInform(){
-		var estimateSheetJsonString = $('#estimateSheetJsonString').html();		
-		var estimateItemsJsonString = $('#estimateItemsJsonString').html();
+		var estimateSheetJsonString = '${estimateSheetJsonString}';		
+		var estimateItemsJsonString = '${estimateItemsJsonString}';
+		//var estimateSheetJsonString = $('#estimateSheetJsonString').html();		
+		//var estimateItemsJsonString = $('#estimateItemsJsonString').html();
 		console.log("estimateSheetJsonString:"+estimateSheetJsonString);
 		console.log("estimateItemsJsonString:"+estimateItemsJsonString);
 		var estimateSheetJsonObject = JSON.parse(estimateSheetJsonString);
@@ -74,7 +95,7 @@
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
 	
-	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
+	/* function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 		var inputJson=JSON.parse(inputJsonString);
 		var processedInputJson = getJsonToSend(inputJson);
 		var address="saveEstimate";
@@ -82,6 +103,25 @@
 		$('#wrapper').css('visibility','visible');
 		$('body').css('cursor','progress');
 		sendInputJson(processedInputJson,address);
+	} */
+
+	function saveButton(){
+		var inputJsonString = OZViewer.GetInformation("INPUT_JSON_ALL");
+		console.log("제이슨:"+inputJsonString);
+		var inputJson=JSON.parse(inputJsonString);
+		var processedInputJson = getJsonToSend(inputJson);
+		var address="saveEstimate";
+		$('#wrapper').css('z-index',2);
+		$('#wrapper').css('visibility','visible');
+		$('body').css('cursor','progress');
+		sendInputJson(processedInputJson,address);
+	}
+
+	//모도루 버튼 클릭시 작동. 메인메뉴로 돌아간다.
+	function cancelButton(){
+		var userInformJsonString = $('#userInformJsonString').html();
+		//alert("userInformJsonString:"+userInformJsonString);
+		location.href="memberMain";
 	}
 </script>
 <div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>

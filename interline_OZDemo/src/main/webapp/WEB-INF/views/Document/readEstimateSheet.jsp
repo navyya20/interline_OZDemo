@@ -15,21 +15,40 @@
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>
 <!-- If you want to run the HTML5SVG viewer please change the OZJSViewer.js to OZJSSVGViewer.js.
 <script type="text/javascript" src="http://192.168.0.103:8888/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>   OZJSViewer.js   OZJSSVGViewer.js
 -->
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=1'/>"></script>
+<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<style>
+        .mainMenuButton{	
+			display:inline-block;
+			width:100px;
+		}
+		.mainMenuTd{
+			width: 100px;
+		}
+	</style>
 <body>
-<div id="userNum" style="display: none;">${userNum}</div>
-<div id="reportNum" style="display: none;">${reportNum}</div>
+<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
+	<table style="text-align: center; margin: auto;">
+		<tr>
+			<td class="mainMenuTd">
+				<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
+			</td>
+		</tr>
+	</table>
+</div>
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	//세션으로부터 유저인폼 jsonString을 받는다.
 	
-	var userNum = $('#userNum').html();
-	var reportNum = $('#reportNum').html();
+	var userNum = "${userNum}";
+	var reportNum = "${reportNum}";
+	//var userNum = $('#userNum').html();
+	//var reportNum = $('#reportNum').html();
 	console.log("userNum:"+userNum);
 	console.log("reportNum:"+reportNum);
 	var now = new Date();
@@ -68,6 +87,11 @@
 		variable = Number(variable).toString(); 
 		if(Number(variable) < 10 && variable.length == 1) variable = "0" + variable; 
 		return variable; 
+	}
+	function cancelButton(){
+		var userInformJsonString = $('#userInformJsonString').html();
+		//alert("userInformJsonString:"+userInformJsonString);
+		location.href="memberMain";
 	}
 
 </script>

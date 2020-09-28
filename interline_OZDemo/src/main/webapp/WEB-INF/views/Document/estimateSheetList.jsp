@@ -159,7 +159,7 @@ function selectAll(){
 		<td><input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
 		<td>${sheet.reportNum}</td>
 		<td>${sheet.receiver}</td>
-		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_blank" style="text-decoration: none;">${sheet.reportName}</a></td>
+		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.reportName}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd HH:mm"/></td>

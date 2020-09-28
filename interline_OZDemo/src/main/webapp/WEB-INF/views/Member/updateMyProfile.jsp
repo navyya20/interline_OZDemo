@@ -50,12 +50,8 @@
 		    var filter = "win16|win32|win64|mac|macintel";
 		    if( navigator.platform  ){
 		      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-			      $("body").addClass('mobile_body');
 		      }else{
-		    	  $("body").addClass('pc_body');
-		    	  $("body").addClass("pc_body");
-			      $("#title").addClass("pc_font_title");
-			      $(".btn").addClass("pc_font_button2");
+		    	  //$("body").addClass('pc_body');
 		      }
 		    }
 		  }
@@ -132,7 +128,7 @@ function submitMyProfile(){
 }
 </script>
 
-<body>
+<body class="pc_body">
 <div id="title">自社情報修正</div>
 
 <form id="updateMyProfile" action="updateMyProfile" method="post">

@@ -47,11 +47,11 @@ $(function(){
 
 #_iframe{
 	margin:20px 0px 0px 0px;
-	width: 80%; 
+	width: 100%; 
 	height: 100%;
 }
 #list_Box{
-	width: 80%;
+	width: 100%;
 	height: 100%;
 	z-index: 1;
 }
@@ -84,7 +84,7 @@ $(function(){
 	</tr>
 </table>
 </div>
-<div id="_iframe" style="position:absolute; left:20%; ">
+<div id="_iframe">
 	<iframe name="list_Box" id="list_Box" src="estimateSheetList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 </div>
 </body>
