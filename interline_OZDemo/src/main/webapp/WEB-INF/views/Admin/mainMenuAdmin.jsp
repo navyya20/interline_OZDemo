@@ -27,9 +27,14 @@ $(function(){
 
 		if( title == "Login"){
 			location.href = "../";
+		}else if(title == "memberList"){
+			document.documentElement.style.overflow = '';
+		}else if(title != "memberList"){
+			window.scrollTo(0, 0);
+			document.documentElement.style.overflow = 'hidden';
 		}
 		
-		$(this).css('height',($(this).contents().find('body')[0].scrollHeight-10)+'px');
+		$(this).css('height',($(this).contents().find('body')[0].scrollHeight+50)+'px');
 		
 		/* $('#list_Box').css('width','700px'); */
 	
@@ -46,7 +51,7 @@ text-align:center;
 #_iframe{
 	margin:20px 0px 0px 0px;
 	width: 80%; 
-	height: 100%;
+	height: 90%;
 }
 
 #list_Box{

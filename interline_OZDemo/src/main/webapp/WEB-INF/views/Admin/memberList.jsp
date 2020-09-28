@@ -14,8 +14,9 @@ $(function(){
 	first_MemberList();
 
 	function first_MemberList(){
-		 $('#list_Box',parent.document).css('height',$("body")[0].scrollHeight-10+'px');
+		 $('#list_Box',parent.document).css('height',$("body")[0].scrollHeight+50+'px');
 	}
+	
 });
 
 function update_member(val){
@@ -64,7 +65,7 @@ height: 45px;
 }
 
 #Member_List{
-margin: 34px auto 40px;
+margin: 34px auto 70px;
 width: fit-content;
 }
 </style>
@@ -93,6 +94,5 @@ width: fit-content;
 <form action="deleteMember" method="post" id="delForm_member">
 <input type="hidden" name="userNum" id="userNum">
 </form>
-
 </body>
 </html>
