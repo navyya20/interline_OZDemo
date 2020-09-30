@@ -38,7 +38,7 @@
 		<table style="text-align: center; margin: auto;">
 			<tr>
 				<td class="mainMenuTd">
-					<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
+					<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">作成</span>
 				</td>
 				<td class="mainMenuTd"></td>
 				<td class="mainMenuTd">

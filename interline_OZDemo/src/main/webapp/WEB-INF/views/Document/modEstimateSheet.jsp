@@ -26,8 +26,8 @@
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
     <style>
         @font-face {
-            font-family: "nanumbarungothic";
-            src: url('../resources/font/msgothic.ttc') format('truetype');
+            font-family: "msgothic";
+            src: url('../resources/font/NanumBarunGothic.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -45,7 +45,7 @@
 	<table style="text-align: center; margin: auto;">
 		<tr>
 			<td class="mainMenuTd">
-				<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">保存</span>
+				<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">作成</span>
 			</td>
 			<td class="mainMenuTd"></td>
 			<td class="mainMenuTd">
@@ -90,11 +90,26 @@
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
-	var opt = [];
-	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
-	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+	function start_viewer(){
+		var opt = [];
+		opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
+		opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
+		start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+	}
+
 	
+	var fontFlag = false;
+	fontSpy('msgothic', { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+        success: function() {
+        	fontFlag = true;
+        	console.log("font success");
+            start_viewer();
+        },
+        failure: function() {
+			console.log("font fail");
+        }
+    });
+		
 	/* function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 		var inputJson=JSON.parse(inputJsonString);
 		var processedInputJson = getJsonToSend(inputJson);
