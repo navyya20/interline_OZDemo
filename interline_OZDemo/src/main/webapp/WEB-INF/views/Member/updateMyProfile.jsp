@@ -168,8 +168,9 @@ function submitMyProfile(){
 	<tr>
 		<td>POST</td>
 		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" maxlength="8" title="形式:000-0000" value="${userInform.post}"></td>
-	</tr>
+	</tr>	
 	
+	<!-- 여기까지 개인정보      여기서부터 구좌정보 -->
 	
 	<tr>
 		<td class="categoryTd"></td>

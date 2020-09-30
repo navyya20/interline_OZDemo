@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -48,6 +49,8 @@ public class MemberController {
 	
 	@Autowired
 	MemberDAO dao;
+	
+	//private final String resourcesDir=c.getContextPath();
 	
 	//memberMain
 	@RequestMapping(value = "/memberMain", method=RequestMethod.GET)
@@ -282,11 +285,17 @@ public class MemberController {
 	
 	//(회원용)회원정보 수정페이지로드
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.GET)
-	public String updateMyProfileForm(HttpSession session) {
+	public String updateMyProfileForm(HttpSession session , Model model) {
 		System.out.println("회원정보 업데이트 화면로드");
 		UserInformVO userIdPassword = (UserInformVO)session.getAttribute("userInform");
 		UserInformVO member = dao.getMember(userIdPassword);
 		session.setAttribute("userInform", member);
+		
+		
+		// 파일경로 가져오기 테스트
+        model.addAttribute("path", session.getServletContext().getRealPath("/resources"));
+        
+        
 		return "Member/updateMyProfile";
 	}
 	
