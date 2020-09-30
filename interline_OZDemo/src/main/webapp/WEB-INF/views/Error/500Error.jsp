@@ -27,7 +27,7 @@ $(document).ready(function(){
 });
 
 function main_Menu(){
-	location.href="<c:url value = '/member/memberMain'/>";
+	location.replace("<c:url value = '/member/memberMain'/>");
 }
 </script>
 <style>
