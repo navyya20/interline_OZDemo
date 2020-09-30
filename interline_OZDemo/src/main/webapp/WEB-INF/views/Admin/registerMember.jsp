@@ -51,6 +51,10 @@ $(function(){
 					}else if(confirm("登録しましか？")){
 						$('#registerMember_Form').submit();
 					} 
+				},
+				error: function(e){
+					console.log(JSON.stringify(e));
+					alert('エラー！'); 
 				}
 			}); 
 		} 
