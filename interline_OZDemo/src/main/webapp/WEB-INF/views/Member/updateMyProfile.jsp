@@ -85,29 +85,29 @@ function submitMyProfile(){
 	//계좌번호 검사
 	var accountcheck=/^\d{1,4}-\d{1,8}$/;
 	
-	if(!pwCheck.test(password)){alert("PASSWORDは3~20字の英数字です。");$("#login_pw").focus();return;}
-	if(password != password2){alert("パスワードを確認してください");return;}
-	if(characterCheck.test(companyName)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#companyName").focus();return;}
-	if(characterCheck.test(representative)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#representative").focus();return;}
-	if(characterCheck.test(phoneNumber)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#phoneNumber").focus();return;}
-	if(characterCheck.test(address)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#address").focus();return;}
-	if(characterCheck.test(post)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#post").focus();return;}
-	if(characterCheck.test(bankName)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#bankName").focus();return;}
-	if(characterCheck.test(depositeClassification)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#depositeClassification").focus();return;}
-	if(characterCheck.test(accountNumber)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#accountNumber").focus();return;}
-	if(characterCheck.test(accountOwner)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#accountOwner").focus();return;}
-	if(characterCheck.test(hurigana)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#hurigana").focus();return;}
+	if(!pwCheck.test(password)){alert("PASSWORDは3~20字の英数字です。");$("#login_pw").focus();return false;}
+	if(password != password2){alert("パスワードを確認してください");return false;}
+	if(characterCheck.test(companyName)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#companyName").focus();return false;}
+	if(characterCheck.test(representative)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#representative").focus();return false;}
+	if(!phoneCheck.test(phoneNumber)){alert("電話番号の形式:000-0000-0000");$("#phoneNumber").focus();return false;}
+	if(characterCheck.test(address)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#address").focus();return false;}
+	if(!postCheck.test(post)){alert("POSTの形式:000-0000");$("#post").focus();return false;}
+	if(characterCheck.test(bankName)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#bankName").focus();return false;}
+	if(characterCheck.test(depositeClassification)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#depositeClassification").focus();return false;}
+	if(characterCheck.test(accountNumber)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#accountNumber").focus();return false;}
+	if(characterCheck.test(accountOwner)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#accountOwner").focus();return false;}
+	if(characterCheck.test(hurigana)){alert("特殊文字は＠,＃,＆,(,)だけ使えます。");$("#hurigana").focus();return false;}
 
 	//if(companyName.length >=21){"会社名は20文字以内にお願いします。";$("#companyName").focus();return;}
 	//if(representative.length >=14){"代表者名は20文字以内にお願いします。";$("#representative").focus();return;}
 	//if(address.length >=51){"住所は50文字以内にお願いします。";$("#address").focus();return;}
-	if(bankName.length >=31){alert("銀行名は30文字以内にお願いします。");$("#bankName").focus();return;}
-	if(depositeClassification.length >=11){alert("代表者名は10文字以内にお願いします。");$("#depositeClassification").focus();return;}
-	if(accountNumber.length >0 && !accountcheck.test(accountNumber)){alert("口座番号は123-1234567形式でお願いします。");$("#accountNumber").focus();return;}
-	if(accountOwner.length >=31){alert("代表者名は30文字以内にお願いします。");$("#accountOwner").focus();return;}
-	if(hurigana.length >=61){alert("口座名義人名は60文字以内にお願いします。");$("#hurigana").focus();return;}
-	if(!phoneCheck.test(phoneNumber)){alert("123-1234-1234形式でお願いします。");$("#phoneNumber").focus();return;}
-	if(!postCheck.test(post)){alert("123-1234形式でお願いします。");$("#post").focus();return;}
+	if(bankName.length >=31){alert("銀行名は30文字以内にお願いします。");$("#bankName").focus();return false;}
+	if(depositeClassification.length >=11){alert("代表者名は10文字以内にお願いします。");$("#depositeClassification").focus();return false;}
+	if(accountNumber.length >0 && !accountcheck.test(accountNumber)){alert("口座番号は123-1234567形式でお願いします。");$("#accountNumber").focus();return false;}
+	if(accountOwner.length >=31){alert("代表者名は30文字以内にお願いします。");$("#accountOwner").focus();return false;}
+	if(hurigana.length >=61){alert("口座名義人名は60文字以内にお願いします。");$("#hurigana").focus();return false;}
+	if(!phoneCheck.test(phoneNumber)){alert("123-1234-1234形式でお願いします。");$("#phoneNumber").focus();return false;}
+	if(!postCheck.test(post)){alert("123-1234形式でお願いします。");$("#post").focus();return false;}
 
 	var form = document.getElementById("updateMyProfile");
 	var form = $("#updateMyProfile").serialize() ;
@@ -167,7 +167,7 @@ function submitMyProfile(){
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" title="形式:000-0000" maxlength="8" value="${userInform.post}"></td>
+		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" maxlength="8" title="形式:000-0000" value="${userInform.post}"></td>
 	</tr>
 	
 	
