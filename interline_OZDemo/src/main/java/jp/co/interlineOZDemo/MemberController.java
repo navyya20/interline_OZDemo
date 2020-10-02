@@ -1,13 +1,18 @@
 package jp.co.interlineOZDemo;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -17,23 +22,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
 import jp.co.interlineOZDemo.dao.MemberDAO;
-import jp.co.interlineOZDemo.util.ExportReport;
-import jp.co.interlineOZDemo.util.GetProperties;
+import jp.co.interlineOZDemo.util.FileService;
 import jp.co.interlineOZDemo.util.PageNavigator;
-import jp.co.interlineOZDemo.util.SendMail;
 import jp.co.interlineOZDemo.vo.BillInformVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
-import oz.scheduler.SchedulerException;
 
 
 
@@ -291,22 +295,72 @@ public class MemberController {
 		UserInformVO member = dao.getMember(userIdPassword);
 		session.setAttribute("userInform", member);
 		
-		
-		// 파일경로 가져오기 테스트
-        model.addAttribute("path", session.getServletContext().getRealPath("/resources"));
-        
-        
 		return "Member/updateMyProfile";
 	}
 	
 	//(회원용)회원정보 수정정보 저장
 	@ResponseBody
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.POST)
-	public String updateMyProfileForm2(UserInformVO userInform ) {
-		System.out.println("회원정보 업데이트 실행");
-		System.out.println("받아온 회원수정정보:" + userInform);
-		dao.updateMyProfile(userInform);
+	public String updateMyProfileForm2( UserInformVO userInform , MultipartFile file, HttpSession session) {
+		System.out.println(file.getContentType());
+		String path =  session.getServletContext().getRealPath("/resources/stamp");
+		System.out.println(path);
+		path.replace('/', File.separatorChar);
+		
+		System.out.println("회원정보 업데이트 실행"); 
+		System.out.println("받아온 회원수정정보:" +userInform); 
+		if (!file.isEmpty()) {		//파일 관련 일들  이름을 다시지어준다던가 결로를 정해준다던가 복사해서 저장한다던가 자부자리한것들이많아 하나의 객체로 조종하는게 편하다.
+			String savedfile = FileService.saveFile(file, path, userInform.getUserId());
+			System.out.println(savedfile+"가 저장되었습니다.");
+			userInform.setStampFileName(savedfile);
+		}
+		
+		try {
+			dao.updateMyProfile(userInform);
+			UserInformVO newInform = dao.getMember(userInform);
+			session.setAttribute("userInform", newInform);
+		} catch (Exception e) {
+			
+		}
 		
 		return "自社情報を修正しました。";
+	}
+	
+	//다운로드
+	@RequestMapping(value = "/updateMyProfile/download", method = RequestMethod.GET)
+	public String fileDownload(HttpSession session, String fileName, Model model, HttpServletResponse response) {	//response쓰임을 잘보자. 요청과 응답에 관련된 클레스
+		String path = session.getServletContext().getRealPath("/resources/stamp/sample");
+		if(fileName.contains("/")) {return null;}
+		try {
+			response.setHeader("Content-Disposition", " attachment;filename="+ URLEncoder.encode(fileName, "UTF-8"));	
+			//항상 전송되는데이터에는 헤더가있음 "Content-Disposition"종류의 파일이고 
+			//" attachment;filename="+ URLEncoder.encode(originalfile, "UTF-8") 이라는 파일 name을 갖고 있다 는뜻.
+			//생각해보면 받을때는 MultipartFile객체로 받으니 파일에 대한 정보를 다 받지만 
+			//아웃 스트림 으로 줄때는 정보가 없다. 브라우져가 유일하게 알아 먹을 방법이 헤더에 명시해주는것. 
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		//저장된 파일 경로
+		String fullPath = path + "/" + fileName;
+		
+		//서버의 파일을 읽을 입력 스트림과 클라이언트에게 전달할 출력스트림
+		FileInputStream filein = null;
+		ServletOutputStream fileout = null;
+		
+		try {
+			filein = new FileInputStream(fullPath);
+			fileout = response.getOutputStream();	//response가 outputstream을 만들면 스트림을 유져-서버 관계를 만든다.  예전에 만들던 outputstream은 내컴퓨터-내컴퓨터
+			
+			//Spring의 파일 관련 유틸. filein을 fileout으로 복사한다.
+			FileCopyUtils.copy(filein, fileout);
+			
+			filein.close();
+			fileout.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }

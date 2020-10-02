@@ -86,7 +86,7 @@
 		phoneNumber=#{phoneNumber},
 		address=#{address},
 		post=#{post},
-		
+		stampFileName=#{stampFileName},
 		bankName=#{bankName},
 		depositeClassification=#{depositeClassification},
 		accountNumber=#{accountNumber},

@@ -1,15 +1,17 @@
+<%@ page import="jp.co.interlineOZDemo.util.GetProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>updateMyProfile</title>
 </head>
-<script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
+<script src="<c:url value = '../resources/js/jquery-3.4.1.min.js'/>"></script>
 <script src="<c:url value = '../resources/js/inputController.js'/>"></script>
-<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<link href="../resources/css/Font-Style.css?ver=1" rel="stylesheet">
 
 <style>
 	body{
@@ -109,13 +111,25 @@ function submitMyProfile(){
 	if(!phoneCheck.test(phoneNumber)){alert("123-1234-1234形式でお願いします。");$("#phoneNumber").focus();return false;}
 	if(!postCheck.test(post)){alert("123-1234形式でお願いします。");$("#post").focus();return false;}
 
-	var form = document.getElementById("updateMyProfile");
-	var form = $("#updateMyProfile").serialize() ;
-	
+	//var form = document.getElementById("updateMyProfile");
+	//var form = $("#updateMyProfile").serialize() ;
+	var formData= new FormData(document.getElementById('updateMyProfile'));
+	for (var key of formData.keys()) {
+	  console.log(key);
+	}
+	for (var value of formData.values()) {
+	  console.log(value);
+	}
+	//이 formData(); 형식을 받으려면 반드시   contentType: false(해더중복 방지?), processData: false(데이터를 문자화시키려는것 방지)필요.
+	//그리고 가장 중요한건 웹어플리케이션이 multifile을 받을 준비가 되어있어야함. (pom과 root-context.xml에 설정이 되어있어야함!!!!)
+	//이게 없으면 'multipart/form-data' 형식을 읽지못해  VO에 맵핑이 안됨.
     $.ajax({
         type : "post",
         url : "updateMyProfile",
-        data : form,
+        enctype: 'multipart/form-data',
+        data : formData,
+        contentType: false,
+        processData: false,
         dataType : "text",
         error: function(xhr, status, error){
             console.log(error);
@@ -131,7 +145,7 @@ function submitMyProfile(){
 <body class="pc_body">
 <div id="title">自社情報修正</div>
 
-<form id="updateMyProfile" action="updateMyProfile" method="post">
+<form id="updateMyProfile" action="updateMyProfile" method="post" enctype="multipart/form-data">
 <table class="informTable">
 	<tr>
 		<td class="categoryTd"></td>
@@ -168,7 +182,16 @@ function submitMyProfile(){
 	<tr>
 		<td>POST</td>
 		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" maxlength="8" title="形式:000-0000" value="${userInform.post}"></td>
-	</tr>	
+	</tr>
+	<tr>
+		<td>判子</td>
+		<td class="inputTd"><img src="../resources/stamp/${userInform.stampFileName}"><input type="file" name="file"><input type="hidden" id="stampFileName" name="stampFileName" value="${userInform.stampFileName}"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td class="inputTd">判子は? 透明な背景の判子イメージです。例）<a href="updateMyProfile/download?fileName=sample1.png">download1</a> <a href="updateMyProfile/download?fileName=sample2.png">download2</a></td>
+	</tr>
+		
 	
 	<!-- 여기까지 개인정보      여기서부터 구좌정보 -->
 	
