@@ -82,6 +82,7 @@ if ( self !== top ) {
 	version1.9 2020 09 25 14:27<br>
 	version1.9 2020 09 26 09:37<br>
 	version1.9 2020 09 28 13:33<br>
+	version2.0 2020 10 05 19:08<br>
 </div>
 <div id="login_div">
 	<table id="login_table">
