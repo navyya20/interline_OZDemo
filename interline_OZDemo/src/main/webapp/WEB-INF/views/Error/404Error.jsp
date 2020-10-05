@@ -11,6 +11,7 @@
 <link href="<c:url value = '/resources/css/Font-Style.css'/>" rel="stylesheet">
 <script>
 $(document).ready(function(){
+	Error_Page();
 	 isMobile(); 
 	function isMobile() {
 	    var filter = "win16|win32|win64|mac|macintel";
@@ -23,7 +24,14 @@ $(document).ready(function(){
 		      $(".btn").addClass("pc_font_button2");
 	      }
 	    }
-	  }	
+	  }
+	  
+	function Error_Page(){
+		//페이지호출이 iframe일 경우 부모페이지를 에러페이지로
+		if(self!=top){
+			window.parent.location.href="/OZDemo/400Error";
+		}
+	}
 });
 
 function main_Menu(){

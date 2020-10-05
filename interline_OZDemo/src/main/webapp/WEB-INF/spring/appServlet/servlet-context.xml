@@ -16,6 +16,10 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!-- 에러페이지를 컨트롤러 없이 호출-->
+	<mvc:view-controller path="/400Error" view-name="Error/400Error" />
+	<mvc:view-controller path="/500Error" view-name="Error/500Error" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />

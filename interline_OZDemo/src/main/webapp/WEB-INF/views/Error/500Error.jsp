@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>404Error</title>
+<title>500Error</title>
 <script src="<c:url value = '/resources/js/jquery-2.0.3.min.js'/>"></script>
 <link href="<c:url value = '/resources/css/Font-Style.css'/>" rel="stylesheet">
 <script>
 $(document).ready(function(){
-	 isMobile(); 
+	Error_Page();
+	isMobile();
 	function isMobile() {
 	    var filter = "win16|win32|win64|mac|macintel";
 	    if( navigator.platform  ){
@@ -23,7 +24,14 @@ $(document).ready(function(){
 		      $(".btn").addClass("pc_font_button2");
 	      }
 	    }
-	  }	
+	  }
+
+	function Error_Page(){
+		//페이지호출이 iframe일 경우 부모페이지를 에러페이지로
+		if(self!=top){
+			window.parent.location.href="/OZDemo/500Error";
+		}
+	}
 });
 
 function main_Menu(){

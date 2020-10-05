@@ -1,4 +1,3 @@
-//입력한 청구서 정보를 데이터베이스에 저장
 function save(reportNum){
 	var billData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
 	var bankName_Len = billData.bankName.length;
@@ -24,11 +23,10 @@ function save(reportNum){
 				data: {jsonStr:JSON.stringify(billData)},
 				dataType:'text',
 				success: function(data){
-					alert("保存成功");
+					alert("請求書を作成しました。");
 					location.href="memberMain";
 				},
 				error: function(e){
-					console.log(JSON.stringify(e));
 					alert('エラー！');
 				}
 			});

@@ -32,7 +32,6 @@ $(function(){
 		}
 
  		if(user_num.length > 0 && user_num.length <= 9 && check.test(user_id) && check.test(user_pw)){
-
  			$.ajax({
 				type:"post",
 				url:"check_multiple",
@@ -53,7 +52,6 @@ $(function(){
 					} 
 				},
 				error: function(e){
-					console.log(JSON.stringify(e));
 					alert('エラー！'); 
 				}
 			}); 
