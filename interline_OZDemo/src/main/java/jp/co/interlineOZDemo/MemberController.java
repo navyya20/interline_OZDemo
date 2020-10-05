@@ -110,7 +110,7 @@ public class MemberController {
 				System.out.println(estimateItemsJsonString);
 				model.addAttribute("estimateItemsJsonString", estimateItemsJsonString);
 			}
-			
+			model.addAttribute("stampFileName", userInform.getStampFileName());
 			return "Document/modEstimateSheet";
 		}
 	
@@ -235,6 +235,7 @@ public class MemberController {
 		}
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
+		model.addAttribute("stamp", estimateSheet.getStamp());
 		return "Document/readEstimateSheet";
 	}
 	

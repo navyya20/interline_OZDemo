@@ -47,7 +47,7 @@
 		$("#companyName").on("propertychange input", function() { limitString("companyName",40); });
 		$("#representative").on("propertychange input", function() { limitString("representative",26); });
 		$("#address").on("propertychange input", function() { limitString("address",120); });
-		 isMobile(); 
+		isMobile(); 
 		function isMobile() {
 		    var filter = "win16|win32|win64|mac|macintel";
 		    if( navigator.platform  ){
@@ -60,6 +60,7 @@
 		
 	});
 
+	
  
 	//정규식 확인작업 필요함. [一-龥] [가-힇]   [ぁ-ゔ]+|[ァ-ヴー]+[々〆〤]+/u 
 function submitMyProfile(){
@@ -140,6 +141,23 @@ function submitMyProfile(){
         }
     });
 }
+
+function getFile(e){
+	var file = e.files[0];
+	if(file.size>10*1024){
+		alert("最大10kbです。");
+		e.value = null;
+		return;
+	}
+	var imgTag = document.getElementById("stampImg");
+	console.log(file);
+	var reader = new FileReader();
+	reader.onload = function(e) {
+		imgTag.src = e.target.result;
+	};
+
+	reader.readAsDataURL(file);
+}
 </script>
 
 <body class="pc_body">
@@ -184,8 +202,8 @@ function submitMyProfile(){
 		<td class="inputTd"><input type="text" id="post" name="post" class="inputBox" maxlength="8" title="形式:000-0000" value="${userInform.post}"></td>
 	</tr>
 	<tr>
-		<td>判子</td>
-		<td class="inputTd"><img src="../resources/stamp/${userInform.stampFileName}"><input type="file" name="file"><input type="hidden" id="stampFileName" name="stampFileName" value="${userInform.stampFileName}"></td>
+		<td>判子<br>(10kb以下)</td>
+		<td class="inputTd"><img id="stampImg" src="../resources/stamp/${userInform.stampFileName}"> <input id="upload" type="file" name="file" onchange="getFile(this)" accept=".jpg,.gif,.png"><input type="hidden" id="stampFileName" name="stampFileName" value="${userInform.stampFileName}"></td>
 	</tr>
 	<tr>
 		<td></td>

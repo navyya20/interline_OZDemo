@@ -49,13 +49,14 @@ public class FileService {
 		//저장할 전체 경로를 포함한 File 객체
 		File serverFile = null;
 		
+		int index = 0;
 		//같은 이름의 파일이 있는 경우의 처리
 		while (true) {
-			serverFile = new File(uploadPath + "/" + savedFilename + ext);
+			serverFile = new File(uploadPath + "/" + savedFilename + index + ext);
 			//같은 이름의 파일이 없으면 나감.
 			if ( !serverFile.isFile()) break;	
-			//같은 이름의 파일이 있으면 삭제
-			serverFile.delete();
+			//같은 이름의 파일이 있으면 인덱스 증가
+			index++;
 		}		
 		
 		//파일 저장 (스프링이 제공해주는 기능. 원래는 스트림으로 입출력했어야하는데.)
@@ -66,7 +67,7 @@ public class FileService {
 			e.printStackTrace();
 		}
 		
-		return savedFilename + ext;
+		return savedFilename + index + ext;
 	}
 	
 	/**

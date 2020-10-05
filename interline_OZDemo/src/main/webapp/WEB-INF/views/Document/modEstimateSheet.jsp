@@ -57,6 +57,8 @@
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
+	var stamp = "http://<%out.print(properties.getWebIP());%>/OZDemo/resources/stamp/"+'${stampFileName}';
+	console.log("stamp:"+stamp)
 	function getEstimateSheetInform(){
 		var estimateSheetJsonString = '${estimateSheetJsonString}';		
 		var estimateItemsJsonString = '${estimateItemsJsonString}';
@@ -84,9 +86,10 @@
 		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname","OZDemo/writeEstimateSheet.ozr");
 		oz.sendToActionScript("connection.inputjson", JSON.stringify(getEstimateSheetInform()));
-		oz.sendToActionScript("connection.pcount","2");
+		oz.sendToActionScript("connection.pcount","3");
 		oz.sendToActionScript("connection.args1","repeat=10");
 		oz.sendToActionScript("connection.args2","itemJson="+itemJsonString);
+		oz.sendToActionScript("connection.args3","stampFileName="+stamp);
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}

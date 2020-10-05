@@ -37,7 +37,8 @@
 			sumWithTax2,
 			state,
 			dateForDisplaying,
-			expirationDate
+			expirationDate,
+			stamp
 		) VALUES (			
 			#{userNum},
 			
@@ -60,7 +61,8 @@
 			#{sumWithTax2},
 			'e',
 			#{dateForDisplaying},
-			#{expirationDate}
+			#{expirationDate},
+			#{stamp}
 		)
 		
 		<selectKey keyProperty="reportNum" resultType="int" order="AFTER">
@@ -101,7 +103,7 @@
 			reportNum,reportDate,dateForDisplaying,userNum,supplier,address,post,phoneNumber
 			,representative,receiver,reportName,deadline,supplyPoint,payCondition,cautions
 			,sum,sumWithTax,sumWithTax2,state,dateForDisplaying,
-			expirationDate
+			expirationDate,stamp
 		 from 
 		 	estimateSheet 
 		 where 
