@@ -160,7 +160,8 @@
    			depositeClassification,
    			accountNumber,
    			accountOwner,
-  		 	hurigana
+  		 	hurigana,
+  		 	stamp
 		)values(
 			#{billNum},
   			#{reportNum},
@@ -182,7 +183,8 @@
    			#{depositeClassification},
    			#{accountNumber},
    			#{accountOwner},
-  		 	#{hurigana}
+  		 	#{hurigana},
+  		 	#{stamp}
 		)
 	</insert>
 	
