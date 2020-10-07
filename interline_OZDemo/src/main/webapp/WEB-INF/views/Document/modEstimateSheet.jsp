@@ -67,6 +67,7 @@
 		console.log("estimateSheetJsonString:"+estimateSheetJsonString);
 		console.log("estimateItemsJsonString:"+estimateItemsJsonString);
 		var estimateSheetJsonObject = JSON.parse(estimateSheetJsonString);
+		estimateSheetJsonObject.stamp = stamp;
 		//아이템들이 존재하면 인덱스 붙여 1차원 배열로 만든다.
 		if (estimateItemsJsonString != ""){
 			var estimateItemsJsonObject = JSON.parse(estimateItemsJsonString);
