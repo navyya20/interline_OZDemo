@@ -325,11 +325,13 @@ public class MemberController {
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.POST)
 	public String updateMyProfileForm2( UserInformVO userInform , MultipartFile file, HttpSession session) {
 		System.out.println(file.getContentType());
-		//String path =  session.getServletContext().getRealPath("/resources/stamp");
-		String path =  rootPath+"/webapps/files/OZDemoEstimateSheet/stamp";
-		System.out.println(path);
-		path.replace('/', File.separatorChar);
-		
+		String path =  session.getServletContext().getRealPath("/resources/stamp");
+		String RootName="OZDemo";
+		if(path.contains("interline_OZDemo")) {RootName="interline_OZDemo";}
+		path = path.replace(File.separatorChar+RootName+File.separatorChar+"resources"+File.separatorChar+"stamp", "");
+		path = path + "/files/OZDemoEstimateSheet/stamp";
+		path = path.replace('/', File.separatorChar);
+		System.out.println("저장경로:"+path);
 		System.out.println("회원정보 업데이트 실행"); 
 		System.out.println("받아온 회원수정정보:" +userInform); 
 		if (!file.isEmpty()) {		//파일 관련 일들  이름을 다시지어준다던가 결로를 정해준다던가 복사해서 저장한다던가 자부자리한것들이많아 하나의 객체로 조종하는게 편하다.
