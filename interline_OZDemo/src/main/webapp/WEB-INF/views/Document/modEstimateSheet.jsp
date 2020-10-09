@@ -57,7 +57,7 @@
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
 	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
-	var stamp = "http://<%out.print(properties.getWebIP());%>/OZDemo/resources/stamp/"+'${stampFileName}';
+	var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/"+'${stampFileName}';
 	console.log("stamp:"+stamp)
 	function getEstimateSheetInform(){
 		var estimateSheetJsonString = '${estimateSheetJsonString}';		

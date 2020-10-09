@@ -50,7 +50,7 @@
 	<div id="OZViewer" style="width:98%;height:98%"></div>
 	<script type="text/javascript" >
 		//세션으로부터 유저인폼 jsonString을 받는다.
-		var stamp = "http://<%out.print(properties.getWebIP());%>/OZDemo/resources/stamp/";
+		var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/";
 		function getUserInform(){
 			//var userInformJsonString = $('#userInformJsonString').html();
 			var userInformJsonString = '${userInformJsonString}';

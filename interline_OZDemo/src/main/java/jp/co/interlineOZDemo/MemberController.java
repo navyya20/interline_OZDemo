@@ -33,6 +33,7 @@ import com.google.gson.Gson;
 
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.util.FileService;
+import jp.co.interlineOZDemo.util.GetProperties;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.BillInformVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
@@ -50,11 +51,31 @@ public class MemberController {
 	
 	private static final int countPerPage=20;	
 	private static final int pagePerGroup=10;
+	String rootPath="aaa";
 	
 	@Autowired
 	MemberDAO dao;
 	
 	//private final String resourcesDir=c.getContextPath();
+	public MemberController() {
+		GetProperties properties= new GetProperties();
+		String os = System.getProperty("os.name").toLowerCase();
+		if (os.contains("win")) { 
+			System.out.println("Window");
+			rootPath = properties.getServerPath2(); 
+		} else if (os.contains("mac")) { 
+			System.out.println("Mac"); 
+		} else if (os.contains("nix") || os.contains("nux") || os.contains("aix")) { 
+			System.out.println("Unix"); 
+			rootPath = properties.getServerPath();
+		} else if (os.contains("linux")) { 
+			System.out.println("Linux"); 
+			rootPath = properties.getServerPath(); 
+		} else if (os.contains("sunos")) { 
+			System.out.println("Solaris"); 
+		}
+		System.out.println("설정된 루트경로:"+rootPath);
+	}
 	
 	//memberMain
 	@RequestMapping(value = "/memberMain", method=RequestMethod.GET)
@@ -304,7 +325,8 @@ public class MemberController {
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.POST)
 	public String updateMyProfileForm2( UserInformVO userInform , MultipartFile file, HttpSession session) {
 		System.out.println(file.getContentType());
-		String path =  session.getServletContext().getRealPath("/resources/stamp");
+		//String path =  session.getServletContext().getRealPath("/resources/stamp");
+		String path =  rootPath+"/webapps/files/OZDemoEstimateSheet/stamp";
 		System.out.println(path);
 		path.replace('/', File.separatorChar);
 		

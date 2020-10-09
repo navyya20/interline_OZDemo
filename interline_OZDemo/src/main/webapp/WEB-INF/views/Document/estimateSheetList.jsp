@@ -162,7 +162,7 @@ function selectAll(){
 		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.reportName}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyy.MM.dd HH:mm"/></td>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd HH:mm"/></td>
 		<td class="lastColum">
 			<c:choose>
 				<c:when test="${sheet.state eq 'e'}">

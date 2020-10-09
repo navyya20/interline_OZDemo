@@ -69,7 +69,7 @@ if ( self !== top ) {
 </head>
 
 <body class="body">
-<div style="position: absolute; top: 0; left: 0">
+<div style="position: absolute; top: 0; left: 0; display: none;">
 	version1 2020 08 27 18:12<br>
 	version1.1 2020 08 27 20:53<br>
 	version1.2 2020 08 28 16:26<br>
@@ -83,6 +83,7 @@ if ( self !== top ) {
 	version1.9 2020 09 26 09:37<br>
 	version1.9 2020 09 28 13:33<br>
 	version2.0 2020 10 05 19:08<br>
+	version2.1 2020 10 09 13:08<br>
 </div>
 <div id="login_div">
 	<table id="login_table">

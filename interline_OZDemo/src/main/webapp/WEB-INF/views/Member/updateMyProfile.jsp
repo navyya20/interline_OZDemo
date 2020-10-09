@@ -203,7 +203,7 @@ function getFile(e){
 	</tr>
 	<tr>
 		<td>判子<br>(10kb以下)</td>
-		<td class="inputTd"><img id="stampImg" src="../resources/stamp/${userInform.stampFileName}"> <input id="upload" type="file" name="file" onchange="getFile(this)" accept=".jpg,.gif,.png"><input type="hidden" id="stampFileName" name="stampFileName" value="${userInform.stampFileName}"></td>
+		<td class="inputTd"><img id="stampImg" src="http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/${userInform.stampFileName}"> <input id="upload" type="file" name="file" onchange="getFile(this)" accept=".jpg,.gif,.png"><input type="hidden" id="stampFileName" name="stampFileName" value="${userInform.stampFileName}"></td>
 	</tr>
 	<tr>
 		<td></td>
