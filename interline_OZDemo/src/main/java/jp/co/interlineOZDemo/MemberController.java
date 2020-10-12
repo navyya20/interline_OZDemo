@@ -147,12 +147,17 @@ public class MemberController {
 		System.out.println("견적아이템들:"+estimateItemsString);
 		SimpleDateFormat estimateDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
 		SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
-		try {
-			Date estimate_Date = estimateDate_pattern.parse(estimateSheetVO.getReportDate());
-			estimateSheetVO.setReportDate(newDate_pattern.format(estimate_Date)); //청구서에 입력된 날짜 데이터 포멧
-		} catch (ParseException e) {
-			e.printStackTrace();
+		
+		try {		
+			Date estimate_Date = oldDate_pattern.parse(estimateSheetVO.getDateForDisplaying());
+			estimateSheetVO.setDateForDisplaying(newDate_pattern.format(estimate_Date));
+			Date deadline_Date = oldDate_pattern.parse(estimateSheetVO.getDeadline());
+			estimateSheetVO.setDeadline(newDate_pattern.format(deadline_Date)); //청구서에 입력된 날짜 데이터 포멧
+		} catch (ParseException e) {			
+			logger.error(""+e);
+			return "error";
 		}
+		
 		
 		//견적내용 insert후 reportNum받아옴.
 		int reportNum = dao.insertEstimateSheet(estimateSheetVO);
