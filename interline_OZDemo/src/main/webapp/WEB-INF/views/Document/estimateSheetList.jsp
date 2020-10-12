@@ -40,6 +40,9 @@
 		text-decoration: none;
 		color: black;
 	}
+	.titleRow{
+		background-color: rgb(150, 200, 255);
+	} 
 </style>
 
 <script>
@@ -146,13 +149,13 @@ function selectAll(){
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
-		<td style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
-		<td style="width: 5%;">文書番号</td>
-		<td style="width: 9%;">顧客</td>
-		<td style="width: 9%;">件名</td>
-		<td style="width: 9%;">保存日時</td>
-		<td style="width: 5%;">請求書</td>
-		<td style="width: 5%;">COPYして作成</td>
+		<td class="titleRow" style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
+		<td class="titleRow" style="width: 5%;">文書番号</td>
+		<td class="titleRow" style="width: 9%;">顧客</td>
+		<td class="titleRow" style="width: 9%;">件名</td>
+		<td class="titleRow" style="width: 9%;">保存日時</td>
+		<td class="titleRow" style="width: 5%;">請求書</td>
+		<td class="titleRow" style="width: 5%;">COPYして作成</td>
 	</tr>
 	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
 	<tr>
