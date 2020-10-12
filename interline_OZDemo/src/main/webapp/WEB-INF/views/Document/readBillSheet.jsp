@@ -63,6 +63,7 @@ function back(){
 	function SetOZParamters_OZViewer(){
 		var now = new Date();
 		var reportNum = "${reportNum}";
+		var userNum = "${userNum}";
 		
 		var oz;
 		oz = document.getElementById("OZViewer");
@@ -72,7 +73,8 @@ function back(){
 		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "readBill");
  		oz.sendToActionScript("odi.readBill.pcount", "2");
-		oz.sendToActionScript("odi.readBill.args1", "reportnum="+reportNum);
+		oz.sendToActionScript("odi.readBill.args1", "reportNum="+reportNum);
+		oz.sendToActionScript("odi.readBill.args2", "userNum="+userNum);
 
 		oz.sendToActionScript("export.format","pdf");
 		oz.sendToActionScript("export.filename",reportNum+"_BillSheet_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
