@@ -3,6 +3,7 @@ package jp.co.interlineOZDemo.vo;
 public class BillInformVO {
 	private int billNum;
 	private int reportNum;
+	private int userNum;
 	private	String billDate;
 	private	String supplier;
 	private	String address;
@@ -25,13 +26,14 @@ public class BillInformVO {
 		super();
 	}
 
-	public BillInformVO(int billNum, int reportNum, String billDate, String supplier, String address, String post,
-			String phoneNumber, String representative, String receiver, String supplyPoint, String stamp, long sum,
-			long sumWithTax, long sumWithTax2, String bankName, String depositeClassification, String accountNumber,
-			String accountOwner, String hurigana) {
+	public BillInformVO(int billNum, int reportNum, int userNum, String billDate, String supplier, String address,
+			String post, String phoneNumber, String representative, String receiver, String supplyPoint, String stamp,
+			long sum, long sumWithTax, long sumWithTax2, String bankName, String depositeClassification,
+			String accountNumber, String accountOwner, String hurigana) {
 		super();
 		this.billNum = billNum;
 		this.reportNum = reportNum;
+		this.userNum = userNum;
 		this.billDate = billDate;
 		this.supplier = supplier;
 		this.address = address;
@@ -65,6 +67,14 @@ public class BillInformVO {
 
 	public void setReportNum(int reportNum) {
 		this.reportNum = reportNum;
+	}
+
+	public int getUserNum() {
+		return userNum;
+	}
+
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
 	}
 
 	public String getBillDate() {
@@ -205,12 +215,21 @@ public class BillInformVO {
 
 	@Override
 	public String toString() {
-		return "BillInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", billDate=" + billDate
-				+ ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber=" + phoneNumber
-				+ ", representative=" + representative + ", receiver=" + receiver + ", supplyPoint=" + supplyPoint
-				+ ", stamp=" + stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2=" + sumWithTax2
-				+ ", bankName=" + bankName + ", depositeClassification=" + depositeClassification + ", accountNumber="
-				+ accountNumber + ", accountOwner=" + accountOwner + ", hurigana=" + hurigana + "]";
+		return "BillInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", userNum=" + userNum + ", billDate="
+				+ billDate + ", supplier=" + supplier + ", address=" + address + ", post=" + post + ", phoneNumber="
+				+ phoneNumber + ", representative=" + representative + ", receiver=" + receiver + ", supplyPoint="
+				+ supplyPoint + ", stamp=" + stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2="
+				+ sumWithTax2 + ", bankName=" + bankName + ", depositeClassification=" + depositeClassification
+				+ ", accountNumber=" + accountNumber + ", accountOwner=" + accountOwner + ", hurigana=" + hurigana
+				+ ", getBillNum()=" + getBillNum() + ", getReportNum()=" + getReportNum() + ", getBillDate()="
+				+ getBillDate() + ", getSupplier()=" + getSupplier() + ", getAddress()=" + getAddress() + ", getPost()="
+				+ getPost() + ", getPhoneNumber()=" + getPhoneNumber() + ", getRepresentative()=" + getRepresentative()
+				+ ", getReceiver()=" + getReceiver() + ", getSupplyPoint()=" + getSupplyPoint() + ", getStamp()="
+				+ getStamp() + ", getSum()=" + getSum() + ", getSumWithTax()=" + getSumWithTax() + ", getSumWithTax2()="
+				+ getSumWithTax2() + ", getBankName()=" + getBankName() + ", getDepositeClassification()="
+				+ getDepositeClassification() + ", getAccountNumber()=" + getAccountNumber() + ", getAccountOwner()="
+				+ getAccountOwner() + ", getHurigana()=" + getHurigana() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 }

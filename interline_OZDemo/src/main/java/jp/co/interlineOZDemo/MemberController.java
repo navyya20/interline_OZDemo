@@ -51,6 +51,8 @@ public class MemberController {
 	
 	private static final int countPerPage=20;	
 	private static final int pagePerGroup=10;
+	private static final SimpleDateFormat billDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
+	private static final SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
 	String rootPath="aaa";
 	
 	@Autowired
@@ -263,10 +265,20 @@ public class MemberController {
 	//청구서 작성
 	@RequestMapping(value="/writeBill", method=RequestMethod.GET)
 	public String writeBillSheet(Model model,int reportNum, HttpSession session){
-		String id = (String) session.getAttribute("loginId");
+		
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		EstimateSheetVO userNumReportNum = new EstimateSheetVO();
+		userNumReportNum.setUserNum(userInform.getUserNum());
+		userNumReportNum.setReportNum(reportNum);
+		EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
+		
+		if(estimateSheet==null || estimateSheet.getState().equals("b")) {
+			return "redirect:/member/memberMain";
+		}
 		
 		model.addAttribute("reportNum", reportNum);
-		model.addAttribute("id", id);
+		model.addAttribute("userNum", userInform.getUserNum());
+		model.addAttribute("stamp", estimateSheet.getStamp());
 		 
 		return "Document/writeBillSheet";
 	}
@@ -274,24 +286,16 @@ public class MemberController {
 	//청구서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveBill", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public String saveEstimateSheet(String jsonStr, HttpSession session) {
+	public String saveEstimateSheet(String jsonStr, HttpSession session) throws ParseException {
 		System.out.println("견적서내용:"+jsonStr);
-		
 		Gson gson = new Gson();
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화
 		
-		SimpleDateFormat billDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
-		SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
+		Date bill_Date = billDate_pattern.parse(BillInform.getBillDate());
+		BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧nform.setUserNum(userInform.getUserNum());
 		
-		
-		try {
-			Date bill_Date = billDate_pattern.parse(BillInform.getBillDate());
-			BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		
+		BillInform.setUserNum(userInform.getUserNum());
 		int result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
 		
 		if(result == 1) {
@@ -303,9 +307,21 @@ public class MemberController {
 	
 	//청구서 열람
 	@RequestMapping(value="/readBill", method=RequestMethod.GET)
-	public String readBillSheet(Model model,int reportNum){
+	public String readBillSheet(Model model,int reportNum,HttpSession session){
 		
-		model.addAttribute("reportNum", reportNum); //청구서와 연결된 견적서 번호
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		BillInformVO userNumReportNum = new BillInformVO();
+		userNumReportNum.setUserNum(userInform.getUserNum());
+		userNumReportNum.setReportNum(reportNum);
+		BillInformVO BillInform = dao.getBillInform(userNumReportNum);
+
+		if(BillInform==null) {
+			return "redirect:/member/memberMain";
+		}
+		model.addAttribute("userNum", userInform.getUserNum());
+		model.addAttribute("reportNum", reportNum);
+		model.addAttribute("stamp", BillInform.getStamp());
+		
 		return "Document/readBillSheet";
 	}
 	
@@ -325,10 +341,10 @@ public class MemberController {
 	@RequestMapping(value="/updateMyProfile",method=RequestMethod.POST)
 	public String updateMyProfileForm2( UserInformVO userInform , MultipartFile file, HttpSession session) {
 		System.out.println(file.getContentType());
-		String path =  session.getServletContext().getRealPath("/resources/stamp");
+		String path =  session.getServletContext().getRealPath("");
 		String RootName="OZDemo";
 		if(path.contains("interline_OZDemo")) {RootName="interline_OZDemo";}
-		path = path.replace(File.separatorChar+RootName+File.separatorChar+"resources"+File.separatorChar+"stamp", "");
+		path = path.replace(File.separatorChar+RootName+File.separatorChar, "");
 		path = path + "/files/OZDemoEstimateSheet/stamp";
 		path = path.replace('/', File.separatorChar);
 		System.out.println("저장경로:"+path);

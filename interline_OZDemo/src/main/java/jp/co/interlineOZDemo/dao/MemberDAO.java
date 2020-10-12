@@ -89,4 +89,10 @@ public class MemberDAO {
 		mapper.setState(reportNum);
 	}
 
+	public BillInformVO getBillInform(BillInformVO userNumReportNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		BillInformVO BillInform = mapper.getBillInform(userNumReportNum);
+		return BillInform;
+	}
+
 }

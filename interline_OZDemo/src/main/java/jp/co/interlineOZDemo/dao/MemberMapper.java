@@ -34,4 +34,6 @@ public interface MemberMapper {
 
 	public void setState(int reportNum);
 
+	public BillInformVO getBillInform(BillInformVO userNumReportNum);
+
 }
