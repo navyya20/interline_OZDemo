@@ -145,8 +145,6 @@ public class MemberController {
 		System.out.println("saveEstimateSheet실행");
 		System.out.println("견적서내용:"+estimateSheetVO);
 		System.out.println("견적아이템들:"+estimateItemsString);
-		SimpleDateFormat estimateDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
-		SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
 		
 		try {		
 			Date estimate_Date = oldDate_pattern.parse(estimateSheetVO.getDateForDisplaying());
