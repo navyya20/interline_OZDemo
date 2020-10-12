@@ -21,7 +21,6 @@
 <script type="text/javascript" src="http://192.168.0.103:8888/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>   OZJSViewer.js   OZJSSVGViewer.js
 -->
 
-
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <style>

@@ -18,7 +18,7 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <script src="<c:url value = '../resources/js/billSheet.js'/>" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
-<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+
 <style>
 .billMenuButton{
 	display:inline-block;
@@ -28,12 +28,6 @@
 	width: 100px;
 }
 
-@font-face {
-	font-family: "msgothic";
-    src: url('../resources/font/msgothic.ttc') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
 </style>
 
 <script>
@@ -50,7 +44,6 @@ $(document).ready(function(){
 	      }
 	    }
 	  }
-	
 });
 
 </script>
@@ -66,7 +59,6 @@ $(document).ready(function(){
 
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
-
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
 		var userNum = "${userNum}";
@@ -88,7 +80,6 @@ $(document).ready(function(){
 		return true;
 	}
 	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
-   
 </script>
 </body>
 </html>

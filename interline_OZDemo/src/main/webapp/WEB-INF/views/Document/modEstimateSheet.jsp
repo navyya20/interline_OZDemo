@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
 <title>estimateSheet</title>
+</head>
 
 
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
@@ -23,14 +24,7 @@
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
-<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
     <style>
-        @font-face {
-            font-family: "msgothic";
-            src: url('../resources/font/NanumBarunGothic.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
         .mainMenuButton{	
 			display:inline-block;
 			width:100px;
@@ -39,7 +33,6 @@
 			width: 100px;
 		}
 	</style>
-</head>
 <body>
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
@@ -58,7 +51,7 @@
 <script type="text/javascript" >
 	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
 	var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/"+'${stampFileName}';
-	console.log("stamp:"+stamp)
+	console.log("stamp:"+stamp);
 	function getEstimateSheetInform(){
 		var estimateSheetJsonString = '${estimateSheetJsonString}';		
 		var estimateItemsJsonString = '${estimateItemsJsonString}';
@@ -94,25 +87,12 @@
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
-	function start_viewer(){
-		var opt = [];
-		opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
-		opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-		start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
-	}
+	var opt = [];
+	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
+	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
 
 	
-	var fontFlag = false;
-	fontSpy('msgothic', { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
-        success: function() {
-        	fontFlag = true;
-        	console.log("font success");
-            start_viewer();
-        },
-        failure: function() {
-			console.log("font fail");
-        }
-    });
 		
 	/* function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 		var inputJson=JSON.parse(inputJsonString);
