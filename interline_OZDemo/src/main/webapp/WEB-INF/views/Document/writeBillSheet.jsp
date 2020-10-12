@@ -87,23 +87,7 @@ $(document).ready(function(){
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
-
-    function start_viewer() {
-        if (isMSGothic) {
-            start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", null, false);
-        }
-    }
-    var isMSGothic = false;
-
-    fontSpy('msgothic', { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
-        success: function() {
-        	isMSGothic = true;
-            start_viewer();
-        },
-        failure: function() {
-
-        }
-    });
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
    
 </script>
 </body>

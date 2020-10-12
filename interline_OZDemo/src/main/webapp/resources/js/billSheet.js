@@ -23,6 +23,11 @@ function save(reportNum){
 				data: {jsonStr:JSON.stringify(billData)},
 				dataType:'text',
 				success: function(data){
+					
+					if(date == "error"){
+						alert('エラー！');
+					}
+					
 					alert("請求書を作成しました。");
 					location.href="memberMain";
 				},

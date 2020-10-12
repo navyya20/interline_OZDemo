@@ -142,6 +142,7 @@
 		insert into billInform(
 			billNum,
   			reportNum,
+  			userNum,
 			billDate,
 	
 			supplier,
@@ -165,6 +166,7 @@
 		)values(
 			#{billNum},
   			#{reportNum},
+  			#{userNum},
 			#{billDate},
 	
 			#{supplier},
@@ -187,6 +189,16 @@
   		 	#{stamp}
 		)
 	</insert>
+	
+	<select id="getBillInform" parameterType="billInform" resultType="billInform">
+		select 
+			billNum,reportNum,userNum,billDate,supplier,address,post,phoneNumber,representative,receiver,sum,
+			sumWithTax,sumWithTax2,bankName,depositeClassification,accountNumber,accountOwner,hurigana,stamp
+		from
+			billInform
+		where 
+		 	reportNum=#{reportNum} and userNum=#{userNum}
+	</select>
 	
 	<update id="setState" parameterType="int">
 		update 

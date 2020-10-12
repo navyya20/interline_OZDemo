@@ -37,12 +37,17 @@ public class AdminController {
 	
 	//회원 리스트
 	@RequestMapping(value="/memberList", method=RequestMethod.GET)
-	public String getMemberList(Model model) throws ParseException {
-		ArrayList<UserInformVO> list = dao.getMemberList();
+	public String getMemberList(Model model){
+		ArrayList<UserInformVO> list = dao.getMemberList();		
 		
-		for(int n=0; n<list.size();n++) {
-			Date Start_Date = old_pattern.parse(list.get(n).getStartDate());
-			list.get(n).setStartDate(new_pattern.format(Start_Date));		
+		try {
+			for(int n=0; n<list.size();n++) {		
+				Date Start_Date = old_pattern.parse(list.get(n).getStartDate());
+				list.get(n).setStartDate(new_pattern.format(Start_Date));	
+			}
+		} catch (ParseException e) {
+			logger.error(""+e);
+			return "redirect:/500Error";
 		}
 		
 		model.addAttribute("member", list);

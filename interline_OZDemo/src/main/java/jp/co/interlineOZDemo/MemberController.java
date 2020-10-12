@@ -51,7 +51,7 @@ public class MemberController {
 	
 	private static final int countPerPage=20;	
 	private static final int pagePerGroup=10;
-	private static final SimpleDateFormat billDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
+	private static final SimpleDateFormat oldDate_pattern = new SimpleDateFormat("yyyy年MM月dd日");
 	private static final SimpleDateFormat newDate_pattern = new SimpleDateFormat("yyyy.MM.dd");
 	String rootPath="aaa";
 	
@@ -301,8 +301,13 @@ public class MemberController {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화
 		
-		Date bill_Date = billDate_pattern.parse(BillInform.getBillDate());
-		BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧nform.setUserNum(userInform.getUserNum());
+		try {		
+			Date bill_Date = oldDate_pattern.parse(BillInform.getBillDate());
+			BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
+		} catch (ParseException e) {			
+			logger.error(""+e);
+			return "error";
+		}
 		
 		BillInform.setUserNum(userInform.getUserNum());
 		int result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
