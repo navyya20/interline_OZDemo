@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
-		var id = "${id}";
+		var userNum = "${userNum}";
 
 		var oz;
 		oz = document.getElementById("OZViewer");
@@ -79,8 +79,8 @@ $(document).ready(function(){
 		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "writeBill");
  		oz.sendToActionScript("odi.writeBill.pcount", "2");
-		oz.sendToActionScript("odi.writeBill.args1", "reportnum="+reportNum);
-		oz.sendToActionScript("odi.writeBill.args2", "id="+id);
+		oz.sendToActionScript("odi.writeBill.args1", "reportNum="+reportNum);
+		oz.sendToActionScript("odi.writeBill.args2", "userNum="+userNum);
 
 		oz.sendToActionScript("export.format","pdf");
 		oz.sendToActionScript("pdf.filename","BillSheet");
