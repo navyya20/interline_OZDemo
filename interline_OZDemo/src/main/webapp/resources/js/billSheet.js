@@ -24,7 +24,7 @@ function save(reportNum){
 				dataType:'text',
 				success: function(data){
 					
-					if(date == "error"){
+					if(data == "error"){
 						alert('エラー！');
 					}
 					
