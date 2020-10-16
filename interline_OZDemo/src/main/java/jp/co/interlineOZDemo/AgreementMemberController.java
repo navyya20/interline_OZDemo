@@ -14,7 +14,7 @@ import jp.co.interlineOZDemo.dao.AgreementMemberDAO;
 
 
 @Controller
-@RequestMapping("/agreementMember")
+@RequestMapping("/member")
 public class AgreementMemberController {
 	private static final Logger logger = LoggerFactory.getLogger(AgreementMemberController.class);
 	
