@@ -141,21 +141,15 @@ public class MemberController {
 	//견적서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveEstimate", method=RequestMethod.POST)
-	public String saveEstimateSheet(EstimateSheetVO estimateSheetVO, String estimateItemsString , HttpSession session, String email) {
+	public String saveEstimateSheet(EstimateSheetVO estimateSheetVO, String estimateItemsString , HttpSession session, String email) throws ParseException {
 		System.out.println("saveEstimateSheet실행");
 		System.out.println("견적서내용:"+estimateSheetVO);
 		System.out.println("견적아이템들:"+estimateItemsString);
-		
-		try {		
-			Date estimate_Date = oldDate_pattern.parse(estimateSheetVO.getDateForDisplaying());
-			estimateSheetVO.setDateForDisplaying(newDate_pattern.format(estimate_Date));
-			Date deadline_Date = oldDate_pattern.parse(estimateSheetVO.getDeadline());
-			estimateSheetVO.setDeadline(newDate_pattern.format(deadline_Date)); //청구서에 입력된 날짜 데이터 포멧
-		} catch (ParseException e) {			
-			logger.error(""+e);
-			return "error";
-		}
-		
+
+		Date estimate_Date = oldDate_pattern.parse(estimateSheetVO.getDateForDisplaying());
+		estimateSheetVO.setDateForDisplaying(newDate_pattern.format(estimate_Date));//청구서에 입력된 날짜 데이터 포멧	
+	/*	Date deadline_Date = oldDate_pattern.parse(estimateSheetVO.getDeadline());
+		estimateSheetVO.setDeadline(newDate_pattern.format(deadline_Date)); */
 		
 		//견적내용 insert후 reportNum받아옴.
 		int reportNum = dao.insertEstimateSheet(estimateSheetVO);
@@ -298,19 +292,14 @@ public class MemberController {
 	//청구서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveBill", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public String saveEstimateSheet(String jsonStr, HttpSession session) throws ParseException {
+	public String saveBillSheet(String jsonStr, HttpSession session) throws ParseException {
 		System.out.println("견적서내용:"+jsonStr);
 		Gson gson = new Gson();
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화
-		
-		try {		
-			Date bill_Date = oldDate_pattern.parse(BillInform.getBillDate());
-			BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
-		} catch (ParseException e) {			
-			logger.error(""+e);
-			return "error";
-		}
+				
+		Date bill_Date = oldDate_pattern.parse(BillInform.getBillDate());
+		BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
 		
 		BillInform.setUserNum(userInform.getUserNum());
 		int result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
