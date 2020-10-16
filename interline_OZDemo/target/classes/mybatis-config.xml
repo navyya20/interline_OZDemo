@@ -13,5 +13,6 @@
 	<mappers>
 		<mapper resource="MemberMapper.xml"/>
 		<mapper resource="AdminMapper.xml"/>
+		<mapper resource="AgreementMemberMapper.xml"/>
 	</mappers>
 </configuration>
