@@ -9,10 +9,13 @@
 		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateItemsVO" alias="estimateItems"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.ItemsVO" alias="Items"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.BillInformVO" alias="billInform"/>
+		
+		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO" alias="agreementUserInform"/>
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="MemberMapper.xml"/>
 		<mapper resource="AdminMapper.xml"/>
-		<mapper resource="AgreementMemberMapper.xml"/>
+		<mapper resource="Agreement/AgreementMemberMapper.xml"/>
 	</mappers>
 </configuration>
