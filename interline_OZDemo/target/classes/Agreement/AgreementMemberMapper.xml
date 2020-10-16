@@ -5,5 +5,25 @@
 
 <mapper namespace="jp.co.interlineOZDemo.dao.agreement.AgreementMemberMapper">
 	
+	<!-- 페이징을 위해 현제 해당하는 유저가 작성한 문서들의 총 갯수를 가져온다. -->
+	<select id="getTotalAgreement" parameterType="int" resultType="int">
+		select agreementAgreement.s + agreementMemorandum.s total 
+		from 
+			(select count(distinct userNum) s from agreementAgreement where userNum=#{userNum}) agreementAgreement, 
+			(select count(distinct userNum) s from agreementMemorandum where userNum=#{userNum}) agreementMemorandum
+	</select>
 	
+	<!-- 동의서와 각서 둘다 합쳐서 모두 가져옵니다.  union으로 합치기위해 컬럼명을 동일하게하고  vo는 어차피 중복이므로 agreement껄 사용합니다. -->
+	<select id="getAgreementList" parameterType="int" resultType="agreementAgreement">
+		select 
+			userNum, sort, reportNum, agreementDate agreementDate, systemReportNum, customer
+		from 
+			agreementAgreement where userNum=#{userNum} 
+		UNION ALL 
+		select 
+			userNum, sort, reportNum, memorandumDate agreementDate, systemReportNum, customer
+		from 
+			agreementMemorandum where userNum=#{userNum}
+		order by reportNum asc;
+	</select>
 </mapper>

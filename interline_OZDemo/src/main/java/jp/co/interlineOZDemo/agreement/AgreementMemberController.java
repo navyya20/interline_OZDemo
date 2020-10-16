@@ -18,6 +18,7 @@ import jp.co.interlineOZDemo.dao.agreement.AgreementMemberDAO;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
 
 
 
@@ -41,13 +42,14 @@ public class AgreementMemberController {
 	public String getEstimateSheetList(HttpSession session , Model model ,@RequestParam(value="page", defaultValue="1") int page) {
 		System.out.println("동의서 리스트 페이지 호출 실행");
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		//int total = dao.getTotalAgreement(userInform.getUserNum());
-		//PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-		//ArrayList<EstimateSheetVO> estimateSheetArray = new ArrayList<EstimateSheetVO>();
-		//estimateSheetArray = dao.getEstimateSheetList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
-		//model.addAttribute("estimateSheetArray",estimateSheetArray);
-		//model.addAttribute("pn", navi);
+		int total = dao.getTotalAgreement(userInform.getUserNum());
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		ArrayList<AgreementAgreementVO> AgreementArray = new ArrayList<AgreementAgreementVO>();
+		AgreementArray = dao.getAgreementList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
+		model.addAttribute("AgreementArray",AgreementArray);
+		model.addAttribute("pn", navi);
+		System.out.println(AgreementArray.toString());
 		System.out.println("견적서 리스트 페이지 호출 완료");
-		return "Agreement/Document/estimateSheetList";
+		return "Agreement/Document/aaa";
 	}
 }

@@ -11,6 +11,8 @@
 		<typeAlias type="jp.co.interlineOZDemo.vo.BillInformVO" alias="billInform"/>
 		
 		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO" alias="agreementUserInform"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO" alias="agreementAgreement"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementMemorandumVO" alias="agreementMemorandum"/>
 		
 	</typeAliases>
 	<mappers>
