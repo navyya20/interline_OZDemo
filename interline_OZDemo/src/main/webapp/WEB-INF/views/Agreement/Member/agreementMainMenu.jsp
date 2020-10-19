@@ -49,9 +49,10 @@ $(function(){
 	margin:20px 0px 0px 0px;
 	width: 100%; 
 	height: 100%;
+	text-align: center;
 }
 #list_Box{
-	width: 100%;
+	width: 50%;
 	height: 100%;
 	z-index: 1;
 }
@@ -70,13 +71,16 @@ $(function(){
 	<tr>
 		<td style="font-weight: bold;">${sessionScope.userInform.userId}様</td>
 		<td class="mainMenuTd">
-			<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報修正</span>
+			<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">情報修正</span>
 		</td>
 		<td class="mainMenuTd">
-			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeEstimate'">見積書作成</span>
+			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeAgreement'">同意書作成</span>
 		</td>
 		<td class="mainMenuTd">
-			<span id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</span>
+			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeMemorandum'">覚書作成</span>
+		</td>
+		<td class="mainMenuTd">
+			<span id="agreementList" class="pc_font_button1 mainMenuButton move_btn">文書リスト</span>
 		</td>
 		<td class="mainMenuTd">
 			<span id="logout" class="pc_font_button1 mainMenuButton logout">ログアウト</span>
@@ -85,7 +89,7 @@ $(function(){
 </table>
 </div>
 <div id="_iframe">
-	<iframe name="list_Box" id="list_Box" src="estimateSheetList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
+	<iframe name="list_Box" id="list_Box" src="agreementList" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0></iframe>
 </div>
 </body>
 </html>

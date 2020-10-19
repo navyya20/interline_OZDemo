@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
 
 
 
@@ -37,6 +39,13 @@ public class AgreementMemberController {
 	@Autowired
 	AgreementMemberDAO dao;
 	
+	//memberMain
+	@RequestMapping(value = "/agreementMainMenu", method=RequestMethod.GET)
+	public String mainMenuMember() {
+
+		return "Agreement/Member/agreementMainMenu";
+	}
+	
 	//견적서 리스트 페이지 
 	@RequestMapping(value="/agreementList", method=RequestMethod.GET)
 	public String getEstimateSheetList(HttpSession session , Model model ,@RequestParam(value="page", defaultValue="1") int page) {
@@ -50,6 +59,21 @@ public class AgreementMemberController {
 		model.addAttribute("pn", navi);
 		System.out.println(AgreementArray.toString());
 		System.out.println("견적서 리스트 페이지 호출 완료");
-		return "Agreement/Document/aaa";
+		return "Agreement/Document/agreementList";
 	}
+	
+	//동의서 작성
+	@RequestMapping(value="/writeAgreement", method=RequestMethod.GET)
+	public String writeAgreement(HttpSession session, Model model) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		AgreementUserInformVO agreementUserInform = dao.getUserInform(userInform.getUserNum());
+		JSONObject userInformJsonObject = new JSONObject(agreementUserInform);
+		String userInformJsonString = userInformJsonObject.toString();
+		System.out.println("agreementUserInform:"+userInformJsonString);
+		model.addAttribute("userInformJsonString", userInformJsonString);
+		return "Agreement/Document/writeAgreement";
+	}
+	
+	
+	
 }

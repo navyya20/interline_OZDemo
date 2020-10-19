@@ -9,8 +9,8 @@
 <title>estimateSheetList</title>
 </head>
 
-<script src="<c:url value = '../../resources/js/jquery-2.0.3.min.js'/>"></script>
-<link href="../../resources/css/Font-Style.css?ver=1" rel="stylesheet">
+<script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
+<link href="../resources/css/Font-Style.css?ver=1" rel="stylesheet">
 <style>
 	body{
 		text-align: center;
@@ -144,43 +144,24 @@ function selectAll(){
 </script>
 
 <body>
-<div id="title">見積書リスト</div>
+<div id="title">同意書リスト</div>
 <div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="pc_font_button2" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
 		<td class="titleRow" style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
-		<td class="titleRow" style="width: 5%;">文書番号</td>
+		<td class="titleRow" style="width: 5%;">分類</td>
+		<td class="titleRow" style="width: 9%;">日時</td>
 		<td class="titleRow" style="width: 9%;">顧客</td>
-		<td class="titleRow" style="width: 9%;">件名</td>
-		<td class="titleRow" style="width: 9%;">保存日時</td>
-		<td class="titleRow" style="width: 5%;">請求書</td>
-		<td class="titleRow" style="width: 5%;">COPYして作成</td>
 	</tr>
-	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
+	<c:forEach var="sheet" items="${AgreementArray}" varStatus="status">
 	<tr>
 		<td><input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
-		<td>${sheet.reportNum}</td>
-		<td>${sheet.receiver}</td>
-		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.reportName}</a></td>
+		<td>${sheet.sort}</td>
 		<td>
-			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<fmt:parseDate value="${sheet.agreementDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd HH:mm"/></td>
-		<td class="lastColum">
-			<c:choose>
-				<c:when test="${sheet.state eq 'e'}">
-					<span class="pc_font_button2" onclick="writeBillSheet(${sheet.reportNum})">請求書作成</span>
-				</c:when>
-				<c:when test="${sheet.state eq 'b'}">
-					<span class="pc_font_button3" onclick="readBillSheet(${sheet.reportNum})">請求書閲覧</span>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
-		</td>
-		<td class="lastColum">
-			<span class="pc_font_button2" onclick="modEstimateSheet(${sheet.reportNum})">COPYして作成</span>
-		</td>
+		<td><a href="readAgreement?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.customer}</a></td>
 	</tr>
 	</c:forEach>
 

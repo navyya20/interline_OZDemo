@@ -14,6 +14,7 @@ import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
 
 @Repository
 public class AgreementMemberDAO {
@@ -32,6 +33,12 @@ public class AgreementMemberDAO {
 		RowBounds rbs = new RowBounds(st,ctt);
 		ArrayList<AgreementAgreementVO> agreementArray=mapper.getAgreementList(rbs, userNum);
 		return agreementArray;
+	}
+
+	public AgreementUserInformVO getUserInform(int userNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		AgreementUserInformVO agreementUserInform = mapper.getAgreementUserInform(userNum);
+		return agreementUserInform;
 	}
 	
 }
