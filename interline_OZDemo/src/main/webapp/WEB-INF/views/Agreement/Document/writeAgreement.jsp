@@ -21,7 +21,7 @@
 <script type="text/javascript" src="http://192.168.0.103:8888/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>   OZJSViewer.js   OZJSSVGViewer.js
 -->
 
-<script src="<c:url value = '../resources/js/estimateSheet.js?ver=6'/>"></script>
+<script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <style>
 	.mainMenuButton{	
@@ -69,6 +69,7 @@
 			oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
 			oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/writeAgreement.ozr");
 			oz.sendToActionScript("connection.inputjson", getUserInform());
+			oz.sendToActionScript("eform.signpad_type", "dialog");
 			oz.sendToActionScript("pdf.fontembedding","true");
 			return true;
 		}
@@ -97,7 +98,7 @@
 			console.log("제이슨:"+inputJsonString);
 			var inputJson=JSON.parse(inputJsonString);
 			var processedInputJson = getJsonToSend(inputJson);
-			var address="saveEstimate";
+			var address="saveAgreement";
 			$('#wrapper').css('z-index',2);
 			$('#wrapper').css('visibility','visible');
 			$('body').css('cursor','progress');
@@ -106,7 +107,7 @@
 
 		//모도루 버튼 클릭시 작동. 메인메뉴로 돌아간다.
 		function cancelButton(){
-			var userInformJsonString = $('#userInformJsonString').html();
+			//var userInformJsonString = $('#userInformJsonString').html();
 			//alert("userInformJsonString:"+userInformJsonString);
 			location.href="memberMain";
 		}

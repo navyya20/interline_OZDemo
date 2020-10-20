@@ -40,5 +40,17 @@ public class AgreementMemberDAO {
 		AgreementUserInformVO agreementUserInform = mapper.getAgreementUserInform(userNum);
 		return agreementUserInform;
 	}
+
+	public int saveAgreement(AgreementAgreementVO agreementVO) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.saveAgreement(agreementVO);
+		return result;
+	}
+	
+	public int nextReportNum(int userNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.nextReportNum(userNum);
+		return result;
+	}
 	
 }

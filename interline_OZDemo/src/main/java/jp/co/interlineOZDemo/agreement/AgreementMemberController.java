@@ -1,7 +1,9 @@
 package jp.co.interlineOZDemo.agreement;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.interlineOZDemo.dao.agreement.AgreementMemberDAO;
 import jp.co.interlineOZDemo.util.PageNavigator;
@@ -74,6 +77,20 @@ public class AgreementMemberController {
 		return "Agreement/Document/writeAgreement";
 	}
 	
-	
-	
+	//동의서 저장
+	@ResponseBody
+	@RequestMapping(value="/saveAgreement", method=RequestMethod.POST)
+	public String saveAgreement(AgreementAgreementVO agreementVO, HttpSession session) throws ParseException {
+		System.out.println("saveEstimateSheet실행");
+		System.out.println("견적서내용:"+agreementVO);
+		//年月日로 되어있는 날짜 형식을  . . . 으로 바꿔줌. DB에 넣기위해
+		Date agreementDate = oldDate_pattern.parse(agreementVO.getAgreementDate());
+		agreementVO.setAgreementDate(newDate_pattern.format(agreementDate));
+		//지금까지있는 reportNum의 MAX를 찾아 그것의 +1한값을 reportNum으로 해줌.
+		int nextReportNum = dao.nextReportNum(agreementVO.getUserNum());
+		agreementVO.setReportNum(nextReportNum + 1);
+		System.out.println("nextReportNum:"+nextReportNum);
+		int result = dao.saveAgreement(agreementVO);
+		return "completed";
+	}
 }

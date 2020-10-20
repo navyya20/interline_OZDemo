@@ -31,4 +31,60 @@
 	<select id="getAgreementUserInform" parameterType="int" resultType="agreementUserInform">
 		select * from agreementUserInform where userNum=#{userNum}
 	</select>
+	
+	<!-- 다음 reportNum을 가져오기위한 select.  이 결과에  +1 을 하여 다음 저장되는 reportNum을 설정한다. -->
+	<select id="nextReportNum" parameterType="int" resultType="int">
+		select 
+			coalesce(max(merged.reportNum),0) 
+		from 	(select 
+					reportNum 
+				from 
+					agreementAgreement 
+				where 
+					userNum=#{userNum} 
+				union 
+				select 
+					reportNum 
+				from 
+					agreementMemorandum
+				where
+					userNum=#{userNum}) merged
+	</select>
+	
+	<!-- 동의서를 한행 저장한다. -->
+	<insert id="saveAgreement" parameterType="agreementAgreement">
+		insert into agreementAgreement (
+			userNum,
+			systemReportNum,
+			reportNum,
+			
+			company,
+			address,
+			post,
+			phoneNumber,
+			email,
+			incharge,
+			
+			agreementDate,
+			customer,
+			sign,
+			sort
+		) VALUES (
+			#{userNum},
+			get_seq('agreementSeq'),
+			#{reportNum},
+			
+			#{company},
+			#{address},
+			#{post},
+			#{phoneNumber},
+			#{email},
+			#{incharge},
+			
+			#{agreementDate},
+			#{customer},
+			#{sign},
+			#{sort}
+		)
+	</insert>
 </mapper>

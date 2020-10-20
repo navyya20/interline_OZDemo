@@ -20,4 +20,6 @@ public interface AgreementMemberMapper {
 
 	AgreementUserInformVO getAgreementUserInform(int userNum);
 
+	int saveAgreement(AgreementAgreementVO agreementVO);
+	int nextReportNum(int userNum);
 }
