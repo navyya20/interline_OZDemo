@@ -68,7 +68,7 @@ public class MainController {
 			if(member.getAuthority().equals("a")) {
 				result.put("url", "admin/adminMain");		
 			}else if(member.getAuthority().equals("u")) {
-				result.put("url", "member/memberMain");
+				result.put("url", "member/selectSystem");
 			}
 		}
 		
@@ -79,6 +79,12 @@ public class MainController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/member/selectSystem", method=RequestMethod.GET)
+	public String selectSystem(){
+		
+		return "selectSystem";
 	}
 	
 	//logout

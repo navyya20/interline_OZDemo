@@ -11,11 +11,36 @@ public class AgreementMemorandumVO {
 	private String representative;
 	private String post;
 	private String address;
+	private String stamp;
 
 	private String memorandumDate;
 	private String customer;
 	private String sign;
 	private String sort;
+	
+	public AgreementMemorandumVO() {
+		super();
+	}
+
+	public AgreementMemorandumVO(int userNum, int systemReportNum, int reportNum, String systemDate, String company,
+			String representative, String post, String address, String stamp, String memorandumDate, String customer,
+			String sign, String sort) {
+		super();
+		this.userNum = userNum;
+		this.systemReportNum = systemReportNum;
+		this.reportNum = reportNum;
+		this.systemDate = systemDate;
+		this.company = company;
+		this.representative = representative;
+		this.post = post;
+		this.address = address;
+		this.stamp = stamp;
+		this.memorandumDate = memorandumDate;
+		this.customer = customer;
+		this.sign = sign;
+		this.sort = sort;
+	}
+
 	public int getUserNum() {
 		return userNum;
 	}
@@ -64,6 +89,12 @@ public class AgreementMemorandumVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getStamp() {
+		return stamp;
+	}
+	public void setStamp(String stamp) {
+		this.stamp = stamp;
+	}
 	public String getMemorandumDate() {
 		return memorandumDate;
 	}
@@ -89,16 +120,12 @@ public class AgreementMemorandumVO {
 		this.sort = sort;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return "AgreementMemorandum [userNum=" + userNum + ", systemReportNum=" + systemReportNum + ", reportNum="
+		return "AgreementMemorandumVO [userNum=" + userNum + ", systemReportNum=" + systemReportNum + ", reportNum="
 				+ reportNum + ", systemDate=" + systemDate + ", company=" + company + ", representative="
-				+ representative + ", post=" + post + ", address=" + address + ", memorandumDate=" + memorandumDate
-				+ ", customer=" + customer + ", sign=" + sign + ", sort=" + sort + "]";
+				+ representative + ", post=" + post + ", address=" + address + ", stamp=" + stamp + ", memorandumDate="
+				+ memorandumDate + ", customer=" + customer + ", sign=" + sign + ", sort=" + sort + "]";
 	}
-	
-	
-	
 	
 }
