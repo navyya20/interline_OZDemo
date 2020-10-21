@@ -1,9 +1,11 @@
 package jp.co.interlineOZDemo.agreement;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.dao.agreement.AgreementMemberDAO;
+import jp.co.interlineOZDemo.util.FileService;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
@@ -65,7 +70,7 @@ public class AgreementMemberController {
 		return "Agreement/Document/agreementList";
 	}
 	
-	//동의서 작성
+	//동의서 작성 페이지
 	@RequestMapping(value="/writeAgreement", method=RequestMethod.GET)
 	public String writeAgreement(HttpSession session, Model model) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
@@ -77,7 +82,7 @@ public class AgreementMemberController {
 		return "Agreement/Document/writeAgreement";
 	}
 	
-	//동의서 저장
+	//동의서 저장기능
 	@ResponseBody
 	@RequestMapping(value="/saveAgreement", method=RequestMethod.POST)
 	public String saveAgreement(AgreementAgreementVO agreementVO, HttpSession session) throws ParseException {
@@ -93,4 +98,76 @@ public class AgreementMemberController {
 		int result = dao.saveAgreement(agreementVO);
 		return "completed";
 	}
+	
+	// 동의서 열람 페이지 
+	@RequestMapping(value="/readAgreement", method=RequestMethod.GET)
+	public String readAgreement(int reportNum, Model model, HttpSession session) {
+		System.out.println("동의서 열람 실행");
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		AgreementAgreementVO userNumReportNum = new AgreementAgreementVO();
+		userNumReportNum.setUserNum(userInform.getUserNum());
+		userNumReportNum.setReportNum(reportNum);
+		AgreementAgreementVO agreement = dao.getAgreement(userNumReportNum);
+		if(agreement==null) {
+			System.out.println("reportNum:"+reportNum+"  userNum:"+userInform.getUserNum()+"  열람하려는 문서가 없습니다.");
+			return "Agreement/Member/agreementMainMenu";
+		}
+		
+		model.addAttribute("userNum", userInform.getUserNum());
+		model.addAttribute("reportNum", reportNum);
+		return "Agreement/Document/readAgreement";
+	}
+	
+	//동의서 삭제
+		@ResponseBody
+		@RequestMapping(value="/deleteAgreement", method=RequestMethod.GET)
+		public String deleteAgreement(int[] reportNum, Model model, HttpSession session) {
+			System.out.println("삭제 실행.");
+			UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+			int userNum=userInform.getUserNum();	
+			System.out.println("받아온 reportNum:"+reportNum.toString()+",userNum:"+userNum);
+			HashMap<String, Object> hashMap = new HashMap<String, Object>();
+			hashMap.put("userNum", userNum);
+			hashMap.put("reportNum", reportNum);
+			dao.deleteAgreement(hashMap);
+			dao.deleteMemorandum(hashMap);
+			System.out.println("삭제 완료.");
+			return "Agreement/Document/agreementMainMenu";
+		}
+	
+	//정보수정 페이지
+	@RequestMapping(value="/agreementUpdateMyProfile",method=RequestMethod.GET)
+	public String agreementUpdateMyProfileForm(HttpSession session , Model model) {
+		System.out.println("회원정보 업데이트 화면로드");
+		UserInformVO userIdPassword = (UserInformVO)session.getAttribute("userInform");
+		
+		UserInformVO member = dao.getMemberByAgreementSys(userIdPassword);
+		model.addAttribute("userInform", member);
+		AgreementUserInformVO agreementUserInform = dao.getAgreementUserInform(member.getUserNum());
+		model.addAttribute("agreementUserInform", agreementUserInform);
+		return "Agreement/Member/agreementUpdateMyProfile";
+	}
+	
+	//(회원용)회원정보 수정정보 저장
+	@ResponseBody
+	@RequestMapping(value="/agreementUpdateMyProfile",method=RequestMethod.POST)
+	public String agreementUpdateMyProfileForm2(HttpSession session, AgreementUserInformVO agreementUserInform, String password ) {
+		System.out.println("수정정보 저장");
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		String oldPassword = userInform.getPassword();
+		agreementUserInform.setUserNum(userInform.getUserNum());
+		dao.updateAgreementUserInform(agreementUserInform);
+		System.out.println("동의서시스템 유저정보를 수정하였습니다.");
+		if(!oldPassword.equals(password)) {
+			userInform.setPassword(password);
+			dao.updatePasswordByAgreementSys(userInform);
+			System.out.println("페스워드를 수정하였습니다.");
+			session.setAttribute("userInform", userInform);
+		}
+		//userInform = dao.getUserInformByAgreementSys(userInform.getUserNum());
+		//session.setAttribute("userInform", userInform);
+		
+		return "自社情報を修正しました。";
+	}
+	
 }

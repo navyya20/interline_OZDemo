@@ -109,7 +109,7 @@
 		function cancelButton(){
 			//var userInformJsonString = $('#userInformJsonString').html();
 			//alert("userInformJsonString:"+userInformJsonString);
-			location.href="memberMain";
+			location.href="agreementMainMenu";
 		}
 	</script>
 	<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>

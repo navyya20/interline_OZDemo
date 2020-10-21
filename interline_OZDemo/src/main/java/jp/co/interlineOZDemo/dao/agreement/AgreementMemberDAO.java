@@ -8,10 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import jp.co.interlineOZDemo.dao.MemberMapper;
-import jp.co.interlineOZDemo.vo.BillInformVO;
-import jp.co.interlineOZDemo.vo.EstimateItemsVO;
-import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
@@ -52,5 +48,54 @@ public class AgreementMemberDAO {
 		int result = mapper.nextReportNum(userNum);
 		return result;
 	}
+
+	public UserInformVO getMemberByAgreementSys(UserInformVO userIdPassword) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		UserInformVO userInform = mapper.getMemberByAgreementSys(userIdPassword);
+		return userInform;
+	}
+
+	public AgreementUserInformVO getAgreementUserInform(int userNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		AgreementUserInformVO agreementUserInform = mapper.getAgreementUserInform(userNum);
+		return agreementUserInform;
+	}
+
+	public int updateAgreementUserInform(AgreementUserInformVO agreementUserInform) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.updateAgreementUserInform(agreementUserInform);
+		return result;
+	}
+
+	public int updatePasswordByAgreementSys(UserInformVO userInform) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.updatePasswordByAgreementSys(userInform);
+		return result;
+	}
+
+	public AgreementAgreementVO getAgreement(AgreementAgreementVO userNumReportNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		AgreementAgreementVO agreement = mapper.getAgreement(userNumReportNum);
+		return agreement;
+	}
+
+	public int deleteAgreement(HashMap<String, Object> hashMap) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.deleteAgreement(hashMap);
+		return result;
+	}
+
+	public int deleteMemorandum(HashMap<String, Object> hashMap) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.deleteMemorandum(hashMap);
+		return result;
+	}
+	
+	/*
+	public UserInformVO getUserInformByAgreementSys(int userNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		UserInformVO userInform = mapper.getUserInformByAgreementSys(userNum);
+		return userInform;
+	}*/
 	
 }

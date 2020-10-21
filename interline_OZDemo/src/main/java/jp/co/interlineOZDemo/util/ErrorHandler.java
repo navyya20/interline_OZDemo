@@ -29,7 +29,7 @@ public class ErrorHandler {
 		
 		String check_ajax = request.getHeader("x-requested-with");
 		ModelAndView mav =  new ModelAndView();
-		
+		System.out.println("check_ajax:"+check_ajax);
 		//데이터 전송방식이 ajax인지 확인
 		if(check_ajax == null) {
 			mav.setViewName("/Error/500Error"); //전송방식이 ajax가 아닐경우 화면처리

@@ -82,18 +82,18 @@
 	
 	<update id="updateMyProfile" parameterType="member">
 		update userInform SET
-		password=#{password},
-		companyName=#{companyName},
-		representative=#{representative},
-		phoneNumber=#{phoneNumber},
-		address=#{address},
-		post=#{post},
-		stampFileName=#{stampFileName},
-		bankName=#{bankName},
-		depositeClassification=#{depositeClassification},
-		accountNumber=#{accountNumber},
-		accountOwner=#{accountOwner},
-		hurigana=#{hurigana}
+			password=#{password},
+			companyName=#{companyName},
+			representative=#{representative},
+			phoneNumber=#{phoneNumber},
+			address=#{address},
+			post=#{post},
+			stampFileName=#{stampFileName},
+			bankName=#{bankName},
+			depositeClassification=#{depositeClassification},
+			accountNumber=#{accountNumber},
+			accountOwner=#{accountOwner},
+			hurigana=#{hurigana}
 		
 		where userId=#{userId}
 	</update>

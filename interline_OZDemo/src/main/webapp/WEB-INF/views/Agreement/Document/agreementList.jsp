@@ -118,12 +118,12 @@ function deleteSheet(){
 	if(!confirm("削除しますか。")){ return false; }
 	$.ajax(
 			{
-				url: "deleteSheet",
+				url: "deleteAgreement",
 				type: 'GET',
 				traditional : true,
 				data: {"reportNum":reportNumArray},
 				success: function(data){
-					document.location.href = "estimateSheetList";
+					document.location.href = "agreementList";
 				},
 				error: function(e){
 					console.log(JSON.stringify(e));
@@ -151,7 +151,7 @@ function selectAll(){
 	<tr>
 		<td class="titleRow" style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 5%;">分類</td>
-		<td class="titleRow" style="width: 9%;">日時</td>
+		<td class="titleRow" style="width: 9%;">同意日</td>
 		<td class="titleRow" style="width: 9%;">顧客</td>
 	</tr>
 	<c:forEach var="sheet" items="${AgreementArray}" varStatus="status">
@@ -160,7 +160,7 @@ function selectAll(){
 		<td>${sheet.sort}</td>
 		<td>
 			<fmt:parseDate value="${sheet.agreementDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd HH:mm"/></td>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/></td>
 		<td><a href="readAgreement?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.customer}</a></td>
 	</tr>
 	</c:forEach>

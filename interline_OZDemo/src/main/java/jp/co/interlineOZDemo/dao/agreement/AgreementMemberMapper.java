@@ -22,4 +22,18 @@ public interface AgreementMemberMapper {
 
 	int saveAgreement(AgreementAgreementVO agreementVO);
 	int nextReportNum(int userNum);
+
+	UserInformVO getMemberByAgreementSys(UserInformVO userIdPassword);
+
+	int updateAgreementUserInform(AgreementUserInformVO agreementUserInform);
+
+	int updatePasswordByAgreementSys(UserInformVO userInform);
+
+	AgreementAgreementVO getAgreement(AgreementAgreementVO userNumReportNum);
+
+	int deleteAgreement(HashMap<String, Object> hashMap);
+
+	int deleteMemorandum(HashMap<String, Object> hashMap);
+
+	//UserInformVO getUserInformByAgreementSys(int userNum);
 }

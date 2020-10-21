@@ -233,14 +233,6 @@ public class MemberController {
 	public String deleteSheet(int[] reportNum, Model model, HttpSession session) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		int userNum=userInform.getUserNum();
-		ArrayList<EstimateSheetVO> estimateSheetArray = new ArrayList<EstimateSheetVO>();
-		
-		for(int i=0 ; i<reportNum.length ; i++) {
-			EstimateSheetVO estimateSheet = new EstimateSheetVO();
-			estimateSheet.setReportNum(reportNum[i]);
-			estimateSheetArray.add(estimateSheet);
-		}
-		
 		
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("userNum", userNum);
