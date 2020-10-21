@@ -10,6 +10,7 @@ import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementMemorandumVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
 
 public interface AgreementMemberMapper {
@@ -36,4 +37,6 @@ public interface AgreementMemberMapper {
 	int deleteMemorandum(HashMap<String, Object> hashMap);
 
 	//UserInformVO getUserInformByAgreementSys(int userNum);
+	
+	int insertMemorandumSheet(AgreementMemorandumVO memorandumInform);
 }

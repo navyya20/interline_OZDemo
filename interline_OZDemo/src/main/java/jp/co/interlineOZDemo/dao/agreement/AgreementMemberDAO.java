@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementMemorandumVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
 
 @Repository
@@ -98,4 +99,9 @@ public class AgreementMemberDAO {
 		return userInform;
 	}*/
 	
+	public int insertMemorandumSheet(AgreementMemorandumVO memorandumInform) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		int result = mapper.insertMemorandumSheet(memorandumInform);
+		return result;
+	}
 }

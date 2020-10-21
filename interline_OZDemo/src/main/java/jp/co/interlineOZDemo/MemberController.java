@@ -79,6 +79,12 @@ public class MemberController {
 		System.out.println("설정된 루트경로:"+rootPath);
 	}
 	
+	@RequestMapping(value="/selectSystem", method=RequestMethod.GET)
+	public String selectSystem(){
+		
+		return "selectSystem";
+	}
+	
 	//memberMain
 	@RequestMapping(value = "/memberMain", method=RequestMethod.GET)
 	public String mainMenuMember() {

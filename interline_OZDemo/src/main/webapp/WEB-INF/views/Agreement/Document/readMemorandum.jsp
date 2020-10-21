@@ -31,7 +31,7 @@
 	display:inline-block;
 	width:100px;
 }
-.billMenuTd{
+.memorandumMenuTd{
 	width: 100px;
 }
 </style>
@@ -63,11 +63,14 @@ function back(){
 <body style="width:98%;height:98%">
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
 <table style="text-align:center; margin:auto;"><tr>
-<td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 billMenuButton" onclick="back()">戻る</span></td>
+<td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript">
+	var userNum = "${userNum}";
+	var systemReportNum= "${systemReportNum}";
+
 	function SetOZParamters_OZViewer() {
 		var oz;
 		oz = document.getElementById("OZViewer");
@@ -78,8 +81,8 @@ function back(){
 		
 		oz.sendToActionScript("odi.odinames", "readMemorandum");
  		oz.sendToActionScript("odi.readMemorandum.pcount", "2");
- 		oz.sendToActionScript("odi.readMemorandum.args1", "userNum=");
-		oz.sendToActionScript("odi.readMemorandum.args2", "systemReportNum=");
+ 		oz.sendToActionScript("odi.readMemorandum.args1", "userNum="+userNum);
+		oz.sendToActionScript("odi.readMemorandum.args2", "systemReportNum="+systemReportNum);
 		return true;
 	}
 	start_ozjs("OZViewer", "http://127.0.0.1:8888/oz80/ozhviewer/");

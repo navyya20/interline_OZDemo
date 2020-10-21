@@ -134,4 +134,38 @@
 		reportNum in (<foreach item="item" index="i" collection="reportNum" separator=",">#{item}</foreach>)
 	</delete>
 	
+	<insert id="insertMemorandumSheet" parameterType="agreementMemorandum">
+	insert into agreementMemorandum(
+	userNum 
+	,systemReportNum
+	,reportNum 
+
+	,company	
+	,representative
+	,post	
+	,address
+	,stamp
+
+	,memorandumDate
+	,customer	
+	,sign
+	,sort	
+	)values(
+	#{userNum}
+	,get_seq('agreementSeq')
+	,#{reportNum}
+
+	,#{company}	
+	,#{representative}
+	,#{post}	
+	,#{address}
+	,#{stamp}
+
+	,#{memorandumDate}
+	,#{customer}
+	,#{sign}
+	,#{sort}
+	)
+	</insert>
+	
 </mapper>

@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import jp.co.interlineOZDemo.dao.MemberDAO;
 import jp.co.interlineOZDemo.dao.agreement.AgreementMemberDAO;
 import jp.co.interlineOZDemo.util.FileService;
@@ -28,6 +30,7 @@ import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.agreement.AgreementMemorandumVO;
 import jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO;
 
 
@@ -169,5 +172,53 @@ public class AgreementMemberController {
 		
 		return "自社情報を修正しました。";
 	}
+
+
+	//각서 작성
+	@RequestMapping(value="/writeMemorandum", method=RequestMethod.GET)
+	public String writeMemorandumSheet(Model model,HttpSession session) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+
+		model.addAttribute("userNum", userInform.getUserNum());
+		model.addAttribute("stampFileName", userInform.getStampFileName());
+		return "Agreement/Document/writeMemorandum";
+	}
 	
+	//각서 저장
+	@ResponseBody
+	@RequestMapping(value="/saveMemorandum", method=RequestMethod.POST)
+	public String saveMemorandumSheet(String jsonStr,Model model,HttpSession session) throws ParseException {
+		logger.debug("각서 저장:{}",jsonStr);
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		Gson gson = new Gson();
+		AgreementMemorandumVO memorandumVO = gson.fromJson(jsonStr, AgreementMemorandumVO.class); //json객체의 vo객체화
+		
+		Date memorandum_Date = oldDate_pattern.parse(memorandumVO.getMemorandumDate());
+		memorandumVO.setMemorandumDate(newDate_pattern.format(memorandum_Date)); //청구서에 입력된 날짜 데이터 포멧
+		
+		int nextReportNum = dao.nextReportNum(memorandumVO.getUserNum());
+		memorandumVO.setReportNum(nextReportNum + 1);
+		
+		memorandumVO.setUserNum(userInform.getUserNum());
+		memorandumVO.setSort("覚書");
+		
+		logger.debug("각서 정보:{}",memorandumVO);
+		int result = dao.insertMemorandumSheet(memorandumVO);
+		
+		if(result == 1) {
+			return "success";
+		}
+		
+		return "error";
+	}
+	
+	//각서 읽기
+	@RequestMapping(value="/readMemorandum", method=RequestMethod.GET)
+	public String readMemorandumSheet(int reportNum,Model model,HttpSession session) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+
+		model.addAttribute("userNum", userInform.getUserNum());
+		model.addAttribute("systemReportNum", reportNum);
+		return "Agreement/Document/readMemorandum";
+	}
 }

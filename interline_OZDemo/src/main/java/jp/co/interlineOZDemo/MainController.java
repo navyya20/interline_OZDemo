@@ -81,12 +81,6 @@ public class MainController {
 		return result;
 	}
 	
-	@RequestMapping(value="/member/selectSystem", method=RequestMethod.GET)
-	public String selectSystem(){
-		
-		return "selectSystem";
-	}
-	
 	//logout
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String Logout(HttpSession session) {

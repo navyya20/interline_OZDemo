@@ -58,23 +58,20 @@ $(document).ready(function(){
 });
 
 function save(reportNum){
-	var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
+	var memorandumData=OZViewer.GetInformation("INPUT_JSON_ALL"); //입력된 값을 전부 받아오기
 	console.log(memorandumData);
 
 		$.ajax({
 			url: "saveMemorandum",
 			type: 'POST',
-			data: {memorandumData},
+			data: {jsonStr:memorandumData},
 			success: function(data){
-				
-				if(data == "error"){
-					alert('エラー！');
-				}
-				
+								
 				alert("覚書を作成しました。");
 				location.href="agreementMainMenu";
 			},
 			error: function(e){
+				console.log(JSON.stringify(e));
 				alert('エラー！');
 			}
 		});
