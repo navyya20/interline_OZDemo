@@ -95,7 +95,9 @@
 	
 	<!-- 본격 동의서시스템의 유저정보를 수정한다. -->
 	<update id="updateAgreementUserInform" parameterType="agreementUserInform">
-		update agreementUserInform
+		update 
+			agreementUserInform
+		set
 			company=#{company},
 			representative=#{representative},
 			post=#{post},
@@ -103,7 +105,7 @@
 			email=#{email},
 			phoneNumber=#{phoneNumber},
 			incharge=#{incharge}
-		where uesrNum=#{userNum}
+		where userNum=#{userNum}
 	</update>
 	<!-- 비밀번호를 바꿨을경우 모체userInform(견적서시스템의 userInform)의 비밀번호를 수정한다. -->
 	<update id="updatePasswordByAgreementSys" parameterType="member">

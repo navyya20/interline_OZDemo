@@ -44,10 +44,11 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#companyName").on("propertychange input", function() { limitString("companyName",40); });
+		$("#companyName").on("propertychange input", function() { limitString("companyName",20); });
 		$("#representative").on("propertychange input", function() { limitString("representative",26); });
-		$("#address").on("propertychange input", function() { limitString("address",120); });
+		$("#address").on("propertychange input", function() { limitString("address",70); });
 		$("#incharge").on("propertychange input", function() { limitString("incharge",20); });
+		$("#email").on("propertychange input", function() { limitString("email",30); });
 	});
 
 	

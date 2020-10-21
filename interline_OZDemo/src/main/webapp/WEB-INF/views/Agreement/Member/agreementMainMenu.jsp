@@ -71,7 +71,7 @@ $(function(){
 	<tr>
 		<td style="font-weight: bold;">${sessionScope.userInform.userId}様</td>
 		<td class="mainMenuTd">
-			<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">情報修正</span>
+			<span id="agreementUpdateMyProfile" class="pc_font_button1 mainMenuButton move_btn">情報修正</span>
 		</td>
 		<td class="mainMenuTd">
 			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeAgreement'">同意書作成</span>
