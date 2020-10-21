@@ -43,8 +43,22 @@
 </div>
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript" >
-	//세션으로부터 유저인폼 jsonString을 받는다.
+$(document).ready(function(){
+	 isMobile(); 
+	function isMobile() {
+	    var filter = "win16|win32|win64|mac|macintel";
+	    if( navigator.platform  ){
+	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+	      }else{
+	    	  $("body").addClass('pc_body');
+		      $("#title").addClass("pc_font_title");
+		      $(".btn").addClass("pc_font_button2");
+	      }
+	    }
+	  }
 	
+});
+	//세션으로부터 유저인폼 jsonString을 받는다.
 	var userNum = "${userNum}";
 	var reportNum = "${reportNum}";
 	var stamp = "${stamp}"
