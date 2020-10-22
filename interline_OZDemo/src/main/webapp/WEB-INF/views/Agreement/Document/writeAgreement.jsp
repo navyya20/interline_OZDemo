@@ -46,7 +46,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="OZViewer" style="width:98%;height:98%"></div>
+	<div id="OZViewer" style="width:100%; height:98%;"></div>
 	<script type="text/javascript" >
 		//세션으로부터 유저인폼 jsonString을 받는다.
 		var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/";

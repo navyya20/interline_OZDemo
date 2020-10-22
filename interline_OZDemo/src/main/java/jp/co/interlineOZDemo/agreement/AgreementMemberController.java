@@ -57,11 +57,13 @@ public class AgreementMemberController {
 		return "Agreement/Member/agreementMainMenu";
 	}
 	
-	//견적서 리스트 페이지 
+	//동의서 리스트 페이지 
 	@RequestMapping(value="/agreementList", method=RequestMethod.GET)
 	public String getEstimateSheetList(HttpSession session , Model model ,@RequestParam(value="page", defaultValue="1") int page) {
 		System.out.println("동의서 리스트 페이지 호출 실행");
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		String device = (String)session.getAttribute("device");
+		System.out.println(device);
 		int total = dao.getTotalAgreement(userInform.getUserNum());
 		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
 		ArrayList<AgreementAgreementVO> AgreementArray = new ArrayList<AgreementAgreementVO>();

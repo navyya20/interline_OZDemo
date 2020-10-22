@@ -51,7 +51,7 @@ public class MainController {
 	//Login
 	@ResponseBody
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public HashMap<String, String> Login(HttpSession session,String userId, String password) {
+	public HashMap<String, String> Login(HttpSession session,String userId, String password, String checkDevice) {
 		logger.debug("login id:{}, pw:{}", userId,password);
 		UserInformVO userIdPassword = new UserInformVO();
 		userIdPassword.setUserId(userId);
@@ -64,7 +64,7 @@ public class MainController {
 			session.setAttribute("userInform", member);
 			JSONObject jsonObject = new JSONObject(member);
 			session.setAttribute("userInformJsonString", jsonObject.toString());
-			
+			session.setAttribute("device",checkDevice);
 			if(member.getAuthority().equals("a")) {
 				result.put("url", "admin/adminMain");		
 			}else if(member.getAuthority().equals("u")) {

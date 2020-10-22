@@ -36,12 +36,22 @@ $(document).ready(function(){
 		if(id.length == 0){alert("IDを入力してください。");$("#login_id").focus();return false;}
 		if(pw.length == 0){alert("PWを入力してください。");$("#login_pw").focus();return false;}
 
+		var filter = "win16|win32|win64|mac|macintel";
+		var checkDevice="PC";
+		if( navigator.platform  ){
+			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+				checkDevice="MB";
+		    }else{
+				checkDevice="PC";		    	
+		    }
+		}
+		
 		console.log("ID/PW를 확인하러 갑니다.");
 		$.ajax({
 			type:"post",
 			url:"login",
 			traditional: true,
-			data:{userId:id,password:pw},
+			data:{"userId":id,"password":pw,"checkDevice":checkDevice},
 			dataType:"json",
 			success:function(result){
 				if(result.error!=null){
