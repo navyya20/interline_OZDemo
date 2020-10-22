@@ -39,4 +39,6 @@ public interface AgreementMemberMapper {
 	//UserInformVO getUserInformByAgreementSys(int userNum);
 	
 	int insertMemorandumSheet(AgreementMemorandumVO memorandumInform);
+
+	AgreementMemorandumVO getMemorandum(AgreementMemorandumVO userNumReportNum);
 }

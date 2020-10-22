@@ -69,7 +69,7 @@ function back(){
 <div id="OZViewer" style="width:98%;height:98%"></div>
 <script type="text/javascript">
 	var userNum = "${userNum}";
-	var systemReportNum= "${systemReportNum}";
+	var reportNum= "${reportNum}";
 
 	function SetOZParamters_OZViewer() {
 		var oz;
@@ -82,7 +82,11 @@ function back(){
 		oz.sendToActionScript("odi.odinames", "readMemorandum");
  		oz.sendToActionScript("odi.readMemorandum.pcount", "2");
  		oz.sendToActionScript("odi.readMemorandum.args1", "userNum="+userNum);
-		oz.sendToActionScript("odi.readMemorandum.args2", "systemReportNum="+systemReportNum);
+		oz.sendToActionScript("odi.readMemorandum.args2", "reportNum="+reportNum);
+
+		oz.sendToActionScript("export.format","pdf");
+		oz.sendToActionScript("export.filename",reportNum+"_MemorandumSheet_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
+		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;
 	}
 	start_ozjs("OZViewer", "http://127.0.0.1:8888/oz80/ozhviewer/");

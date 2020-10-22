@@ -104,4 +104,10 @@ public class AgreementMemberDAO {
 		int result = mapper.insertMemorandumSheet(memorandumInform);
 		return result;
 	}
+
+	public AgreementMemorandumVO getMemorandum(AgreementMemorandumVO userNumReportNum) {
+		AgreementMemberMapper mapper = session.getMapper(AgreementMemberMapper.class);
+		AgreementMemorandumVO memorandumInform = mapper.getMemorandum(userNumReportNum);
+		return memorandumInform;
+	}
 }

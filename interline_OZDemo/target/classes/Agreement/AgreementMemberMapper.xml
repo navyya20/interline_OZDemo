@@ -136,6 +136,7 @@
 		reportNum in (<foreach item="item" index="i" collection="reportNum" separator=",">#{item}</foreach>)
 	</delete>
 	
+	<!-- 각서 저장 -->
 	<insert id="insertMemorandumSheet" parameterType="agreementMemorandum">
 	insert into agreementMemorandum(
 	userNum 
@@ -170,4 +171,7 @@
 	)
 	</insert>
 	
+	<select id="getMemorandum" parameterType="agreementMemorandum" resultType="agreementMemorandum">
+		select * from agreementMemorandum where userNum=#{userNum} and reportNum=#{reportNum}
+	</select>
 </mapper>

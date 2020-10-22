@@ -141,6 +141,30 @@ function selectAll(){
 		checkBoxItems.prop('checked', false) ;
 	}
 }
+
+function readReportSheet(reportNum,sort){
+	var form = document.createElement("form");
+	var url;
+	if(sort == "覚書"){
+		url = "readMemorandum";
+	}else if(sort == "동의서의 sort값"){
+		url ="readAgreement";
+	}
+
+	form.setAttribute("charset","UTF-8");
+	form.setAttribute("method","post");
+	form.setAttribute("action",url);
+
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type","hidden");
+	hiddenField.setAttribute("name","reportNum");
+	hiddenField.setAttribute("value",reportNum);
+
+	form.appendChild(hiddenField);
+	parent.document.body.appendChild(form);
+	form.submit();
+	
+}
 </script>
 
 <body>
@@ -161,7 +185,7 @@ function selectAll(){
 		<td>
 			<fmt:parseDate value="${sheet.agreementDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/></td>
-		<td><a href="readAgreement?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.customer}</a></td>
+		<td><a href="javascript:void(0);" onclick="readReportSheet('${sheet.reportNum}','${sheet.sort}')" target="_parent" style="text-decoration: none;">${sheet.customer}</a></td>
 	</tr>
 	</c:forEach>
 

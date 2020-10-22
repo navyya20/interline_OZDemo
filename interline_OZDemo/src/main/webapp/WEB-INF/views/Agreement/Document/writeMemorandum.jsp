@@ -58,13 +58,14 @@ $(document).ready(function(){
 });
 
 function save(reportNum){
-	var memorandumData=OZViewer.GetInformation("INPUT_JSON_ALL"); //입력된 값을 전부 받아오기
+	var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
+	var name = memorandumData.customer;
 	console.log(memorandumData);
 
 		$.ajax({
 			url: "saveMemorandum",
 			type: 'POST',
-			data: {jsonStr:memorandumData},
+			data: memorandumData,
 			success: function(data){
 								
 				alert("覚書を作成しました。");

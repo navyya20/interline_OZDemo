@@ -114,7 +114,7 @@ public class AgreementMemberController {
 		if(agreement==null) {
 			System.out.println("reportNum:"+reportNum+"  userNum:"+userInform.getUserNum()+"  열람하려는 문서가 없습니다.");
 			return "Agreement/Member/agreementMainMenu";
-		}
+		} 
 		
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
@@ -180,25 +180,23 @@ public class AgreementMemberController {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 
 		model.addAttribute("userNum", userInform.getUserNum());
-		model.addAttribute("stampFileName", userInform.getStampFileName());
+		model.addAttribute("stampFileName", userInform.getStampFileName()); //도장이름
 		return "Agreement/Document/writeMemorandum";
 	}
 	
 	//각서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveMemorandum", method=RequestMethod.POST)
-	public String saveMemorandumSheet(String jsonStr,Model model,HttpSession session) throws ParseException {
-		logger.debug("각서 저장:{}",jsonStr);
+	public String saveMemorandumSheet(AgreementMemorandumVO memorandumVO,Model model,HttpSession session) throws ParseException {
+		logger.debug("각서 저장:{}",memorandumVO);
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		Gson gson = new Gson();
-		AgreementMemorandumVO memorandumVO = gson.fromJson(jsonStr, AgreementMemorandumVO.class); //json객체의 vo객체화
-		
+
 		Date memorandum_Date = oldDate_pattern.parse(memorandumVO.getMemorandumDate());
-		memorandumVO.setMemorandumDate(newDate_pattern.format(memorandum_Date)); //청구서에 입력된 날짜 데이터 포멧
+		memorandumVO.setMemorandumDate(newDate_pattern.format(memorandum_Date)); //각서에 입력된 날짜 데이터 포멧
 		
-		int nextReportNum = dao.nextReportNum(memorandumVO.getUserNum());
+		int nextReportNum = dao.nextReportNum(userInform.getUserNum());
+		
 		memorandumVO.setReportNum(nextReportNum + 1);
-		
 		memorandumVO.setUserNum(userInform.getUserNum());
 		memorandumVO.setSort("覚書");
 		
@@ -213,12 +211,22 @@ public class AgreementMemberController {
 	}
 	
 	//각서 읽기
-	@RequestMapping(value="/readMemorandum", method=RequestMethod.GET)
+	@RequestMapping(value="/readMemorandum", method=RequestMethod.POST)
 	public String readMemorandumSheet(int reportNum,Model model,HttpSession session) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-
+		
+		AgreementMemorandumVO userNumReportNum = new AgreementMemorandumVO();
+		userNumReportNum.setUserNum(userInform.getUserNum());
+		userNumReportNum.setReportNum(reportNum);
+		AgreementMemorandumVO memorandum = dao.getMemorandum(userNumReportNum);
+		
+		if(memorandum==null) {
+			System.out.println("reportNum:"+reportNum+"  userNum:"+userInform.getUserNum()+"  열람하려는 문서가 없습니다.");
+			return "Agreement/Member/agreementMainMenu";
+		} 
+		
 		model.addAttribute("userNum", userInform.getUserNum());
-		model.addAttribute("systemReportNum", reportNum);
+		model.addAttribute("reportNum", reportNum);
 		return "Agreement/Document/readMemorandum";
 	}
 }
