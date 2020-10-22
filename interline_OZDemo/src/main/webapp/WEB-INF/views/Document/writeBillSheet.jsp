@@ -49,7 +49,7 @@ $(document).ready(function(){
 </script>
 <body>
 
-<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="billMenuTd"><span id="save_Btn"  class="pc_font_button1 billMenuButton" onclick="save(${reportNum})">作成</span></td>
 <td class="billMenuTd"></td>
@@ -57,7 +57,7 @@ $(document).ready(function(){
 </tr></table>
 </div>
 
-<div id="OZViewer" style="width:98%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:98%"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";

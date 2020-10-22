@@ -41,7 +41,7 @@
 		</tr>
 	</table>
 </div>
-<div id="OZViewer" style="width:98%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:98%"></div>
 <script type="text/javascript" >
 $(document).ready(function(){
 	 isMobile(); 
