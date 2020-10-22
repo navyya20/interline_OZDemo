@@ -154,8 +154,8 @@ public class MemberController {
 
 		Date estimate_Date = oldDate_pattern.parse(estimateSheetVO.getDateForDisplaying());
 		estimateSheetVO.setDateForDisplaying(newDate_pattern.format(estimate_Date));//청구서에 입력된 날짜 데이터 포멧	
-	/*	Date deadline_Date = oldDate_pattern.parse(estimateSheetVO.getDeadline());
-		estimateSheetVO.setDeadline(newDate_pattern.format(deadline_Date)); */
+		Date deadline_Date = oldDate_pattern.parse(estimateSheetVO.getDeadline());
+		estimateSheetVO.setDeadline(newDate_pattern.format(deadline_Date));
 		
 		//견적내용 insert후 reportNum받아옴.
 		int reportNum = dao.insertEstimateSheet(estimateSheetVO);
