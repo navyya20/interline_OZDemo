@@ -147,7 +147,7 @@ function readReportSheet(reportNum,sort){
 	var url;
 	if(sort == "覚書"){
 		url = "readMemorandum";
-	}else if(sort == "동의서의 sort값"){
+	}else if(sort == "同意書"){
 		url ="readAgreement";
 	}
 

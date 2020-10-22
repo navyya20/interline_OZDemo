@@ -103,7 +103,7 @@ public class AgreementMemberController {
 	}
 	
 	// 동의서 열람 페이지 
-	@RequestMapping(value="/readAgreement", method=RequestMethod.GET)
+	@RequestMapping(value="/readAgreement", method=RequestMethod.POST)
 	public String readAgreement(int reportNum, Model model, HttpSession session) {
 		System.out.println("동의서 열람 실행");
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
