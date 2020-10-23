@@ -124,6 +124,10 @@ public class AgreementMemberController {
 		
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
+		String device = (String)session.getAttribute("device");
+		if(device.equals("MB")) {
+			return "Agreement/Document/readAgreementMobile";
+		}
 		return "Agreement/Document/readAgreement";
 	}
 	
