@@ -10,7 +10,7 @@
 </head>
 
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>
-<link href="../resources/css/Font-Style.css?ver=1" rel="stylesheet">
+<link href="../resources/css/Font-Style.css?ver=2" rel="stylesheet">
 <style>
 	body{
 		text-align: center;
@@ -43,18 +43,22 @@
 	.titleRow{
 		background-color: rgb(150, 200, 255);
 	} 
+	
 </style>
 
 <script>
 $(function(){
 
 	isMobile(); 
-		
+	
 	function isMobile() {
 		var filter = "win16|win32|win64|mac|macintel";
 		if( navigator.platform  ){
 			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
-				//$("body").attr('class','mobile_body');
+				$("body").attr('class','mobile_body');
+				$("#allSelect").attr('class','mobile_checkbox');
+				$(".checkbox").attr('class','mobile_checkbox');
+				$(".btn").addClass("pc_font_button1");
 		    }else{
 		    	$("body").addClass("pc_body");
 		    	$("#title").addClass("pc_font_title");
@@ -62,24 +66,6 @@ $(function(){
 		    }
 		}
 	} 
-	
-	$('#list_Box').css('min-height',window.innerHeight-100+'px');
-	$('#list_Box').attr("src","estimateSheetList");
-	
-	$('#list_Box').load(function(){
-		
-		if($(this).contents().find('#OZViewer').html()==null){
-         	$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
-		}else{
-			$(this).css('height',window.innerHeight-40+'px');
-		}
-		
-		if(($(this)[0].contentWindow.location.pathname).indexOf("statistics") > -1){
-			$('#list_Box').css('width','1300px');
-		}else{
-			$('#list_Box').css('width','1100px');
-		}
-	});
 });
 function writeNewSheet(){
 	window.parent.location.href="writeEstimate";
@@ -169,18 +155,18 @@ function readReportSheet(reportNum,sort){
 
 <body>
 <div id="title">同意書リスト</div>
-<div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="pc_font_button2" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
+<div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="btn" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
 	<tr>
-		<td class="titleRow" style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
+		<td class="titleRow" style="width: 0.5%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 5%;">分類</td>
-		<td class="titleRow" style="width: 9%;">同意日</td>
-		<td class="titleRow" style="width: 9%;">顧客</td>
+		<td class="titleRow" style="width: 8%;">同意日</td>
+		<td class="titleRow" style="width: 15%;">顧客</td>
 	</tr>
 	<c:forEach var="sheet" items="${AgreementArray}" varStatus="status">
 	<tr>
-		<td><input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
+		<td><input id='row${status.count}' class="checkbox" type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
 		<td>${sheet.sort}</td>
 		<td>
 			<fmt:parseDate value="${sheet.agreementDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -207,6 +193,7 @@ function readReportSheet(reportNum,sort){
 	<a href="javascript:formSubmit(${pn.currentPage + pn.pagePerGroup})">▷▷</a>
 	<input type="hidden" id="page">
 </div>
+
 
 </body>
 </html>

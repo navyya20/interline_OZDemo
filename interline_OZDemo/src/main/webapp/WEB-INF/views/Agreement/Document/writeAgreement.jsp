@@ -3,14 +3,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
+<% String device = (String)request.getSession().getAttribute("device"); %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
-<title>estimateSheet</title>
-</head>
 
+
+<%//out.print(properties.getOZViewerSource(device)); %>
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.css" type="text/css"/>
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
@@ -23,6 +24,7 @@
 
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<title>writeAgreement</title>
 <style>
 	.mainMenuButton{	
 		display:inline-block;
@@ -32,6 +34,7 @@
 		width: 100px;
 	}
 </style>
+</head>
 <body class="pc_body">
 	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 		<table style="text-align: center; margin: auto;">
@@ -49,7 +52,6 @@
 	<div id="OZViewer" style="width:100%; height:98%;"></div>
 	<script type="text/javascript" >
 		//세션으로부터 유저인폼 jsonString을 받는다.
-		var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/";
 		function getUserInform(){
 			//var userInformJsonString = $('#userInformJsonString').html();
 			var userInformJsonString = '${userInformJsonString}';

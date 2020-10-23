@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
 import org.springframework.core.io.ClassPathResource;
@@ -71,7 +73,21 @@ public class GetProperties {
 	}
 
 
-	
+	public String getOZViewerSource(String device) {
+		
+		String sources = "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\r\n" + 
+				"<meta name=\"viewport\" content=\"width=device-width,initial-scale=1,user-scalable=no\"/>\r\n" + 
+				"<link rel=\"stylesheet\" href=\"http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css\"/>\r\n" + 
+				"<script src=\"http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js\"></script>\r\n" + 
+				"<link rel=\"stylesheet\" type=\"text/css\" href=\"http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css\"/>\r\n" + 
+				"<script type=\"text/javascript\" src=\"http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js\"></script>\r\n" + 
+				"<script src=\"http://"+this.ozIP+"/oz80/ozhviewer/jquery.mouseSwipe.js\" type=\"text/javascript\"></script>";		
+		if( device.equals("PC") ) {
+			return sources;
+		}else {
+			return sources;			
+		}
+	}
 
 
 	

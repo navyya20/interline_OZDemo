@@ -15,7 +15,8 @@
 $(function(){
 	$('.move_btn').click(member_frameMove);
 	$('#logout').click(member_logout);
-
+	isMobile();
+	
 	function member_frameMove(){
 		var url = $(this).attr('id');
 		console.log(url);
@@ -25,6 +26,35 @@ $(function(){
 	function member_logout(){
 		location.href="../logout";
 	}
+
+	 
+	
+	function isMobile() {
+		var filter = "win16|win32|win64|mac|macintel";
+		if( navigator.platform  ){
+			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+				$("body").attr('class','mobile_body');
+				$("#list_Box").attr('class','list_Box_Mobile');
+				$(".mainMenuButton").addClass("mainMenuButton_Mobile");
+		    	$(".mainMenuTd").addClass("mainMenuTd_Mobile");
+				$("#printId").html('');
+				$("#printId").attr('class','printId_Mobile');
+				$("#agreementUpdateMyProfile").html('情報<br>修正');
+				$("#writeNewAgreement").html('同意書<br>作成');
+				$("#writeNewMemorandum").html('覚書<br>作成');
+				$("#agreementList").html('文書<br>リスト');
+				$("#logout").html('ログ<br>アウト');
+		    }else{
+		    	$("body").addClass("pc_body");
+		    	$("#title").addClass("pc_font_title");
+		    	$(".btn").addClass("pc_font_button2");
+		    	$(".mainMenuButton").addClass("mainMenuButton_PC");
+		    	$(".mainMenuTd").addClass("mainMenuTd_PC");
+				$("#list_Box").attr('class','list_Box_PC');
+		    }
+		}
+	} 
+	
 
 	$('#list_Box').load(function(){
 		var title = $(this).contents()[0].title;
@@ -51,33 +81,48 @@ $(function(){
 	height: 100%;
 	text-align: center;
 }
-#list_Box{
+.list_Box_PC{
 	width: 50%;
 	height: 100%;
 	z-index: 1;
 }
-.mainMenuButton{
+.list_Box_Mobile{
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+.mainMenuButton_PC{
 	display:inline-block;
 	width:100px;
 }
-.mainMenuTd{
+.mainMenuTd_PC{
 	width: 150px;
+}
+.mainMenuButton_Mobile{
+	display:inline-block;
+	width:150px;
+}
+.mainMenuTd_Mobile{
+	width: 180px;
+}
+.printId{
+		width: 0px;
 }
 
 </style>
-<body class="pc_body">
+<body>
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 <table style="text-align: center; margin: auto;">
 	<tr>
-		<td style="font-weight: bold;">${sessionScope.userInform.userId}様</td>
+		<td id="printId" style="font-weight: bold;">${sessionScope.userInform.userId}様</td>
 		<td class="mainMenuTd">
 			<span id="agreementUpdateMyProfile" class="pc_font_button1 mainMenuButton move_btn">情報修正</span>
 		</td>
 		<td class="mainMenuTd">
-			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeAgreement'">同意書作成</span>
+			<span id="writeNewAgreement" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeAgreement'">同意書作成</span>
 		</td>
 		<td class="mainMenuTd">
-			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeMemorandum'">覚書作成</span>
+			<span id="writeNewMemorandum" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeMemorandum'">覚書作成</span>
 		</td>
 		<td class="mainMenuTd">
 			<span id="agreementList" class="pc_font_button1 mainMenuButton move_btn">文書リスト</span>

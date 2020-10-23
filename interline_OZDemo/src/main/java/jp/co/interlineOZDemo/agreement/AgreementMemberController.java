@@ -84,6 +84,10 @@ public class AgreementMemberController {
 		String userInformJsonString = userInformJsonObject.toString();
 		System.out.println("agreementUserInform:"+userInformJsonString);
 		model.addAttribute("userInformJsonString", userInformJsonString);
+		String device = (String)session.getAttribute("device");
+		if(device.equals("MB")) {
+			return "Agreement/Document/writeAgreementMobile";
+		}
 		return "Agreement/Document/writeAgreement";
 	}
 	

@@ -25,9 +25,22 @@
 </style>
 <script>
 $(document).ready(function(){
-	 $('#btn_login').click(input_Check);
-	 $("#login_id").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
-	 $("#login_pw").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
+	$('#btn_login').click(input_Check);
+	$("#login_id").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
+	$("#login_pw").keyup(function(e){if(e.keyCode == 13)  input_Check(); });
+	isMobile(); 
+	function isMobile() {
+		var filter = "win16|win32|win64|mac|macintel";
+		if( navigator.platform  ){
+			if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
+				$("body").attr('class','mobile_body');
+		    }else{
+		    	$("body").addClass("pc_body");
+		    	$("#title").addClass("pc_font_title");
+		    	$(".btn").addClass("pc_font_button2");
+		    }
+		}
+	} 
 	function input_Check(){
 		var id=$("#login_id").val();
 		var pw=$("#login_pw").val();
@@ -104,7 +117,7 @@ if ( self !== top ) {
 	</tr>
 	<tr>
 	<td colspan="2" class="login_title" style="text-align: left;">
-		<span>OZ-DEMO 見積書編</span>
+		<span>OZ-DEMO</span>
 	</td>
 	</tr>
 	<tr>

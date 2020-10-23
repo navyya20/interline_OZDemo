@@ -31,7 +31,7 @@
 			width: 100px;
 		}
 	</style>
-<body>
+<body class="pc_body">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>
@@ -71,7 +71,7 @@
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
 	
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 	}

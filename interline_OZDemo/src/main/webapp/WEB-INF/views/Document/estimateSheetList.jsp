@@ -63,23 +63,7 @@ $(function(){
 		}
 	} 
 	
-	$('#list_Box').css('min-height',window.innerHeight-100+'px');
-	$('#list_Box').attr("src","estimateSheetList");
 	
-	$('#list_Box').load(function(){
-		
-		if($(this).contents().find('#OZViewer').html()==null){
-         	$(this).css('height',($(this).contents().find('body')[0].scrollHeight)+50+'px');
-		}else{
-			$(this).css('height',window.innerHeight-40+'px');
-		}
-		
-		if(($(this)[0].contentWindow.location.pathname).indexOf("statistics") > -1){
-			$('#list_Box').css('width','1300px');
-		}else{
-			$('#list_Box').css('width','1100px');
-		}
-	});
 });
 function writeNewSheet(){
 	window.parent.location.href="writeEstimate";
