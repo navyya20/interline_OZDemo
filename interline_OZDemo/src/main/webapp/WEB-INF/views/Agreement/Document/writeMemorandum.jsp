@@ -15,7 +15,9 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<script src="<c:url value = '../resources/js/memorandum.js'/>" charset="utf-8"></script>
 
+<title>writeMemorandum</title>
 <style>
 .memorandumMenuButton{
 	display:inline-block;
@@ -43,43 +45,17 @@ $(document).ready(function(){
 	
 });
 
-function save(reportNum){
-	var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
-	var name = memorandumData.customer;
-	console.log(memorandumData);
-
-		$.ajax({
-			url: "saveMemorandum",
-			type: 'POST',
-			data: memorandumData,
-			success: function(data){
-								
-				alert("覚書を作成しました。");
-				location.href="agreementMainMenu";
-			},
-			error: function(e){
-				console.log(JSON.stringify(e));
-				alert('エラー！');
-			}
-		});
-
-	return false;
-}
-
-function back(){
-	location.href="agreementMainMenu";
-}
 </script>
 </head>
-<body style="width:98%;height:98%">
-<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<body>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="save_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="save(${reportNum})">作成</span></td>
 <td class="memorandumMenuTd"></td>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
-<div id="OZViewer" style="width:98%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:100%"></div>
 <script type="text/javascript">
 
 	var userNum = "${userNum}";
@@ -91,6 +67,8 @@ function back(){
 		oz.sendToActionScript("connection.servlet", "http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname", "OZDemo_Agreement/Memorandum/writeMemorandum.ozr");
 		oz.sendToActionScript("connection.pcount","1");
+		oz.sendToActionScript("viewer.pagedisplay", "singlepagecontinuous");
+		
 		oz.sendToActionScript("connection.args1","stampFileName="+stamp);
 
 		oz.sendToActionScript("global.language", "ja_JP");

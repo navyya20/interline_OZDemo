@@ -1,8 +1,10 @@
 <%@page import="jp.co.interlineOZDemo.util.GetProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <% String device = (String)request.getSession().getAttribute("device"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,8 +28,9 @@
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
-<title>writeMemorandumMobile</title>
+<script src="<c:url value = '../resources/js/memorandum.js'/>" charset="utf-8"></script>
 
+<title>writeMemorandumMobile</title>
 <style>
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
@@ -56,46 +59,55 @@ $(document).ready(function(){
 	      }
 	    }
 	  }
-	
+
+	function save(reportNum){
+		var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
+		var customer_Len = memorandumData.customer.length;
+		var sign_Len = memorandumData.sign.length;
+		
+		if( 0<customer_Len && customer_Len<20 && 0<sign_Len && sign_Len<15000 ){
+			$.ajax({
+				url: "saveMemorandum",
+				type: 'POST',
+				data: memorandumData,
+				success: function(data){
+									
+					alert("覚書を作成しました。");
+					location.href="agreementMainMenu";
+				},
+				error: function(e){
+					console.log(JSON.stringify(e));
+					alert('エラー！');
+				}
+			});
+		}
+
+		if(0>=customer_Len || customer_Len>20){
+			alert("名前は1~20文字です。");
+		}else if(0>=sign_Len){
+			alert("サインを入力してください。");
+		}else if(sign_Len>15000){
+			alert("サインが長いです。");
+		}
+		
+		return false;
+	}
+
+	function back(){
+		location.href="agreementMainMenu";
+	}
 });
-
-function save(reportNum){
-	var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
-	var name = memorandumData.customer;
-	console.log(memorandumData);
-
-		$.ajax({
-			url: "saveMemorandum",
-			type: 'POST',
-			data: memorandumData,
-			success: function(data){
-								
-				alert("覚書を作成しました。");
-				location.href="agreementMainMenu";
-			},
-			error: function(e){
-				console.log(JSON.stringify(e));
-				alert('エラー！');
-			}
-		});
-
-	return false;
-}
-
-function back(){
-	location.href="agreementMainMenu";
-}
 </script>
 </head>
-<body style="width:98%;height:98%">
-<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<body>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="save_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="save(${reportNum})">作成</span></td>
 <td class="memorandumMenuTd"></td>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
-<div id="OZViewer" style="width:98%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:100%"></div>
 <script type="text/javascript">
 
 	var userNum = "${userNum}";

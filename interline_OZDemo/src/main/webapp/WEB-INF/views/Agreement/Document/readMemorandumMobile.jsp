@@ -25,8 +25,8 @@
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
-<title>readMemorandumMobile</title>
 
+<title>readMemorandumMobile</title>
 <style>
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
@@ -65,13 +65,13 @@ function back(){
 </script>
 
 </head>
-<body style="width:98%;height:98%">
-<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:98%;">
+<body>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
-<div id="OZViewer" style="width:98%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:100%"></div>
 <script type="text/javascript">
 	var userNum = "${userNum}";
 	var reportNum= "${reportNum}";
