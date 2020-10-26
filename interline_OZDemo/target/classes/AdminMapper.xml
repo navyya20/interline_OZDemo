@@ -34,6 +34,10 @@
 		)
 	</insert>
 	
+	<insert id="registerAgreementMember" parameterType="int">
+		insert into agreementUserInform(userNum)values(#{userNum})
+	</insert>
+	
 	<select id="getMemberList" resultType="member">
 		select 
 			userNum,userId,companyName,representative,startDate 

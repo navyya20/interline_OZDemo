@@ -191,6 +191,11 @@ public class AgreementMemberController {
 
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("stampFileName", userInform.getStampFileName()); //도장이름
+		
+		String device = (String)session.getAttribute("device");
+		if(device.equals("MB")) {
+			return "Agreement/Document/writeMemorandumMobile";
+		}
 		return "Agreement/Document/writeMemorandum";
 	}
 	
@@ -237,6 +242,11 @@ public class AgreementMemberController {
 		
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
+		
+		String device = (String)session.getAttribute("device");
+		if(device.equals("MB")) {
+			return "Agreement/Document/readMemorandumMobile";
+		}
 		return "Agreement/Document/readMemorandum";
 	}
 }

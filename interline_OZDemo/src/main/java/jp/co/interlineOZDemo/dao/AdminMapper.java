@@ -19,4 +19,6 @@ public interface AdminMapper {
 
 	UserInformVO check_Multiple(HashMap<String, Object> map);
 
+	int registerAgreementMember(int userNum);
+
 }

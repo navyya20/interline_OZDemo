@@ -85,10 +85,15 @@ public class AdminController {
 	@RequestMapping(value="/registerMember", method=RequestMethod.POST)
 	public String registerMember(UserInformVO member) {
 		logger.debug("insertMember:{}",member);
-		int result = dao.registerMember(member);
+		int resultMember = dao.registerMember(member);
 		
-		if(result == 1) {
-			logger.debug("登録成功");
+		if(resultMember == 1) {
+			logger.debug("ユーザー登録成功");
+			int resultAgreementMember = dao.registerAgreementMember(member.getUserNum());
+			
+			if(resultAgreementMember == 1) {
+				logger.debug("同意書のユーザー登録成功");
+			}
 		}
 		return "redirect:/admin/memberList";
 	}
