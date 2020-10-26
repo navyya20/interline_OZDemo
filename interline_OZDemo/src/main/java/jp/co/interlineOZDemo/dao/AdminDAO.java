@@ -63,4 +63,11 @@ public class AdminDAO {
 		return member;
 	}
 
+	public int registerAgreementMember(int userNum) {
+		AdminMapper mapper = session.getMapper(AdminMapper.class);
+		
+		int n = mapper.registerAgreementMember(userNum);
+		return n;
+	}
+
 }
