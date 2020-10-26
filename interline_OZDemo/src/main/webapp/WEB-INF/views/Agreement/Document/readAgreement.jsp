@@ -57,6 +57,9 @@
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
 		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
+		oz.sendToActionScript("font.fontnames","font1");
+		oz.sendToActionScript("font.font1.name","ＭＳ ゴシック");
+		oz.sendToActionScript("font.font1.replacefont","meiryo");
 		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/readAgreement.ozr");
 		oz.sendToActionScript("global.language", "ja");

@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% GetProperties properties= new GetProperties(); %>
-<% String device = (String)request.getSession().getAttribute("device"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +26,7 @@
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
-<title>writeAgreementMobile</title>
+<title>readAgreementMobile</title>
 
 <style>
 .mobile_body{
@@ -46,67 +45,59 @@
 </head>
 <body id="body_Mobile" style="height:100%; overscroll-behavior:none;">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
-		<table style="text-align: center; margin: auto;">
-			<tr>
-				<td class="mainMenuTd">
-					<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">作成</span>
-				</td>
-				<td class="mainMenuTd"></td>
-				<td class="mainMenuTd">
-					<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<table style="text-align: center; margin: auto;">
+		<tr>
+			<td class="mainMenuTd">
+				<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
+			</td>
+		</tr>
+	</table>
+</div>
 <div id="OZViewer" style="width:100%;height:100%;overflow:hidden"></div>
 <script type="text/javascript" >
-function getUserInform(){
-	//var userInformJsonString = $('#userInformJsonString').html();
-	var userInformJsonString = '${userInformJsonString}';
-	var userInformJson=JSON.parse(userInformJsonString);
-	userInformJsonString = JSON.stringify(userInformJson);
-	console.log("userInformJsonString:"+userInformJsonString);
-	$('#userInform').html(userInformJsonString);
-	return userInformJsonString;
-}
+//세션으로부터 유저인폼 jsonString을 받는다.
+var userNum = "${userNum}";
+var reportNum = "${reportNum}";
+console.log("userNum:"+userNum);
+console.log("reportNum:"+reportNum);
+var now = new Date();
+var fileName=reportNum+"_OZDemo_"+now.getFullYear() + numFormat((now.getMonth()+1)) + numFormat(now.getDate()) + "_" + numFormat(now.getHours()) + numFormat(now.getMinutes()) + numFormat(now.getSeconds());
+console.log("filename:"+fileName);
 function SetOZParamters_OZViewer(){
-var oz;
-oz = document.getElementById("OZViewer");
-oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
-oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
-oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
-oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/writeAgreement.ozr");
-oz.sendToActionScript("connection.inputjson", getUserInform());
-oz.sendToActionScript("eform.signpad_type", "dialog");
-oz.sendToActionScript("pdf.fontembedding","true");
-return true;
+	var oz;
+	oz = document.getElementById("OZViewer");
+	oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
+	oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
+	oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
+	oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/readAgreement.ozr");
+	oz.sendToActionScript("global.language", "ja");
+	oz.sendToActionScript("odi.odinames","readAgreement");
+	oz.sendToActionScript("odi.readAgreement.pcount","2");
+	oz.sendToActionScript("odi.readAgreement.args1","userNum="+userNum);
+	oz.sendToActionScript("odi.readAgreement.args2","reportNum="+reportNum);
+	oz.sendToActionScript("export.filename",reportNum+"_OZDemo_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
+	oz.sendToActionScript("pdf.fontembedding","true");
+	return true;
 }
 var opt = [];
 opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
 start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
 
-
-function saveButton(){
-	var inputJsonString = OZViewer.GetInformation("INPUT_JSON_ALL");
-	console.log("제이슨:"+inputJsonString);
-	var inputJson=JSON.parse(inputJsonString);
-	var processedInputJson = getJsonToSend(inputJson);
-	var address="saveAgreement";
-	$('#wrapper').css('z-index',2);
-	$('#wrapper').css('visibility','visible');
-	$('body').css('cursor','progress');
-	sendInputJson(processedInputJson,address);
+function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 }
-
-//모도루 버튼 클릭시 작동. 메인메뉴로 돌아간다.
+//pdf저장시 파일이름에  6월 을  06월로 바꿔주기위함
+function numFormat(variable) { 
+	variable = Number(variable).toString(); 
+	if(Number(variable) < 10 && variable.length == 1) variable = "0" + variable; 
+	return variable; 
+}
 function cancelButton(){
-	//var userInformJsonString = $('#userInformJsonString').html();
+	var userInformJsonString = $('#userInformJsonString').html();
 	//alert("userInformJsonString:"+userInformJsonString);
 	location.href="agreementMainMenu";
 }
 </script>
-<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
 
 </body>
 </html>

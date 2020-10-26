@@ -154,7 +154,7 @@ function readReportSheet(reportNum,sort){
 </script>
 
 <body>
-<div id="title">同意書リスト</div>
+<div id="title">文書リスト</div>
 <div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="btn" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
@@ -162,7 +162,7 @@ function readReportSheet(reportNum,sort){
 		<td class="titleRow" style="width: 0.5%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 5%;">分類</td>
 		<td class="titleRow" style="width: 8%;">同意日</td>
-		<td class="titleRow" style="width: 15%;">顧客</td>
+		<td class="titleRow" style="width: 15%;">名前</td>
 	</tr>
 	<c:forEach var="sheet" items="${AgreementArray}" varStatus="status">
 	<tr>
