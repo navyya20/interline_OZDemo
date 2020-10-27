@@ -16,12 +16,12 @@
 	<!-- 동의서와 각서 둘다 합쳐서 모두 가져옵니다.  union으로 합치기위해 컬럼명을 동일하게하고  vo는 어차피 중복이므로 agreement껄 사용합니다. -->
 	<select id="getAgreementList" parameterType="int" resultType="agreementAgreement">
 		select 
-			userNum, sort, reportNum, agreementDate agreementDate, systemReportNum, customer
+			userNum, sort, reportNum, agreementDate agreementDate, systemReportNum, customer, systemDate
 		from 
 			agreementAgreement where userNum=#{userNum} 
 		UNION ALL 
 		select 
-			userNum, sort, reportNum, memorandumDate agreementDate, systemReportNum, customer
+			userNum, sort, reportNum, memorandumDate agreementDate, systemReportNum, customer, systemDate
 		from 
 			agreementMemorandum where userNum=#{userNum}
 		order by reportNum desc;

@@ -25,13 +25,12 @@
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
-<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<link href="../resources/css/Font-Style.css?ver=2" rel="stylesheet">
 <title>readAgreementMobile</title>
 
 <style>
-.mobile_body{
-	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
-	-webkit-text-size-adjust:300%;
+.mobile_font_forOZ{
+	font-family: 'ＭＳ ゴシック',MS Gothic,'ヒラギノ角ゴ Pro W3',Hiragino Kaku Gothic Pro,"メイリオ",Meiryo,Osaka,sans-serif;
 }
 .mainMenuButton{	
 		display:inline-block;
@@ -43,7 +42,7 @@
 </style>
 
 </head>
-<body id="body_Mobile" style="height:100%; overscroll-behavior:none;">
+<body id="body_Mobile" class="mobile_font_forOZ" style="height:100%; overscroll-behavior:none;">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>

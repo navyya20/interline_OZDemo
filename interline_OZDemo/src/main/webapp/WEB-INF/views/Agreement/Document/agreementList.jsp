@@ -161,7 +161,7 @@ function readReportSheet(reportNum,sort){
 	<tr>
 		<td class="titleRow" style="width: 0.5%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 5%;">分類</td>
-		<td class="titleRow" style="width: 8%;">同意日</td>
+		<td class="titleRow" style="width: 8%;">同意日時</td>
 		<td class="titleRow" style="width: 15%;">名前</td>
 	</tr>
 	<c:forEach var="sheet" items="${AgreementArray}" varStatus="status">
@@ -169,8 +169,8 @@ function readReportSheet(reportNum,sort){
 		<td><input id='row${status.count}' class="checkbox" type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
 		<td>${sheet.sort}</td>
 		<td>
-			<fmt:parseDate value="${sheet.agreementDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/></td>
+			<fmt:parseDate value="${sheet.systemDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd　HH:mm"/></td>
 		<td><a href="javascript:void(0);" onclick="readReportSheet('${sheet.reportNum}','${sheet.sort}')" target="_parent" style="text-decoration: none;">${sheet.customer}</a></td>
 	</tr>
 	</c:forEach>

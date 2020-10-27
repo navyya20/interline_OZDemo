@@ -21,7 +21,7 @@
 -->
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=1'/>"></script>
-<link href="../resources/css/Font-Style.css" rel="stylesheet">
+<link href="../resources/css/Font-Style.css?ver=7" rel="stylesheet">
 <style>
         .mainMenuButton{	
 			display:inline-block;
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	    if( navigator.platform  ){
 	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
 	      }else{
-	    	  $("body").addClass('pc_body');
+	    	  $("#menuBar").addClass('pc_body');
 		      $("#title").addClass("pc_font_title");
 		      $(".btn").addClass("pc_font_button2");
 	      }
