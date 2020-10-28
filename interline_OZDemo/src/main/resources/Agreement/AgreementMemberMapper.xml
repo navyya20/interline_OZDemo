@@ -147,7 +147,6 @@
 	,representative
 	,post	
 	,address
-	,stamp
 
 	,memorandumDate
 	,customer	
@@ -162,7 +161,6 @@
 	,#{representative}
 	,#{post}	
 	,#{address}
-	,#{stamp}
 
 	,#{memorandumDate}
 	,#{customer}

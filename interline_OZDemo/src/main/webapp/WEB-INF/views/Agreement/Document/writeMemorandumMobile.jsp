@@ -53,7 +53,7 @@ $(document).ready(function(){
 	    if( navigator.platform  ){
 	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
 	      }else{
-	    	  $("body").addClass('pc_body');
+	    	  $("#menuBar").addClass('pc_body');
 		      $("#title").addClass("pc_font_title");
 		      $(".btn").addClass("pc_font_button2");
 	      }
@@ -111,16 +111,13 @@ $(document).ready(function(){
 <script type="text/javascript">
 
 	var userNum = "${userNum}";
-	var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/"+"${stampFileName}";
-
+	
 	function SetOZParamters_OZViewer() {
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet", "http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname", "OZDemo_Agreement/Memorandum/writeMemorandum.ozr");
-		oz.sendToActionScript("connection.pcount","1");
-		oz.sendToActionScript("connection.args1","stampFileName="+stamp);
-
+		
 		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "writeMemorandum");
  		oz.sendToActionScript("odi.writeMemorandum.pcount", "1");

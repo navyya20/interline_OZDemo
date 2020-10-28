@@ -17,7 +17,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- 에러페이지를 컨트롤러 없이 호출-->
-	<mvc:view-controller path="/400Error" view-name="Error/400Error" />
+	<mvc:view-controller path="/404Error" view-name="Error/404Error" />
+	<mvc:view-controller path="/405Error" view-name="Error/405Error" />
 	<mvc:view-controller path="/500Error" view-name="Error/500Error" />
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

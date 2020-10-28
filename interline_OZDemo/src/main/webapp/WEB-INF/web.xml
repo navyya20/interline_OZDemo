@@ -52,6 +52,11 @@
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/Error/404Error.jsp</location>
 	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/views/Error/405Error.jsp</location>
+	</error-page>
+	
  <!--	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/Error/500Error.jsp</location>

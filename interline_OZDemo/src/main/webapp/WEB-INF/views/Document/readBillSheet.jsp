@@ -37,7 +37,7 @@ $(document).ready(function(){
 	    if( navigator.platform  ){
 	      if( filter.indexOf(navigator.platform.toLowerCase())<0 ){
 	      }else{
-	    	  $("body").addClass('pc_body');
+	    	  $("#menuBar").addClass('pc_body');
 		      $("#title").addClass("pc_font_title");
 		      $(".btn").addClass("pc_font_button2");
 	      }
@@ -58,7 +58,7 @@ function back(){
 </tr></table>
 </div>
 
-<div id="OZViewer" style="width:100%;height:98%"></div>
+<div id="OZViewer" style="width:100%;height:98%;"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var now = new Date();
