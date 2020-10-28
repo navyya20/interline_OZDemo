@@ -48,9 +48,9 @@
 <body id="body_Mobile" style="height:100%; overscroll-behavior:none;">
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
-<td class="mainMenuTd"><span id="save_Btn"  class="pc_font_button1 mainMenuButton" onclick="save(${reportNum})">作成</span></td>
+<td class="mainMenuTd"><span id="save_Btn"  class="pc_font_button1 mainMenuButton" onclick="saveButton()">作成</span></td>
 <td class="mainMenuTd"></td>
-<td class="mainMenuTd"><span id="back_Btn"  class="pc_font_button1 mainMenuButton" onclick="back()">戻る</span></td>
+<td class="mainMenuTd"><span id="back_Btn"  class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span></td>
 </tr></table>
 </div>
 <div id="OZViewer" style="width:100%;height:100%;overflow:hidden"></div>
