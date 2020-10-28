@@ -65,7 +65,7 @@ $(document).ready(function(){
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet", "http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname", "OZDemo_Agreement/Memorandum/writeMemorandum.ozr");		
-//		oz.sendToActionScript("viewer.pagedisplay", "continuous");
+		oz.sendToActionScript("viewer.pagedisplay", "singlepagecontinuous");
 
 		oz.sendToActionScript("global.language", "ja_JP");
 		oz.sendToActionScript("odi.odinames", "writeMemorandum");
