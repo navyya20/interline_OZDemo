@@ -109,8 +109,8 @@ public class AgreementMemberController {
 	}
 	
 	// 동의서 열람 페이지 
-	@RequestMapping(value="/readAgreement", method=RequestMethod.POST)
-	public String readAgreement(int reportNum, Model model, HttpSession session) {
+	@RequestMapping(value="/readAgreement", method={RequestMethod.GET,RequestMethod.POST})
+	public String readAgreement(@RequestParam(defaultValue="0")int reportNum, Model model, HttpSession session) {
 		System.out.println("동의서 열람 실행");
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		AgreementAgreementVO userNumReportNum = new AgreementAgreementVO();
@@ -119,7 +119,7 @@ public class AgreementMemberController {
 		AgreementAgreementVO agreement = dao.getAgreement(userNumReportNum);
 		if(agreement==null) {
 			System.out.println("reportNum:"+reportNum+"  userNum:"+userInform.getUserNum()+"  열람하려는 문서가 없습니다.");
-			return "Agreement/Member/agreementMainMenu";
+			return "redirect:/member/agreementMainMenu";
 		} 
 		
 		model.addAttribute("userNum", userInform.getUserNum());
@@ -225,8 +225,8 @@ public class AgreementMemberController {
 	}
 	
 	//각서 읽기
-	@RequestMapping(value="/readMemorandum", method=RequestMethod.POST)
-	public String readMemorandumSheet(int reportNum,Model model,HttpSession session) {
+	@RequestMapping(value="/readMemorandum", method= {RequestMethod.GET,RequestMethod.POST})
+	public String readMemorandumSheet(@RequestParam(defaultValue="0")int reportNum,Model model,HttpSession session) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		
 		AgreementMemorandumVO userNumReportNum = new AgreementMemorandumVO();
@@ -236,7 +236,7 @@ public class AgreementMemberController {
 		
 		if(memorandum==null) {
 			System.out.println("reportNum:"+reportNum+"  userNum:"+userInform.getUserNum()+"  열람하려는 문서가 없습니다.");
-			return "Agreement/Member/agreementMainMenu";
+			return "redirect:/member/agreementMainMenu";
 		} 
 		
 		model.addAttribute("userNum", userInform.getUserNum());
