@@ -1,6 +1,7 @@
 <%@page import="jp.co.interlineOZDemo.util.GetProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <% String device = (String)request.getSession().getAttribute("device"); %>
 <!DOCTYPE html>
@@ -39,25 +40,19 @@
 		width:100px;
 	}
 	.mainMenuTd{
-		width: 200px;
+		width: 100px;
 	}
 </style>
 
 </head>
 <body id="body_Mobile" style="height:100%; overscroll-behavior:none;">
-<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
-		<table style="text-align: center; margin: auto;">
-			<tr>
-				<td class="mainMenuTd">
-					<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn" onclick="saveButton()">作成</span>
-				</td>
-				<td class="mainMenuTd"></td>
-				<td class="mainMenuTd">
-					<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="cancelButton()">戻る</span>
-				</td>
-			</tr>
-		</table>
-	</div>
+<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
+<table style="text-align:center; margin:auto;"><tr>
+<td class="mainMenuTd"><span id="save_Btn"  class="pc_font_button1 mainMenuButton" onclick="save(${reportNum})">作成</span></td>
+<td class="mainMenuTd"></td>
+<td class="mainMenuTd"><span id="back_Btn"  class="pc_font_button1 mainMenuButton" onclick="back()">戻る</span></td>
+</tr></table>
+</div>
 <div id="OZViewer" style="width:100%;height:100%;overflow:hidden"></div>
 <script type="text/javascript" >
 function getUserInform(){

@@ -2,9 +2,7 @@
 
 //input: 폼에서 받은 제이슨
 /*output: ajax로 보내기위해 체크및 가공을 합니다.
-  
  */
- 
 function getJsonToSend(inputJson){
 	var sign = inputJson.sign;
 	//DB의 sign칼럼이 15000자 제한이기 때문에 하는 체크

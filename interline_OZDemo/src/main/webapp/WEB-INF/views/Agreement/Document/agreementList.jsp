@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<title>estimateSheetList</title>
+<title>agreementList</title>
 </head>
 
 <script src="<c:url value = '../resources/js/jquery-2.0.3.min.js'/>"></script>

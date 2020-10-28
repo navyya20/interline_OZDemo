@@ -1,6 +1,7 @@
 <%@page import="jp.co.interlineOZDemo.util.GetProperties"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
 <html>
