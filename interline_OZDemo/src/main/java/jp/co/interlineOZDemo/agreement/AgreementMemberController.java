@@ -190,7 +190,6 @@ public class AgreementMemberController {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 
 		model.addAttribute("userNum", userInform.getUserNum());
-		model.addAttribute("stampFileName", userInform.getStampFileName()); //도장이름
 		
 		String device = (String)session.getAttribute("device");
 		if(device.equals("MB")) {

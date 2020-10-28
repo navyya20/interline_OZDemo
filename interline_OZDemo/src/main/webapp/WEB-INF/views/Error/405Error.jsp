@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>500Error</title>
+<title>405Error</title>
 <script src="<c:url value = '/resources/js/jquery-2.0.3.min.js'/>"></script>
 <link href="<c:url value = '/resources/css/Font-Style.css'/>" rel="stylesheet">
 <script>
 $(document).ready(function(){
 	Error_Page();
-	isMobile();
+	 isMobile(); 
 	function isMobile() {
 	    var filter = "win16|win32|win64|mac|macintel";
 	    if( navigator.platform  ){
@@ -25,11 +25,11 @@ $(document).ready(function(){
 	      }
 	    }
 	  }
-
+	  
 	function Error_Page(){
 		//페이지호출이 iframe일 경우 부모페이지를 에러페이지로
 		if(self!=top){
-			window.parent.location.href="/OZDemo/500Error";
+			window.parent.location.href="/OZDemo/400Error";
 		}
 	}
 });
@@ -47,7 +47,7 @@ text-align: center;
 </head>
 <body>
 <div id="error_div">
-<h1>データを格納しながら問題が発生しました。管理者に問い合わせください。</h1>
+<h1>このページは,リクエストメソッドをサポートしません。</h1>
 <button id="delBtn_member" class="pc_font_button1" onclick="main_Menu()">メイン画面へ</button>
 </div>
 </body>
