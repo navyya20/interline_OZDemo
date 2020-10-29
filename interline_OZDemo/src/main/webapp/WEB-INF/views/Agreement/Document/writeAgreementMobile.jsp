@@ -27,10 +27,17 @@
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <title>writeAgreementMobile</title>
 
 <style>
+@font-face {
+	font-family: "Noto Sans JP";
+	src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
 	-webkit-text-size-adjust:300%;
@@ -79,7 +86,25 @@ return true;
 var opt = [];
 opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
+
+var isFont = false;		
+function start_viewer() {
+    if (isFont) {
+    	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
+    }
+}
+
+console.log("fontSpy함수를 실행합니다.");
+fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+    success: function() {
+    	isFont = true;
+    	console.log("뷰어를 실행합니다.")
+        start_viewer();
+    },
+    failure: function() {
+		console.log("isFont is false");
+    }
+});
 
 
 function saveButton(){
