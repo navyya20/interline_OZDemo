@@ -15,9 +15,16 @@
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
 
 <title>readMemorandum</title>
 <style>
+@font-face {
+	font-family: "Noto Sans JP";
+	src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
 .memorandumMenuButton{
 	display:inline-block;
 	width:100px;
@@ -84,8 +91,25 @@ function back(){
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
-	
+    var isFont = false;		
+
+	function start_viewer() {
+        if (isFont) {
+        	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+        }
+    }
+
+	console.log("fontSpy함수를 실행합니다.");
+    fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+        success: function() {
+        	isFont = true;
+        	console.log("뷰어를 실행합니다.")
+            start_viewer();
+        },
+        failure: function() {
+			console.log("isFont is false");
+        }
+    });
 </script>
 </body>
 </html>

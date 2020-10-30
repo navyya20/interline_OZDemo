@@ -29,9 +29,17 @@
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script src="<c:url value = '../resources/js/memorandum.js'/>" charset="utf-8"></script>
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
 
 <title>writeMemorandumMobile</title>
 <style>
+	@font-face {
+		font-family: "Noto Sans JP";
+		src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+	}
+	
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
 	-webkit-text-size-adjust:300%;
@@ -59,44 +67,9 @@ $(document).ready(function(){
 	      }
 	    }
 	  }
-
-	function save(reportNum){
-		var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
-		var customer_Len = memorandumData.customer.length;
-		var sign_Len = memorandumData.sign.length;
-		
-		if( 0<customer_Len && customer_Len<20 && 0<sign_Len && sign_Len<15000 ){
-			$.ajax({
-				url: "saveMemorandum",
-				type: 'POST',
-				data: memorandumData,
-				success: function(data){
-									
-					alert("覚書を作成しました。");
-					location.href="agreementMainMenu";
-				},
-				error: function(e){
-					console.log(JSON.stringify(e));
-					alert('エラー！');
-				}
-			});
-		}
-
-		if(0>=customer_Len || customer_Len>20){
-			alert("名前は1~20文字です。");
-		}else if(0>=sign_Len){
-			alert("サインを入力してください。");
-		}else if(sign_Len>15000){
-			alert("サインが長いです。");
-		}
-		
-		return false;
-	}
-
-	function back(){
-		location.href="agreementMainMenu";
-	}
+	
 });
+
 </script>
 </head>
 <body>
@@ -134,8 +107,26 @@ $(document).ready(function(){
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
-	
+
+	var isFont = false;		
+	function start_viewer() {
+	    if (isFont) {
+	    	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
+	    }
+	}
+
+	console.log("fontSpy함수를 실행합니다.");
+	fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+	    success: function() {
+	    	isFont = true;
+	    	console.log("뷰어를 실행합니다.")
+	        start_viewer();
+	    },
+	    failure: function() {
+			console.log("isFont is false");
+	    }
+	});
+
 </script>
 </body>
 </html>
