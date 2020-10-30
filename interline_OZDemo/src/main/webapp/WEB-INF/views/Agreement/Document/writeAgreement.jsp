@@ -24,6 +24,7 @@
 
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <title>writeAgreement</title>
 <style>
@@ -42,7 +43,7 @@
 	}
 </style>
 </head>
-<body class="pc_body">
+<body class="pc_body" style="width:100%; height:100%;">
 	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 		<table style="text-align: center; margin: auto;">
 			<tr>
@@ -56,7 +57,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="OZViewer" style="width:100%; height:98%;"></div>
+	<div id="OZViewer" style="width:100%; height:100%;"></div>
 	<script type="text/javascript" >
 		//세션으로부터 유저인폼 jsonString을 받는다.
 		function getUserInform(){
@@ -75,12 +76,13 @@
 			oz = document.getElementById("OZViewer");
 			oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
 			oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
+			oz.sendToActionScript("viewer.pagedisplay", "singlepagecontinuous");
+			
 			oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
 			oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/writeAgreement.ozr");
 			oz.sendToActionScript("connection.inputjson", getUserInform());
 			oz.sendToActionScript("eform.signpad_type", "dialog");
 			oz.sendToActionScript("pdf.fontembedding","true");
-			oz.sendToActionScript("viewer.fontdpi",1200);
 			
 			return true;
 		}
@@ -139,7 +141,7 @@
 			location.href="agreementMainMenu";
 		}
 	</script>
-	<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
+	<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:100%; opacity: 0.5;"></div>
 	
 </body>
 </html>

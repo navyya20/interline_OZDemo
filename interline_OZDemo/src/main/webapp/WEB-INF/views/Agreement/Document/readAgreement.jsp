@@ -57,9 +57,6 @@
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
 		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
-		oz.sendToActionScript("font.fontnames","font1");
-		oz.sendToActionScript("font.font1.name","ＭＳ ゴシック");
-		oz.sendToActionScript("font.font1.replacefont","meiryo");
 		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
 		oz.sendToActionScript("connection.reportname","OZDemo_Agreement/Agreement/readAgreement.ozr");
 		oz.sendToActionScript("global.language", "ja");
@@ -74,7 +71,7 @@
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/");
+	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",opt);
 	
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 	}
