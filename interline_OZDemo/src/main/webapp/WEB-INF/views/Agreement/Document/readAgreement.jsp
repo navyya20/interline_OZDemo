@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
-<html>
+<html style="height:97.6%;">
 <head>
 <meta charset="UTF-8">
 <title>Read EstimateSheet</title>
@@ -15,23 +15,31 @@
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <!-- If you want to run the HTML5SVG viewer please change the OZJSViewer.js to OZJSSVGViewer.js.
 <script type="text/javascript" src="http://192.168.0.103:8888/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>   OZJSViewer.js   OZJSSVGViewer.js
 -->
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=1'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <style>
-        .mainMenuButton{	
-			display:inline-block;
-			width:100px;
-		}
-		.mainMenuTd{
-			width: 100px;
-		}
+	@font-face {
+		font-family: "Noto Sans JP";
+		src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+		font-weight: normal;
+		font-style: normal;
+	}
+    .mainMenuButton{	
+		display:inline-block;
+		width:100px;
+	}
+	.mainMenuTd{
+		width: 100px;
+	}
 	</style>
-<body class="pc_body">
+<body class="pc_body" style="height:97.6%;width:99.5%;">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>
@@ -41,7 +49,7 @@
 		</tr>
 	</table>
 </div>
-<div id="OZViewer" style="width:100%;height:98%"></div>
+<div id="OZViewer" style="height:97.6%;width:99.5%;"></div>
 <script type="text/javascript" >
 	//세션으로부터 유저인폼 jsonString을 받는다.
 	
@@ -71,7 +79,25 @@
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",opt);
+	var isFont = false;		
+	function start_viewer() {
+        if (isFont) {
+        	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+        }
+    }
+	console.log("fontSpy함수를 실행합니다.");
+    fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+        success: function() {
+        	isFont = true;
+        	console.log("뷰어를 실행합니다.")
+            start_viewer();
+        },
+        failure: function() {
+			console.log("isFont is false");
+        }
+    });
+
+
 	
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 	}

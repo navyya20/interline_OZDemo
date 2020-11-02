@@ -27,8 +27,9 @@
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
-<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <title>writeAgreementMobile</title>
 
 <style>

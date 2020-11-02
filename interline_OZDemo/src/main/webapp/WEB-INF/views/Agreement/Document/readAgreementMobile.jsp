@@ -20,19 +20,25 @@
 
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <!-- If you want to run the HTML5SVG viewer please change the OZJSViewer.js to OZJSSVGViewer.js.
 <script type="text/javascript" src="http://kimServer:8080/ozrviewer/OZJSSVGViewer.js" charset="utf-8"></script>
 -->
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <script src="<c:url value = '../resources/js/agreement.js?ver=6'/>"></script>
 <link href="../resources/css/Font-Style.css?ver=2" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <title>readAgreementMobile</title>
 
 <style>
-.mobile_font_forOZ{
-	font-family: 'ＭＳ ゴシック',MS Gothic,'ヒラギノ角ゴ Pro W3',Hiragino Kaku Gothic Pro,"メイリオ",Meiryo,Osaka,sans-serif;
+@font-face {
+	font-family: "Noto Sans JP";
+	src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
 }
+
 .mainMenuButton{	
 		display:inline-block;
 		width:100px;
@@ -43,8 +49,8 @@
 </style>
 
 </head>
-<body id="body_Mobile" class="mobile_font_forOZ" style="height:100%; overscroll-behavior:none;">
-<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
+<body id="body_Mobile" style="height:100%; overscroll-behavior:none;">
+<div id="menuBar" class="mobile_body" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>
 			<td class="mainMenuTd">
@@ -85,7 +91,24 @@ function SetOZParamters_OZViewer(){
 var opt = [];
 opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
+
+var isFont = false;		
+function start_viewer() {
+    if (isFont) {
+    	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/",true,opt);
+    }
+}
+console.log("fontSpy함수를 실행합니다.");
+fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+    success: function() {
+    	isFont = true;
+    	console.log("뷰어를 실행합니다.")
+        start_viewer();
+    },
+    failure: function() {
+		console.log("isFont is false");
+    }
+});
 
 function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 }

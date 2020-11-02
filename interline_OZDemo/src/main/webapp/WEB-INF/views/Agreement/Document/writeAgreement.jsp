@@ -5,7 +5,7 @@
 <% GetProperties properties= new GetProperties(); %>
 <% String device = (String)request.getSession().getAttribute("device"); %>
 <!DOCTYPE html>
-<html>
+<html style="height:97.6%">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
@@ -43,7 +43,7 @@
 	}
 </style>
 </head>
-<body class="pc_body" style="width:100%; height:100%;">
+<body class="pc_body" style="height:97.6%; width:99.5%; ">
 	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 		<table style="text-align: center; margin: auto;">
 			<tr>
@@ -57,7 +57,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="OZViewer" style="width:100%; height:100%;"></div>
+	<div id="OZViewer" style="height:97.6%; width:99.5%;"></div>
 	<script type="text/javascript" >
 		//세션으로부터 유저인폼 jsonString을 받는다.
 		function getUserInform(){
@@ -141,7 +141,6 @@
 			location.href="agreementMainMenu";
 		}
 	</script>
-	<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:100%; opacity: 0.5;"></div>
 	
 </body>
 </html>
