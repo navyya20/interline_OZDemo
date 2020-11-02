@@ -24,10 +24,11 @@
 <!-- If you want to run the HTML5SVG viewer please change the OZJSViewer.js to OZJSSVGViewer.js.
 <script type="text/javascript" src="http://kimServer:8080/ozrviewer/OZJSSVGViewer.js" charset="utf-8"></script>
 -->
+
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.mouseSwipe.js" type="text/javascript"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
-
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <title>readMemorandumMobile</title>
 <style>
 @font-face {

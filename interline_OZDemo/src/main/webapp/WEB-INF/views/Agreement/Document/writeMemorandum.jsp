@@ -14,19 +14,13 @@
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
+
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script src="<c:url value = '../resources/js/memorandum.js'/>" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
-
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <title>writeMemorandum</title>
 <style>
-	@font-face {
-		font-family: "Noto Sans JP";
-		src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
-		font-weight: normal;
-		font-style: normal;
-	}
-	
 .memorandumMenuButton{
 	display:inline-block;
 	width:100px;

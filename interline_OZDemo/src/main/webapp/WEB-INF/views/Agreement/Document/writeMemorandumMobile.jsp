@@ -30,16 +30,9 @@
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 <script src="<c:url value = '../resources/js/memorandum.js'/>" charset="utf-8"></script>
 <script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
-
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
 <title>writeMemorandumMobile</title>
 <style>
-	@font-face {
-		font-family: "Noto Sans JP";
-		src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
-		font-weight: normal;
-		font-style: normal;
-	}
-	
 .mobile_body{
 	font-family: -apple-system-subset,Helvetica,Hiragino Kaku Gothic ProN,sans-serif;
 	-webkit-text-size-adjust:300%;

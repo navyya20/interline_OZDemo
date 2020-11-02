@@ -32,13 +32,6 @@
 <title>readAgreementMobile</title>
 
 <style>
-@font-face {
-	font-family: "Noto Sans JP";
-	src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
-	font-weight: normal;
-	font-style: normal;
-}
-
 .mainMenuButton{	
 		display:inline-block;
 		width:100px;

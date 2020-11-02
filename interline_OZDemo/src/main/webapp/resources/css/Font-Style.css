@@ -1,5 +1,10 @@
 @charset "UTF-8";
-
+@font-face {
+	font-family: "Noto Sans JP";
+	src: url('../resources/font/NotoSansJP-Regular.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
 .pc_body *{
 	font-family: 'ヒラギノ角ゴ Pro W3',Hiragino Kaku Gothic Pro,"メイリオ",Meiryo,Osaka,'ＭＳ Ｐゴシック',MS PGothic,sans-serif;
 }
