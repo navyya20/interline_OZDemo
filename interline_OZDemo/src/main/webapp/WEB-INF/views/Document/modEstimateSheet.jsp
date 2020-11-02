@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
-<html>
+<html style="height:97.6%">
 <head>
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
@@ -33,7 +33,7 @@
 			width: 100px;
 		}
 	</style>
-<body>
+<body style="width:99.5%;height:97.6%">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>
@@ -47,7 +47,7 @@
 		</tr>
 	</table>
 </div>
-<div id="OZViewer" style="width:100%;height:98%"></div>
+<div id="OZViewer" style="width:99.5%;height:97.6%"></div>
 <script type="text/javascript" >
 	//세션으로부터 견적서 정보에대한 jsonString을 받는다.
 	var stamp = "http://<%out.print(properties.getWebIP());%>/files/OZDemoEstimateSheet/stamp/"+'${stampFileName}';
@@ -123,6 +123,6 @@
 		location.href="memberMain";
 	}
 </script>
-<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width: 100%; height:170%; opacity: 0.5;"></div>
+<div id="wrapper" style="z-index: -1; display: table; background-color:rgb(225,225,225); position: absolute; left: 0%; top: 0%; visibility: hidden; width:99.5%;height:97.6%; opacity: 0.5;"></div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <% GetProperties properties= new GetProperties(); %>
 
 <!DOCTYPE html>
-<html>
+<html style="height:97.6%">
 <head>
 <meta charset="UTF-8">
 <title>Read BillSheet</title>
@@ -16,7 +16,7 @@
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/ui.dynatree.css" type="text/css"/>
 <script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery.dynatree.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSSVGViewer.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/OZJSViewer.js" charset="utf-8"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
 
 <style>
@@ -51,14 +51,14 @@ function back(){
 }
 </script>
 
-<body>
+<body style="width:99.5%;height:97.6%">
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="billMenuTd"><span id="back_Btn"  class="pc_font_button1 billMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
 
-<div id="OZViewer" style="width:100%;height:98%;"></div>
+<div id="OZViewer" style="width:99.5%;height:97.6%"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var now = new Date();

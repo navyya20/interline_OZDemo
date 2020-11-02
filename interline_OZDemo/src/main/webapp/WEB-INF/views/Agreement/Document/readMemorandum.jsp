@@ -5,7 +5,7 @@
 <% GetProperties properties= new GetProperties(); %>
 
 <!DOCTYPE html>
-<html style="height:100%">
+<html style="height:97.6%">
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
@@ -53,14 +53,15 @@ function back(){
 </script>
 
 </head>
-<body>
+<body  style="height:97.6%;width:99.5%;">
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
 </div>
-<div id="OZViewer" style="width:100%;height:100%"></div>
+<div id="OZViewer"  style="height:97.6%;width:99.5%;"></div>
 <script type="text/javascript">
+	var now = new Date();
 	var userNum = "${userNum}";
 	var reportNum= "${reportNum}";
 

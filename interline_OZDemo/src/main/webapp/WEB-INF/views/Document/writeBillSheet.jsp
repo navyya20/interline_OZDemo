@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% GetProperties properties= new GetProperties(); %>
 <!DOCTYPE html>
-<html>
+<html style="height:97.6%">
 <head>
 <meta charset="UTF-8">
 <title>BillSheet</title>
@@ -47,7 +47,7 @@ $(document).ready(function(){
 });
 
 </script>
-<body>
+<body style="width:99.5%;height:97.6%">
 
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
@@ -57,7 +57,7 @@ $(document).ready(function(){
 </tr></table>
 </div>
 
-<div id="OZViewer" style="width:100%;height:98%"></div>
+<div id="OZViewer" style="width:99.5%;height:97.6%"></div>
 <script type="text/javascript" >
 	function SetOZParamters_OZViewer(){
 		var reportNum = "${reportNum}";
