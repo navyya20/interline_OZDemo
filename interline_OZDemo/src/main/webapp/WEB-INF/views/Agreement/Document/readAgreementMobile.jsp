@@ -77,7 +77,7 @@ function SetOZParamters_OZViewer(){
 	oz.sendToActionScript("odi.readAgreement.pcount","2");
 	oz.sendToActionScript("odi.readAgreement.args1","userNum="+userNum);
 	oz.sendToActionScript("odi.readAgreement.args2","reportNum="+reportNum);
-	oz.sendToActionScript("export.filename",reportNum+"_OZDemo_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
+	oz.sendToActionScript("export.filename",reportNum+"_AgreementSheet_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
 	oz.sendToActionScript("pdf.fontembedding","true");
 	return true;
 }
