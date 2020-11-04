@@ -44,9 +44,9 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#companyName").on("propertychange input", function() { limitString("companyName",40); });
-		$("#representative").on("propertychange input", function() { limitString("representative",26); });
-		$("#address").on("propertychange input", function() { limitString("address",120); });
+		$("#companyName").on("propertychange input", function() { limitString("companyName",36); });
+		$("#representative").on("propertychange input", function() { limitString("representative",22); });
+		$("#address").on("propertychange input", function() { limitString("address",108); });
 		isMobile(); 
 		function isMobile() {
 		    var filter = "win16|win32|win64|mac|macintel";

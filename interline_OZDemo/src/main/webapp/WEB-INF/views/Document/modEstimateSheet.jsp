@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="format-detection" content="telephone=no, address=no, email=no"/><!-- IOS에서 일정 형식의 text에 자동링크를 걸어서 JSON.stringify가 되지 않는다. 이를 해결하기위한 코드 -->
 <title>estimateSheet</title>
-</head>
+
 
 
 <script src="http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/jquery-2.0.3.min.js"></script>
@@ -24,6 +24,8 @@
 
 <script src="<c:url value = '../resources/js/estimateSheet.js?ver=4'/>"></script>
 <link href="../resources/css/Font-Style.css" rel="stylesheet">
+<script type="text/javascript" src="../resources/js/jQuery-FontSpy.js" charset="utf-8"></script>
+<link rel="preload" href="../resources/font/NotoSansJP-Regular.otf" as="font">
     <style>
         .mainMenuButton{	
 			display:inline-block;
@@ -33,6 +35,7 @@
 			width: 100px;
 		}
 	</style>
+</head>
 <body style="width:99.5%;height:97.6%">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
@@ -67,7 +70,12 @@
 			var estimateItemsJsonObjectSerialized = serializeEstimateItemsJsonObject(estimateItemsJsonObject);
 			Object.assign(estimateSheetJsonObject,estimateItemsJsonObjectSerialized);
 		}
-		
+		console.log(estimateSheetJsonObject);
+		if (estimateSheetJsonObject.sum !== ""){
+			estimateSheetJsonObject.sum=("￥"+comma(estimateSheetJsonObject.sum));
+			estimateSheetJsonObject.sumWithTax=("￥"+comma(estimateSheetJsonObject.sumWithTax));
+			estimateSheetJsonObject.sumWithTax2=("￥"+comma(estimateSheetJsonObject.sumWithTax2));
+		}
 		return estimateSheetJsonObject;
 	}
 	console.log(JSON.stringify(getEstimateSheetInform()));
@@ -90,7 +98,23 @@
 	var opt = [];
 	opt["print_exportfrom"] = "server"; //인쇄 PDF 익스포트 작업을 서버와 통신하여 동작
 	opt["save_exportfrom"] = { "pdf" : "server" }; //PDF 익스포트 작업을 서버와 통신하여 동작 
-	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+	var isFont = false;		
+	function start_viewer() {
+        if (isFont) {
+        	start_ozjs("OZViewer","http://<%out.print(properties.getOzIP());%>/oz80/ozhviewer/", opt);
+        }
+    }
+	console.log("fontSpy함수를 실행합니다.");
+    fontSpy("Noto Sans JP", { //위의 font-face에서 설정한 이름을 여기에 설정해주시기 바랍니다.
+        success: function() {
+        	isFont = true;
+        	console.log("뷰어를 실행합니다.")
+            start_viewer();
+        },
+        failure: function() {
+			console.log("isFont is false");
+        }
+    });
 
 	
 		
