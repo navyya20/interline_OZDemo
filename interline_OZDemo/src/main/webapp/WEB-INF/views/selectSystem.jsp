@@ -64,6 +64,11 @@ body{text-align: center;}
 			<span class="btn move_btn" id="agreementMainMenu">同意書システム</span>
 		</td>
 	</tr>
+	<tr class="mainMenuTr">
+		<td>
+			<span class="btn move_btn" id="applicationMainMenu">申込書システム</span>
+		</td>
+	</tr>
 </table>
 </div>
 </body>

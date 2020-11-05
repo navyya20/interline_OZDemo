@@ -94,11 +94,12 @@ public class ExportReport {
 					exportMap.setProperty("connection.args" + Integer.toString(i + 1), ozrParamVal[i]);
 
 				// ODI패러미터 설정
-				exportMap.setProperty("odi.odinames", odiName);
-				exportMap.setProperty("odi." + odiName + ".pcount", Integer.toString(odiParamCnt));
-				for (int i = 0; i < odiParamCnt; i++)
-					exportMap.setProperty("odi." + odiName + ".args" + Integer.toString(i + 1), odiParamVal[i]);
-	
+				if(odiName!=null) {
+					exportMap.setProperty("odi.odinames", odiName);
+					exportMap.setProperty("odi." + odiName + ".pcount", Integer.toString(odiParamCnt));
+					for (int i = 0; i < odiParamCnt; i++)
+						exportMap.setProperty("odi." + odiName + ".args" + Integer.toString(i + 1), odiParamVal[i]);
+				}
 				// 익스포트 정보
 				exportMap.setProperty("viewer.mode", "export");
 				//exportMap.setProperty("viewer.largebundle", "true");
