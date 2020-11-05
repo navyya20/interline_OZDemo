@@ -67,28 +67,13 @@ $(function(){
 		}
 	} 
 });
-function writeNewSheet(){
-	window.parent.location.href="writeEstimate";
-}
-
-function writeBillSheet(reportNum){
-	window.parent.location.href = "writeBill?reportNum=" +reportNum;
-}
-
-function readBillSheet(reportNum){
-	window.parent.location.href = "readBill?reportNum=" +reportNum;
-}
 
 function formSubmit(page){
 	var pp = document.getElementById('page');
 	
 	pp.value=page;
 							
-	document.location.href = "estimateSheetList?page=" + pp.value;
-}
-
-function modEstimateSheet(reportNum){
-	window.parent.location.href = "modEstimate?reportNum=" + reportNum;
+	document.location.href = "agreementList?page=" + pp.value;
 }
 
 function deleteSheet(){
