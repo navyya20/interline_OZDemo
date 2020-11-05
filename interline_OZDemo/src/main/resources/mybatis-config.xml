@@ -14,10 +14,15 @@
 		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO" alias="agreementAgreement"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementMemorandumVO" alias="agreementMemorandum"/>
 		
+		<typeAlias type="jp.co.interlineOZDemo.vo.application.ApplicationVO" alias="application"/>
+		
+		
+		
 	</typeAliases>
 	<mappers>
 		<mapper resource="MemberMapper.xml"/>
 		<mapper resource="AdminMapper.xml"/>
 		<mapper resource="Agreement/AgreementMemberMapper.xml"/>
+		<mapper resource="Application/ApplicationMemberMapper.xml"/>
 	</mappers>
 </configuration>
