@@ -3,7 +3,53 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="jp.co.interlineOZDemo.dao.agreement.AgreementMemberMapper">
+<mapper namespace="jp.co.interlineOZDemo.dao.application.ApplicationMemberMapper">
 	
+	<!-- 다음 reportNum을 가져오기위한 select.  이 결과에  +1 을 하여 다음 저장되는 reportNum을 설정한다. -->
+	<select id="nextApplicationNum" parameterType="int" resultType="int">
+		select 
+			coalesce(max(reportNum),0) 
+		from
+			Application 
+		where 
+			userNum=#{userNum} 
+	</select>
 	
+	<insert id="insertApplicationSheet" parameterType="application">
+		insert into Application(
+			userNum,
+			systemReportNum,
+			reportNum,
+			applicationDate,
+			name,
+			nameHurigana,
+			telephone,
+			mobile,
+			birth,
+			gender,
+			age,
+			post,
+			address,
+			addressHurigana,
+			PDFPath,
+			sign
+		)VALUES (
+			#{userNum},
+			get_seq('applicationSeq'),
+			#{reportNum},
+			#{applicationDate},
+			#{name},
+			#{nameHurigana},
+			#{telephone},
+			#{mobile},
+			#{birth},
+			#{gender},
+			#{age},
+			#{post},
+			#{address},
+			#{addressHurigana},
+			#{PDFPath},
+			#{sign}
+		)
+	</insert>
 </mapper>

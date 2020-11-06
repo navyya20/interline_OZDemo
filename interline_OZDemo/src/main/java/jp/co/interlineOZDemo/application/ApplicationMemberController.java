@@ -1,7 +1,9 @@
 package jp.co.interlineOZDemo.application;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import jp.co.interlineOZDemo.agreement.AgreementMemberController;
 import jp.co.interlineOZDemo.dao.application.ApplicationMemberDAO;
@@ -21,7 +24,7 @@ import jp.co.interlineOZDemo.util.ExportReport;
 import jp.co.interlineOZDemo.util.GetProperties;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.UserInformVO;
-import jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO;
+import jp.co.interlineOZDemo.vo.application.ApplicationVO;
 import oz.scheduler.SchedulerException;
 
 @Controller
@@ -90,5 +93,43 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		}
 		
 		return "Application/pdfTest";
+	}
+	
+	//신청서 작성
+	@RequestMapping(value="/writeApplication", method=RequestMethod.GET)
+	public String writeMemorandumSheet(Model model,HttpSession session) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+
+		model.addAttribute("userNum", userInform.getUserNum());
+		
+		return "Application/Document/writeApplication";
+	}
+	
+	//신청서 저장
+	@ResponseBody
+	@RequestMapping(value="/saveApplication", method=RequestMethod.POST)
+	public String saveApplicationSheet(ApplicationVO applicationVO,Model model,HttpSession session) throws ParseException {
+		logger.debug("신청서 저장:{}",applicationVO);
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		
+		int nextApplicationNum = dao.nextApplicationNum(userInform.getUserNum());
+		
+		Date application_Date = oldDate_pattern.parse(applicationVO.getApplicationDate());
+		applicationVO.setApplicationDate(newDate_pattern.format(application_Date)); //각서에 입력된 날짜 데이터 포멧
+		
+		Date birth_Date = oldDate_pattern.parse(applicationVO.getBirth());
+		applicationVO.setBirth(newDate_pattern.format(birth_Date)); //각서에 입력된 날짜 데이터 포멧
+	
+		applicationVO.setUserNum(userInform.getUserNum());
+		applicationVO.setReportNum(nextApplicationNum + 1);
+		logger.debug("신청서 저장용 정보:{}",applicationVO);
+		
+		int result = dao.insertApplicationSheet(applicationVO);
+		
+		if(result == 1) {
+			return "success";
+		}
+		
+		return "error";
 	}
 }

@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import jp.co.interlineOZDemo.vo.application.ApplicationVO;
+
 @Repository
 public class ApplicationMemberDAO {
 
@@ -16,6 +18,22 @@ public class ApplicationMemberDAO {
 
 	public void functionName() {
 		ApplicationMemberMapper mapper = session.getMapper(ApplicationMemberMapper.class);	
+	}
+
+	public int insertApplicationSheet(ApplicationVO applicationVO) {
+		ApplicationMemberMapper mapper = session.getMapper(ApplicationMemberMapper.class);
+		
+		int result = mapper.insertApplicationSheet(applicationVO);
+		
+		return result;
+	}
+
+	public int nextApplicationNum(int userNum) {
+		ApplicationMemberMapper mapper = session.getMapper(ApplicationMemberMapper.class);
+		
+		int result = mapper.nextApplicationNum(userNum);
+		
+		return result;
 	}
 
 }
