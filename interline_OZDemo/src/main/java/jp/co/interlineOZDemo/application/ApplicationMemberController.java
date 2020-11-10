@@ -132,12 +132,12 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 			
 			GetProperties properties= new GetProperties();
 			String ozId="admin";
-			String ozPW="admin01";
+			String ozPW="admin1";
 			String OZserverURL="http://"+properties.getOzIP()+"/oz80/server";
 			String ipScheduler=properties.getOzIP().split(":")[0];
 			int portScheduler=9521;
 			ExportReport export=new ExportReport(ozId, ozPW, OZserverURL, ipScheduler, portScheduler);
-			String nameOzr="OZDemo_Application/writeApplication.ozr";
+			String nameOzr="OZDemo_Application/readApplication.ozr";
 			String[] ozrParamValue = null;
 			//String nameOdi ="readEstimateSheet";
 			//String[] odiParamValue = {"userNum="+estimateSheetVO.getUserNum(),"reportNum="+reportNum};
