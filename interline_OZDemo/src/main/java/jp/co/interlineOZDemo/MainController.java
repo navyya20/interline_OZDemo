@@ -77,7 +77,6 @@ public class MainController {
 		}else if(!member.getPassword().equals(password)){
 			result.put("error","PASSWORDが合致しません。");
 		}
-		
 		return result;
 	}
 	

@@ -52,4 +52,25 @@
 			#{sign}
 		)
 	</insert>
+	
+	<!-- 페이징을 위해 현제 해당하는 유저가 작성한 문서들의 총 갯수를 가져온다. -->
+	<select id="getTotalApplication" parameterType="int" resultType="int">
+		select count(systemReportNum) from application where userNum=#{userNum}
+	</select>
+	
+	<!-- 신청서 리스트를 가져온다. -->
+	<select id="getApplicationList" parameterType="int" resultType="application">
+		select 
+			userNum, systemReportNum, reportNum, systemDate, name, telephone, mobile, birth, PDFPath
+		from 
+			application where userNum=#{userNum}
+		order by reportNum desc;
+	</select>
+	
+	<!-- 신청서를 지운다. -->
+	<delete id="deleteAgreement" parameterType="hashMap">
+		delete from application where userNum=#{userNum} and 
+		reportNum in (<foreach item="item" index="i" collection="reportNum" separator=",">#{item}</foreach>)
+	</delete>
+	
 </mapper>

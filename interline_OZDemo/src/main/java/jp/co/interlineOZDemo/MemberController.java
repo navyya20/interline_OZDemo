@@ -80,8 +80,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/selectSystem", method=RequestMethod.GET)
-	public String selectSystem(){
-		
+	public String selectSystem(HttpSession session){
+		String device = (String)session.getAttribute("device");
+		System.out.println(device);
 		return "selectSystem";
 	}
 	

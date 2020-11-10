@@ -132,21 +132,21 @@ public class AgreementMemberController {
 	}
 	
 	//동의서 삭제
-		@ResponseBody
-		@RequestMapping(value="/deleteAgreement", method=RequestMethod.GET)
-		public String deleteAgreement(int[] reportNum, Model model, HttpSession session) {
-			System.out.println("삭제 실행.");
-			UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-			int userNum=userInform.getUserNum();	
-			System.out.println("받아온 reportNum:"+reportNum.toString()+",userNum:"+userNum);
-			HashMap<String, Object> hashMap = new HashMap<String, Object>();
-			hashMap.put("userNum", userNum);
-			hashMap.put("reportNum", reportNum);
-			dao.deleteAgreement(hashMap);
-			dao.deleteMemorandum(hashMap);
-			System.out.println("삭제 완료.");
-			return "Agreement/Document/agreementMainMenu";
-		}
+	@ResponseBody
+	@RequestMapping(value="/deleteAgreement", method=RequestMethod.GET)
+	public String deleteAgreement(int[] reportNum, Model model, HttpSession session) {
+		System.out.println("삭제 실행.");
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		int userNum=userInform.getUserNum();	
+		System.out.println("받아온 reportNum:"+reportNum.toString()+",userNum:"+userNum);
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("userNum", userNum);
+		hashMap.put("reportNum", reportNum);
+		dao.deleteAgreement(hashMap);
+		dao.deleteMemorandum(hashMap);
+		System.out.println("삭제 완료.");
+		return "Agreement/Document/agreementMainMenu";
+	}
 	
 	//정보수정 페이지
 	@RequestMapping(value="/agreementUpdateMyProfile",method=RequestMethod.GET)

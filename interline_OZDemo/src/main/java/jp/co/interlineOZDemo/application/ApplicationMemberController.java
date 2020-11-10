@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -53,12 +54,12 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		String device = (String)session.getAttribute("device");
 		System.out.println(device);
-		//int total = dao.getTotalAgreement(userInform.getUserNum());
-		//PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
-		//ArrayList<AgreementAgreementVO> AgreementArray = new ArrayList<AgreementAgreementVO>();
-		//AgreementArray = dao.getAgreementList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
-		//model.addAttribute("AgreementArray",AgreementArray);
-		//model.addAttribute("pn", navi);
+		int total = dao.getTotalApplication(userInform.getUserNum());
+		PageNavigator navi = new PageNavigator(countPerPage, pagePerGroup, page, total);
+		ArrayList<ApplicationVO> applicationArray = new ArrayList<ApplicationVO>();
+		applicationArray = dao.getApplicationList(navi.getStartRecord(), navi.getCountPerPage(), userInform.getUserNum());
+		model.addAttribute("ApplicationArray",applicationArray);
+		model.addAttribute("pn", navi);
 		//System.out.println(AgreementArray.toString());
 		System.out.println("견적서 리스트 페이지 호출 완료");
 		return "Application/Document/applicationList";
@@ -157,4 +158,24 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		
 		return "error";
 	}
+	
+
+	//신청서 삭제
+	@ResponseBody
+	@RequestMapping(value="/deleteApplication", method=RequestMethod.GET)
+	public String deleteApplication(int[] reportNum, Model model, HttpSession session) {
+		System.out.println("삭제 실행.");
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		int userNum=userInform.getUserNum();	
+		System.out.println("받아온 reportNum:"+reportNum.toString()+",userNum:"+userNum);
+		HashMap<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("userNum", userNum);
+		hashMap.put("reportNum", reportNum);
+		dao.deleteApplication(hashMap);
+		System.out.println("삭제 완료.");
+		return "Application/Document/applicationMainMenu";
+	}
+	
+	
+	
 }

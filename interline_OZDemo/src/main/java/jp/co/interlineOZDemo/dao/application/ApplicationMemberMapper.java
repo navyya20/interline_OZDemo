@@ -13,5 +13,11 @@ public interface ApplicationMemberMapper {
 
 	int nextApplicationNum(int userNum);
 
+	int getTotalApplication(int userNum);
+
+	ArrayList<ApplicationVO> getApplicationList(RowBounds rbs, int userNum);
+
+	int deleteApplication(HashMap<String, Object> hashMap);
+
 	
 }
