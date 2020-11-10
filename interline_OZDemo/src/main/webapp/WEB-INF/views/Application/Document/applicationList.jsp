@@ -127,10 +127,10 @@ function selectAll(){
 		<td class="titleRow" style="width: 10%;">連絡先</td>
 	</tr>
 	<!-- 문서 리스트 뽑는곳  -->
-	<c:forEach var="sheet" items="${applicationArray}" varStatus="status">
+	<c:forEach var="sheet" items="${ApplicationArray}" varStatus="status">
 	<tr>
 		<td><input id='row${status.count}' class="checkbox" type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
-		<td><a href="${sheet.PDFPath}">${sheet.name}</a></td>
+		<td><a href="${sheet.PDFPath}" target="_parent">${sheet.name}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.birth}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/></td>
