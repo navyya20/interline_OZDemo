@@ -10,13 +10,13 @@
 		select 
 			coalesce(max(reportNum),0) 
 		from
-			Application 
+			application 
 		where 
 			userNum=#{userNum} 
 	</select>
 	
 	<insert id="insertApplicationSheet" parameterType="application">
-		insert into Application(
+		insert into application(
 			userNum,
 			systemReportNum,
 			reportNum,
@@ -52,6 +52,15 @@
 			#{sign}
 		)
 	</insert>
+	
+	<update id="setPDFPath" parameterType="hashMap">
+		update 
+			application
+		set
+			PDFPath = #{PDFPath}
+		where
+			reportNum = #{reportNum}
+	</update>
 	
 	<!-- 페이징을 위해 현제 해당하는 유저가 작성한 문서들의 총 갯수를 가져온다. -->
 	<select id="getTotalApplication" parameterType="int" resultType="int">

@@ -19,5 +19,7 @@ public interface ApplicationMemberMapper {
 
 	int deleteApplication(HashMap<String, Object> hashMap);
 
+	void setPDFPath(HashMap<String, Object> hashMap);
+
 	
 }

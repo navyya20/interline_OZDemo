@@ -113,6 +113,7 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		logger.debug("신청서 저장:{}",applicationVO);
 		logger.debug("신청서 저장2:{}",jsonString);
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		HashMap<String, Object> hashMap = new HashMap<>();
 		
 		int nextApplicationNum = dao.nextApplicationNum(userInform.getUserNum());
 		
@@ -152,6 +153,11 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 				ozExportResult="saveError";
 			}
 			logger.debug("ozExportResult:{}",ozExportResult);
+			
+			hashMap.put("reportNum", (nextApplicationNum+1));
+			hashMap.put("PDFPath", "http://"+properties.getOzIP()+"/files/application/pdf/"+(nextApplicationNum+1)+"_Application_"+userInform.getUserId()+".pdf");
+			
+			dao.setPDFPath(hashMap);
 			return "success";
 		}
 

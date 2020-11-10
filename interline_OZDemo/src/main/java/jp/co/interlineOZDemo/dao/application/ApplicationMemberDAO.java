@@ -57,4 +57,11 @@ public class ApplicationMemberDAO {
 		return result;
 	}
 
+	public void setPDFPath(HashMap<String, Object> hashMap) {
+		ApplicationMemberMapper mapper = session.getMapper(ApplicationMemberMapper.class);
+		mapper.setPDFPath(hashMap);
+		
+		return;
+	}
+
 }
