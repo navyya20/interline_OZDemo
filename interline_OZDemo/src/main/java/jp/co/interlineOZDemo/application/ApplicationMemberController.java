@@ -74,7 +74,7 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		String ipScheduler=properties.getOzIP().split(":")[0];
 		int portScheduler=9521;
 		ExportReport export=new ExportReport(ozId, ozPW, OZserverURL, ipScheduler, portScheduler);
-		String nameOzr="OZDemo_Application/pdfTest.ozr";
+		String nameOzr="OZDemo_Application/writeApplication.ozr";
 		String[] ozrParamValue = null;
 		//String nameOdi ="readEstimateSheet";
 		//String[] odiParamValue = {"userNum="+estimateSheetVO.getUserNum(),"reportNum="+reportNum};
@@ -108,8 +108,9 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 	//신청서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveApplication", method=RequestMethod.POST)
-	public String saveApplicationSheet(ApplicationVO applicationVO,Model model,HttpSession session) throws ParseException {
+	public String saveApplicationSheet(ApplicationVO applicationVO,String jsonString,Model model,HttpSession session) throws ParseException {
 		logger.debug("신청서 저장:{}",applicationVO);
+		logger.debug("신청서 저장2:{}",jsonString);
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 		
 		int nextApplicationNum = dao.nextApplicationNum(userInform.getUserNum());
@@ -122,13 +123,37 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 	
 		applicationVO.setUserNum(userInform.getUserNum());
 		applicationVO.setReportNum(nextApplicationNum + 1);
-		logger.debug("신청서 저장용 정보:{}",applicationVO);
 		
 		int result = dao.insertApplicationSheet(applicationVO);
 		
 		if(result == 1) {
+			
+			GetProperties properties= new GetProperties();
+			String ozId="admin";
+			String ozPW="admin01";
+			String OZserverURL="http://"+properties.getOzIP()+"/oz80/server";
+			String ipScheduler=properties.getOzIP().split(":")[0];
+			int portScheduler=9521;
+			ExportReport export=new ExportReport(ozId, ozPW, OZserverURL, ipScheduler, portScheduler);
+			String nameOzr="OZDemo_Application/writeApplication.ozr";
+			String[] ozrParamValue = null;
+			//String nameOdi ="readEstimateSheet";
+			//String[] odiParamValue = {"userNum="+estimateSheetVO.getUserNum(),"reportNum="+reportNum};
+			String formatExport = "pdf";
+			//String fileNameExport="reportExport"+estimateSheetVO.getReportName()+reportNum;
+			String ozExportResult="";
+			
+			try {
+				ozExportResult=export.exportMethod(jsonString, nameOzr, ozrParamValue, null, null, formatExport, (nextApplicationNum+1)+"_Application_"+userInform.getUserId());
+			} catch (SchedulerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				ozExportResult="saveError";
+			}
+			logger.debug("ozExportResult:{}",ozExportResult);
 			return "success";
 		}
+
 		
 		return "error";
 	}
