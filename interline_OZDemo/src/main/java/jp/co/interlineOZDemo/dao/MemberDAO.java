@@ -87,6 +87,7 @@ public class MemberDAO {
 	public void setState(int reportNum) {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		mapper.setState(reportNum);
+		return;
 	}
 
 	public BillInformVO getBillInform(BillInformVO userNumReportNum) {
