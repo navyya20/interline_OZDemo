@@ -115,7 +115,7 @@ function selectAll(){
 </script>
 
 <body>
-<div id="title">文書リスト</div>
+<div id="title">申込書リスト</div>
 <div style="text-align: left; margin-bottom: 5px; margin-top: 5px; "><span class="btn" onclick="deleteSheet()" style="background-color: rgb(255, 204, 0); color: rgb(0,0,0); border-color: rgb(255, 204, 0); padding:1px 20px 1px 20px;">削除</span></div>
 <div style="text-align: center;">
 <table id="list_table">
@@ -123,21 +123,19 @@ function selectAll(){
 		<td class="titleRow" style="width: 0.5%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 8%;">名前</td>
 		<td class="titleRow" style="width: 6%;">年齢</td>
-		<td class="titleRow" style="width: 6%;">日時</td>
-		<td class="titleRow" style="width: 13%;">連絡先</td>
+		<td class="titleRow" style="width: 12%;">日時</td>
+		<td class="titleRow" style="width: 20%;">連絡先</td>
 	</tr>
 	<!-- 문서 리스트 뽑는곳  -->
 	<c:forEach var="sheet" items="${ApplicationArray}" varStatus="status">
 	<tr>
 		<td><input id='row${status.count}' class="checkbox" type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
 		<td><a href="${sheet.PDFPath}" target="_parent">${sheet.name}</a></td>
-		<td>
-			<fmt:parseDate value="${sheet.birth}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyy"/><c:if test="${device eq 'MB'}"><br></c:if><fmt:formatDate value="${noticePostDate}" pattern="MMdd"/></td>
+		<td>${sheet.age}</td>
 		<td>
 			<fmt:parseDate value="${sheet.systemDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyy"/><c:if test="${device eq 'MB'}"><br></c:if><fmt:formatDate value="${noticePostDate}" pattern="MMdd"/><br><fmt:formatDate value="${noticePostDate}" pattern="HH:mm"/></td>
-		<td>${sheet.telephone}<br>${sheet.mobile}</td>		
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyy"/><c:if test="${device eq 'MB'}"><br></c:if><fmt:formatDate value="${noticePostDate}" pattern="MMdd"/><c:if test="${device eq 'MB'}"><br></c:if><c:if test="${device eq 'PC'}"> </c:if><fmt:formatDate value="${noticePostDate}" pattern="HH:mm"/></td>
+		<td>${sheet.telephone}<c:if test="${device eq 'MB'}"><br></c:if><c:if test="${device eq 'PC'}"> / </c:if>${sheet.mobile}</td>		
 	</tr>
 	</c:forEach>
 
