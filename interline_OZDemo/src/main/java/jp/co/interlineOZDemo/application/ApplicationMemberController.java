@@ -102,8 +102,13 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
 
 		model.addAttribute("userNum", userInform.getUserNum());
+		String device = (String)session.getAttribute("device");
 		
+		if(device.equals("MB")) {
+			return "Application/Document/writeApplicationMobile";
+		}
 		return "Application/Document/writeApplication";
+
 	}
 	
 	//신청서 저장
@@ -132,7 +137,7 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 			
 			GetProperties properties= new GetProperties();
 			String ozId="admin";
-			String ozPW="admin1";
+			String ozPW="admin01";
 			String OZserverURL="http://"+properties.getOzIP()+"/oz80/server";
 			String ipScheduler=properties.getOzIP().split(":")[0];
 			int portScheduler=9521;
