@@ -160,6 +160,7 @@ private static final Logger logger = LoggerFactory.getLogger(AgreementMemberCont
 			logger.debug("ozExportResult:{}",ozExportResult);
 			
 			hashMap.put("reportNum", (nextApplicationNum+1));
+			hashMap.put("userNum", userInform.getUserNum());
 			hashMap.put("PDFPath", "http://"+properties.getOzIP()+"/files/application/pdf/"+(nextApplicationNum+1)+"_Application_"+userInform.getUserId()+".pdf");
 			
 			dao.setPDFPath(hashMap);

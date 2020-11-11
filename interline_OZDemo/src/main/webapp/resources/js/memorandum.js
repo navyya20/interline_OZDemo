@@ -1,4 +1,4 @@
-function save(reportNum){
+function save(){
 	var memorandumData=JSON.parse(OZViewer.GetInformation("INPUT_JSON_ALL")); //입력된 값을 전부 받아오기
 	var customer_Len = memorandumData.customer.length;
 	var sign_Len = memorandumData.sign.length;

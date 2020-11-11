@@ -59,7 +59,7 @@
 		set
 			PDFPath = #{PDFPath}
 		where
-			reportNum = #{reportNum}
+			reportNum = #{reportNum} and userNum = #{userNum}
 	</update>
 	
 	<!-- 페이징을 위해 현제 해당하는 유저가 작성한 문서들의 총 갯수를 가져온다. -->

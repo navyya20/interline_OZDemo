@@ -1,4 +1,4 @@
-function save(reportNum){
+function save(){
 	var inpuJson=OZViewer.GetInformation("INPUT_JSON_ALL"); //입력된 값을 전부 받아오기
 	var applicationData = JSON.parse(inpuJson);
 	

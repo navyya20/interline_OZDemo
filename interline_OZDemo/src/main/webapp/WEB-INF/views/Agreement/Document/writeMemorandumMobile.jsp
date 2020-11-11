@@ -68,7 +68,7 @@ $(document).ready(function(){
 <body>
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
-<td class="memorandumMenuTd"><span id="save_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="save(${reportNum})">作成</span></td>
+<td class="memorandumMenuTd"><span id="save_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="save()">作成</span></td>
 <td class="memorandumMenuTd"></td>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
 </tr></table>
