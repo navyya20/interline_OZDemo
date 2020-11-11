@@ -121,10 +121,10 @@ function selectAll(){
 <table id="list_table">
 	<tr>
 		<td class="titleRow" style="width: 0.5%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
-		<td class="titleRow" style="width: 10%;">名前</td>
-		<td class="titleRow" style="width: 5%;">年齢</td>
-		<td class="titleRow" style="width: 8%;">日時</td>
-		<td class="titleRow" style="width: 10%;">連絡先</td>
+		<td class="titleRow" style="width: 8%;">名前</td>
+		<td class="titleRow" style="width: 6%;">年齢</td>
+		<td class="titleRow" style="width: 6%;">日時</td>
+		<td class="titleRow" style="width: 13%;">連絡先</td>
 	</tr>
 	<!-- 문서 리스트 뽑는곳  -->
 	<c:forEach var="sheet" items="${ApplicationArray}" varStatus="status">
@@ -133,10 +133,10 @@ function selectAll(){
 		<td><a href="${sheet.PDFPath}" target="_parent">${sheet.name}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.birth}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/></td>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyy"/><c:if test="${device eq 'MB'}"><br></c:if><fmt:formatDate value="${noticePostDate}" pattern="MMdd"/></td>
 		<td>
 			<fmt:parseDate value="${sheet.systemDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
-			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd"/><br><fmt:formatDate value="${noticePostDate}" pattern="HH:mm"/></td>
+			<fmt:formatDate value="${noticePostDate}" pattern="yyyy"/><c:if test="${device eq 'MB'}"><br></c:if><fmt:formatDate value="${noticePostDate}" pattern="MMdd"/><br><fmt:formatDate value="${noticePostDate}" pattern="HH:mm"/></td>
 		<td>${sheet.telephone}<br>${sheet.mobile}</td>		
 	</tr>
 	</c:forEach>
