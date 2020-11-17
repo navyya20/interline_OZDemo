@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jp.co.interlineOZDemo.agreement.AgreementMemberController;
 import jp.co.interlineOZDemo.dao.application.ApplicationMemberDAO;
 import jp.co.interlineOZDemo.util.ExportReport;
 import jp.co.interlineOZDemo.util.GetProperties;
@@ -31,7 +30,7 @@ import oz.scheduler.SchedulerException;
 @Controller
 @RequestMapping("/member")
 public class ApplicationMemberController {
-private static final Logger logger = LoggerFactory.getLogger(AgreementMemberController.class);
+private static final Logger logger = LoggerFactory.getLogger(ApplicationMemberController.class);
 	
 	private static final int countPerPage=20;	
 	private static final int pagePerGroup=10;

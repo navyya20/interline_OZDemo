@@ -62,7 +62,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body  style="height:97.6%;width:99.5%;">
-<div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
+<div id="menuBar" style="position:relative; left:0px; z-index:10; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="save_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="save()">作成</span></td>
 <td class="memorandumMenuTd"></td>
