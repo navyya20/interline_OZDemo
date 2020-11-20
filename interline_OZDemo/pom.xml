@@ -185,6 +185,15 @@
 			<systemPath>${project.lib.path}/ozsfw80.jar</systemPath>
 		</dependency>
 		
+	<!-- pdf관련 라이브러리 -->
+		<dependency>
+			<groupId>external</groupId>
+			<artifactId>pdfbox-app</artifactId>
+			<version>2.0.21</version>
+			<scope>system</scope>
+			<systemPath>${project.lib.path}/pdfbox-app-2.0.21.jar</systemPath>
+		</dependency>
+		
 		<!-- json 라이브러리 (parsing쓰기위함) -->
 		<dependency>
 		    <groupId>org.json</groupId>

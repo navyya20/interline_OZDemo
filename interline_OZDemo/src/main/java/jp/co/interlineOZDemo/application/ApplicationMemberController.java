@@ -1,5 +1,6 @@
 package jp.co.interlineOZDemo.application;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jp.co.interlineOZDemo.dao.application.ApplicationMemberDAO;
 import jp.co.interlineOZDemo.util.ExportReport;
 import jp.co.interlineOZDemo.util.GetProperties;
+import jp.co.interlineOZDemo.util.PDFController;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 import jp.co.interlineOZDemo.vo.application.ApplicationVO;
@@ -66,32 +68,14 @@ private static final Logger logger = LoggerFactory.getLogger(ApplicationMemberCo
 	
 	@RequestMapping(value = "/pdfTest", method=RequestMethod.GET)
 	public String applicationPDFTest() {
-		
-		GetProperties properties= new GetProperties();
-		String ozId="admin";
-		String ozPW="admin1";
-		String OZserverURL="http://"+properties.getOzIP()+"/oz80/server";
-		String ipScheduler=properties.getOzIP().split(":")[0];
-		int portScheduler=9521;
-		ExportReport export=new ExportReport(ozId, ozPW, OZserverURL, ipScheduler, portScheduler);
-		String nameOzr="OZDemo_Application/writeApplication.ozr";
-		String[] ozrParamValue = null;
-		//String nameOdi ="readEstimateSheet";
-		//String[] odiParamValue = {"userNum="+estimateSheetVO.getUserNum(),"reportNum="+reportNum};
-		String formatExport = "pdf";
-		//String fileNameExport="reportExport"+estimateSheetVO.getReportName()+reportNum;
-		String result="";
-		JSONObject exportJsonObject = new JSONObject();
-		exportJsonObject.put("form2", "aaaa");
-		String jsonData = exportJsonObject.toString();
-		try {
-			result=export.exportMethod(jsonData, nameOzr, ozrParamValue, null, null, formatExport, "testPDF");
-		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			result="saveError";
-		}
-		
+		String rootPath = "C:/Apache Software Foundation/Tomcat 8.5";
+		String pdfPath = rootPath+"/webapps/files/application/pdf/1_Application_uuu.pdf";
+		rootPath = rootPath.replace('/', File.separatorChar);
+		PDFController pdfController = new PDFController();
+		ArrayList<String> jpgPaths = pdfController.PDFtoJPG(pdfPath, 150);
+		String outPDFPath = rootPath+"/webapps/files/application/pdf/converted.pdf";
+		outPDFPath = outPDFPath.replace('/', File.separatorChar);
+		pdfController.JPGtoPDF(jpgPaths, outPDFPath);
 		return "Application/pdfTest";
 	}
 	
