@@ -37,7 +37,7 @@
 	}
 </style>
 </head>
-<body class="pc_body" style="height:97.6%; width:99.5%; ">
+<body class="pc_body" style="height:97.6%; width:99%; ">
 	<div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 		<table style="text-align: center; margin: auto;">
 			<tr>

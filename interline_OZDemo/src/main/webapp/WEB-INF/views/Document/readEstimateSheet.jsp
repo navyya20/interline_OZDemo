@@ -33,7 +33,7 @@
 			width: 100px;
 		}
 	</style>
-<body style="width:99.5%;height:97.6%">
+<body style="width:99%;height:97.6%">
 <div id="menuBar" style="position:relative; left: 0px; z-index: 1000; text-align: center; width:100%;">
 	<table style="text-align: center; margin: auto;">
 		<tr>
@@ -110,7 +110,6 @@ $(document).ready(function(){
 			console.log("isFont is false");
         }
     });
-
     
 	function OZUserEvent_OZViewer(inputJsonString, param2, param3) {
 		var inputJson=JSON.parse(inputJsonString);

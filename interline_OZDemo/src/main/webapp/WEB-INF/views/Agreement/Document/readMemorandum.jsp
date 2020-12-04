@@ -53,7 +53,7 @@ function back(){
 </script>
 
 </head>
-<body  style="height:97.6%;width:99.5%;">
+<body  style="height:97.6%;width:99%;">
 <div id="menuBar" style="position:relative; left:0px; z-index:1000; text-align: center; width:100%;">
 <table style="text-align:center; margin:auto;"><tr>
 <td class="memorandumMenuTd"><span id="back_Btn"  class="pc_font_button1 memorandumMenuButton" onclick="back()">戻る</span></td>
