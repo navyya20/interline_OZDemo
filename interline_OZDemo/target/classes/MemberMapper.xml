@@ -17,6 +17,7 @@
 	
 	<insert id="insertEstimateSheet" parameterType="estimateSheet">
 		insert into estimateSheet (
+			reportNum,
 			userNum,
 			
 			supplier,
@@ -39,7 +40,8 @@
 			dateForDisplaying,
 			expirationDate,
 			stamp
-		) VALUES (			
+		) VALUES (	
+			get_seq('agreementSeq'),		
 			#{userNum},
 			
 			#{supplier},
@@ -120,7 +122,7 @@
 	
 	<select id="getEstimateSheetList" parameterType="int" resultType="estimateSheet">
 		select 			
-			reportNum,reportDate,dateForDisplaying,userNum,supplier,receiver,reportName,deadline,state
+			reportNum,reportDate,dateForDisplaying,userNum,supplier,receiver,reportName,deadline,state,estimateType
 		from 
 			estimateSheet
 		where 
@@ -208,4 +210,14 @@
 		where
 			reportNum = #{reportNum}
 	</update>
+	
+	<!-- 해당타입의 구체정보를 가져온다 ozr이름, DB이름 ,item테이블이름 등 -->
+	<select id="getEstimateTypeInform" parameterType="String" resultType="estimateType">
+		select * from estimateType where estimateType=#{estimateType}
+	</select>
+	
+	<select id="getEstimateCommon" parameterType="estimateCommon" resultType="estimateCommon">
+		select userNum, reportNum, stamp, state from ${DBName} where reportNum=#{reportNum} and userNum =#{userNum}
+	</select>
+	
 </mapper>

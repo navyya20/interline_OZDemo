@@ -69,12 +69,12 @@ function writeNewSheet(){
 	window.parent.location.href="writeEstimate";
 }
 
-function writeBillSheet(reportNum){
-	window.parent.location.href = "writeBill?reportNum=" +reportNum;
+function writeBillSheet(reportNum,estimateType){
+	window.parent.location.href = "writeBill?reportNum=" +reportNum+"&estimateType="+estimateType;
 }
 
-function readBillSheet(reportNum){
-	window.parent.location.href = "readBill?reportNum=" +reportNum;
+function readBillSheet(reportNum,estimateType){
+	window.parent.location.href = "readBill?reportNum=" +reportNum+"&estimateType="+estimateType;
 }
 
 function formSubmit(page){
@@ -135,6 +135,7 @@ function selectAll(){
 	<tr>
 		<td class="titleRow" style="width: 2%;"><input id='allSelect' type='checkbox' name='selectAll' value='on' onchange="selectAll()"></td>
 		<td class="titleRow" style="width: 5%;">文書番号</td>
+		<td class="titleRow" style="width: 5%;">種類</td>
 		<td class="titleRow" style="width: 9%;">顧客</td>
 		<td class="titleRow" style="width: 9%;">件名</td>
 		<td class="titleRow" style="width: 9%;">保存日時</td>
@@ -143,20 +144,23 @@ function selectAll(){
 	</tr>
 	<c:forEach var="sheet" items="${estimateSheetArray}" varStatus="status">
 	<tr>
-		<td><input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'></td>
+		<td>
+			<input id='row${status.count}' type='checkbox' name='selectedRow' value='${sheet.reportNum}'>
+		</td>
 		<td>${sheet.reportNum}</td>
+		<td>${sheet.estimateType}</td>
 		<td>${sheet.receiver}</td>
-		<td><a href="readEstimate?reportNum=${sheet.reportNum}" target="_parent" style="text-decoration: none;">${sheet.reportName}</a></td>
+		<td><a href="readEstimate?reportNum=${sheet.reportNum}&estimateType=${sheet.estimateType}" target="_parent" style="text-decoration: none;">${sheet.reportName}</a></td>
 		<td>
 			<fmt:parseDate value="${sheet.reportDate}" var="noticePostDate" pattern="yyyy-MM-dd HH:mm:ss"/>
 			<fmt:formatDate value="${noticePostDate}" pattern="yyyyMMdd HH:mm"/></td>
 		<td class="lastColum">
 			<c:choose>
 				<c:when test="${sheet.state eq 'e'}">
-					<span class="pc_font_button2" onclick="writeBillSheet(${sheet.reportNum})">請求書作成</span>
+					<span class="pc_font_button2" onclick="writeBillSheet(${sheet.reportNum},'${sheet.estimateType}')">請求書作成</span>
 				</c:when>
 				<c:when test="${sheet.state eq 'b'}">
-					<span class="pc_font_button3" onclick="readBillSheet(${sheet.reportNum})">請求書閲覧</span>
+					<span class="pc_font_button3" onclick="readBillSheet(${sheet.reportNum},'${sheet.estimateType}')">請求書閲覧</span>
 				</c:when>
 				<c:otherwise>
 				</c:otherwise>

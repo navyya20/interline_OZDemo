@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import jp.co.interlineOZDemo.vo.BillInformVO;
+import jp.co.interlineOZDemo.vo.EstimateCommonVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
+import jp.co.interlineOZDemo.vo.EstimateTypeVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 
 @Repository
@@ -94,6 +96,18 @@ public class MemberDAO {
 		MemberMapper mapper = session.getMapper(MemberMapper.class);
 		BillInformVO BillInform = mapper.getBillInform(userNumReportNum);
 		return BillInform;
+	}
+
+	public EstimateTypeVO getEstimateTypeInform(String estimateType) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		EstimateTypeVO getEstimateTypeInform = mapper.getEstimateTypeInform(estimateType);
+		return getEstimateTypeInform;
+	}
+
+	public EstimateCommonVO getEstimateCommon(EstimateCommonVO userNumReportNum) {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		EstimateCommonVO estimateCommon = mapper.getEstimateCommon(userNumReportNum);
+		return estimateCommon;
 	}
 
 }

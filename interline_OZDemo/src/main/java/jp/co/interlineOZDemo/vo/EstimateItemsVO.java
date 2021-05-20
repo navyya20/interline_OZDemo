@@ -8,6 +8,8 @@ public class EstimateItemsVO {
     private String unit;
     private int unitPrice;
     private long price;    
+    private String ozrName;
+    
 	public int getReportNum() {
 		return reportNum;
 	}
@@ -51,11 +53,21 @@ public class EstimateItemsVO {
 	public void setItemNum(int itemNum) {
 		this.itemNum = itemNum;
 	}
+	
+	
+	public String getOzrName() {
+		return ozrName;
+	}
+	public void setOzrName(String ozrName) {
+		this.ozrName = ozrName;
+	}
 	@Override
 	public String toString() {
 		return "EstimateItemsVO [reportNum=" + reportNum + ", itemName=" + itemName + ", itemNum=" + itemNum
-				+ ", amount=" + amount + ", unit=" + unit + ", unitPrice=" + unitPrice + ", price=" + price  + "]";
+				+ ", amount=" + amount + ", unit=" + unit + ", unitPrice=" + unitPrice + ", price=" + price
+				+ ", ozrName=" + ozrName + "]";
 	}
+	
 	
     
 	

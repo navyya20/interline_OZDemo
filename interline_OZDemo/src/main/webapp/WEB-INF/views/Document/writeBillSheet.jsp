@@ -60,20 +60,25 @@ $(document).ready(function(){
 
 <div id="OZViewer" style="width:99.5%;height:97.6%"></div>
 <script type="text/javascript" >
+	var reportNum = "${reportNum}";
+	var userNum = "${userNum}";
+	
+	var estimateTypeInform = '${estimateTypeInform}';
+	var estimateTypeInformJson=JSON.parse(estimateTypeInform);
 	function SetOZParamters_OZViewer(){
-		var reportNum = "${reportNum}";
-		var userNum = "${userNum}";
-
+		
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
-		oz.sendToActionScript("connection.reportname","OZDemo_Bill/writeBill.ozr");
+		oz.sendToActionScript("connection.reportname","OZDemo_Bill/write"+estimateTypeInformJson.billOzrName+".ozr");
 		
 		oz.sendToActionScript("global.language", "ja_JP");
-		oz.sendToActionScript("odi.odinames", "writeBill");
- 		oz.sendToActionScript("odi.writeBill.pcount", "2");
+		oz.sendToActionScript("odi.odinames", "write"+estimateTypeInformJson.billOzrName);
+ 		oz.sendToActionScript("odi.writeBill.pcount", "4");
 		oz.sendToActionScript("odi.writeBill.args1", "reportNum="+reportNum);
 		oz.sendToActionScript("odi.writeBill.args2", "userNum="+userNum);
+		oz.sendToActionScript("odi.writeBill.args3", "estimateDBName="+estimateTypeInformJson.estimateDBName);
+		oz.sendToActionScript("odi.writeBill.args4", "itemDBName="+estimateTypeInformJson.itemDBName);
 
 		oz.sendToActionScript("export.format","pdf");
 		oz.sendToActionScript("pdf.filename","writeBillSheet");

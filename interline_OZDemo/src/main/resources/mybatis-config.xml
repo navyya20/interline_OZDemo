@@ -9,6 +9,8 @@
 		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateItemsVO" alias="estimateItems"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.ItemsVO" alias="Items"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.BillInformVO" alias="billInform"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateTypeVO" alias="estimateType"/>
+		<typeAlias type="jp.co.interlineOZDemo.vo.EstimateCommonVO" alias="estimateCommon"/>
 		
 		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementUserInformVO" alias="agreementUserInform"/>
 		<typeAlias type="jp.co.interlineOZDemo.vo.agreement.AgreementAgreementVO" alias="agreementAgreement"/>

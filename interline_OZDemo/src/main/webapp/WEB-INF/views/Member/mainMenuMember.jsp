@@ -73,7 +73,7 @@ $(function(){
 			<span id="updateMyProfile" class="pc_font_button1 mainMenuButton move_btn">自社情報修正</span>
 		</td>
 		<td class="mainMenuTd">
-			<span id="writeNewEstimateSheet" class="pc_font_button1 mainMenuButton" onclick="location.href = 'writeEstimate'">見積書作成</span>
+			<span id="selectEstimateType" class="pc_font_button1 mainMenuButton move_btn">見積書作成</span>
 		</td>
 		<td class="mainMenuTd">
 			<span id="estimateSheetList" class="pc_font_button1 mainMenuButton move_btn">見積書リスト</span>

@@ -23,6 +23,9 @@ public class EstimateSheetVO {
 	private long sumWithTax2;
 	private String email;
 	private String state;
+	private String estimateType;
+	private String estimateDBName;
+	private String itemDBName;
 	
 	
 	
@@ -158,6 +161,30 @@ public class EstimateSheetVO {
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
+	
+	
+	public String getEstimateType() {
+		return estimateType;
+	}
+	public void setEstimateType(String estimateType) {
+		this.estimateType = estimateType;
+	}
+	
+	
+	public String getEstimateDBName() {
+		return estimateDBName;
+	}
+	public void setEstimateDBName(String estimateDBName) {
+		this.estimateDBName = estimateDBName;
+	}
+	public String getItemDBName() {
+		return itemDBName;
+	}
+	public void setItemDBName(String itemDBName) {
+		this.itemDBName = itemDBName;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "EstimateSheetVO [reportNum=" + reportNum + ", reportDate=" + reportDate + ", dateForDisplaying="
@@ -166,8 +193,11 @@ public class EstimateSheetVO {
 				+ ", representative=" + representative + ", receiver=" + receiver + ", reportName=" + reportName
 				+ ", deadline=" + deadline + ", supplyPoint=" + supplyPoint + ", payCondition=" + payCondition
 				+ ", stamp=" + stamp + ", cautions=" + cautions + ", sum=" + sum + ", sumWithTax=" + sumWithTax
-				+ ", sumWithTax2=" + sumWithTax2 + ", email=" + email + ", state=" + state + "]";
+				+ ", sumWithTax2=" + sumWithTax2 + ", email=" + email + ", state=" + state + ", estimateType="
+				+ estimateType + ", estimateDBName=" + estimateDBName + ", itemDBName=" + itemDBName + "]";
 	}
+	
+	
 	
 	
 	

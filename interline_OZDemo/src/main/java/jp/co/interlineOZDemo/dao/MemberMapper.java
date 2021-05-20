@@ -6,8 +6,10 @@ import java.util.HashMap;
 import org.apache.ibatis.session.RowBounds;
 
 import jp.co.interlineOZDemo.vo.BillInformVO;
+import jp.co.interlineOZDemo.vo.EstimateCommonVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
+import jp.co.interlineOZDemo.vo.EstimateTypeVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 
 public interface MemberMapper {
@@ -35,5 +37,9 @@ public interface MemberMapper {
 	public void setState(int reportNum);
 
 	public BillInformVO getBillInform(BillInformVO userNumReportNum);
+
+	public EstimateTypeVO getEstimateTypeInform(String estimateType);
+
+	public EstimateCommonVO getEstimateCommon(EstimateCommonVO userNumReportNum);
 
 }

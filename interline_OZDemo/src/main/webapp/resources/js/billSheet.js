@@ -16,11 +16,10 @@ function save(reportNum){
 			billData["sum"] = billData["sum"].replace(/[^0-9]/g,""); //금액의 ￥표시 삭제, 숫자만 받아오기
 			billData["sumWithTax"] = billData["sumWithTax"].replace(/[^0-9]/g,"");
 			billData["sumWithTax2"] = billData["sumWithTax2"].replace(/[^0-9]/g,"");
-
 			$.ajax({
 				url: "saveBill",
 				type: 'POST',
-				data: {jsonStr:JSON.stringify(billData)},
+				data: {jsonStr:JSON.stringify(billData),estimateType:billData.estimateType},
 				dataType:'text',
 				success: function(data){
 					

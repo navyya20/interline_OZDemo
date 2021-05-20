@@ -63,7 +63,9 @@ $(document).ready(function(){
 	//세션으로부터 유저인폼 jsonString을 받는다.
 	var userNum = "${userNum}";
 	var reportNum = "${reportNum}";
-	var stamp = "${stamp}"
+	var stamp = "${stamp}";
+	var estimateTypeInform = '${estimateTypeInform}';
+	var estimateTypeInformJson=JSON.parse(estimateTypeInform);
 	//var userNum = $('#userNum').html();
 	//var reportNum = $('#reportNum').html();
 	console.log("userNum:"+userNum);
@@ -76,16 +78,18 @@ $(document).ready(function(){
 		var oz;
 		oz = document.getElementById("OZViewer");
 		oz.sendToActionScript("viewer.ignore_disable_color_inputcomponent","true");
-		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/estimateSheet.js");
+		oz.sendToActionScript("viewer.external_functions_path","ozp://OZDemo/JS/"+estimateTypeInformJson.jsName);
 		oz.sendToActionScript("connection.servlet","http://<%out.print(properties.getOzIP());%>/oz80/server");
-		oz.sendToActionScript("connection.reportname","OZDemo/readEstimateSheet.ozr");
+		oz.sendToActionScript("connection.reportname","OZDemo/read"+estimateTypeInformJson.estimateOzrName+".ozr");
 		oz.sendToActionScript("connection.pcount","1");
 		oz.sendToActionScript("connection.args1","stamp="+stamp);
 		oz.sendToActionScript("global.language", "ja");
-		oz.sendToActionScript("odi.odinames","readEstimateSheet");
-		oz.sendToActionScript("odi.readEstimateSheet.pcount","2");
-		oz.sendToActionScript("odi.readEstimateSheet.args1","userNum="+userNum);
-		oz.sendToActionScript("odi.readEstimateSheet.args2","reportNum="+reportNum);
+		oz.sendToActionScript("odi.odinames","read"+estimateTypeInformJson.estimateOzrName);
+		oz.sendToActionScript("odi.read"+estimateTypeInformJson.estimateOzrName+".pcount","2");
+		oz.sendToActionScript("odi.read"+estimateTypeInformJson.estimateOzrName+".args1","userNum="+userNum);
+		oz.sendToActionScript("odi.read"+estimateTypeInformJson.estimateOzrName+".args2","reportNum="+reportNum);
+		oz.sendToActionScript("odi.read"+estimateTypeInformJson.estimateOzrName+".args3","estimateDBName="+estimateTypeInformJson.estimateDBName);
+		oz.sendToActionScript("odi.read"+estimateTypeInformJson.estimateOzrName+".args4","itemDBName="+estimateTypeInformJson.itemDBName);
 		oz.sendToActionScript("export.filename",reportNum+"_OZDemo_"+now.getFullYear() + (now.getMonth()+1).toString().padStart(2,'0') + now.getDate().toString().padStart(2,'0') + "_" + now.getHours().toString().padStart(2,'0') + now.getMinutes().toString().padStart(2,'0') + now.getSeconds().toString().padStart(2,'0'));
 		oz.sendToActionScript("pdf.fontembedding","true");
 		return true;

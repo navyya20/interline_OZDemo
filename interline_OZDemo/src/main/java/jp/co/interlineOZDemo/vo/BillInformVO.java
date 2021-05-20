@@ -21,37 +21,10 @@ public class BillInformVO {
 	private String accountNumber;
 	private String accountOwner;
 	private String hurigana;
+	private String ozrName;
+	private String estimateType;
+	private String billDBName;
 	
-	public BillInformVO() {
-		super();
-	}
-
-	public BillInformVO(int billNum, int reportNum, int userNum, String billDate, String supplier, String address,
-			String post, String phoneNumber, String representative, String receiver, String supplyPoint, String stamp,
-			long sum, long sumWithTax, long sumWithTax2, String bankName, String depositeClassification,
-			String accountNumber, String accountOwner, String hurigana) {
-		super();
-		this.billNum = billNum;
-		this.reportNum = reportNum;
-		this.userNum = userNum;
-		this.billDate = billDate;
-		this.supplier = supplier;
-		this.address = address;
-		this.post = post;
-		this.phoneNumber = phoneNumber;
-		this.representative = representative;
-		this.receiver = receiver;
-		this.supplyPoint = supplyPoint;
-		this.stamp = stamp;
-		this.sum = sum;
-		this.sumWithTax = sumWithTax;
-		this.sumWithTax2 = sumWithTax2;
-		this.bankName = bankName;
-		this.depositeClassification = depositeClassification;
-		this.accountNumber = accountNumber;
-		this.accountOwner = accountOwner;
-		this.hurigana = hurigana;
-	}
 
 	public int getBillNum() {
 		return billNum;
@@ -213,6 +186,31 @@ public class BillInformVO {
 		this.hurigana = hurigana;
 	}
 
+	
+	public String getOzrName() {
+		return ozrName;
+	}
+
+	public void setOzrName(String ozrName) {
+		this.ozrName = ozrName;
+	}
+
+	public String getEstimateType() {
+		return estimateType;
+	}
+
+	public void setEstimateType(String estimateType) {
+		this.estimateType = estimateType;
+	}
+	
+	public String getBillDBName() {
+		return billDBName;
+	}
+
+	public void setBillDBName(String billDBName) {
+		this.billDBName = billDBName;
+	}
+
 	@Override
 	public String toString() {
 		return "BillInformVO [billNum=" + billNum + ", reportNum=" + reportNum + ", userNum=" + userNum + ", billDate="
@@ -221,15 +219,10 @@ public class BillInformVO {
 				+ supplyPoint + ", stamp=" + stamp + ", sum=" + sum + ", sumWithTax=" + sumWithTax + ", sumWithTax2="
 				+ sumWithTax2 + ", bankName=" + bankName + ", depositeClassification=" + depositeClassification
 				+ ", accountNumber=" + accountNumber + ", accountOwner=" + accountOwner + ", hurigana=" + hurigana
-				+ ", getBillNum()=" + getBillNum() + ", getReportNum()=" + getReportNum() + ", getBillDate()="
-				+ getBillDate() + ", getSupplier()=" + getSupplier() + ", getAddress()=" + getAddress() + ", getPost()="
-				+ getPost() + ", getPhoneNumber()=" + getPhoneNumber() + ", getRepresentative()=" + getRepresentative()
-				+ ", getReceiver()=" + getReceiver() + ", getSupplyPoint()=" + getSupplyPoint() + ", getStamp()="
-				+ getStamp() + ", getSum()=" + getSum() + ", getSumWithTax()=" + getSumWithTax() + ", getSumWithTax2()="
-				+ getSumWithTax2() + ", getBankName()=" + getBankName() + ", getDepositeClassification()="
-				+ getDepositeClassification() + ", getAccountNumber()=" + getAccountNumber() + ", getAccountOwner()="
-				+ getAccountOwner() + ", getHurigana()=" + getHurigana() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", ozrName=" + ozrName + ", estimateType=" + estimateType + ", billDBName=" + billDBName + "]";
 	}
+	
+	
+	
 
 }

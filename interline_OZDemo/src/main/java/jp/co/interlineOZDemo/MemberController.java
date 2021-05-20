@@ -36,8 +36,10 @@ import jp.co.interlineOZDemo.util.FileService;
 import jp.co.interlineOZDemo.util.GetProperties;
 import jp.co.interlineOZDemo.util.PageNavigator;
 import jp.co.interlineOZDemo.vo.BillInformVO;
+import jp.co.interlineOZDemo.vo.EstimateCommonVO;
 import jp.co.interlineOZDemo.vo.EstimateItemsVO;
 import jp.co.interlineOZDemo.vo.EstimateSheetVO;
+import jp.co.interlineOZDemo.vo.EstimateTypeVO;
 import jp.co.interlineOZDemo.vo.UserInformVO;
 
 
@@ -108,10 +110,18 @@ public class MemberController {
 		return "Document/estimateSheetList";
 	}
 	
+	//견적서타입 선택 페이지
+	@RequestMapping(value="/selectEstimateType", method=RequestMethod.GET)
+	public String selectEstimateType(HttpSession session, Model model) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		return "Member/selectEstimateType";
+	}
+	
 	//견적서 작성
 	@RequestMapping(value="/writeEstimate", method=RequestMethod.GET)
-	public String writeEstimateSheet(HttpSession session, Model model) {
+	public String writeEstimateSheet(HttpSession session, Model model, String estimateType) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		System.out.println("estimateType:"+estimateType);
 		JSONObject userInformJsonObject = new JSONObject(userInform);
 		String userInformJsonString = userInformJsonObject.toString();
 		model.addAttribute("userInformJsonString", userInformJsonString);
@@ -119,30 +129,30 @@ public class MemberController {
 	}
 	
 	//견적서 수정작성
-		@RequestMapping(value="/modEstimate", method=RequestMethod.GET)
-		public String modEstimateSheet(HttpSession session, Model model, int reportNum) {
-			UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-			EstimateSheetVO userNumReportNum = new EstimateSheetVO();
-			userNumReportNum.setUserNum(userInform.getUserNum());
-			userNumReportNum.setReportNum(reportNum);
-			EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
-			if(estimateSheet==null) {
-				return "Member/mainMenuMember";
-			}
-			JSONObject estimateSheetJson = new JSONObject(estimateSheet);
-			String estimateSheetJsonString = estimateSheetJson.toString();
-			model.addAttribute("estimateSheetJsonString", estimateSheetJsonString);
-			
-			ArrayList<EstimateItemsVO> estimateItems = dao.getEstimateItems(reportNum);
-			if(estimateItems.size() !=0 && estimateItems != null) {
-				JSONArray estimateItemsJsonObject = new JSONArray(estimateItems);
-				String estimateItemsJsonString = estimateItemsJsonObject.toString();
-				System.out.println(estimateItemsJsonString);
-				model.addAttribute("estimateItemsJsonString", estimateItemsJsonString);
-			}
-			model.addAttribute("stampFileName", userInform.getStampFileName());
-			return "Document/modEstimateSheet";
+	@RequestMapping(value="/modEstimate", method=RequestMethod.GET)
+	public String modEstimateSheet(HttpSession session, Model model, int reportNum) {
+		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
+		EstimateSheetVO userNumReportNum = new EstimateSheetVO();
+		userNumReportNum.setUserNum(userInform.getUserNum());
+		userNumReportNum.setReportNum(reportNum);
+		EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
+		if(estimateSheet==null) {
+			return "Member/mainMenuMember";
 		}
+		JSONObject estimateSheetJson = new JSONObject(estimateSheet);
+		String estimateSheetJsonString = estimateSheetJson.toString();
+		model.addAttribute("estimateSheetJsonString", estimateSheetJsonString);
+		
+		ArrayList<EstimateItemsVO> estimateItems = dao.getEstimateItems(reportNum);
+		if(estimateItems.size() !=0 && estimateItems != null) {
+			JSONArray estimateItemsJsonObject = new JSONArray(estimateItems);
+			String estimateItemsJsonString = estimateItemsJsonObject.toString();
+			System.out.println(estimateItemsJsonString);
+			model.addAttribute("estimateItemsJsonString", estimateItemsJsonString);
+		}
+		model.addAttribute("stampFileName", userInform.getStampFileName());
+		return "Document/modEstimateSheet";
+	}
 	
 	
 	//견적서 저장
@@ -252,30 +262,39 @@ public class MemberController {
 	
 	//견적서 열람
 	@RequestMapping(value="/readEstimate", method=RequestMethod.GET)
-	public String readEstimate(int reportNum, Model model, HttpSession session) {
+	public String readEstimate(int reportNum, String estimateType, Model model, HttpSession session) {
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		EstimateSheetVO userNumReportNum = new EstimateSheetVO();
+		EstimateTypeVO estimateTypeInform = dao.getEstimateTypeInform(estimateType);
+		
+		EstimateCommonVO userNumReportNum = new EstimateCommonVO();
 		userNumReportNum.setUserNum(userInform.getUserNum());
 		userNumReportNum.setReportNum(reportNum);
-		EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
-		if(estimateSheet==null) {
-			return "Member/mainMenuMember";
-		}
+		userNumReportNum.setDBName(estimateTypeInform.getEstimateDBName());
+		EstimateCommonVO estimateCommon = dao.getEstimateCommon(userNumReportNum);
+		/*
+		 * if(estimateCommon==null) { return "Member/mainMenuMember"; }
+		 */
+		System.out.println(estimateCommon);
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
-		model.addAttribute("stamp", estimateSheet.getStamp());
+		model.addAttribute("stamp", estimateCommon.getStamp());
+		
+		JSONObject jsonObject = new JSONObject(estimateTypeInform);
+		model.addAttribute("estimateTypeInform", jsonObject.toString());
 		return "Document/readEstimateSheet";
 	}
 	
 	//청구서 작성
 	@RequestMapping(value="/writeBill", method=RequestMethod.GET)
-	public String writeBillSheet(Model model,int reportNum, HttpSession session){
-		
+	public String writeBillSheet(int reportNum, String estimateType, Model model, HttpSession session){
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		EstimateSheetVO userNumReportNum = new EstimateSheetVO();
+		EstimateTypeVO estimateTypeInform = dao.getEstimateTypeInform(estimateType);
+		
+		EstimateCommonVO userNumReportNum = new EstimateCommonVO();
 		userNumReportNum.setUserNum(userInform.getUserNum());
 		userNumReportNum.setReportNum(reportNum);
-		EstimateSheetVO estimateSheet = dao.getEstimateSheet(userNumReportNum);
+		userNumReportNum.setDBName(estimateTypeInform.getEstimateDBName());
+		EstimateCommonVO estimateSheet = dao.getEstimateCommon(userNumReportNum);
 		
 		if(estimateSheet==null || estimateSheet.getState().equals("b")) {
 			return "redirect:/member/memberMain";
@@ -284,41 +303,59 @@ public class MemberController {
 		model.addAttribute("reportNum", reportNum);
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("stamp", estimateSheet.getStamp());
-		 
+		
+		JSONObject jsonObject = new JSONObject(estimateTypeInform);
+		model.addAttribute("estimateTypeInform", jsonObject.toString());
+		
 		return "Document/writeBillSheet";
 	}
 	
 	//청구서 저장
 	@ResponseBody
 	@RequestMapping(value="/saveBill", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-	public String saveBillSheet(String jsonStr, HttpSession session) throws ParseException {
+	public String saveBillSheet(String jsonStr, String estimateType, HttpSession session) throws ParseException {
 		System.out.println("견적서내용:"+jsonStr);
 		Gson gson = new Gson();
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화
+		int result;
+		switch (estimateType) {
+		case "a":
+			BillInformVO BillInform = gson.fromJson(jsonStr, BillInformVO.class); //json객체의 vo객체화		
+			Date bill_Date = oldDate_pattern.parse(BillInform.getBillDate());
+			BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
+			
+			BillInform.setUserNum(userInform.getUserNum());
 				
-		Date bill_Date = oldDate_pattern.parse(BillInform.getBillDate());
-		BillInform.setBillDate(newDate_pattern.format(bill_Date)); //청구서에 입력된 날짜 데이터 포멧
-		
-		BillInform.setUserNum(userInform.getUserNum());
-		int result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
-		
-		if(result == 1) {
-			dao.setState(BillInform.getReportNum()); //견적서DB의 청구서 작성여부 변경
-			return "success";
+			result = dao.insertBillSheet(BillInform); //DB에 청구서 정보 저장
+			if(result == 1) {
+				dao.setState(BillInform.getReportNum()); //견적서DB의 청구서 작성여부 변경
+				return "success";
+			}
+			break;
+		case "b":
+			break;
+		default:
+			
+			break;
 		}
+		
+		
+		
+		
 		return "error";		
 	}
 	
 	//청구서 열람
 	@RequestMapping(value="/readBill", method=RequestMethod.GET)
-	public String readBillSheet(Model model,int reportNum,HttpSession session){
-		
+	public String readBillSheet(int reportNum, String estimateType, Model model, HttpSession session){
 		UserInformVO userInform = (UserInformVO)session.getAttribute("userInform");
-		BillInformVO userNumReportNum = new BillInformVO();
+		EstimateTypeVO estimateTypeInform = dao.getEstimateTypeInform(estimateType);
+		
+		EstimateCommonVO userNumReportNum = new EstimateCommonVO();
 		userNumReportNum.setUserNum(userInform.getUserNum());
 		userNumReportNum.setReportNum(reportNum);
-		BillInformVO BillInform = dao.getBillInform(userNumReportNum);
+		userNumReportNum.setDBName(estimateTypeInform.getBillDBName());
+		EstimateCommonVO BillInform = dao.getEstimateCommon(userNumReportNum);
 
 		if(BillInform==null) {
 			return "redirect:/member/memberMain";
@@ -326,6 +363,8 @@ public class MemberController {
 		model.addAttribute("userNum", userInform.getUserNum());
 		model.addAttribute("reportNum", reportNum);
 		model.addAttribute("stamp", BillInform.getStamp());
+		model.addAttribute("billOzrName", estimateTypeInform.getBillOzrName());
+		model.addAttribute("jsName", estimateTypeInform.getJsName());
 		
 		return "Document/readBillSheet";
 	}
